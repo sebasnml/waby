@@ -157,6 +157,9 @@ body{
 .masthead .me-pill{padding:2px;border-radius:50%;min-height:0;gap:0}
 .masthead .me-pill > div:last-child{display:none}
 .masthead .me-pill .mini-av{width:32px;height:32px}
+/* Halo dorado atardecer en el avatar cuando Wavy Pro está activo: un
+   anillo dorado y un resplandor suave alrededor de la circunferencia. */
+.masthead .me-pill.pro-halo .mini-av{border-color:#E9B949;box-shadow:0 0 0 2px #F2C14E,0 0 16px 4px rgba(242,193,78,.6)}
 .eyebrow{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--crimson);font-weight:600}
 h1{font-family:var(--serif);font-weight:500;font-size:clamp(28px,7vw,36px);line-height:1;letter-spacing:.02em;margin:2px 0}
 .tagline{font-family:var(--serif);font-style:normal;color:var(--muted);font-size:14px}
@@ -334,7 +337,6 @@ h1{font-family:var(--serif);font-weight:500;font-size:clamp(28px,7vw,36px);line-
    arriba se encoge hasta quedar solo el corazón, que se coloca en el
    renglón de progreso (ver #heartSocket) */
 .sos-sticky{position:sticky;bottom:calc(env(safe-area-inset-bottom,0px) + 92px);width:100%;margin:18px 0 12px;z-index:40}
-#sosb{overflow:hidden;will-change:transform}
 /* Ancla estática para medir la posición REAL de la barra SOS en la página.
    Es un marcador invisible en flujo normal, justo antes de la barra. No se
    mide la barra misma: #sosb es position:sticky y en Safari offsetTop de
@@ -356,6 +358,7 @@ h1{font-family:var(--serif);font-weight:500;font-size:clamp(28px,7vw,36px);line-
 @keyframes heartBeat{0%,100%{transform:scale(1)}16%{transform:scale(1.14)}30%{transform:scale(1)}46%{transform:scale(1.2)}68%{transform:scale(1)}}
 @media(prefers-reduced-motion:reduce){.heart-socket.docked svg{animation:none}}
 #sosb{
+  overflow:hidden;will-change:transform;
   background:linear-gradient(135deg, rgba(186, 92, 104, 0.85), rgba(142, 58, 72, 0.92));
   backdrop-filter:blur(20px) saturate(180%);
   -webkit-backdrop-filter:blur(20px) saturate(180%);
@@ -2055,6 +2058,10 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
         </button>
         <button class="btn ghost" id="bbFinishEarly" hidden>Terminar</button>
       </div>
+
+      <!-- El recuadro "Amplía tu espacio seguro", justo abajo del botón de
+           respiración (lo dibuja renderCoastAlliesCard). -->
+      <div id="coastAlliesCard"></div>
 
       <!-- RITUAL DE RESPIRACIÓN MUTUA SINCRONIZADA ("RESPIRAR JUNTOS") -->
       <!-- El recuadro de "Abrir sintonía" de Círculo, copiado aquí tal cual
@@ -4066,7 +4073,9 @@ document.addEventListener('click',e=>{
 /* Sincronización de estado Pro y Modo Desarrollador (Cero Emojis) */
 function syncProWifiSwitchUI(){
   const proActive=isPro();
-  const sw=$('proWifiSwitch'),badge=$('wifiBadgeTxt'),topTag=$('topVipTag'),proSt=$('proStatusBadge'),palInd=$('palVipIndicator'),moodHint=$('vipMoodHint');
+  const sw=$('proWifiSwitch'),badge=$('wifiBadgeTxt'),topTag=$('topVipTag'),proSt=$('proStatusBadge'),palInd=$('palVipIndicator'),moodHint=$('vipMoodHint'),topBtn=$('topProfileBtn');
+  /* Halo dorado atardecer en el avatar del encabezado cuando Pro está activo. */
+  if(topBtn)topBtn.classList.toggle('pro-halo',proActive);
   const pBadge=$('profilePlanBadge'),sTitle=$('subCardTitle'),sDesc=$('subCardDesc'),pwBtn=$('openPaywallBtn');
   if(sw){
     sw.classList.toggle('on',!!S.vip);
@@ -4083,7 +4092,10 @@ function syncProWifiSwitchUI(){
     if(proActive)topTag.innerHTML=lotusSvg;
     else topTag.textContent='mi espacio';
   }
-  if(proSt)proSt.textContent=proActive?'Wavy Pro Activo':'3 Libres · 7 Pro';
+  /* El estado Pro ya no se dice con texto en el encabezado de hábitos:
+     cuando Pro está activo el badge se oculta y el halo dorado del avatar
+     lo indica; cuando no está activo se sigue mostrando el conteo. */
+  if(proSt){proSt.hidden=proActive;if(!proActive)proSt.textContent='3 Libres · 7 Pro';}
   if(palInd)palInd.textContent=proActive?'11 Paletas Activas':'4 Libres · 7 Pro';
   if(moodHint)moodHint.textContent=proActive?'19 Emociones Activas':'Toca para desbloquear';
   if(pBadge)pBadge.textContent=proActive?(S.vip?'Modo Desarrollador':(tLeft>0?'Prueba Gratis ('+tLeft+' días)':'Wavy Pro Activo')):'Plan Básico';
@@ -4623,6 +4635,32 @@ function renderCoastSyncBanner(){
   c.innerHTML='';
   c.appendChild(buildOpenSyncBanner());
 }
+/* El recuadro "Amplía tu espacio seguro": se muestra en Costa (ya no en
+   Círculo) cuando el usuario aún no tiene vínculos ni ecos. Se construye
+   con una función compartida para que el botón VINCULAR siga funcionando. */
+function buildEmptyAlliesCard(){
+  const c=document.createElement('div');
+  c.className='wavy-card empty-allies-card';
+  c.style.cssText='text-align:center;padding:28px 18px;margin-top:12px;background:var(--wash);border:1px dashed var(--rule);border-radius:16px;';
+  c.innerHTML=
+    '<div style="font-family:var(--serif);font-size:18px;color:var(--ink);margin-bottom:6px">Amplía tu espacio seguro</div>'+
+    '<p style="font-size:12px;color:var(--muted);max-width:280px;margin:0 auto 16px;line-height:1.5">Este es tu espacio y solo entra quien tú elijas. Cuando quieras, invita a alguien de confianza.</p>'+
+    '<button type="button" class="btn" style="font-size:11px;padding:8px 18px">Vincular</button>';
+  const btn=c.querySelector('.btn');
+  if(btn){
+    btn.onclick=()=>{
+      if($('openDirectoryBtn'))$('openDirectoryBtn').click();
+      else if($('allyUserInput'))$('allyUserInput').focus();
+    };
+  }
+  return c;
+}
+/* El recuadro en Costa, justo abajo de "Comenzar respiración · 5 min". */
+function renderCoastAlliesCard(){
+  const c=$('coastAlliesCard');if(!c)return;
+  c.innerHTML='';
+  if(!S.following.length && !S.echoes.length)c.appendChild(buildEmptyAlliesCard());
+}
 
 function renderCircleFeed(){
   const box=$('circleFeedList');if(!box)return;box.innerHTML='';
@@ -4687,25 +4725,6 @@ function renderCircleFeed(){
     }
     box.appendChild(myCard);
   });
-
-  if(!S.following.length && !S.echoes.length){
-    const emptyCard=document.createElement('div');
-    emptyCard.className='wavy-card empty-allies-card';
-    emptyCard.style.cssText='text-align:center;padding:28px 18px;margin-top:12px;background:var(--wash);border:1px dashed var(--rule);border-radius:16px;';
-    emptyCard.innerHTML=
-      '<div style="font-family:var(--serif);font-size:18px;color:var(--ink);margin-bottom:6px">Amplía tu espacio seguro</div>'+
-      '<p style="font-size:12px;color:var(--muted);max-width:280px;margin:0 auto 16px;line-height:1.5">Este es tu espacio y solo entra quien tú elijas. Cuando quieras, invita a alguien de confianza.</p>'+
-      '<button type="button" class="btn" id="emptyAllyConnectBtn" style="font-size:11px;padding:8px 18px">Vincular</button>';
-    const btn=emptyCard.querySelector('#emptyAllyConnectBtn');
-    if(btn){
-      btn.onclick=()=>{
-        if($('openDirectoryBtn'))$('openDirectoryBtn').click();
-        else if($('allyUserInput'))$('allyUserInput').focus();
-      };
-    }
-    box.appendChild(emptyCard);
-    return;
-  }
 
   const sortedFollowing=[...S.following].sort((a,b)=>{
     const ua=findUser(a),ub=findUser(b);
@@ -4821,6 +4840,7 @@ function renderCircleFeed(){
   });
   /* La copia del recuadro en Costa se mantiene en sintonía con Círculo. */
   renderCoastSyncBanner();
+  renderCoastAlliesCard();
 }
 
 function updateStoredAllyAccount(uname,mutator){
@@ -5586,7 +5606,25 @@ function sosDockTick(){
 function requestSosDock(){
   if(!sosDockRaf)sosDockRaf=requestAnimationFrame(sosDockTick);
 }
-window.addEventListener('scroll',()=>{requestSosDock();updateCircleComposerYield();updateMastheadFade();},{passive:true});
+/* El compositor y el difuminado del encabezado solo se recalculan una vez
+   por cuadro de animación, no en cada evento de scroll (en iOS el scroll
+   con inercia dispara muchos eventos por cuadro y medir el layout en cada
+   uno es lo que traba la pantalla). */
+let composerYieldRaf=0;
+function requestComposerYield(){
+  if(composerYieldRaf)return;
+  composerYieldRaf=requestAnimationFrame(()=>{
+    composerYieldRaf=0;
+    updateCircleComposerYield();
+    updateMastheadFade();
+  });
+}
+let _lastScrollY=window.scrollY||0;
+window.addEventListener('scroll',()=>{
+  requestSosDock();requestComposerYield();
+  const diff=Math.abs((window.scrollY||0)-_lastScrollY);
+  if(diff>50){closeTransientPopovers();_lastScrollY=window.scrollY||0;}
+},{passive:true});
 window.addEventListener('resize',()=>{measureSosSocket();requestSosDock();updateCircleComposerYield();updateMastheadFade();});
 if($('heartSocket'))$('heartSocket').onclick=()=>{const b=$('sosb');if(b)b.click();};
 
@@ -8562,15 +8600,6 @@ document.addEventListener('pointerdown',e=>{
   /* El cajón de hidratación/alimentación no se cierra al tocar fuera ni al
      desplazar: solo otro clic en su tarjeta o el botón Listo lo esconde */
 });
-
-let _lastScrollY=window.scrollY||0;
-window.addEventListener('scroll',()=>{
-  const diff=Math.abs((window.scrollY||0)-_lastScrollY);
-  if(diff>50){
-    closeTransientPopovers();
-    _lastScrollY=window.scrollY||0;
-  }
-},{passive:true});
 
 /* =========================================================
    MANEJADORES DE MODO HOJA EN BLANCO

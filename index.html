@@ -310,7 +310,7 @@ h1{font-family:var(--serif);font-weight:500;font-size:clamp(28px,7vw,36px);line-
 .mk span{width:clamp(22px,6.4vw,26px);height:clamp(22px,6.4vw,26px);font-size:12px;border-radius:50%;border:1px solid var(--muted);display:grid;place-items:center;background:var(--card-solid);transition:transform .2s,background .2s}
 .mk.got span{background:var(--ink);color:var(--paper);border-color:var(--ink)}
 .mk.cur span{background:var(--crimson);border-color:var(--crimson);color:#fff;transform:scale(1.14)}
-.sig{border-left:3px solid var(--crimson);background:var(--wash);padding:14px 16px;border-radius:0 12px 12px 0;margin-bottom:16px;min-height:132px;cursor:pointer}
+.sig{border-left:3px solid var(--crimson);padding:14px 16px;border-radius:0 12px 12px 0;margin-bottom:16px;min-height:132px;cursor:pointer}
 .sig .m{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--crimson);margin-bottom:6px;display:flex;justify-content:space-between;font-weight:600}
 .sig q{display:block;font-family:var(--serif);font-size:20px;line-height:1.25;font-style:italic;quotes:none;margin-bottom:8px}
 .sig p{font-size:13.5px;line-height:1.55;color:var(--ink);opacity:.9}
@@ -973,10 +973,10 @@ textarea::placeholder{font-style:italic;color:var(--muted);opacity:.65}
   position:relative;overflow:hidden;border-radius:20px;margin-bottom:14px;
   padding:16px 18px 18px;text-align:center;color:var(--ink);
   background:
-    radial-gradient(90% 60% at 50% 36%,color-mix(in srgb, var(--relic,#8A6A3A) 42%, transparent) 0%,transparent 64%),
+    radial-gradient(90% 60% at 50% 36%,color-mix(in srgb, var(--relic,#8A8578) 42%, transparent) 0%,transparent 64%),
     linear-gradient(180deg,var(--card-solid) 0%,var(--wash) 100%);
   border:1px solid var(--glass-border);
-  box-shadow:var(--glass-spec),0 22px 44px -28px color-mix(in srgb, var(--relic,#8A6A3A) 45%, transparent);
+  box-shadow:var(--glass-spec),0 22px 44px -28px color-mix(in srgb, var(--relic,#8A8578) 45%, transparent);
 }
 .peb-top{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600}
 .peb-chip{display:inline-flex;align-items:center;gap:7px;padding:5px 11px;border-radius:30px;background:var(--card);border:1px solid var(--glass-border);letter-spacing:.10em;white-space:nowrap}
@@ -1344,6 +1344,7 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
   width:28px;height:28px;border-radius:50%;background:var(--wash);color:var(--ink);
   display:grid;place-items:center;flex-shrink:0;
 }
+.bento-dim{display:block;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:700;font-style:normal;margin-bottom:1px}
 .bento-card.has .bento-ic{background:rgba(99,130,100,0.18);color:var(--ok)}
 .bento-card strong{font-family:var(--serif);font-size:15.5px;font-weight:500;color:var(--ink);line-height:1.15;display:block}
 .bento-card small{font-size:11.5px;color:var(--muted);font-family:var(--serif);font-style:normal;display:block;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -1456,7 +1457,7 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
 .peb-vessel-btn.on{
   border-color:var(--gold);
   background:var(--card-solid);
-  box-shadow:0 0 0 1px var(--gold),0 12px 24px -10px color-mix(in srgb, var(--g3,#8A6A3A) 65%, transparent);
+  box-shadow:0 0 0 1px var(--gold),0 12px 24px -10px color-mix(in srgb, var(--g3,#8A8578) 65%, transparent);
   transform:translateY(-2px);
 }
 .peb-vessel-btn .v-pro{
@@ -1492,12 +1493,12 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
     0 0 0 2px var(--card-solid),0 0 0 3.5px var(--gold),
     0 10px 20px -6px color-mix(in srgb, var(--g3,#5C7A4E) 70%, transparent);
 }
-[data-vessel="perla"] .v-gem{--g1:#FDF5F8;--g2:#E8C8D4;--g3:#B898A8}
-[data-vessel="rosa"] .v-gem{--g1:#F9D8E0;--g2:#D488A0;--g3:#9A4A68}
-[data-vessel="nube"] .v-gem{--g1:#F0F0F8;--g2:#C8C8E0;--g3:#8A8AB0}
-[data-vessel="roble"] .v-gem{--g1:#F2D8A8;--g2:#B89048;--g3:#5A3A1A}
-[data-vessel="brujula"] .v-gem{--g1:#FFFDF5;--g2:#C8A85A;--g3:#5A7A9A}
-[data-vessel="escudo"] .v-gem{--g1:#E8D8C8;--g2:#8A9AA8;--g3:#4A2A20}
+[data-vessel="fuente"] .v-gem{--g1:#F2FAF8;--g2:#8AB8B0;--g3:#5A8A80}
+[data-vessel="musa"] .v-gem{--g1:#FFFDF5;--g2:#D8B878;--g3:#B89048}
+[data-vessel="nido"] .v-gem{--g1:#FDF2DC;--g2:#C8A85A;--g3:#5A3A18}
+[data-vessel="piedra"] .v-gem{--g1:#F2F0EC;--g2:#A8A49A;--g3:#5A554E}
+[data-vessel="horizonte"] .v-gem{--g1:#E8ECF2;--g2:#8A9AB8;--g3:#2A3A58}
+[data-vessel="brasa"] .v-gem{--g1:#FFE8B8;--g2:#E07828;--g3:#6A2410}
 @keyframes gemShine{to{transform:rotate(360deg)}}
 @media(prefers-reduced-motion:reduce){.v-gem::after{animation:none}}
 .peb-decay-pill{
@@ -1554,22 +1555,32 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
    encima del último recuadro para que el cajón se pueda usar. (:has()
    requiere Safari 15.4+; el iPhone 15 lo tiene.) */
 #v-circle:has(#circleComposerDrawer:not([hidden])) .circle-sticky-wrap{z-index:40}
-.circle-composer-pill{
-  width:100%;display:flex;justify-content:space-between;align-items:center;gap:10px;
-  padding:12px 18px;border-radius:999px;
+/* El cuadro de texto ES la píldora: compacto y redondeado cuando está
+   cerrado, y se convierte en el editor al darle click. El cajón de
+   controles (debajo) es lo que marca el estado expandido. */
+.circle-composer{width:100%}
+#circleComposer #echoInput{
+  border:1px solid rgba(255,255,255,0.82);
+  border-radius:999px;
   background:linear-gradient(135deg, rgba(255,253,250,0.88), rgba(244,236,228,0.94));
   backdrop-filter:blur(22px) saturate(180%);-webkit-backdrop-filter:blur(22px) saturate(180%);
-  border:1px solid rgba(255,255,255,0.82);
-  color:var(--ink);font-family:var(--serif);font-style:italic;font-size:16px;
   box-shadow:inset 0 1.5px 0 rgba(255,255,255,0.95), 0 14px 32px -8px rgba(35,31,29,0.18);
-  cursor:pointer;transition:transform .22s ease, box-shadow .22s ease;
+  padding:11px 18px;
+  min-height:46px;height:46px;
+  font-size:16px;font-style:italic;
+  overflow:hidden;cursor:pointer;
+  transition:border-radius .25s ease, min-height .25s ease, background .25s ease, box-shadow .25s ease, font-size .25s ease;
 }
-.circle-composer-pill:hover{transform:translateY(-1.5px);border-color:var(--gold)}
-.circle-composer-pill b{
-  display:inline-flex;align-items:center;gap:5px;
-  font-family:var(--sans);font-style:normal;font-size:11px;font-weight:600;
-  letter-spacing:.1em;text-transform:uppercase;color:var(--ink);
-  padding:6px 12px;border-radius:999px;background:var(--wash);border:1px solid var(--rule);
+#circleComposer:has(#circleComposerDrawer:not([hidden])) #echoInput{
+  border:none;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+  border-radius:14px;
+  background:transparent;
+  backdrop-filter:none;-webkit-backdrop-filter:none;
+  box-shadow:none;
+  padding:10px 4px;
+  min-height:76px;height:auto;
+  font-size:18.5px;font-style:normal;
+  overflow:auto;cursor:text;
 }
 .circle-composer-drawer{
   padding:16px;border-radius:22px;margin-bottom:8px;
@@ -1945,31 +1956,29 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
 
       <div class="pd" id="pd">
         <div class="peb-top">
-          <span id="pebVesselTitle">Roble</span>
+          <span id="pebVesselTitle">Piedra</span>
           <span class="peb-chip"><i></i><span id="as">Vínculos · 0</span></span>
         </div>
                 <svg id="pebSvgArt" viewBox="0 0 120 150" aria-hidden="true">
 <defs>
-        <radialGradient id="gRoble" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#F2D8A8" stop-opacity=".95"/><stop offset=".55" stop-color="#C8A058" stop-opacity=".45"/><stop offset="1" stop-color="#6A4A28" stop-opacity="0"/></radialGradient>
-        <linearGradient id="bRoble" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8A6A3A"/><stop offset=".5" stop-color="#5A3A1A"/><stop offset="1" stop-color="#3A2410"/></linearGradient>
-        <linearGradient id="bRobleTop" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#D8B878"/><stop offset=".5" stop-color="#B89048"/><stop offset="1" stop-color="#D8B878"/></linearGradient>
-        <linearGradient id="fRobleO" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF0C9"/><stop offset="1" stop-color="#D48818"/></linearGradient>
-        <linearGradient id="fRobleM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFE8A8"/></linearGradient>
-        <linearGradient id="fRobleC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFF5D6"/></linearGradient>
+        <radialGradient id="gPiedra" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#E8E6E0" stop-opacity=".95"/><stop offset=".55" stop-color="#A8A49A" stop-opacity=".45"/><stop offset="1" stop-color="#4A4640" stop-opacity="0"/></radialGradient>
+        <radialGradient id="bPiedra" cx="40%" cy="28%" r="80%"><stop offset="0" stop-color="#F2F0EC"/><stop offset=".4" stop-color="#C8C4BA"/><stop offset=".75" stop-color="#8A8578"/><stop offset="1" stop-color="#5A554E"/></radialGradient>
+        <linearGradient id="fPiedraO" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF8E0"/><stop offset="1" stop-color="#C87828"/></linearGradient>
+        <linearGradient id="fPiedraM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFE8A8"/></linearGradient>
+        <linearGradient id="fPiedraC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFF8E0"/></linearGradient>
       </defs>
-      <circle class="gl" cx="60" cy="68" r="58" fill="url(#gRoble)"/>
-      <ellipse cx="60" cy="144" rx="36" ry="3.5" fill="#2A1A08" opacity=".35"/>
-      <!-- Roble: un tocón pulido con sus anillos de crecimiento, madera noble -->
-      <path d="M32 102 C32 100 88 100 88 102 L88 132 C88 138 80 142 60 142 C40 142 32 138 32 132 Z" fill="url(#bRoble)" stroke="#2A1A08" stroke-width=".8"/>
-      <path d="M40 108 C42 118 42 128 40 136 M52 108 C54 118 54 128 52 136 M68 108 C66 118 66 128 68 136 M80 108 C78 118 78 128 80 136" fill="none" stroke="#D8B878" stroke-width=".9" stroke-linecap="round" opacity=".5"/>
-      <ellipse cx="60" cy="102" rx="28" ry="6" fill="url(#bRobleTop)" stroke="#6A4A28" stroke-width=".9"/>
-      <ellipse cx="60" cy="102" rx="20" ry="4" fill="none" stroke="#8A6A3A" stroke-width=".8"/>
-      <ellipse cx="60" cy="102" rx="12" ry="2.4" fill="none" stroke="#8A6A3A" stroke-width=".7"/>
-      <ellipse class="emb" cx="60" cy="102" rx="6" ry="1.6" fill="#E8A838"/>
+      <circle class="gl" cx="60" cy="68" r="58" fill="url(#gPiedra)"/>
+      <ellipse cx="60" cy="144" rx="36" ry="3.5" fill="#2A2622" opacity=".35"/>
+      <!-- Piedra: un canto rodado pulido, el cimiento que no se mueve -->
+      <path d="M32 132 C28 118 36 104 52 100 C66 97 84 102 88 114 C91 125 84 138 70 141 C54 144 36 141 32 132Z" fill="url(#bPiedra)" stroke="#4A4640" stroke-width=".8"/>
+      <path d="M40 124 C48 118 62 116 74 120 M42 132 C52 128 66 128 76 132" fill="none" stroke="#FFFFFF" stroke-width="1" stroke-linecap="round" opacity=".35"/>
+      <ellipse cx="50" cy="110" rx="10" ry="5" fill="#FFFFFF" opacity=".5" transform="rotate(-18 50 110)"/>
+      <ellipse cx="68" cy="134" rx="6" ry="3" fill="#6A655C" opacity=".4"/>
+      <ellipse class="emb" cx="60" cy="98" rx="7" ry="1.8" fill="#A8A49A"/>
       <g id="fl">
-        <path class="f1" d="M60 94 C44 86 47 58 60 26 C73 58 76 86 60 94Z" fill="url(#fRobleO)" opacity=".95"/>
-        <path class="f2" d="M60 94 C52 88 53 68 60 42 C67 68 68 88 60 94Z" fill="url(#fRobleM)"/>
-        <path class="f3" d="M60 94 C56 91 56 83 60 70 C64 83 64 91 60 94Z" fill="url(#fRobleC)"/>
+        <path class="f1" d="M60 94 C44 86 47 58 60 26 C73 58 76 86 60 94Z" fill="url(#fPiedraO)" opacity=".95"/>
+        <path class="f2" d="M60 94 C52 88 53 68 60 42 C67 68 68 88 60 94Z" fill="url(#fPiedraM)"/>
+        <path class="f3" d="M60 94 C56 91 56 83 60 70 C64 83 64 91 60 94Z" fill="url(#fPiedraC)"/>
       </g>
         </svg>
         <div class="peb-read">
@@ -2040,12 +2049,27 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
         </div>
       </div>
       <p class="note" id="bt" style="margin:0 0 12px">Toca el botón inferior para comenzar con sonido armónico.</p>
-      <div class="row" style="grid-template-columns:1fr;margin-bottom:10px">
-        <button class="btn" id="bb" style="width:100%">
-          <svg class="w-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/></svg>
-          <span id="bbTxt">Comenzar respiración&nbsp;·&nbsp;5 min</span>
-        </button>
-        <button class="btn ghost" id="bbFinishEarly" hidden>Terminar</button>
+      <div style="margin-bottom:10px">
+        <div class="row" style="grid-template-columns:1fr auto">
+          <button class="btn" id="bb" style="width:100%">
+            <svg class="w-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/></svg>
+            <span id="bbTxt">Comenzar respiración</span>
+          </button>
+          <button type="button" class="btn ghost" id="bbDurBtn" aria-label="Elegir duración de la respiración" style="min-width:86px">5 min ▾</button>
+        </div>
+        <div id="bbDurMenu" hidden style="margin-top:8px;padding:10px;border-radius:14px;background:var(--card);border:1px solid var(--glass-border);display:grid;gap:6px">
+          <div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600">Duración · lo que la ciencia respalda</div>
+          <button type="button" class="chip bb-dur-opt" data-min="2" style="justify-content:flex-start;text-align:left">2 min · Reset rápido — baja la ansiedad aguda</button>
+          <button type="button" class="chip bb-dur-opt on" data-min="5" style="justify-content:flex-start;text-align:left">5 min · Dosis estándar — el protocolo más estudiado</button>
+          <button type="button" class="chip bb-dur-opt" data-min="10" style="justify-content:flex-start;text-align:left">10 min · Sesión profunda — cubre la ola del impulso</button>
+          <button type="button" class="chip bb-dur-custom" style="justify-content:flex-start;text-align:left">Personalizado · Pro — elige tus minutos</button>
+          <div id="bbDurCustomBox" hidden style="display:flex;gap:8px;align-items:center">
+            <input type="number" id="bbDurCustomInput" min="1" max="30" value="15" class="line" style="width:80px;font-style:normal" aria-label="Minutos personalizados">
+            <span style="font-size:12px;color:var(--muted)">min</span>
+            <button type="button" class="btn" id="bbDurCustomApply" style="padding:6px 14px;font-size:11px">Aplicar</button>
+          </div>
+        </div>
+        <button class="btn ghost" id="bbFinishEarly" hidden style="width:100%;margin-top:8px">Terminar</button>
       </div>
 
       <!-- RITUAL DE RESPIRACIÓN MUTUA SINCRONIZADA ("RESPIRAR JUNTOS") -->
@@ -2129,45 +2153,39 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
     <div id="pl" hidden></div>
 
     <!-- Barra Flotante Sticky para Publicar Nota, Canción (Top 5) y Estado de Sintonía -->
+    <!-- El cuadro de texto ES la píldora: compacto y redondeado cuando está
+         cerrado, y se convierte en el editor al darle click (sin cajón aparte). -->
     <div class="circle-sticky-wrap">
-      <div class="circle-composer-drawer" id="circleComposerDrawer" hidden>
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-          <span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:600">Compartir con mi círculo · Cero seguidores</span>
-          <button type="button" class="chip" id="closeCircleComposerBtn" style="min-height:26px;padding:2px 9px;font-size:11px">Cerrar</button>
-        </div>
-        <div style="margin-bottom:8px">
-          <textarea class="echo-input" id="echoInput" maxlength="200" placeholder="Escribe una nota honesta para tu círculo (máx. 200 caracteres)…"></textarea>
-          <div style="display:flex;justify-content:flex-end;margin-top:6px">
+      <div class="circle-composer" id="circleComposer">
+        <textarea class="echo-input" id="echoInput" maxlength="200" placeholder="Dejar una nota o canción en mi círculo…"></textarea>
+        <div class="circle-composer-drawer" id="circleComposerDrawer" hidden>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+            <span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:600">Compartir con mi círculo · Cero seguidores</span>
+            <button type="button" class="chip" id="closeCircleComposerBtn" style="min-height:26px;padding:2px 9px;font-size:11px">Cerrar</button>
+          </div>
+          <div style="display:flex;justify-content:flex-end;margin-bottom:8px">
             <button class="btn" id="postEchoBtn" style="padding:6px 16px;font-size:11px">Publicar nota</button>
           </div>
-        </div>
-        <div style="margin-bottom:8px">
-          <span style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600;display:block;margin-bottom:5px">Etiqueta de momento (opcional):</span>
-          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap">
-            <div class="chips" id="echoVibeChips">
-              <button type="button" class="chip" data-vibe="Tranquilidad" style="min-height:28px;padding:3px 10px;font-size:11.5px">Tranquilidad</button>
-              <button type="button" class="chip" data-vibe="Descompresión" style="min-height:28px;padding:3px 10px;font-size:11.5px">Descompresión</button>
-              <button type="button" class="chip" data-vibe="Disponible para respirar" style="min-height:28px;padding:3px 10px;font-size:11.5px">Disponible para respirar</button>
+          <div style="margin-bottom:8px">
+            <span style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600;display:block;margin-bottom:5px">Etiqueta de momento (opcional):</span>
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap">
+              <div class="chips" id="echoVibeChips">
+                <button type="button" class="chip" data-vibe="Tranquilidad" style="min-height:28px;padding:3px 10px;font-size:11.5px">Tranquilidad</button>
+                <button type="button" class="chip" data-vibe="Descompresión" style="min-height:28px;padding:3px 10px;font-size:11.5px">Descompresión</button>
+                <button type="button" class="chip" data-vibe="Disponible para respirar" style="min-height:28px;padding:3px 10px;font-size:11.5px">Disponible para respirar</button>
+              </div>
+              <span id="echoCount" style="font-size:11px;color:var(--muted)">0 / 200</span>
             </div>
-            <span id="echoCount" style="font-size:11px;color:var(--muted)">0 / 200</span>
           </div>
-        </div>
-        <div style="padding-top:8px;border-top:1px solid var(--rule)">
-          <button type="button" class="mode-link" id="toggleInlineSongBtn" style="font-size:13px">+ Adjuntar canción (Spotify, Apple Music, YouTube, Deezer, Amazon)</button>
-          <div id="inlineSongBox" hidden style="margin-top:8px;display:grid;gap:6px">
-            <input class="line" id="inlineScUrl" maxlength="220" placeholder="Pega el enlace de Spotify, Apple Music, YouTube Music, Deezer o Amazon…">
-            <small id="inlineScMetaPreview" style="font-size:11px;color:var(--ok);font-family:var(--serif);font-style:italic">El nombre de la canción y el artista se leen automáticamente de los metadatos del enlace.</small>
+          <div style="padding-top:8px;border-top:1px solid var(--rule)">
+            <button type="button" class="mode-link" id="toggleInlineSongBtn" style="font-size:13px">+ Adjuntar canción (Spotify, Apple Music, YouTube, Deezer, Amazon)</button>
+            <div id="inlineSongBox" hidden style="margin-top:8px;display:grid;gap:6px">
+              <input class="line" id="inlineScUrl" maxlength="220" placeholder="Pega el enlace de Spotify, Apple Music, YouTube Music, Deezer o Amazon…">
+              <small id="inlineScMetaPreview" style="font-size:11px;color:var(--ok);font-family:var(--serif);font-style:italic">El nombre de la canción y el artista se leen automáticamente de los metadatos del enlace.</small>
+            </div>
           </div>
         </div>
       </div>
-
-      <button type="button" class="circle-composer-pill" id="openCircleComposerBtn">
-        <span>Dejar una nota o canción en mi círculo…</span>
-        <b>
-          <svg class="w-ico" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
-          Publicar
-        </b>
-      </button>
     </div>
   </div>
 
@@ -4170,7 +4188,7 @@ function switchMainView(vid){
   });
   document.querySelectorAll('.vpage').forEach(p=>p.classList.toggle('on',p.id===vid));
   if(vid==='v-breathe'){fit();startLoop()}else{stopLoop()}
-  if(vid==='v-today'){renderPebeteroBanner();flameView();requestSosDock()}
+  if(vid==='v-today'){renderPebeteroBanner();flameView();measureSosGeo();requestSosDock()}
   if(vid==='v-circle'){renderHomeCoRegulation();updateCircleComposerYield()}
   if(vid==='v-clinic'){stats();hours(true);renderClinicalReport()}
   if(vid==='v-profile'){syncProfileForm();syncProWifiSwitchUI();renderSealsCarousel()}
@@ -4446,26 +4464,27 @@ function renderPebeteroBanner(){
 }
 
 let selectedEchoVibe='';
-if($('openCircleComposerBtn')){
-  $('openCircleComposerBtn').onclick=()=>{
+/* El cuadro de texto ES la píldora: al darle click (focus) se convierte en
+   el editor (aparecen los controles abajo) y la pantalla baja hasta abajo
+   para que el cuadro se vea completo. No hay un cajón aparte arriba. */
+if($('echoInput')){
+  $('echoInput').addEventListener('focus',()=>{
     const dr=$('circleComposerDrawer');
-    if(dr){
-      dr.hidden=!dr.hidden;
-      if(!dr.hidden){
-        if($('echoInput'))$('echoInput').focus();
-        /* La pantalla baja hasta abajo para que el cuadro de texto se vea completo.
-           El scroll es programado: se marca la ventana para que el listener de
-           scroll no lo confunda con un scroll del usuario y no cierre el cajón. */
-        composerScrollUntil=Date.now()+1200;
-        window.scrollTo({top:document.documentElement.scrollHeight,behavior:'smooth'});
-      }
+    if(dr && dr.hidden){
+      dr.hidden=false;
+      /* La pantalla baja hasta abajo para que el cuadro de texto se vea completo.
+         El scroll es programado: se marca la ventana para que el listener de
+         scroll no lo confunda con un scroll del usuario y no cierre el cajón. */
+      composerScrollUntil=Date.now()+1200;
+      window.scrollTo({top:document.documentElement.scrollHeight,behavior:'smooth'});
+      updateCircleComposerYield(); /* los controles cambian la altura del compositor */
     }
-    updateCircleComposerYield(); /* el cajón cambia la altura del compositor */
-  };
+  });
 }
 if($('closeCircleComposerBtn')){
   $('closeCircleComposerBtn').onclick=()=>{
     if($('circleComposerDrawer'))$('circleComposerDrawer').hidden=true;
+    if($('echoInput'))$('echoInput').blur();
     updateCircleComposerYield();
   };
 }
@@ -4561,6 +4580,7 @@ $('postEchoBtn').onclick=async()=>{
   if($('inlineScUrl'))$('inlineScUrl').value='';
   if($('inlineSongBox'))$('inlineSongBox').hidden=true;
   if($('circleComposerDrawer'))$('circleComposerDrawer').hidden=true;
+  if($('echoInput'))$('echoInput').blur();
   selectedEchoVibe='';
   document.querySelectorAll('#echoVibeChips .chip').forEach(c=>c.classList.remove('on'));
   save(true);renderCircleFeed();
@@ -5001,6 +5021,9 @@ if($('habitExpandBtn'))$('habitExpandBtn').onclick=()=>{
   const sec=$('sub-habit');if(!sec)return;
   const collapsed=sec.classList.toggle('habits-collapsed');
   $('habitExpandBtn').setAttribute('aria-expanded',collapsed?'false':'true');
+  /* Expandir/contraer cambia el alto del contenido de arriba: el corazón
+     y la barra se mueven, así que la geometría del morph se re-mide. */
+  measureSosGeo();
 };
 
 function build(){
@@ -5529,22 +5552,43 @@ function sosDockDocY(){
   while(el){y+=el.offsetTop||0;el=el.offsetParent;}
   return y;
 }
+/* Geometría cacheada del morph SOS. Se mide una sola vez y se re-mide
+   solo cuando algo puede haberla movido (resize, cambio de vista,
+   expandir/contraer hábitos). El morph NUNCA lee el layout en el camino
+   del scroll: en iOS el rAF se pausa durante el scroll con impulso, y
+   leer el layout en cada cuadro era lo que congelaba la barra y luego
+   la teletransportaba. */
+let sosGeo={y0:0,barH:48,barW:280,barCX:0,barCY:0,valid:false};
+function measureSosGeo(){
+  const sosb=$('sosb');
+  if(!sosb){sosGeo.valid=false;return;}
+  let y0=sosDockDocY()-(window.innerHeight||800)+140;
+  if(!(y0>200))y0=Math.max(1,(document.documentElement.scrollHeight||0)-(window.innerHeight||800));
+  sosGeo.y0=y0;
+  /* Centro natural de la barra cuando está pegada (sticky) al fondo de
+     la ventana: es constante mientras la barra está pegada, y el morph
+     solo la mueve cuando d es grande (arriba de la hoja), que es justo
+     cuando la barra está pegada. Abajo (d~0) no hay traslación, así que
+     este valor es el correcto para todo el recorrido. */
+  const r=sosb.getBoundingClientRect();
+  sosGeo.barH=r.height||48;
+  sosGeo.barW=r.width||280;
+  sosGeo.barCX=r.left+r.width/2-sosLastTx;
+  sosGeo.barCY=r.top+r.height/2-sosLastTy;
+  measureSosSocket();
+  sosGeo.valid=y0>0;
+  sosDockLastApplied=-1; /* la geometría cambió: forzar el siguiente repintado */
+}
 function sosDockTargetCalc(){
   const sosb=$('sosb');if(!sosb)return 0;
   if($('sos') && !$('sos').hidden)return 0; /* SOS abierto: la barra se queda entera */
   const vt=$('v-today');
   if(!vt || !vt.classList.contains('on'))return sosDockCur; /* fuera de Hoy: congelar */
-  let y0=sosDockDocY()-(window.innerHeight||800)+140;
-  /* Seguro de respaldo: si la medición sale absurda (y0 diminuto o
-     negativo en una página larga), el morph nunca puede quedarse atascado
-     en 0. La barra está al final de la hoja, así que el recorrido real es
-     casi el scroll total de la página: scrollHeight − alto de la ventana. */
-  if(!(y0>200)){
-    y0=Math.max(1,(document.documentElement.scrollHeight||0)-(window.innerHeight||800));
-  }
-  if(y0<=0)return 0; /* página corta: sin recorrido, la barra se queda */
+  /* Sin geometría válida la barra se queda entera y VISIBLE: nunca puede
+     quedar invisible por un valor atascado. */
+  if(!sosGeo.valid || !(sosGeo.y0>0))return 0;
   const y=window.scrollY||0;
-  const p=1-Math.min(1,Math.max(0,y/y0));
+  const p=1-Math.min(1,Math.max(0,y/sosGeo.y0));
   /* 15% más rápida: el corazón llega a su lugar scrolleando 15% menos. */
   return Math.min(1,p/0.85);
 }
@@ -5557,13 +5601,17 @@ function applySosDock(d){
      repintado poniendo sosDockLastApplied en -1. */
   if(Math.abs(d-sosDockLastApplied)<0.0005 && sosSockDoc)return;
   sosDockLastApplied=d;
-  if(!sosSockDoc || d<0.02 || d>0.98 || Date.now()-sosSockLastMeas>1000)measureSosSocket();
+  /* La posición del corazón se re-mide como mucho 1 vez por segundo en
+     el camino del scroll (red de seguridad). Las re-mediciones de verdad
+     son por evento (resize, cambio de vista, expandir/contraer hábitos)
+     vía measureSosGeo(): así el scroll nunca fuerza un layout. */
+  if(!sosSockDoc || Date.now()-sosSockLastMeas>1000)measureSosSocket();
   const e=d*d*(3-2*d); /* suavizado para el viaje */
   sosb.classList.toggle('docking',d>0.02);
-  const r=sosb.getBoundingClientRect();
-  /* centro natural de la barra (sin el translate del frame anterior) */
-  const natCX=r.left+r.width/2-sosLastTx;
-  const natCY=r.top+r.height/2-sosLastTy;
+  /* Centro natural de la barra desde la geometría cacheada (no se lee el
+     layout aquí): es el centro cuando la barra está pegada al fondo. */
+  const natCX=sosGeo.barCX||(window.innerWidth/2);
+  const natCY=sosGeo.barCY||((window.innerHeight||800)-140);
   let tx=0,ty=0;
   /* El corazón aparece antes y completo: a d=0.8 ya está al 100% y la
      barra ya se fue a d=0.85. Del 0.85 al 1.0 solo queda el corazón, sin
@@ -5584,8 +5632,8 @@ function applySosDock(d){
      desvanece antes de llegar (a d=0.85 su opacidad ya es 0). */
   const ec=Math.min(1,Math.max(0,(d-0.05)/0.75));
   const ec2=ec*ec*(3-2*ec);
-  const cx=Math.max(0,(r.width-34)/2*ec2);
-  const cy=Math.max(0,(r.height-34)/2*ec2);
+  const cx=Math.max(0,((sosGeo.barW||280)-34)/2*ec2);
+  const cy=Math.max(0,((sosGeo.barH||48)-34)/2*ec2);
   sosb.style.clipPath=ec2>0?('inset('+cy.toFixed(1)+'px '+cx.toFixed(1)+'px '+cy.toFixed(1)+'px '+cx.toFixed(1)+'px round 999px)'):'';
   sosb.style.opacity=Math.max(0,1-Math.max(0,(d-0.55)/0.3)).toFixed(3);
   sosb.style.pointerEvents=d>0.35?'none':'';
@@ -5617,6 +5665,15 @@ function sosDockTick(){
   sosDockCur=sosDockTargetCalc();
   applySosDock(sosDockCur);
 }
+/* Actualización SÍNCRONA del morph SOS en el listener de scroll (no por
+   rAF): en iOS el rAF se pausa durante el scroll con impulso, y eso era
+   lo que congelaba la barra y luego la teletransportaba. Como todo sale
+   de la geometría cacheada (sin leer el layout), es barato y la barra
+   siempre va pegada al scroll, incluso durante el impulso. */
+function sosDockSync(){
+  sosDockCur=sosDockTargetCalc();
+  applySosDock(sosDockCur);
+}
 function requestSosDock(){
   if(!sosDockRaf)sosDockRaf=requestAnimationFrame(sosDockTick);
 }
@@ -5639,7 +5696,7 @@ let _lastScrollY=window.scrollY||0;
    cierre y el cajón se abre y se cierra en el mismo instante. */
 let composerScrollUntil=0;
 window.addEventListener('scroll',()=>{
-  requestSosDock();requestComposerYield();
+  sosDockSync();requestComposerYield();
   const diff=Math.abs((window.scrollY||0)-_lastScrollY);
   if(diff>50){
     _lastScrollY=window.scrollY||0;
@@ -5647,7 +5704,7 @@ window.addEventListener('scroll',()=>{
     closeTransientPopovers();
   }
 },{passive:true});
-window.addEventListener('resize',()=>{measureSosSocket();requestSosDock();updateCircleComposerYield();updateMastheadFade();});
+window.addEventListener('resize',()=>{measureSosGeo();requestSosDock();updateCircleComposerYield();updateMastheadFade();});
 if($('heartSocket'))$('heartSocket').onclick=()=>{const b=$('sosb');if(b)b.click();};
 
 /* =========================================================
@@ -5847,7 +5904,7 @@ $('audioMuteBtn').onclick=e=>{
 
 const cv=$('sea'),cx=cv.getContext('2d'),bcv=$('breathLayer'),bcx=bcv.getContext('2d');
 const ffCv=$('coFirefliesOverlay'),ffCx=ffCv?ffCv.getContext('2d'):null;
-const TOTAL_SEC=300;
+let TOTAL_SEC=300; /* duración de la sesión (segundos); la elige el usuario: 2, 5, 10 min o personalizado (Pro) */
 const RM=window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
 const LOW_END=(navigator.hardwareConcurrency && navigator.hardwareConcurrency<=4)||(navigator.deviceMemory && navigator.deviceMemory<=4);
 let arousal=.10,target=.10,isDraggingSlider=false,lastCoastPct=-1;
@@ -6337,7 +6394,7 @@ function endBreath(done){
   broadcastLiveEvent('cobreath_touch',{inhaling:false,active:coBreath.active});
   setBreathingFocus(false);
   WavyAudio.stopOcean();
-  if($('bbTxt'))$('bbTxt').textContent='Comenzar respiración · 5 min';
+  if($('bbTxt'))$('bbTxt').textContent='Comenzar respiración';
   if(done || hadCycles){
     WavyAudio.cuePhase('close');
     const v=Math.round(target*100);$('rs').value=v;$('rv').textContent=v+'%';
@@ -6416,6 +6473,7 @@ function stepBreath(dt){
 $('bb').addEventListener('pointerdown',()=>{WavyAudio.unlockNow()});
 $('bb').onclick=()=>{
   WavyAudio.unlockNow();
+  if($('bbDurMenu'))$('bbDurMenu').hidden=true;
   if(br.on){endBreath(false);return}
   window.scrollTo(0,0);
   const now=Date.now();
@@ -6430,6 +6488,57 @@ $('bb').onclick=()=>{
     :'Modo Táctil activo · Mantén presionado el círculo mientras inhalas';
 };
 $('bbFinishEarly').onclick=()=>endBreath(false);
+/* Duración de la respiración: 2, 5 o 10 min (lo que la ciencia respalda
+   para bajar la ansiedad) o minutos personalizados (Pro). La duración
+   elegida es la que usa la sesión (TOTAL_SEC). */
+function setBreathMin(m){
+  m=Math.max(1,Math.min(30,Math.round(m)||5));
+  S.breathMin=m;
+  TOTAL_SEC=m*60;
+  if($('bbDurBtn'))$('bbDurBtn').textContent=m+' min ▾';
+  document.querySelectorAll('.bb-dur-opt').forEach(b=>b.classList.toggle('on',+(b.dataset.min||0)===m));
+  save(false);
+}
+function syncBreathMinUI(){
+  const m=S.breathMin||5;
+  TOTAL_SEC=m*60;
+  if($('bbDurBtn'))$('bbDurBtn').textContent=m+' min ▾';
+  document.querySelectorAll('.bb-dur-opt').forEach(b=>b.classList.toggle('on',+(b.dataset.min||0)===m));
+}
+if($('bbDurBtn')){
+  $('bbDurBtn').onclick=(e)=>{
+    e.stopPropagation();
+    const menu=$('bbDurMenu');
+    if(menu)menu.hidden=!menu.hidden;
+  };
+}
+document.querySelectorAll('.bb-dur-opt').forEach(b=>{
+  b.onclick=()=>{
+    setBreathMin(+b.dataset.min||5);
+    if($('bbDurMenu'))$('bbDurMenu').hidden=true;
+    if($('bbDurCustomBox'))$('bbDurCustomBox').hidden=true;
+  };
+});
+if(document.querySelector('.bb-dur-custom')){
+  document.querySelector('.bb-dur-custom').onclick=()=>{
+    if(!isPro()){
+      openPaywall('Los minutos personalizados de respiración son parte de Wavy Pro. Elige la duración que tu cuerpo necesita.');
+      return;
+    }
+    const box=$('bbDurCustomBox');
+    if(box)box.hidden=false;
+    if($('bbDurCustomInput'))$('bbDurCustomInput').focus();
+  };
+}
+if($('bbDurCustomApply')){
+  $('bbDurCustomApply').onclick=()=>{
+    const v=+$('bbDurCustomInput').value||15;
+    setBreathMin(v);
+    if($('bbDurMenu'))$('bbDurMenu').hidden=true;
+    if($('bbDurCustomBox'))$('bbDurCustomBox').hidden=true;
+    toast('Duración de respiración: '+v+' min','ok');
+  };
+}
 if(bcv){
   bcv.addEventListener('pointerdown',e=>{
     if(!br.on)return;
@@ -6652,13 +6761,18 @@ $('clueCalToggleBtn').onclick=()=>{S.clueCalOpen=!S.clueCalOpen;save();syncRetra
 $('caliToggleBtn').onclick=()=>{S.caliOpen=!S.caliOpen;save();syncRetractUI();if(S.caliOpen){renderCaliCalendar();renderCaliDetail()}};
 
 const CLUE_CATEGORIES=[
-  {id:'water',icon:'<svg class="w-ico" viewBox="0 0 24 24"><path d="M12 3c4.2 5.4 6.2 8.8 6.2 11.8a6.2 6.2 0 1 1-12.4 0C5.8 11.8 7.8 8.4 12 3Z"/></svg>',name:'Hidratación',sub:'Agua del día',multi:false,opts:['8+ vasos de agua','5–7 vasos','Poca agua (<4 vasos)','Agua + Matcha / Té','Agua con electrolitos']},
-  {id:'nutrition',icon:'<svg class="w-ico" viewBox="0 0 24 24"><path d="M12 4c4.5 0 8 3.5 8 8 0 5-4 8-8 8s-8-3-8-8c0-4.5 3.5-8 8-8Z"/><path d="M12 4c0 5 3 8 8 8"/><path d="M12 2v3"/></svg>',name:'Alimentación',sub:'Comida real vs procesada',multi:true,opts:['Comida limpia (verduras, pollo, arroz, carne)','Proteína y fruta fresca','Comida casera balanceada','Ultraprocesados / Fast food','Exceso de azúcar / Postres','Mucho café / Irritantes']},
-  {id:'sleep',icon:'<svg class="w-ico" viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5Z"/></svg>',name:'Sueño',sub:'Descanso de anoche',multi:false,opts:['Dormí 8+ h','Dormí 7–8 h','Menos de 6 h','Me costó dormir','Despertares nocturnos']},
-  {id:'energy',icon:'<svg class="w-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1"/></svg>',name:'Cuerpo y Energía',sub:'Sensación física hoy',multi:true,opts:['Cuerpo en calma y ligero','Energía alta','Tensión cuello / mandíbula','Inflamación / Pesadez','Cansada/o · Sin pila']},
-  {id:'soc',icon:'<svg class="w-ico" viewBox="0 0 24 24"><circle cx="9" cy="12" r="5"/><circle cx="15" cy="12" r="5"/></svg>',name:'Entorno y Día',sub:'Compañía y actividad',multi:true,opts:['Tiempo a solas nutritivo','Vínculos en paz','Pilates / Pádel / Entreno','Mucho trabajo / Pantalla','Límites sanos hoy']},
-  {id:'bleeding',femaleOnly:true,hideNoPeriod:true,icon:'<svg class="w-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2.5"/></svg>',name:'Periodo y Flujo',sub:'Sangrado o manchado',multi:false,opts:['Ligero','Medio','Abundante','Manchado']},
-  {id:'pain',femaleOnly:true,icon:'<svg class="w-ico" viewBox="0 0 24 24"><path d="M12 3l2.2 6.8L21 12l-6.8 2.2L12 21l-2.2-6.8L3 12l6.8-2.2L12 3Z"/></svg>',name:'Bienestar Hormonal',sub:'Síntomas o confort',multi:true,opts:['Sin molestias','Cólicos leves','Sensibilidad emocional','Piel luminosa','Retención de líquidos','Cabeza / Migraña']}
+  {id:'water',dim:'Cuerpo',icon:'<svg class="w-ico" viewBox="0 0 24 24"><path d="M12 3c4.2 5.4 6.2 8.8 6.2 11.8a6.2 6.2 0 1 1-12.4 0C5.8 11.8 7.8 8.4 12 3Z"/></svg>',name:'Hidratación',sub:'Agua del día',multi:false,opts:['8+ vasos de agua','5–7 vasos','Poca agua (<4 vasos)','Agua + Matcha / Té','Agua con electrolitos']},
+  {id:'nutrition',dim:'Cuerpo',icon:'<svg class="w-ico" viewBox="0 0 24 24"><path d="M12 4c4.5 0 8 3.5 8 8 0 5-4 8-8 8s-8-3-8-8c0-4.5 3.5-8 8-8Z"/><path d="M12 4c0 5 3 8 8 8"/><path d="M12 2v3"/></svg>',name:'Alimentación',sub:'Comida real vs procesada',multi:true,opts:['Comida limpia (verduras, pollo, arroz, carne)','Proteína y fruta fresca','Comida casera balanceada','Ultraprocesados / Fast food','Exceso de azúcar / Postres','Mucho café / Irritantes']},
+  {id:'sleep',dim:'Cuerpo',icon:'<svg class="w-ico" viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5Z"/></svg>',name:'Sueño',sub:'Descanso de anoche',multi:false,opts:['Dormí 8+ h','Dormí 7–8 h','Menos de 6 h','Me costó dormir','Despertares nocturnos']},
+  {id:'movement',dim:'Cuerpo',icon:'<svg class="w-ico" viewBox="0 0 24 24"><path d="M3 12h4l3-7 4 14 3-7h4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',name:'Movimiento',sub:'¿Te moviste hoy?',multi:true,opts:['Pilates / Pádel / Entreno','Caminata larga','Calistenia / Fuerza','Estiramiento suave','Hoy no me moví']},
+  {id:'energy',dim:'Cuerpo',icon:'<svg class="w-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1"/></svg>',name:'Cuerpo y Energía',sub:'Sensación física hoy',multi:true,opts:['Cuerpo en calma y ligero','Energía alta','Tensión cuello / mandíbula','Inflamación / Pesadez','Cansada/o · Sin pila']},
+  {id:'mood',dim:'Mente',icon:'<svg class="w-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 14s1.5 2 4 2 4-2 4-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="9" cy="10" r=".9" fill="currentColor"/><circle cx="15" cy="10" r=".9" fill="currentColor"/></svg>',name:'Ánimo',sub:'¿Cómo está tu ánimo hoy?',multi:false,opts:['En calma','Bien','Regular','Bajo','Muy bajo']},
+  {id:'anxiety',dim:'Mente',icon:'<svg class="w-ico" viewBox="0 0 24 24"><path d="M3 12c2-4 4-4 6 0s4 4 6 0 4-4 6 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',name:'Ansiedad',sub:'¿Cuánta ansiedad sientes hoy?',multi:false,opts:['Casi nada','Un poco','Moderada','Alta','Muy alta']},
+  {id:'craving',dim:'Mente',icon:'<svg class="w-ico" viewBox="0 0 24 24"><path d="M12 3c3 4 5 6 5 9a5 5 0 1 1-10 0c0-3 2-5 5-9Z"/></svg>',name:'Antojo / Impulso',sub:'¿Sentiste el impulso hoy?',multi:false,opts:['No lo sentí','Lo sentí y lo resistí','Lo sentí y cedí','Lo sentí varias veces']},
+  {id:'connection',dim:'Vínculo',icon:'<svg class="w-ico" viewBox="0 0 24 24"><path d="M12 20s-7-4.5-7-9a4 4 0 0 1 7-2.5A4 4 0 0 1 19 11c0 4.5-7 9-7 9Z"/></svg>',name:'Conexión',sub:'¿Te sentiste acompañada/o hoy?',multi:true,opts:['Sí, con alguien cercano','Sí, en mi círculo','Me sentí sola/o','Necesito compañía']},
+  {id:'soc',dim:'Vínculo',icon:'<svg class="w-ico" viewBox="0 0 24 24"><circle cx="9" cy="12" r="5"/><circle cx="15" cy="12" r="5"/></svg>',name:'Entorno y Día',sub:'Contexto del día',multi:true,opts:['Tiempo a solas nutritivo','Mucho trabajo / Pantalla','Límites sanos hoy']},
+  {id:'bleeding',femaleOnly:true,hideNoPeriod:true,dim:'Cuerpo',icon:'<svg class="w-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2.5"/></svg>',name:'Periodo y Flujo',sub:'Sangrado o manchado',multi:false,opts:['Ligero','Medio','Abundante','Manchado']},
+  {id:'pain',femaleOnly:true,dim:'Cuerpo',icon:'<svg class="w-ico" viewBox="0 0 24 24"><path d="M12 3l2.2 6.8L21 12l-6.8 2.2L12 21l-2.2-6.8L3 12l6.8-2.2L12 3Z"/></svg>',name:'Bienestar Hormonal',sub:'Síntomas o confort',multi:true,opts:['Sin molestias','Cólicos leves','Sensibilidad emocional','Piel luminosa','Retención de líquidos','Cabeza / Migraña']}
 ];
 
 function getTodayClueLog(){
@@ -6703,6 +6817,7 @@ function renderClueTrackList(){
         '<span class="bento-ic">'+cat.icon+'</span>'+
         '<span class="bento-badge">'+(count>0?(count+' ✓'):'+')+'</span>'+
       '</div>'+
+      (cat.dim?'<em class="bento-dim">'+esc(cat.dim.toUpperCase())+'</em>':'')+
       '<strong>'+esc(cat.name)+'</strong>'+
       '<small>'+esc(selTxt)+'</small>';
     card.onclick=()=>{
@@ -7532,176 +7647,169 @@ const fuel=()=>{
 };
 function addFuel(n){S.fuel={v:Math.min(100,fuel()+n),t:Date.now()};save();flameView()}
 const PEB_VESSELS={
-  perla:{
-    title:'Perla',mode:'female',short:'Perla',pro:false,relic:'#D8B8C8',
+  fuente:{
+    title:'Fuente',mode:'female',short:'Fuente',pro:false,relic:'#7AA8A0',
     svg:()=>`
       <defs>
-        <radialGradient id="gPerla" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#FDF5F8" stop-opacity=".95"/><stop offset=".55" stop-color="#F2D8E0" stop-opacity=".45"/><stop offset="1" stop-color="#C8A8B8" stop-opacity="0"/></radialGradient>
-        <radialGradient id="bPerla" cx="38%" cy="32%" r="75%"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".45" stop-color="#F9E8EC"/><stop offset=".8" stop-color="#E8C8D4"/><stop offset="1" stop-color="#C8A8B8"/></radialGradient>
-        <linearGradient id="fPerlaO" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E8B8C8"/></linearGradient>
-        <linearGradient id="fPerlaM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#F9E8EC"/></linearGradient>
-        <linearGradient id="fPerlaC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFF5F8"/></linearGradient>
+        <radialGradient id="gFuente" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#E8F2F0" stop-opacity=".95"/><stop offset=".55" stop-color="#8AB8B0" stop-opacity=".45"/><stop offset="1" stop-color="#3A6A60" stop-opacity="0"/></radialGradient>
+        <radialGradient id="bFuente" cx="42%" cy="30%" r="78%"><stop offset="0" stop-color="#F2FAF8"/><stop offset=".4" stop-color="#C8E0DC"/><stop offset=".75" stop-color="#8AB8B0"/><stop offset="1" stop-color="#5A8A80"/></radialGradient>
+        <linearGradient id="bFuenteRim" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#D8E8E4"/><stop offset=".5" stop-color="#8AB8B0"/><stop offset="1" stop-color="#D8E8E4"/></linearGradient>
+        <linearGradient id="fFuenteO" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#7AB8AC"/></linearGradient>
+        <linearGradient id="fFuenteM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#D8F0EC"/></linearGradient>
+        <linearGradient id="fFuenteC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#F2FAF8"/></linearGradient>
       </defs>
-      <circle class="gl" cx="60" cy="70" r="56" fill="url(#gPerla)"/>
-      <ellipse cx="60" cy="143" rx="32" ry="3.2" fill="#8A6A78" opacity=".16"/>
-      <!-- Perla: una esfera lisa e iridiscente sobre una bandeja, sin picos -->
-      <ellipse cx="60" cy="140" rx="30" ry="4.5" fill="#E8D8D0" stroke="#C8A898" stroke-width=".8"/>
-      <circle cx="60" cy="118" r="24" fill="url(#bPerla)" stroke="#B898A8" stroke-width=".7"/>
-      <ellipse cx="51" cy="109" rx="8" ry="5" fill="#FFFFFF" opacity=".75" transform="rotate(-25 51 109)"/>
-      <ellipse cx="68" cy="128" rx="5" ry="3" fill="#F2D8E0" opacity=".5"/>
-      <ellipse class="emb" cx="60" cy="94" rx="7" ry="1.8" fill="#E8C8D4"/>
+      <circle class="gl" cx="60" cy="70" r="56" fill="url(#gFuente)"/>
+      <ellipse cx="60" cy="143" rx="34" ry="3.2" fill="#2A4A44" opacity=".18"/>
+      <!-- Fuente: un manantial sereno, la gota que brota de adentro -->
+      <ellipse cx="60" cy="138" rx="36" ry="5" fill="url(#bFuente)" stroke="#5A8A80" stroke-width=".8"/>
+      <ellipse cx="60" cy="134" rx="30" ry="4" fill="none" stroke="#FFFFFF" stroke-width="1" opacity=".55"/>
+      <ellipse cx="60" cy="130" rx="22" ry="3" fill="none" stroke="#FFFFFF" stroke-width=".8" opacity=".4"/>
+      <ellipse cx="60" cy="126" rx="14" ry="2.2" fill="none" stroke="#FFFFFF" stroke-width=".7" opacity=".3"/>
+      <path d="M60 128 C56 120 56 112 60 104 C64 112 64 120 60 128Z" fill="url(#bFuente)" stroke="#5A8A80" stroke-width=".7"/>
+      <ellipse cx="57" cy="112" rx="2.2" ry="3.5" fill="#FFFFFF" opacity=".8"/>
+      <ellipse cx="48" cy="136" rx="8" ry="2.5" fill="#FFFFFF" opacity=".35" transform="rotate(-12 48 136)"/>
+      <ellipse class="emb" cx="60" cy="100" rx="6" ry="1.6" fill="#8AB8B0"/>
       <g id="fl">
-        <path class="f1" d="M60 94 C44 86 47 58 60 26 C73 58 76 86 60 94Z" fill="url(#fPerlaO)" opacity=".95"/>
-        <path class="f2" d="M60 94 C52 88 53 68 60 42 C67 68 68 88 60 94Z" fill="url(#fPerlaM)"/>
-        <path class="f3" d="M60 94 C56 91 56 83 60 70 C64 83 64 91 60 94Z" fill="url(#fPerlaC)"/>
+        <path class="f1" d="M60 94 C44 86 47 58 60 26 C73 58 76 86 60 94Z" fill="url(#fFuenteO)" opacity=".95"/>
+        <path class="f2" d="M60 94 C52 88 53 68 60 42 C67 68 68 88 60 94Z" fill="url(#fFuenteM)"/>
+        <path class="f3" d="M60 94 C56 91 56 83 60 70 C64 83 64 91 60 94Z" fill="url(#fFuenteC)"/>
       </g>`
   },
-  rosa:{
-    title:'Rosa',mode:'female',short:'Rosa',pro:true,relic:'#C87890',
+  musa:{
+    title:'Musa',mode:'female',short:'Musa',pro:true,relic:'#C8A85A',
     svg:()=>`
       <defs>
-        <radialGradient id="gRosa" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#FDE8EC" stop-opacity=".95"/><stop offset=".55" stop-color="#E8A8B8" stop-opacity=".45"/><stop offset="1" stop-color="#B85A78" stop-opacity="0"/></radialGradient>
-        <linearGradient id="bRosa" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F2B8C8"/><stop offset=".5" stop-color="#D488A0"/><stop offset="1" stop-color="#9A4A68"/></linearGradient>
-        <linearGradient id="bRosaIn" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F9D8E0"/><stop offset="1" stop-color="#C87890"/></linearGradient>
-        <linearGradient id="fRosaO" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE8F0"/><stop offset="1" stop-color="#D488A8"/></linearGradient>
-        <linearGradient id="fRosaM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFE8F0"/></linearGradient>
-        <linearGradient id="fRosaC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFF5F8"/></linearGradient>
+        <radialGradient id="gMusa" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#FDF6E0" stop-opacity=".95"/><stop offset=".55" stop-color="#E8C878" stop-opacity=".45"/><stop offset="1" stop-color="#8A6A28" stop-opacity="0"/></radialGradient>
+        <radialGradient id="bMusa" cx="42%" cy="32%" r="75%"><stop offset="0" stop-color="#FFFDF5"/><stop offset=".45" stop-color="#F2D8A0"/><stop offset=".8" stop-color="#D8B878"/><stop offset="1" stop-color="#B89048"/></radialGradient>
+        <linearGradient id="bMusaRing" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#E8C878"/><stop offset=".5" stop-color="#F2D8A0"/><stop offset="1" stop-color="#E8C878"/></linearGradient>
+        <linearGradient id="fMusaO" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF8E0"/><stop offset="1" stop-color="#D8A838"/></linearGradient>
+        <linearGradient id="fMusaM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFE8A8"/></linearGradient>
+        <linearGradient id="fMusaC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFF8E0"/></linearGradient>
       </defs>
-      <circle class="gl" cx="60" cy="70" r="56" fill="url(#gRosa)"/>
-      <ellipse cx="60" cy="143" rx="32" ry="3.2" fill="#8A4A5A" opacity=".16"/>
-      <!-- Rosa: cinco pétalos redondos alrededor de un centro dorado, sin espinas -->
-      <ellipse cx="60" cy="140" rx="26" ry="4" fill="#7A3A50" opacity=".2"/>
-      <g fill="url(#bRosa)" stroke="#9A4A68" stroke-width=".7">
-        <ellipse cx="60" cy="104" rx="13" ry="19"/>
-        <ellipse cx="41" cy="118" rx="13" ry="19" transform="rotate(-72 41 118)"/>
-        <ellipse cx="79" cy="118" rx="13" ry="19" transform="rotate(72 79 118)"/>
-        <ellipse cx="47" cy="132" rx="13" ry="19" transform="rotate(-36 47 132)"/>
-        <ellipse cx="73" cy="132" rx="13" ry="19" transform="rotate(36 73 132)"/>
-      </g>
-      <ellipse cx="60" cy="120" rx="12" ry="14" fill="url(#bRosaIn)" stroke="#B85A78" stroke-width=".6"/>
-      <circle cx="60" cy="120" r="5" fill="#E8C878"/>
-      <ellipse class="emb" cx="60" cy="94" rx="7" ry="1.8" fill="#D488A8"/>
+      <circle class="gl" cx="60" cy="70" r="56" fill="url(#gMusa)"/>
+      <ellipse cx="60" cy="143" rx="32" ry="3.2" fill="#6A4A18" opacity=".18"/>
+      <!-- Musa: un orbe luminoso con su halo, la presencia que inspira -->
+      <ellipse cx="60" cy="140" rx="26" ry="4" fill="#8A6A28" opacity=".18"/>
+      <circle cx="60" cy="120" r="26" fill="none" stroke="url(#bMusaRing)" stroke-width="1.2" opacity=".85"/>
+      <circle cx="60" cy="120" r="20" fill="url(#bMusa)" stroke="#B89048" stroke-width=".7"/>
+      <ellipse cx="53" cy="112" rx="7" ry="4.5" fill="#FFFFFF" opacity=".8" transform="rotate(-25 53 112)"/>
+      <ellipse cx="66" cy="128" rx="4.5" ry="2.8" fill="#F2D8A0" opacity=".5"/>
+      <circle cx="60" cy="120" r="2" fill="#FFFFFF" opacity=".9"/>
+      <circle cx="38" cy="96" r="1.2" fill="#E8C878"/><circle cx="82" cy="100" r="1" fill="#E8C878"/><circle cx="60" cy="88" r="1.3" fill="#F2D8A0"/>
+      <ellipse class="emb" cx="60" cy="94" rx="7" ry="1.8" fill="#D8B878"/>
       <g id="fl">
-        <path class="f1" d="M60 94 C44 86 47 58 60 26 C73 58 76 86 60 94Z" fill="url(#fRosaO)" opacity=".95"/>
-        <path class="f2" d="M60 94 C52 88 53 68 60 42 C67 68 68 88 60 94Z" fill="url(#fRosaM)"/>
-        <path class="f3" d="M60 94 C56 91 56 83 60 70 C64 83 64 91 60 94Z" fill="url(#fRosaC)"/>
+        <path class="f1" d="M60 94 C44 86 47 58 60 26 C73 58 76 86 60 94Z" fill="url(#fMusaO)" opacity=".95"/>
+        <path class="f2" d="M60 94 C52 88 53 68 60 42 C67 68 68 88 60 94Z" fill="url(#fMusaM)"/>
+        <path class="f3" d="M60 94 C56 91 56 83 60 70 C64 83 64 91 60 94Z" fill="url(#fMusaC)"/>
       </g>`
   },
-  nube:{
-    title:'Nube',mode:'female',short:'Nube',pro:true,relic:'#A8A8C8',
+  nido:{
+    title:'Nido',mode:'female',short:'Nido',pro:true,relic:'#B89048',
     svg:()=>`
       <defs>
-        <radialGradient id="gNube" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#F0F0F8" stop-opacity=".95"/><stop offset=".55" stop-color="#C8C8E0" stop-opacity=".45"/><stop offset="1" stop-color="#8A8AB0" stop-opacity="0"/></radialGradient>
-        <linearGradient id="bNube" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".6" stop-color="#E0E0F0"/><stop offset="1" stop-color="#B8B8D4"/></linearGradient>
-        <linearGradient id="fNubeO" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#B8B8D8"/></linearGradient>
-        <linearGradient id="fNubeM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E8E8F8"/></linearGradient>
-        <linearGradient id="fNubeC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#F5F0FF"/></linearGradient>
+        <radialGradient id="gNido" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#FDF2DC" stop-opacity=".95"/><stop offset=".55" stop-color="#D8B878" stop-opacity=".45"/><stop offset="1" stop-color="#6A4A28" stop-opacity="0"/></radialGradient>
+        <linearGradient id="bNido" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#C8A85A"/><stop offset=".5" stop-color="#8A6A28"/><stop offset="1" stop-color="#5A3A18"/></linearGradient>
+        <radialGradient id="bNidoEgg" cx="42%" cy="30%" r="75%"><stop offset="0" stop-color="#FFFDF5"/><stop offset=".5" stop-color="#F2E8D0"/><stop offset="1" stop-color="#D8C8A8"/></radialGradient>
+        <linearGradient id="fNidoO" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF8E0"/><stop offset="1" stop-color="#C87828"/></linearGradient>
+        <linearGradient id="fNidoM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFE8A8"/></linearGradient>
+        <linearGradient id="fNidoC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFF8E0"/></linearGradient>
       </defs>
-      <circle class="gl" cx="60" cy="70" r="56" fill="url(#gNube)"/>
-      <ellipse cx="60" cy="143" rx="34" ry="3.2" fill="#6A6A90" opacity=".16"/>
-      <!-- Nube: tres círculos suaves que forman una nube, todo curvas -->
-      <ellipse cx="60" cy="138" rx="36" ry="5" fill="url(#bNube)" stroke="#9A9AC0" stroke-width=".7"/>
-      <circle cx="42" cy="124" r="16" fill="url(#bNube)" stroke="#9A9AC0" stroke-width=".7"/>
-      <circle cx="60" cy="114" r="20" fill="url(#bNube)" stroke="#9A9AC0" stroke-width=".7"/>
-      <circle cx="78" cy="124" r="16" fill="url(#bNube)" stroke="#9A9AC0" stroke-width=".7"/>
-      <ellipse cx="52" cy="108" rx="7" ry="4" fill="#FFFFFF" opacity=".7" transform="rotate(-20 52 108)"/>
-      <ellipse class="emb" cx="60" cy="94" rx="7" ry="1.8" fill="#C8C8E0"/>
+      <circle class="gl" cx="60" cy="70" r="56" fill="url(#gNido)"/>
+      <ellipse cx="60" cy="144" rx="34" ry="3.5" fill="#4A2A10" opacity=".22"/>
+      <!-- Nido: un nido tejido que guarda un huevo, el espacio seguro -->
+      <path d="M30 118 C30 132 44 142 60 142 C76 142 90 132 90 118 C90 114 86 112 82 112 L38 112 C34 112 30 114 30 118Z" fill="url(#bNido)" stroke="#4A2A10" stroke-width=".8"/>
+      <path d="M34 122 C44 126 76 126 86 122 M36 128 C46 132 74 132 84 128 M40 134 C50 137 70 137 80 134" fill="none" stroke="#E8C878" stroke-width="1" stroke-linecap="round" opacity=".55"/>
+      <path d="M38 116 C48 120 72 120 82 116" fill="none" stroke="#F2D8A0" stroke-width="1" stroke-linecap="round" opacity=".5"/>
+      <ellipse cx="60" cy="112" rx="13" ry="16" fill="url(#bNidoEgg)" stroke="#B89878" stroke-width=".7"/>
+      <ellipse cx="55" cy="104" rx="4" ry="6" fill="#FFFFFF" opacity=".75" transform="rotate(-18 55 104)"/>
+      <ellipse cx="64" cy="120" rx="3" ry="2" fill="#E8D8B8" opacity=".5"/>
+      <ellipse class="emb" cx="60" cy="94" rx="7" ry="1.8" fill="#D8B878"/>
       <g id="fl">
-        <path class="f1" d="M60 94 C44 86 47 58 60 26 C73 58 76 86 60 94Z" fill="url(#fNubeO)" opacity=".95"/>
-        <path class="f2" d="M60 94 C52 88 53 68 60 42 C67 68 68 88 60 94Z" fill="url(#fNubeM)"/>
-        <path class="f3" d="M60 94 C56 91 56 83 60 70 C64 83 64 91 60 94Z" fill="url(#fNubeC)"/>
+        <path class="f1" d="M60 94 C44 86 47 58 60 26 C73 58 76 86 60 94Z" fill="url(#fNidoO)" opacity=".95"/>
+        <path class="f2" d="M60 94 C52 88 53 68 60 42 C67 68 68 88 60 94Z" fill="url(#fNidoM)"/>
+        <path class="f3" d="M60 94 C56 91 56 83 60 70 C64 83 64 91 60 94Z" fill="url(#fNidoC)"/>
       </g>`
   },
-  roble:{
-    title:'Roble',mode:'male',short:'Roble',pro:false,relic:'#8A6A3A',
+  piedra:{
+    title:'Piedra',mode:'male',short:'Piedra',pro:false,relic:'#8A8578',
     svg:()=>`
       <defs>
-        <radialGradient id="gRoble" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#F2D8A8" stop-opacity=".95"/><stop offset=".55" stop-color="#C8A058" stop-opacity=".45"/><stop offset="1" stop-color="#6A4A28" stop-opacity="0"/></radialGradient>
-        <linearGradient id="bRoble" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8A6A3A"/><stop offset=".5" stop-color="#5A3A1A"/><stop offset="1" stop-color="#3A2410"/></linearGradient>
-        <linearGradient id="bRobleTop" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#D8B878"/><stop offset=".5" stop-color="#B89048"/><stop offset="1" stop-color="#D8B878"/></linearGradient>
-        <linearGradient id="fRobleO" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF0C9"/><stop offset="1" stop-color="#D48818"/></linearGradient>
-        <linearGradient id="fRobleM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFE8A8"/></linearGradient>
-        <linearGradient id="fRobleC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFF5D6"/></linearGradient>
+        <radialGradient id="gPiedra" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#E8E6E0" stop-opacity=".95"/><stop offset=".55" stop-color="#A8A49A" stop-opacity=".45"/><stop offset="1" stop-color="#4A4640" stop-opacity="0"/></radialGradient>
+        <radialGradient id="bPiedra" cx="40%" cy="28%" r="80%"><stop offset="0" stop-color="#F2F0EC"/><stop offset=".4" stop-color="#C8C4BA"/><stop offset=".75" stop-color="#8A8578"/><stop offset="1" stop-color="#5A554E"/></radialGradient>
+        <linearGradient id="fPiedraO" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF8E0"/><stop offset="1" stop-color="#C87828"/></linearGradient>
+        <linearGradient id="fPiedraM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFE8A8"/></linearGradient>
+        <linearGradient id="fPiedraC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFF8E0"/></linearGradient>
       </defs>
-      <circle class="gl" cx="60" cy="68" r="58" fill="url(#gRoble)"/>
-      <ellipse cx="60" cy="144" rx="36" ry="3.5" fill="#2A1A08" opacity=".35"/>
-      <!-- Roble: un tocón pulido con sus anillos de crecimiento, madera noble -->
-      <path d="M32 102 C32 100 88 100 88 102 L88 132 C88 138 80 142 60 142 C40 142 32 138 32 132 Z" fill="url(#bRoble)" stroke="#2A1A08" stroke-width=".8"/>
-      <path d="M40 108 C42 118 42 128 40 136 M52 108 C54 118 54 128 52 136 M68 108 C66 118 66 128 68 136 M80 108 C78 118 78 128 80 136" fill="none" stroke="#D8B878" stroke-width=".9" stroke-linecap="round" opacity=".5"/>
-      <ellipse cx="60" cy="102" rx="28" ry="6" fill="url(#bRobleTop)" stroke="#6A4A28" stroke-width=".9"/>
-      <ellipse cx="60" cy="102" rx="20" ry="4" fill="none" stroke="#8A6A3A" stroke-width=".8"/>
-      <ellipse cx="60" cy="102" rx="12" ry="2.4" fill="none" stroke="#8A6A3A" stroke-width=".7"/>
-      <ellipse class="emb" cx="60" cy="102" rx="6" ry="1.6" fill="#E8A838"/>
+      <circle class="gl" cx="60" cy="68" r="58" fill="url(#gPiedra)"/>
+      <ellipse cx="60" cy="144" rx="36" ry="3.5" fill="#2A2622" opacity=".35"/>
+      <!-- Piedra: un canto rodado pulido, el cimiento que no se mueve -->
+      <path d="M32 132 C28 118 36 104 52 100 C66 97 84 102 88 114 C91 125 84 138 70 141 C54 144 36 141 32 132Z" fill="url(#bPiedra)" stroke="#4A4640" stroke-width=".8"/>
+      <path d="M40 124 C48 118 62 116 74 120 M42 132 C52 128 66 128 76 132" fill="none" stroke="#FFFFFF" stroke-width="1" stroke-linecap="round" opacity=".35"/>
+      <ellipse cx="50" cy="110" rx="10" ry="5" fill="#FFFFFF" opacity=".5" transform="rotate(-18 50 110)"/>
+      <ellipse cx="68" cy="134" rx="6" ry="3" fill="#6A655C" opacity=".4"/>
+      <ellipse class="emb" cx="60" cy="98" rx="7" ry="1.8" fill="#A8A49A"/>
       <g id="fl">
-        <path class="f1" d="M60 94 C44 86 47 58 60 26 C73 58 76 86 60 94Z" fill="url(#fRobleO)" opacity=".95"/>
-        <path class="f2" d="M60 94 C52 88 53 68 60 42 C67 68 68 88 60 94Z" fill="url(#fRobleM)"/>
-        <path class="f3" d="M60 94 C56 91 56 83 60 70 C64 83 64 91 60 94Z" fill="url(#fRobleC)"/>
+        <path class="f1" d="M60 94 C44 86 47 58 60 26 C73 58 76 86 60 94Z" fill="url(#fPiedraO)" opacity=".95"/>
+        <path class="f2" d="M60 94 C52 88 53 68 60 42 C67 68 68 88 60 94Z" fill="url(#fPiedraM)"/>
+        <path class="f3" d="M60 94 C56 91 56 83 60 70 C64 83 64 91 60 94Z" fill="url(#fPiedraC)"/>
       </g>`
   },
-  brujula:{
-    title:'Brújula',mode:'male',short:'Brújula',pro:true,relic:'#5A7A9A',
+  horizonte:{
+    title:'Horizonte',mode:'male',short:'Horizonte',pro:true,relic:'#5A6A8A',
     svg:()=>`
       <defs>
-        <radialGradient id="gBrujula" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#D8E0E8" stop-opacity=".95"/><stop offset=".55" stop-color="#8A9AA8" stop-opacity=".45"/><stop offset="1" stop-color="#2A3A4A" stop-opacity="0"/></radialGradient>
-        <linearGradient id="bBrass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E8C878"/><stop offset=".5" stop-color="#B89048"/><stop offset="1" stop-color="#8A6A28"/></linearGradient>
-        <radialGradient id="bBrujulaFace" cx="50%" cy="42%" r="65%"><stop offset="0" stop-color="#FFFDF5"/><stop offset="1" stop-color="#E8DCC0"/></radialGradient>
-        <linearGradient id="fBrujulaO" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF0C9"/><stop offset="1" stop-color="#C87828"/></linearGradient>
-        <linearGradient id="fBrujulaM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFE8A8"/></linearGradient>
-        <linearGradient id="fBrujulaC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFF5D6"/></linearGradient>
+        <radialGradient id="gHorizonte" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#E8ECF2" stop-opacity=".95"/><stop offset=".55" stop-color="#8A9AB8" stop-opacity=".45"/><stop offset="1" stop-color="#2A3A58" stop-opacity="0"/></radialGradient>
+        <linearGradient id="bHorizonte" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3A4A68"/><stop offset=".6" stop-color="#2A3A58"/><stop offset="1" stop-color="#1A2438"/></linearGradient>
+        <radialGradient id="bHorizonteSun" cx="50%" cy="42%" r="65%"><stop offset="0" stop-color="#FFF8E0"/><stop offset=".55" stop-color="#F2C878"/><stop offset="1" stop-color="#D8A838"/></radialGradient>
+        <linearGradient id="fHorizonteO" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF8E0"/><stop offset="1" stop-color="#C87828"/></linearGradient>
+        <linearGradient id="fHorizonteM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFE8A8"/></linearGradient>
+        <linearGradient id="fHorizonteC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFF8E0"/></linearGradient>
       </defs>
-      <circle class="gl" cx="60" cy="68" r="58" fill="url(#gBrujula)"/>
-      <ellipse cx="60" cy="144" rx="34" ry="3.5" fill="#1A2A38" opacity=".35"/>
-      <!-- Brújula: una esfera de latón con su dial, la aguja apunta al norte -->
-      <circle cx="60" cy="120" r="27" fill="url(#bBrass)" stroke="#6A4A18" stroke-width="1"/>
-      <circle cx="60" cy="120" r="22" fill="url(#bBrujulaFace)" stroke="#8A6A28" stroke-width=".7"/>
-      <g stroke="#5A4A28" stroke-width="1" stroke-linecap="round">
-        <line x1="60" y1="101" x2="60" y2="105"/><line x1="60" y1="135" x2="60" y2="139"/>
-        <line x1="41" y1="120" x2="45" y2="120"/><line x1="75" y1="120" x2="79" y2="120"/>
-        <line x1="47" y1="107" x2="49" y2="109"/><line x1="73" y1="107" x2="71" y2="109"/>
-        <line x1="47" y1="133" x2="49" y2="131"/><line x1="73" y1="133" x2="71" y2="131"/>
-      </g>
-      <path d="M60 102 C63 110 63 118 60 126 C57 118 57 110 60 102 Z" fill="#B85A28" stroke="#8A3A18" stroke-width=".6"/>
-      <path d="M60 138 C57 130 57 122 60 114 C63 122 63 130 60 138 Z" fill="#E8E0D0" stroke="#8A7A58" stroke-width=".6"/>
-      <circle cx="60" cy="120" r="3.5" fill="url(#bBrass)" stroke="#6A4A18" stroke-width=".7"/>
-      <ellipse class="emb" cx="60" cy="94" rx="7" ry="1.8" fill="#C8A85A"/>
+      <circle class="gl" cx="60" cy="68" r="58" fill="url(#gHorizonte)"/>
+      <ellipse cx="60" cy="144" rx="36" ry="3.5" fill="#141A28" opacity=".4"/>
+      <!-- Horizonte: la línea donde la tierra se encuentra con la luz -->
+      <path d="M28 142 C28 124 42 112 60 112 C78 112 92 124 92 142 Z" fill="url(#bHorizonte)" stroke="#141A28" stroke-width=".8"/>
+      <path d="M28 142 C40 132 80 132 92 142" fill="none" stroke="#F2C878" stroke-width="1.2" opacity=".8"/>
+      <circle cx="60" cy="118" r="12" fill="url(#bHorizonteSun)" stroke="#B89048" stroke-width=".7"/>
+      <ellipse cx="56" cy="114" rx="4" ry="2.5" fill="#FFFFFF" opacity=".8"/>
+      <circle cx="38" cy="104" r="1" fill="#F2C878"/><circle cx="82" cy="100" r="1.1" fill="#F2C878"/><circle cx="60" cy="96" r="1.2" fill="#FFF8E0"/>
+      <ellipse class="emb" cx="60" cy="96" rx="7" ry="1.8" fill="#D8B878"/>
       <g id="fl">
-        <path class="f1" d="M60 94 C44 86 47 58 60 26 C73 58 76 86 60 94Z" fill="url(#fBrujulaO)" opacity=".95"/>
-        <path class="f2" d="M60 94 C52 88 53 68 60 42 C67 68 68 88 60 94Z" fill="url(#fBrujulaM)"/>
-        <path class="f3" d="M60 94 C56 91 56 83 60 70 C64 83 64 91 60 94Z" fill="url(#fBrujulaC)"/>
+        <path class="f1" d="M60 94 C44 86 47 58 60 26 C73 58 76 86 60 94Z" fill="url(#fHorizonteO)" opacity=".95"/>
+        <path class="f2" d="M60 94 C52 88 53 68 60 42 C67 68 68 88 60 94Z" fill="url(#fHorizonteM)"/>
+        <path class="f3" d="M60 94 C56 91 56 83 60 70 C64 83 64 91 60 94Z" fill="url(#fHorizonteC)"/>
       </g>`
   },
-  escudo:{
-    title:'Escudo',mode:'male',short:'Escudo',pro:true,relic:'#8A5A4A',
+  brasa:{
+    title:'Brasa',mode:'male',short:'Brasa',pro:true,relic:'#C85828',
     svg:()=>`
       <defs>
-        <radialGradient id="gEscudo" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#E8D8C8" stop-opacity=".95"/><stop offset=".55" stop-color="#B89078" stop-opacity=".45"/><stop offset="1" stop-color="#4A2A20" stop-opacity="0"/></radialGradient>
-        <linearGradient id="bEscudo" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8A9AA8"/><stop offset=".45" stop-color="#5A6A7A"/><stop offset="1" stop-color="#2A3A48"/></linearGradient>
-        <linearGradient id="bEscudoBronze" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#C8A85A"/><stop offset=".5" stop-color="#E8C878"/><stop offset="1" stop-color="#C8A85A"/></linearGradient>
-        <linearGradient id="fEscudoO" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF0C9"/><stop offset="1" stop-color="#E05818"/></linearGradient>
-        <linearGradient id="fEscudoM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFB878"/></linearGradient>
-        <linearGradient id="fEscudoC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFE8C8"/></linearGradient>
+        <radialGradient id="gBrasa" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#FDE8D0" stop-opacity=".95"/><stop offset=".55" stop-color="#E07828" stop-opacity=".5"/><stop offset="1" stop-color="#5A1A08" stop-opacity="0"/></radialGradient>
+        <radialGradient id="bBrasa" cx="50%" cy="42%" r="68%"><stop offset="0" stop-color="#FFE8B8"/><stop offset=".35" stop-color="#F2A838"/><stop offset=".7" stop-color="#C85828"/><stop offset="1" stop-color="#6A2410"/></radialGradient>
+        <linearGradient id="fBrasaO" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF0C9"/><stop offset="1" stop-color="#E05818"/></linearGradient>
+        <linearGradient id="fBrasaM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFB878"/></linearGradient>
+        <linearGradient id="fBrasaC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFE8C8"/></linearGradient>
       </defs>
-      <circle class="gl" cx="60" cy="68" r="58" fill="url(#gEscudo)"/>
-      <ellipse cx="60" cy="144" rx="34" ry="3.5" fill="#1A120A" opacity=".4"/>
-      <!-- Escudo: un escudo de acero y bronce, base redondeada, sin puntas -->
-      <path d="M34 100 L86 100 L86 116 C86 130 74 140 60 140 C46 140 34 130 34 116 Z" fill="url(#bEscudo)" stroke="#1A2A38" stroke-width="1"/>
-      <path d="M38 104 L82 104 L82 116 C82 128 72 136 60 136 C48 136 38 128 38 116 Z" fill="none" stroke="url(#bEscudoBronze)" stroke-width="1.6" opacity=".9"/>
-      <circle cx="60" cy="118" r="9" fill="url(#bEscudoBronze)" stroke="#6A4A18" stroke-width=".8"/>
-      <circle cx="60" cy="118" r="4" fill="#F2D8A0"/>
-      <path d="M44 106 C46 114 46 124 44 132 M76 106 C74 114 74 124 76 132" fill="none" stroke="#FFFFFF" stroke-width="1.4" stroke-linecap="round" opacity=".3"/>
-      <ellipse class="emb" cx="60" cy="94" rx="7" ry="1.8" fill="#E8C878"/>
+      <circle class="gl" cx="60" cy="68" r="58" fill="url(#gBrasa)"/>
+      <ellipse cx="60" cy="144" rx="36" ry="3.5" fill="#2A0E04" opacity=".45"/>
+      <!-- Brasa: el carbón que arde por dentro, la fuerza que no necesita gritar -->
+      <path d="M34 130 C30 116 38 102 54 99 C68 96 84 102 88 114 C91 126 84 138 70 141 C54 144 38 141 34 130Z" fill="url(#bBrasa)" stroke="#4A1808" stroke-width=".8"/>
+      <path d="M48 112 C52 120 52 128 48 134 M62 108 C66 118 66 128 62 136 M72 116 C74 122 74 128 72 132" fill="none" stroke="#FFE8B8" stroke-width="1.1" stroke-linecap="round" opacity=".75"/>
+      <ellipse cx="52" cy="110" rx="8" ry="4" fill="#FFFFFF" opacity=".55" transform="rotate(-18 52 110)"/>
+      <ellipse cx="68" cy="134" rx="5" ry="2.5" fill="#8A3018" opacity=".5"/>
+      <ellipse class="emb" cx="60" cy="98" rx="7" ry="1.8" fill="#F2A838"/>
       <g id="fl">
-        <path class="f1" d="M60 94 C39 88 41 62 60 30 C79 62 81 88 60 94Z" fill="url(#fEscudoO)" opacity=".95"/>
-        <path class="f2" d="M48 92 C42 82 45 68 52 52 C54 70 54 84 48 92Z" fill="url(#fEscudoO)" opacity=".8"/>
-        <path class="f2" d="M72 92 C78 82 75 68 68 52 C66 70 66 84 72 92Z" fill="url(#fEscudoO)" opacity=".8"/>
-        <path class="f3" d="M60 94 C50 90 50 72 60 46 C70 72 70 90 60 94Z" fill="url(#fEscudoM)"/>
+        <path class="f1" d="M60 94 C39 88 41 62 60 30 C79 62 81 88 60 94Z" fill="url(#fBrasaO)" opacity=".95"/>
+        <path class="f2" d="M48 92 C42 82 45 68 52 52 C54 70 54 84 48 92Z" fill="url(#fBrasaO)" opacity=".8"/>
+        <path class="f2" d="M72 92 C78 82 75 68 68 52 C66 70 66 84 72 92Z" fill="url(#fBrasaO)" opacity=".8"/>
+        <path class="f3" d="M60 94 C50 90 50 72 60 46 C70 72 70 90 60 94Z" fill="url(#fBrasaM)"/>
         <circle cx="49" cy="42" r="1.4" fill="#FFF2C2"/><circle cx="71" cy="37" r="1.2" fill="#FFF2C2"/><circle cx="60" cy="23" r="1.5" fill="#FFFFFF"/>
       </g>`
   }
 };
 
 /* La reliquia libre por defecto según el modo (mujer / hombre). */
-function pebDefaultVessel(){return S.bioMode==='female'?'perla':'roble';}
+function pebDefaultVessel(){return S.bioMode==='female'?'fuente':'piedra';}
 /* La barra de reliquias muestra solo las 3 del modo actual; se reconstruye
    solo cuando cambia el modo (si no, solo se actualiza el estado .on). */
 let pebBarMode='';
@@ -7726,7 +7834,7 @@ function renderPebVesselArt(){
   const cfg=PEB_VESSELS[vKey];
   renderPebVesselBar();
   if($('pebSvgArt'))$('pebSvgArt').innerHTML=cfg.svg();
-  if($('pd'))$('pd').style.setProperty('--relic',cfg.relic||'#8A6A3A');
+  if($('pd'))$('pd').style.setProperty('--relic',cfg.relic||'#8A8578');
   if($('pebVesselTitle'))$('pebVesselTitle').textContent=cfg.title;
   document.querySelectorAll('#pebVesselBar .peb-vessel-btn').forEach(b=>{
     b.classList.toggle('on',b.dataset.vessel===vKey);
@@ -7739,7 +7847,7 @@ if($('pebVesselBar')){
     const vk=b.dataset.vessel;
     const cfg=PEB_VESSELS[vk];
     if(cfg && cfg.pro && !isPro()){
-      openPaywall('Desbloquea las reliquias exclusivas del Pebetero (Rosa, Nube, Brújula y Escudo) con Wavy Pro.');
+      openPaywall('Desbloquea las reliquias exclusivas del Pebetero (Musa, Nido, Horizonte y Brasa) con Wavy Pro.');
       return;
     }
     S.pebVessel=vk;
@@ -8630,8 +8738,10 @@ tickDay();
 setInterval(tickDay,1000);
 initAllBioCategories();
 renderAll();
+syncBreathMinUI();
 if('scrollRestoration' in history)history.scrollRestoration='manual';
 window.scrollTo(0,0);
+measureSosGeo();
 requestSosDock();
 updateMastheadFade();
 initLiveSyncChannels();
@@ -8649,10 +8759,14 @@ function closeTransientPopovers(){
   }
   if($('circleComposerDrawer') && !$('circleComposerDrawer').hidden){
     $('circleComposerDrawer').hidden=true;
+    if($('echoInput'))$('echoInput').blur();
     updateCircleComposerYield();
   }
   if($('inlineSongBox') && !$('inlineSongBox').hidden){
     $('inlineSongBox').hidden=true;
+  }
+  if($('bbDurMenu') && !$('bbDurMenu').hidden){
+    $('bbDurMenu').hidden=true;
   }
   if($('clueGoalSheet') && !$('clueGoalSheet').hidden){
     $('clueGoalSheet').hidden=true;
@@ -8672,8 +8786,9 @@ document.addEventListener('pointerdown',e=>{
     }
   }
   if($('circleComposerDrawer') && !$('circleComposerDrawer').hidden){
-    if(!e.target.closest('#circleComposerDrawer') && !e.target.closest('#openCircleComposerBtn')){
+    if(!e.target.closest('#circleComposer')){
       $('circleComposerDrawer').hidden=true;
+      if($('echoInput'))$('echoInput').blur();
       updateCircleComposerYield();
     }
   }

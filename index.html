@@ -253,20 +253,25 @@ h1{font-family:var(--serif);font-weight:500;font-size:clamp(28px,7vw,36px);line-
 .panel{display:none;animation:fadeUp .24s ease}.panel.on{display:block}
 
 /* Check-in rápido tipo BeReal en Hoy */
-.checkin-banner{
-  background:var(--wash);border:1px solid var(--glass-border);
-  border-left:3.5px solid var(--crimson);
-  padding:14px 16px;border-radius:12px;margin-bottom:14px;
-  display:flex;justify-content:space-between;align-items:center;gap:12px;
-  box-shadow:var(--glass-spec);
+/* Perímetro fino y elegante en la caja del pebetero: verde cuando la
+   cuota del día está cumplida, rojo (carmín) cuando falta. El color da
+   vueltas alrededor de la caja: un gradiente cónico que rota, una línea
+   muy fina (1.5 px) pero suficiente para llamar la atención. La caja
+   tiene overflow:hidden, así que el anillo vive DENTRO del borde. */
+@property --peb-angle{syntax:'<angle>';initial-value:0deg;inherits:false}
+.pd.peb-ring::before{
+  content:"";position:absolute;inset:0;border-radius:20px;pointer-events:none;z-index:3;
+  padding:1.5px;
+  background:conic-gradient(from var(--peb-angle,0deg),var(--peb-ring) 0deg,transparent 22%,transparent 58%,var(--peb-ring) 82%,var(--peb-ring) 100%);
+  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;
+  mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  mask-composite:exclude;
+  animation:pebRingSpin 6s linear infinite;
 }
-.checkin-banner.maintained{
-  border-left-color:var(--ok);
-  background:linear-gradient(90deg,rgba(21,96,69,0.12),var(--wash));
-}
-.checkin-banner strong{font-family:var(--serif);font-size:17.5px;font-weight:500;display:block;line-height:1.2}
-.checkin-banner.maintained strong{color:var(--ok)}
-.checkin-banner span{font-size:12.5px;color:var(--muted);display:block;margin-top:3px;line-height:1.35}
+@keyframes pebRingSpin{to{--peb-angle:360deg}}
+.pd.peb-ring-done{--peb-ring:var(--ok)}
+.pd.peb-ring-pending{--peb-ring:var(--crimson)}
 
 /* Cuadrícula 3x3 Hábitos */
 .habit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
@@ -1690,13 +1695,6 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
        VISTA 1: HOY (CHECK-IN, HÁBITO, DIARIO Y SOS)
        ========================================================= -->
   <div class="vpage on" id="v-today">
-    <div class="checkin-banner" id="pebBanner">
-      <div>
-        <strong id="pebTitle">Sintonización diaria pendiente</strong>
-        <span id="pebDesc">Cumple 1 minuto de respiración, un registro del día o una práctica breve para encender tu llama en verde y desbloquear los ecos de tu círculo.</span>
-      </div>
-      <button class="btn" id="pebActionBtn" style="white-space:nowrap">Ir a respirar</button>
-    </div>
 
     <nav class="tabs" id="todaySubTabs" role="tablist" aria-label="Instrumentos de hoy">
       <button class="tab on" data-sub="sub-habit" role="tab" aria-selected="true"><b>Hábito</b>Mi Racha</button>
@@ -2164,7 +2162,7 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
     </div>
     </div>
     <div id="circleDiaryPane" hidden>
-      <section class="panel card" id="sub-diary">
+      <section class="panel card on" id="sub-diary">
       <div class="hd">
         <span>Mi Diario <button type="button" class="help-q" data-help="helpBio" aria-label="Ayuda sobre el diario">?</button></span>
       </div>
@@ -3714,7 +3712,7 @@ function handleIncomingLivePacket(pkt){
       }
       save(false);
       flameView();
-      renderPebeteroBanner();
+      syncPebeteroRing();
       toast('Vela de Vigilia encendida por @'+sender+' (100%)','ok');
     }
     renderStoriesBar();
@@ -4205,7 +4203,7 @@ function switchMainView(vid){
   });
   document.querySelectorAll('.vpage').forEach(p=>p.classList.toggle('on',p.id===vid));
   if(vid==='v-breathe'){fit();startLoop()}else{stopLoop()}
-  if(vid==='v-today'){renderPebeteroBanner();flameView();measureSosGeo();requestSosDock()}
+  if(vid==='v-today'){syncPebeteroRing();flameView();measureSosGeo();requestSosDock()}
   if(vid==='v-circle'){renderHomeCoRegulation();updateCircleComposerYield()}
   if(vid==='v-clinic'){stats();hours(true);renderClinicalReport()}
   if(vid==='v-profile'){syncProfileForm();syncProWifiSwitchUI();renderSealsCarousel()}
@@ -4426,7 +4424,7 @@ function markVerifiedPractice(msg){
     addFuel(24);
   }
   save();
-  renderPebeteroBanner();
+  syncPebeteroRing();
   renderStoriesBar();
   renderCircleFeed();
   flameView();
@@ -4474,25 +4472,16 @@ function renderStoriesBar(){
   bar.appendChild(addB);
 }
 
-function renderPebeteroBanner(){
+/* Perímetro del pebetero: verde si la cuota del día está cumplida
+   (práctica verificada hoy), carmín si falta. El anillo da vueltas
+   (CSS) y el color lo pone esta función. Reemplaza al cuadro grande
+   "Llama encendida hoy", que ocupaba demasiado. */
+function syncPebeteroRing(){
+  const p=$('pd');if(!p)return;
   const maintained=isPebeteroMaintained();
-  const b=$('pebBanner'),t=$('pebTitle'),d=$('pebDesc'),btn=$('pebActionBtn');
-  if(!b)return;
-  if(maintained){
-    b.classList.add('maintained');
-    t.textContent='Llama encendida hoy · Práctica cumplida';
-    d.textContent='Ya realizaste tu momento de regulación hoy. Los ecos y notas de tu aliado están desbloqueados.';
-    btn.textContent='Ver mi Círculo';
-    btn.className='btn ghost';
-    btn.onclick=()=>switchMainView('v-circle');
-  }else{
-    b.classList.remove('maintained');
-    t.textContent='Sintonización diaria pendiente ('+Math.round(fuel())+'% de llama)';
-    d.textContent='Respira en la pestaña Respirar, guarda tu Diario o cumple una práctica de 60 s para encender tu llama y leer los ecos de tu aliado.';
-    btn.textContent='Ir a respirar';
-    btn.className='btn';
-    btn.onclick=()=>switchMainView('v-breathe');
-  }
+  p.classList.add('peb-ring');
+  p.classList.toggle('peb-ring-done',maintained);
+  p.classList.toggle('peb-ring-pending',!maintained);
 }
 
 let selectedEchoVibe='';
@@ -4956,7 +4945,7 @@ function strikFriendPebetero(u){
 
 function renderHomeCoRegulation(){
   renderStoriesBar();
-  renderPebeteroBanner();
+  syncPebeteroRing();
   renderCircleFeed();
   updateCircleComposerYield();
 }
@@ -6835,8 +6824,19 @@ function getTodayClueLog(){
 
 let openClueCatId=''; /* Nada se abre solo: solo los clicks activan o desactivan los menús */
 function renderClueTrackList(){
-  const list=$('clueTrackList'),drawer=$('bentoActiveDrawer');if(!list)return;
-  if(drawer && drawer.parentElement===list)list.parentElement.appendChild(drawer);
+  const list=$('clueTrackList');if(!list)return;
+  /* El cajón vive como HERMANO de la lista (hijo de .bio-sec), nunca
+     DENTRO de ella: si queda dentro de un grupo, list.innerHTML=''
+     lo desprende del DOM y $('bentoActiveDrawer') devuelve null en el
+     siguiente render — por eso el primer click abría y después ninguno.
+     Se saca siempre antes de limpiar, y si falta se recrea. */
+  let drawer=$('bentoActiveDrawer');
+  if(!drawer){
+    drawer=document.createElement('div');
+    drawer.id='bentoActiveDrawer';drawer.className='bento-drawer';drawer.hidden=true;
+    list.parentElement.appendChild(drawer);
+  }
+  if(drawer.parentElement!==list.parentElement)list.parentElement.appendChild(drawer);
   list.innerHTML='';
   const log=getTodayClueLog();
   let totalCount=0;

@@ -253,14 +253,15 @@ h1{font-family:var(--serif);font-weight:500;font-size:clamp(28px,7vw,36px);line-
 .panel{display:none;animation:fadeUp .24s ease}.panel.on{display:block}
 
 /* Check-in rápido tipo BeReal en Hoy */
-/* Perímetro fino y elegante en la caja del pebetero: verde cuando la
+/* Perímetro fino y elegante en la pestaña "Pebetero / Mi Llama" (el
+   cuadro al lado de "Bienestar / Ciclo y Ánimo"): verde cuando la
    cuota del día está cumplida, rojo (carmín) cuando falta. El color da
-   vueltas alrededor de la caja: un gradiente cónico que rota, una línea
-   muy fina (1.5 px) pero suficiente para llamar la atención. La caja
-   tiene overflow:hidden, así que el anillo vive DENTRO del borde. */
+   vueltas alrededor del botón: un gradiente cónico que rota, una línea
+   muy fina (1.5 px) pero suficiente para llamar la atención. */
 @property --peb-angle{syntax:'<angle>';initial-value:0deg;inherits:false}
-.pd.peb-ring::before{
-  content:"";position:absolute;inset:0;border-radius:20px;pointer-events:none;z-index:3;
+.tab.peb-ring{position:relative}
+.tab.peb-ring::before{
+  content:"";position:absolute;inset:0;border-radius:9px;pointer-events:none;z-index:3;
   padding:1.5px;
   background:conic-gradient(from var(--peb-angle,0deg),var(--peb-ring) 0deg,transparent 22%,transparent 58%,var(--peb-ring) 82%,var(--peb-ring) 100%);
   -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
@@ -270,8 +271,8 @@ h1{font-family:var(--serif);font-weight:500;font-size:clamp(28px,7vw,36px);line-
   animation:pebRingSpin 6s linear infinite;
 }
 @keyframes pebRingSpin{to{--peb-angle:360deg}}
-.pd.peb-ring-done{--peb-ring:var(--ok)}
-.pd.peb-ring-pending{--peb-ring:var(--crimson)}
+.tab.peb-ring-done{--peb-ring:var(--ok)}
+.tab.peb-ring-pending{--peb-ring:var(--crimson)}
 
 /* Cuadrícula 3x3 Hábitos */
 .habit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
@@ -1904,6 +1905,29 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
         </div>
 
       </div>
+
+      <!-- REGISTRO DEL DÍA (semana, emociones, línea y guardar) -->
+      <div class="retract-body" id="wkRetractBody">
+        <div class="wk" id="wk"></div>
+      </div>
+
+      <div class="bio-sec">
+        <div class="bio-sec-hd"><span>Emociones de hoy</span><span id="moodCounterLbl">Elige hasta 3 (0/3)</span></div>
+        <div class="moods" id="moodsCore"></div>
+        <div class="extra-box" id="moodsExtraBox" hidden>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+            <span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:700">Matices emocionales · Wavy Pro</span>
+            <span id="vipMoodHint" style="font-size:11px;color:var(--muted)">Desbloqueable</span>
+          </div>
+          <div class="moods" id="moodsVip" style="margin-bottom:0"></div>
+        </div>
+      </div>
+
+      <textarea id="ni" class="echo-input" placeholder="Escribe una línea sobre tu día…"></textarea>
+      <button class="btn" style="width:100%" id="na">Guardar registro del día</button>
+      <p class="ins" id="ins"></p>
+      <div id="nb"></div>
+      <button class="btn ghost" id="more" style="width:100%;margin-top:10px" hidden>Ver registros anteriores</button>
     </section>
 
     <!-- SUB-PANEL 1C: PEBETERO Y PRÁCTICAS VERIFICADAS CON TEMPORIZADOR -->
@@ -2178,28 +2202,6 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
           <span>Abrir hoja en blanco</span>
         </button>
       </div>
-
-      <div class="retract-body" id="wkRetractBody">
-        <div class="wk" id="wk"></div>
-      </div>
-
-      <div class="bio-sec">
-        <div class="bio-sec-hd"><span>Emociones de hoy</span><span id="moodCounterLbl">Elige hasta 3 (0/3)</span></div>
-        <div class="moods" id="moodsCore"></div>
-        <div class="extra-box" id="moodsExtraBox" hidden>
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-            <span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:700">Matices emocionales · Wavy Pro</span>
-            <span id="vipMoodHint" style="font-size:11px;color:var(--muted)">Desbloqueable</span>
-          </div>
-          <div class="moods" id="moodsVip" style="margin-bottom:0"></div>
-        </div>
-      </div>
-
-      <textarea id="ni" class="echo-input" placeholder="Escribe una línea sobre tu día…"></textarea>
-      <button class="btn" style="width:100%" id="na">Guardar registro del día</button>
-      <p class="ins" id="ins"></p>
-      <div id="nb"></div>
-      <button class="btn ghost" id="more" style="width:100%;margin-top:10px" hidden>Ver registros anteriores</button>
       </section>
     </div>
   </div>
@@ -4472,16 +4474,15 @@ function renderStoriesBar(){
   bar.appendChild(addB);
 }
 
-/* Perímetro del pebetero: verde si la cuota del día está cumplida
-   (práctica verificada hoy), carmín si falta. El anillo da vueltas
-   (CSS) y el color lo pone esta función. Reemplaza al cuadro grande
-   "Llama encendida hoy", que ocupaba demasiado. */
+/* Perímetro de la pestaña "Pebetero / Mi Llama": verde si la cuota del
+   día está cumplida (práctica verificada hoy), carmín si falta. El
+   anillo da vueltas (CSS) y el color lo pone esta función. */
 function syncPebeteroRing(){
-  const p=$('pd');if(!p)return;
+  const b=document.querySelector('.tab[data-sub="sub-flame"]');if(!b)return;
   const maintained=isPebeteroMaintained();
-  p.classList.add('peb-ring');
-  p.classList.toggle('peb-ring-done',maintained);
-  p.classList.toggle('peb-ring-pending',!maintained);
+  b.classList.add('peb-ring');
+  b.classList.toggle('peb-ring-done',maintained);
+  b.classList.toggle('peb-ring-pending',!maintained);
 }
 
 let selectedEchoVibe='';

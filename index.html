@@ -281,6 +281,13 @@ h1{font-family:var(--serif);font-weight:500;font-size:clamp(28px,7vw,36px);line-
   position:absolute;top:4px;right:6px;font-size:11px;letter-spacing:.06em;
   text-transform:uppercase;color:var(--gold);font-family:var(--sans);font-weight:700;
 }
+/* Privacidad de hábitos: el ojo inicia cerrado y las opciones borrosas.
+   Solo un click en el ojo las revela; otro click las vuelve a borrar. */
+.eye-q{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;border:1px solid var(--rule);background:var(--card-solid);color:var(--muted);cursor:pointer;vertical-align:middle;margin-left:4px}
+.eye-q svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;display:block}
+#sub-habit.habits-hidden #habitGrid,
+#sub-habit.habits-hidden #habitSubTitle,
+#sub-habit.habits-hidden #sm{filter:blur(9px);pointer-events:none;user-select:none}
 
 .read{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:12px}
 .big{font-family:var(--serif);font-size:52px;line-height:.9;font-weight:500;letter-spacing:-.02em}
@@ -324,13 +331,13 @@ h1{font-family:var(--serif);font-weight:500;font-size:clamp(28px,7vw,36px);line-
    arriba se encoge hasta quedar solo el corazón, que se coloca en el
    renglón de progreso (ver #heartSocket) */
 .sos-sticky{position:sticky;bottom:calc(env(safe-area-inset-bottom,0px) + 92px);width:100%;margin:18px 0 12px;z-index:40}
-#sosb{overflow:hidden}
+#sosb{overflow:hidden;will-change:transform}
 /* Ancla estática para medir la posición REAL de la barra SOS en la página.
    Es un marcador invisible en flujo normal, justo antes de la barra. No se
    mide la barra misma: #sosb es position:sticky y en Safari offsetTop de
    un elemento pegado devuelve su posición pegada, no su posición real. */
 #sosAnchor{height:0;overflow:hidden;pointer-events:none}
-#sosb.docking{animation:none;transition:none}
+#sosb.docking{animation:none;transition:none;backdrop-filter:none;-webkit-backdrop-filter:none}
 .heart-socket{
   width:34px;height:34px;border-radius:50%;flex-shrink:0;
   border:1px solid rgba(184,146,90,.5);background:var(--card-solid);
@@ -339,6 +346,12 @@ h1{font-family:var(--serif);font-weight:500;font-size:clamp(28px,7vw,36px);line-
   align-self:center;
 }
 .heart-socket svg{width:18px;height:18px;fill:currentColor;stroke:none;display:block}
+/* El corazón late como la barra completa (mismo latido, mismo carmín):
+   el latido va en el SVG de adentro, no en el círculo, para no pelear
+   con la escala de entrada del socket. */
+.heart-socket.docked svg{animation:heartBeat 2.2s cubic-bezier(.25,.8,.25,1) infinite}
+@keyframes heartBeat{0%,100%{transform:scale(1)}16%{transform:scale(1.14)}30%{transform:scale(1)}46%{transform:scale(1.2)}68%{transform:scale(1)}}
+@media(prefers-reduced-motion:reduce){.heart-socket.docked svg{animation:none}}
 #sosb{
   background:linear-gradient(135deg, rgba(186, 92, 104, 0.85), rgba(142, 58, 72, 0.92));
   backdrop-filter:blur(20px) saturate(180%);
@@ -1471,10 +1484,10 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
     0 10px 20px -6px color-mix(in srgb, var(--g3,#5C7A4E) 70%, transparent);
 }
 [data-vessel="classic"] .v-gem{--g1:#E4EDDC;--g2:#9DBE8C;--g3:#5C7A4E}
-[data-vessel="matcha"] .v-gem{--g1:#EAF2E4;--g2:#7FA66B;--g3:#3F5A34}
-[data-vessel="quartz"] .v-gem{--g1:#E6F2E9;--g2:#5FA87C;--g3:#2A5C40}
-[data-vessel="spartan"] .v-gem{--g1:#DCEADF;--g2:#6FA87F;--g3:#1E4A30}
-[data-vessel="obsidian"] .v-gem{--g1:#E8EDE6;--g2:#7C9A72;--g3:#22301F}
+[data-vessel="matcha"] .v-gem{--g1:#E8F0E0;--g2:#7FA66B;--g3:#3F5A34}
+[data-vessel="quartz"] .v-gem{--g1:#F9E9E7;--g2:#E5A8B0;--g3:#C07A8A}
+[data-vessel="spartan"] .v-gem{--g1:#F7E8C8;--g2:#D4A95C;--g3:#8F6E3E}
+[data-vessel="obsidian"] .v-gem{--g1:#E9E9EE;--g2:#8A8F99;--g3:#1A1A1E}
 @keyframes gemShine{to{transform:rotate(360deg)}}
 @media(prefers-reduced-motion:reduce){.v-gem::after{animation:none}}
 .peb-decay-pill{
@@ -1667,16 +1680,16 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
     </nav>
 
     <!-- SUB-PANEL 1A: HÁBITO Y BATERÍA + FLUJO SOS -->
-    <section class="panel on card" id="sub-habit">
+    <section class="panel on card habits-hidden" id="sub-habit">
       <div class="hd">
-        <span>¿Qué hábito regulas? <button type="button" class="help-q" data-help="helpHabit" aria-label="Ayuda sobre hábitos">?</button></span>
+        <span>¿Qué hábito regulas? <button type="button" class="help-q" data-help="helpHabit" aria-label="Ayuda sobre hábitos">?</button> <button type="button" class="eye-q" id="habitEyeBtn" aria-label="Mostrar u ocultar hábitos" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"/><circle cx="12" cy="12" r="2.8"/><path d="M4 20L20 4"/></svg></button></span>
         <span id="proStatusBadge" style="color:var(--gold);font-weight:700">Plan Básico</span>
       </div>
       <div class="help-tip" id="helpHabit" hidden>Elige el hábito o impulso principal que deseas observar. Los hitos reflejan etapas conductuales frecuentes durante un ciclo de 90 días.</div>
 
       <div class="habit-grid" id="habitGrid"></div>
 
-      <div class="hd"><span id="habitSubTitle">Redes / Scrolling</span><span>Ciclo&nbsp;·&nbsp;90 días</span></div>
+      <div class="hd"><span id="habitSubTitle">Redes</span><span>Ciclo&nbsp;·&nbsp;90 días</span></div>
       <div class="read">
         <div class="big"><span id="pct">0.0</span><small>%</small></div>
         <button type="button" class="heart-socket" id="heartSocket" aria-label="Siento un impulso ahora · Acompañarme">
@@ -1770,7 +1783,7 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
 
       <div class="bio-sec" id="femaleBioBlock">
         <div class="bio-sec-hd">
-          <span>Tu ciclo hormonal</span>
+          <span>Tu ritmo</span>
           <button type="button" class="mode-link" id="clueGoalToggle">Conocer mi ciclo ▾</button>
         </div>
         <div class="mode-sheet" id="clueGoalSheet" hidden></div>
@@ -1947,11 +1960,9 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
           </defs>
           <circle class="gl" cx="60" cy="72" r="56" fill="url(#g4)"/>
           <ellipse cx="60" cy="142" rx="34" ry="3.5" fill="#2E4A32" opacity=".18"/>
-          <path d="M42 136 C42 133 46 131 60 131 C74 131 78 133 78 136 L79 140 C79 141 73 143 60 143 C47 143 41 141 41 140 Z" fill="url(#vJade)" stroke="#2E4A32" stroke-width=".6"/>
-          <path d="M53 120 L51 132 C55 133 65 133 69 132 L67 120 Z" fill="url(#vJade)"/>
-          <path d="M26 99 C26 122 42 126 60 126 C78 126 94 122 94 99 Z" fill="url(#vJade)" stroke="#2E4A32" stroke-width=".8"/>
-          <path d="M36 104 C40 112 44 118 50 122 M84 104 C80 112 76 118 70 122" fill="none" stroke="#C2D8B8" stroke-width=".9" stroke-linecap="round" opacity=".55"/>
-          <path d="M33 102 C35 112 39 120 45 124" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity=".5"/>
+          <path d="M26 99 C24 118 30 132 44 137 C50 139 70 139 76 137 C90 132 96 118 94 99 Z" fill="url(#vJade)" stroke="#2E4A32" stroke-width=".8"/>
+          <path d="M36 106 C40 116 44 124 50 130" fill="none" stroke="#C2D8B8" stroke-width=".9" stroke-linecap="round" opacity=".55"/>
+          <path d="M33 104 C36 114 40 122 46 128" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity=".5"/>
           <path d="M28 109 C42 113 78 113 92 109" fill="none" stroke="url(#vGold)" stroke-width="1.1" opacity=".85"/>
           <ellipse cx="60" cy="99" rx="34" ry="6.2" fill="#243B26" stroke="url(#vGold)" stroke-width="1.2"/>
           <ellipse cx="60" cy="99" rx="29" ry="4.4" fill="#1B2E1F"/>
@@ -2314,7 +2325,7 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
       <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;background:var(--wash);padding:14px 16px;border-radius:14px;border:1px solid var(--rule);margin-bottom:16px">
         <div>
           <strong id="subCardTitle" style="font-family:var(--serif);font-size:19px;display:block">Wavy Básico (Gratuito)</strong>
-          <span id="subCardDesc" style="font-size:12.5px;color:var(--muted)">Desbloquea los 9 hábitos, todos los ritmos con audio, 19 emociones, 11 paletas y exportación clínica con Wavy Pro.</span>
+          <span id="subCardDesc" style="font-size:12.5px;color:var(--muted)">Desbloquea los 10 hábitos, todos los ritmos con audio, 19 emociones, 11 paletas y exportación clínica con Wavy Pro.</span>
         </div>
         <button type="button" class="btn gold" id="openPaywallBtn">Ver Planes Wavy Pro</button>
       </div>
@@ -2458,7 +2469,7 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
       <div class="sl">
         <label><span>Enfoque biológico y ritmo</span><span>personalizado</span></label>
         <div class="chips" id="profileBioPick">
-          <button type="button" class="chip" data-pbm="female">Mujer · Ciclo hormonal</button>
+          <button type="button" class="chip" data-pbm="female">Mujer · Tu ritmo</button>
           <button type="button" class="chip" data-pbm="male">Hombre · Fuerza y calma</button>
         </div>
       </div>
@@ -2534,7 +2545,6 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
 
       <!-- PASO 1: INICIO DE SESIÓN Y REGISTRO EDITORIAL -->
       <div id="onbStep1">
-        <div class="cover-rule"><span>Ex Libris · Registro Personal</span></div>
 
         <div class="cover-form">
           <div class="cover-field">
@@ -2551,7 +2561,7 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
           <div class="cover-field">
             <label><span>Biología para tu Ciclo</span></label>
             <div class="chips" id="obBioChoice" style="justify-content:center">
-              <button type="button" class="chip" data-obm="female" style="flex:1;justify-content:center">Mujer · Ciclo hormonal</button>
+              <button type="button" class="chip" data-obm="female" style="flex:1;justify-content:center">Mujer · Tu ritmo</button>
               <button type="button" class="chip on" data-obm="male" style="flex:1;justify-content:center">Hombre · Ritmo y fuerza</button>
             </div>
           </div>
@@ -2598,9 +2608,9 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
     <p id="pwTriggerReason" style="font-size:13px;color:var(--crimson);font-family:var(--serif);font-style:italic;margin-bottom:12px">Prueba todos los módulos sin restricción durante 7 días.</p>
 
     <div style="background:var(--wash);border:1px solid var(--rule);border-radius:12px;padding:12px 14px;font-size:13px;line-height:1.6;margin-bottom:12px">
-      <div><svg class="w-ico sm gold" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.2 6.8L21 12l-6.8 2.2L12 21l-2.2-6.8L3 12l6.8-2.2L12 3Z"/></svg> <b>Las 9 baterías de hábitos</b> (Videojuegos, Apuestas, Compras, Vapeo, Alcohol, Contacto cero)</div>
+      <div><svg class="w-ico sm gold" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.2 6.8L21 12l-6.8 2.2L12 21l-2.2-6.8L3 12l6.8-2.2L12 3Z"/></svg> <b>Las 10 baterías de hábitos</b> (Videojuegos, Apuestas, Compras, Vapeo, Nicotina, Alcohol, Contacto)</div>
       <div><svg class="w-ico sm gold" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.2 6.8L21 12l-6.8 2.2L12 21l-2.2-6.8L3 12l6.8-2.2L12 3Z"/></svg> <b>Todos los ritmos respiratorios</b> (4·7·8, Box 4·4·4, Suspiro de Stanford y Personalizado)</div>
-      <div><svg class="w-ico sm gold" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.2 6.8L21 12l-6.8 2.2L12 21l-2.2-6.8L3 12l6.8-2.2L12 3Z"/></svg> <b>Los 19 matices emocionales</b> y las <b>11 paletas editoriales Ex Libris</b></div>
+      <div><svg class="w-ico sm gold" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.2 6.8L21 12l-6.8 2.2L12 21l-2.2-6.8L3 12l6.8-2.2L12 3Z"/></svg> <b>Los 19 matices emocionales</b> y las <b>11 paletas editoriales</b></div>
       <div><svg class="w-ico sm gold" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.2 6.8L21 12l-6.8 2.2L12 21l-2.2-6.8L3 12l6.8-2.2L12 3Z"/></svg> <b>Hoja Clínica en PDF</b> para tu terapeuta y Velas de Vigilia ilimitadas</div>
     </div>
 
@@ -3180,7 +3190,7 @@ const CALISTHENICS_PLAN=[
 ];
 
 const HABITS=[
-  {id:'scrolling',name:'Redes / Scrolling',glyph:'◈',vip:false,ref:'Hábito de atención y pantallas',ms:[
+  {id:'scrolling',name:'Redes',glyph:'◈',vip:false,ref:'Hábito de atención y pantallas',ms:[
     [7,'Primera semana: menor reflejo automático de desbloqueo','Muchas personas notan que disminuye la urgencia de revisar notificaciones cada pocos minutos.'],
     [14,'Dos semanas: bloques de atención continua mayores a 20 min','Suele asociarse con menor fatiga visual y mayor facilidad para sostener la lectura.'],
     [21,'Tres semanas: tardes con menor ruido mental','Reducir la comparación social en pantalla suele favorecer una transición más serena hacia la noche.'],
@@ -3190,7 +3200,7 @@ const HABITS=[
     [75,'Día 75: ánimo más estable e independiente de algoritmos','Tu serenidad diaria depende cada vez más de tus actividades reales.'],
     [90,'90 días: autonomía atencional consolidada','Has construido un hábito sostenible donde la tecnología es una herramienta y no un reflejo automático.']
   ]},
-  {id:'porn',name:'Pornografía / Impulso',glyph:'◐',vip:false,ref:'Regulación de impulsos y presencia',ms:[
+  {id:'porn',name:'Pornografía',glyph:'◐',vip:false,ref:'Regulación de impulsos y presencia',ms:[
     [7,'Primera semana: superación de los días de mayor urgencia inicial','Observar el impulso sin actuar ayuda a debilitar el ciclo automático de búsqueda y descarga.'],
     [14,'Dos semanas: mayor claridad mental durante el día','Muchas personas reportan menor dispersión y una reducción gradual de la inquietud inicial.'],
     [21,'Tres semanas: mayor arraigo corporal y presencia','Acompañar la tensión con respiración lenta fortalece la tolerancia al malestar emocional.'],
@@ -3200,7 +3210,7 @@ const HABITS=[
     [75,'Día 75: vínculos afectivos más presentes y seguros','El impulso deja de utilizarse como vía de escape frente a las emociones difíciles.'],
     [90,'90 días: autodominio y serenidad conductual','Cuentas con herramientas prácticas probadas para navegar cualquier marea alta sin volver al automatismo.']
   ]},
-  {id:'sugar',name:'Ultraprocesados / Azúcar',glyph:'❋',vip:false,ref:'Alimentación consciente y energía',ms:[
+  {id:'sugar',name:'Ultraprocesados',glyph:'❋',vip:false,ref:'Alimentación consciente y energía',ms:[
     [7,'Primera semana: menor fluctuación de antojos por la tarde','Muchas personas notan que ceden los picos de urgencia por recompensas dulces inmediatas.'],
     [14,'Dos semanas: mayor sensibilidad al sabor natural','El paladar suele adaptarse gradualmente, apreciando mejor los alimentos reales.'],
     [21,'Tres semanas: sensación de mayor ligereza después de comer','Suele asociarse con menor pesadez vespertina y energía más pareja.'],
@@ -3230,7 +3240,7 @@ const HABITS=[
     [75,'Día 75: estabilidad emocional sin buscar picos de adrenalina','Encuentras motivación en retos saludables y reales.'],
     [90,'90 días: serenidad patrimonial y autocontrol','Tus decisiones financieras se toman con calma y visión de futuro.']
   ]},
-  {id:'shopping',name:'Compras por impulso',glyph:'✧',vip:true,ref:'Consumo intencional y calma',ms:[
+  {id:'shopping',name:'Compras',glyph:'✧',vip:true,ref:'Consumo intencional y calma',ms:[
     [7,'Primera semana: pausa entre la emoción y el carrito de compra','Notar que el impulso sube al navegar catálogos te permite cerrar la ventana a tiempo.'],
     [14,'Dos semanas: regla de espera de 48 horas activa','Dejar enfriar el deseo demuestra que la mayoría de las urgencias no eran necesidades reales.'],
     [21,'Tres semanas: alivio al evitar cargos innecesarios','Tu tranquilidad financiera crece cada semana que sostienes tu límite.'],
@@ -3240,7 +3250,7 @@ const HABITS=[
     [75,'Día 75: inmunidad ante ofertas de falsa urgencia','Identificas las tácticas comerciales sin perder tu centro.'],
     [90,'90 días: consumo consciente y sereno','Compras solo lo que verdaderamente aporta valor y fue meditado en calma.']
   ]},
-  {id:'vape',name:'Vapeo / Nicotina',glyph:'◌',vip:true,ref:'Libertad respiratoria y pausa',ms:[
+  {id:'vape',name:'Vapeo',glyph:'◌',vip:true,ref:'Libertad respiratoria y pausa',ms:[
     [7,'Primera semana: superación de los días de mayor reflejo motor','Sustituir el gesto automático por respiraciones lentas te ayuda a cruzar la primera etapa.'],
     [14,'Dos semanas: sensación de respiración más amplia','Muchas personas notan mayor comodidad al realizar las sesiones de respiración en la Costa.'],
     [21,'Tres semanas: debilitamiento del vínculo entre estrés y vapeo','Aprendes a hacer pausas de 2 minutos en el día sin necesitar un dispositivo.'],
@@ -3249,6 +3259,16 @@ const HABITS=[
     [60,'Dos meses: mejor respuesta física al caminar o entrenar','Tu cuerpo agradece la constancia en el movimiento diario.'],
     [75,'Día 75: tranquilidad en reuniones y espacios sociales','Te sientes cómodo en cualquier entorno sin depender del hábito.'],
     [90,'90 días: autonomía respiratoria consolidada','Tu propia respiración consciente es tu refugio principal ante la tensión.']
+  ]},
+  {id:'nicotine',name:'Nicotina',glyph:'◍',vip:true,ref:'Libertad de la nicotina y calma',ms:[
+    [7,'Primera semana: los antojos más intensos pierden fuerza','Observar el antojo sin actuar ayuda a debilitar el ciclo automático de buscar nicotina.'],
+    [14,'Dos semanas: respiración más amplia y gusto más despierto','Muchas personas notan mayor comodidad al respirar y una recuperación gradual del gusto y el olfato.'],
+    [21,'Tres semanas: el vínculo entre estrés y nicotina se debilita','Aprendes a hacer pausas de 2 minutos sin necesitar un cigarro, un vape o un pouch.'],
+    [30,'Un mes: energía más pareja y menos inquietud entre horas','Tu concentración se vuelve más continua sin interrupciones constantes por el antojo.'],
+    [45,'Día 45: el dinero que ya no se va en nicotina se nota','Ver el ahorro acumulado refuerza tu seguridad y tu tranquilidad diaria.'],
+    [60,'Dos meses: mejor respuesta física al caminar o entrenar','Tu cuerpo agradece la constancia en el movimiento diario.'],
+    [75,'Día 75: tranquilidad en reuniones y espacios sociales','Te sientes cómodo en cualquier entorno sin depender de la nicotina.'],
+    [90,'90 días: libertad de la nicotina consolidada','Tu propia respiración consciente es tu refugio principal ante la tensión.']
   ]},
   {id:'alcohol',name:'Alcohol',glyph:'☾',vip:true,ref:'Claridad matutina y descanso',ms:[
     [7,'Primera semana: noches con descanso más continuo','Muchas personas reportan despertar con menor pesadez desde el primer fin de semana.'],
@@ -3260,7 +3280,7 @@ const HABITS=[
     [75,'Día 75: procesamiento directo de tus emociones','Atraviesas los días difíciles con honestidad y cuidado personal.'],
     [90,'90 días: lucidez y vitalidad sostenidas','Habitas tus semanas con plena claridad mental y física.']
   ]},
-  {id:'nocontact',name:'Contacto cero',glyph:'⚘',vip:true,ref:'Cuidado del duelo y límites sanos',ms:[
+  {id:'nocontact',name:'Contacto',glyph:'⚘',vip:true,ref:'Cuidado del duelo y límites sanos',ms:[
     [7,'Primera semana: sostener el límite en los días más intensos','Evitar revisar perfiles o enviar mensajes protege tu proceso de calma emocional.'],
     [14,'Dos semanas: menor rumiación al despertar','No exponerte a nueva información permite que la mente empiece a descansar.'],
     [21,'Tres semanas: retorno gradual de la energía hacia tu propio cuidado','Tus rutinas, tu descanso y tus amigos cercanos vuelven a ocupar el centro.'],
@@ -4063,12 +4083,12 @@ function syncProWifiSwitchUI(){
     if(proActive)topTag.innerHTML=lotusSvg;
     else topTag.textContent='mi espacio';
   }
-  if(proSt)proSt.textContent=proActive?'Wavy Pro Activo':'3 Libres · 6 Pro';
+  if(proSt)proSt.textContent=proActive?'Wavy Pro Activo':'3 Libres · 7 Pro';
   if(palInd)palInd.textContent=proActive?'11 Paletas Activas':'4 Libres · 7 Pro';
   if(moodHint)moodHint.textContent=proActive?'19 Emociones Activas':'Toca para desbloquear';
   if(pBadge)pBadge.textContent=proActive?(S.vip?'Modo Desarrollador':(tLeft>0?'Prueba Gratis ('+tLeft+' días)':'Wavy Pro Activo')):'Plan Básico';
   if(sTitle)sTitle.textContent=proActive?(S.vip?'Wavy Pro · Modo Desarrollador Activo':(tLeft>0?'Prueba Gratuita Wavy Pro ('+tLeft+' días restantes)':'Suscripción Wavy Pro Activa')):'Wavy Básico (Gratuito)';
-  if(sDesc)sDesc.textContent=proActive?'Tienes acceso ilimitado a los 9 hábitos, audio psicoacústico, 19 emociones, 11 paletas y exportación clínica en PDF.':'Desbloquea los 9 hábitos, todos los ritmos con audio, 19 emociones, 11 paletas y exportación clínica con Wavy Pro.';
+  if(sDesc)sDesc.textContent=proActive?'Tienes acceso ilimitado a los 10 hábitos, audio psicoacústico, 19 emociones, 11 paletas y exportación clínica en PDF.':'Desbloquea los 10 hábitos, todos los ritmos con audio, 19 emociones, 11 paletas y exportación clínica con Wavy Pro.';
   if(pwBtn)pwBtn.textContent=proActive?'Cambiar plan':'Ver Planes Wavy Pro';
   if($('retentionMetricLbl'))$('retentionMetricLbl').textContent='Días activos registrados: '+S.opens.length;
 }
@@ -4238,6 +4258,7 @@ const HABIT_SVGS={
   betting:'<svg class="w-ico lg" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3.5"/><circle cx="8.5" cy="8.5" r="1"/><circle cx="15.5" cy="8.5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="8.5" cy="15.5" r="1"/><circle cx="15.5" cy="15.5" r="1"/></svg>',
   shopping:'<svg class="w-ico lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8h12l-1.2 12H7.2L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>',
   vape:'<svg class="w-ico lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 14c3-3 6 3 9 0s6-3 7 0"/><path d="M6 18c2.5-2 5 2 7.5 0s4.5-2 5.5 0"/><path d="M8 9c1.5-2 3.5-2 5 0"/></svg>',
+  nicotine:'<svg class="w-ico lg" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="13" width="14" height="3.5" rx="1.75"/><path d="M16.5 13h3v3.5h-3"/><path d="M7 10.5c1.2-1.6 1.2-3.2 0-4.8M11 10.5c1.2-1.6 1.2-3.2 0-4.8"/></svg>',
   alcohol:'<svg class="w-ico lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10l-1 7a4 4 0 0 1-8 0L7 3Z"/><path d="M12 14v7M8 21h8"/><path d="M7.6 7h8.8"/></svg>',
   nocontact:'<svg class="w-ico lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 12a3 3 0 1 1 6 0"/><path d="M5 12c2-4 5-6 7-6s5 2 7 6"/><path d="M6 18L18 6"/></svg>'
 };
@@ -4898,7 +4919,7 @@ function renderHabitGrid(){
     b.innerHTML=(locked?'<span class="pro-tag">Pro</span>':'')+'<i>'+hSvg+'</i><span>'+esc(h.name)+'</span>';
     b.onclick=()=>{
       if(locked){
-        openPaywall('Desbloquea la batería de «'+h.name+'» y los 9 hábitos con Wavy Pro.');
+        openPaywall('Desbloquea la batería de «'+h.name+'» y los 10 hábitos con Wavy Pro.');
         return;
       }
       S.habit=h.id;msel=0;save();
@@ -4912,6 +4933,17 @@ function renderHabitGrid(){
   $('habitSubTitle').textContent=cur.name;
   syncProWifiSwitchUI();
 }
+
+/* Ojo de privacidad de hábitos: inicia cerrado (opciones borrosas). */
+const HABIT_EYE_OPEN='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"/><circle cx="12" cy="12" r="2.8"/></svg>';
+const HABIT_EYE_CLOSED='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"/><circle cx="12" cy="12" r="2.8"/><path d="M4 20L20 4"/></svg>';
+if($('habitEyeBtn'))$('habitEyeBtn').onclick=()=>{
+  const sec=$('sub-habit');if(!sec)return;
+  const hidden=sec.classList.toggle('habits-hidden');
+  const btn=$('habitEyeBtn');
+  btn.setAttribute('aria-pressed',hidden?'false':'true');
+  btn.innerHTML=hidden?HABIT_EYE_CLOSED:HABIT_EYE_OPEN;
+};
 
 function build(){
   const mContainer=$('marks');if(!mContainer)return;mContainer.innerHTML='';
@@ -5411,6 +5443,21 @@ let sosDockCur=0, sosDockRaf=0, sosLastTx=0, sosLastTy=0, sosSpanW0=0;
    offsetTop de un elemento pegado devuelve su posición pegada (visual),
    no su posición real en la página. Por eso el morph nunca se activaba:
    y0 salía diminuto y el objetivo del morph quedaba siempre en 0. */
+/* Posición del corazón en el renglón de progreso, medida una sola vez y
+   guardada. En cada frame solo se resta scrollY: sin leer el layout del
+   corazón en cada cuadro. Se re-mide en las posiciones de descanso
+   (arriba y abajo de la hoja), al redimensionar y, como mucho, una vez
+   por segundo mientras se scrollea, por si el contenido de arriba
+   cambia de alto. */
+let sosSockDoc=null, sosSockLastMeas=0, sosDockLastApplied=-1;
+function measureSosSocket(){
+  const s=$('heartSocket');
+  if(!s || !s.offsetParent){sosSockDoc=null;return;}
+  const r=s.getBoundingClientRect();
+  sosSockDoc={x:r.left+r.width/2,y:r.top+(window.scrollY||0)+r.height/2};
+  sosSockLastMeas=Date.now();
+  sosDockLastApplied=-1; /* la geometría cambió: forzar el siguiente repintado */
+}
 function sosDockDocY(){
   const a=$('sosAnchor');
   if(a){
@@ -5444,31 +5491,43 @@ function sosDockTargetCalc(){
 function applySosDock(d){
   const sosb=$('sosb'),socket=$('heartSocket');
   if(!sosb)return;
-  const e=d*d*(3-2*d); /* suavizado para la geometría */
+  /* Si el morph no cambió desde el último cuadro, no se toca el DOM:
+     reescribir los mismos estilos en cada frame es lo que se veía como
+     saltitos. La geometría nueva (resize, cambio de vista) fuerza el
+     repintado poniendo sosDockLastApplied en -1. */
+  if(Math.abs(d-sosDockLastApplied)<0.0005 && sosSockDoc)return;
+  sosDockLastApplied=d;
+  if(!sosSockDoc || d<0.02 || d>0.98 || Date.now()-sosSockLastMeas>1000)measureSosSocket();
+  const e=d*d*(3-2*d); /* suavizado para el viaje */
   sosb.classList.toggle('docking',d>0.02);
   const r=sosb.getBoundingClientRect();
   /* centro natural de la barra (sin el translate del frame anterior) */
   const natCX=r.left+r.width/2-sosLastTx;
   const natCY=r.top+r.height/2-sosLastTy;
   let tx=0,ty=0;
-  if(socket){
-    const sr=socket.getBoundingClientRect();
-    tx=(sr.left+sr.width/2-natCX)*e;
-    ty=(sr.top+sr.height/2-natCY)*e;
-    const s=Math.min(1,Math.max(0,(d-0.55)/0.45));
+  /* El corazón aparece antes y completo: a d=0.8 ya está al 100% y la
+     barra ya se fue a d=0.85. Del 0.85 al 1.0 solo queda el corazón, sin
+     nada rojizo alrededor (sin sombra rosada: el corazón queda limpio). */
+  const s=Math.min(1,Math.max(0,(d-0.5)/0.3));
+  if(socket && sosSockDoc){
+    tx=(sosSockDoc.x-natCX)*e;
+    ty=(sosSockDoc.y-(window.scrollY||0)-natCY)*e;
     socket.style.opacity=s.toFixed(3);
     socket.style.transform='scale('+(0.55+s*0.5).toFixed(3)+')';
     socket.style.pointerEvents=s>0.6?'':'none';
-    socket.style.boxShadow=s>0.85?'0 0 0 3px rgba(186,92,104,.14),0 0 18px rgba(186,92,104,.35)':'';
+    socket.style.boxShadow='';
+    socket.classList.toggle('docked',s>=1);
   }
-  sosb.style.transform=(tx||ty)?('translate('+tx.toFixed(1)+'px,'+ty.toFixed(1)+'px)'):'';
+  sosb.style.transform=(tx||ty)?('translate3d('+tx.toFixed(1)+'px,'+ty.toFixed(1)+'px,0)'):'';
   sosLastTx=tx; sosLastTy=ty;
-  /* el rectángulo se estrecha hasta un círculo de 34px (el corazón) */
-  const cx=Math.max(0,(r.width-34)/2*e);
-  const cy=Math.max(0,(r.height-34)/2*e);
-  sosb.style.clipPath=e>0?('inset('+cy.toFixed(1)+'px '+cx.toFixed(1)+'px '+cy.toFixed(1)+'px '+cx.toFixed(1)+'px round 999px)'):'';
-  /* al final la barra se desvanece y el corazón queda en el renglón */
-  sosb.style.opacity=Math.max(0,1-Math.max(0,(d-0.72)/0.28)).toFixed(3);
+  /* La barra se estrecha rápido: a d=0.8 ya es un círculo de 34px, y se
+     desvanece antes de llegar (a d=0.85 su opacidad ya es 0). */
+  const ec=Math.min(1,Math.max(0,(d-0.05)/0.75));
+  const ec2=ec*ec*(3-2*ec);
+  const cx=Math.max(0,(r.width-34)/2*ec2);
+  const cy=Math.max(0,(r.height-34)/2*ec2);
+  sosb.style.clipPath=ec2>0?('inset('+cy.toFixed(1)+'px '+cx.toFixed(1)+'px '+cy.toFixed(1)+'px '+cx.toFixed(1)+'px round 999px)'):'';
+  sosb.style.opacity=Math.max(0,1-Math.max(0,(d-0.55)/0.3)).toFixed(3);
   sosb.style.pointerEvents=d>0.35?'none':'';
   /* las letras desaparecen durante la reducción: se encogen y se recortan */
   const span=sosb.querySelector('span');
@@ -5492,17 +5551,17 @@ function applySosDock(d){
 }
 function sosDockTick(){
   sosDockRaf=0;
-  const target=sosDockTargetCalc();
-  sosDockCur+=(target-sosDockCur)*0.14;
-  if(Math.abs(target-sosDockCur)<0.001)sosDockCur=target;
+  /* Sin lerp: el morph sigue al scroll 1:1. El lerp hacía que la barra
+     persiguiera al objetivo y, con el rAF limitado en iOS durante el
+     scroll con impulso, avanzara a saltitos visibles. */
+  sosDockCur=sosDockTargetCalc();
   applySosDock(sosDockCur);
-  if(Math.abs(target-sosDockCur)>=0.001)sosDockRaf=requestAnimationFrame(sosDockTick);
 }
 function requestSosDock(){
   if(!sosDockRaf)sosDockRaf=requestAnimationFrame(sosDockTick);
 }
 window.addEventListener('scroll',()=>{requestSosDock();updateCircleComposerYield();updateMastheadFade();},{passive:true});
-window.addEventListener('resize',()=>{requestSosDock();updateCircleComposerYield();updateMastheadFade();});
+window.addEventListener('resize',()=>{measureSosSocket();requestSosDock();updateCircleComposerYield();updateMastheadFade();});
 if($('heartSocket'))$('heartSocket').onclick=()=>{const b=$('sosb');if(b)b.click();};
 
 /* =========================================================
@@ -5527,20 +5586,15 @@ function updateCircleComposerYield(){
   const wr=wrap.getBoundingClientRect();
   const lr=last.getBoundingClientRect();
   const natTop=wr.top-circleYieldCur;
-  let push=Math.max(0,(lr.bottom+10)-natTop);
-  /* LÍMITE: el compositor cede hacia abajo, pero NUNCA detrás de la barra
-     inferior. La barra está arriba de todo (z-index 85) y nada la empuja
-     ni se le pone encima: el compositor puede bajar solo hasta quedar 6px
-     arriba del borde superior de la barra, medido en vivo. Sin este
-     límite, el compositor se deslizaba detrás de la barra y desaparecía,
-     y el cuadro de aliados quedaba cortado por la barra. El último
-     recuadro del feed pinta por encima del compositor (ver CSS), así que
-     sus textos y el botón VINCULAR siempre quedan legibles. */
-  const nav=document.querySelector('.bnav');
-  const navTop=nav?nav.getBoundingClientRect().top:(window.innerHeight||800)-66;
-  const pinnedBottom=wr.bottom-circleYieldCur;
-  const maxPush=Math.max(0,navTop-6-pinnedBottom);
-  push=Math.min(push,maxPush);
+  /* SIN LÍMITE: el compositor cede hacia abajo lo que haga falta, incluso
+     por DEBAJO de la barra horizontal de iconos (desaparece debajo de
+     ella). La barra nunca se empuja: está fija, arriba de todo (z-index
+     85), y al seguir scrolleando hacia arriba queda arriba del cuadro de
+     aliados. El compositor solo vuelve a aparecer scrolleando hasta abajo,
+     pasando el último cuadro de texto. El último recuadro del feed pinta
+     por encima del compositor (ver CSS), así que sus textos y el botón
+     VINCULAR siempre quedan legibles y nunca los tapa. */
+  const push=Math.max(0,(lr.bottom+10)-natTop);
   circleYieldCur=push;
   wrap.style.transform=push>0?('translateY('+push.toFixed(1)+'px)'):'';
 }
@@ -6512,7 +6566,7 @@ function getTodayClueLog(){
   return S.clue.logs[d];
 }
 
-let openClueCatId='water';
+let openClueCatId=''; /* Nada se abre solo: solo los clicks activan o desactivan los menús */
 function renderClueTrackList(){
   const list=$('clueTrackList'),drawer=$('bentoActiveDrawer');if(!list)return;
   if(drawer && drawer.parentElement===list)list.parentElement.appendChild(drawer);
@@ -7383,12 +7437,10 @@ const PEB_VESSELS={
       </defs>
       <circle class="gl" cx="60" cy="72" r="56" fill="url(#g4)"/>
       <ellipse cx="60" cy="142" rx="34" ry="3.5" fill="#2E4A32" opacity=".18"/>
-      <!-- Cáliz de jade salvia sobre pedestal, con veta y filo dorado -->
-      <path d="M42 136 C42 133 46 131 60 131 C74 131 78 133 78 136 L79 140 C79 141 73 143 60 143 C47 143 41 141 41 140 Z" fill="url(#vJade)" stroke="#2E4A32" stroke-width=".6"/>
-      <path d="M53 120 L51 132 C55 133 65 133 69 132 L67 120 Z" fill="url(#vJade)"/>
-      <path d="M26 99 C26 122 42 126 60 126 C78 126 94 122 94 99 Z" fill="url(#vJade)" stroke="#2E4A32" stroke-width=".8"/>
-      <path d="M36 104 C40 112 44 118 50 122 M84 104 C80 112 76 118 70 122" fill="none" stroke="#C2D8B8" stroke-width=".9" stroke-linecap="round" opacity=".55"/>
-      <path d="M33 102 C35 112 39 120 45 124" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity=".5"/>
+      <!-- Vasija redonda de jade salvia: cuerpo pleno y fluido, sin esquinas -->
+      <path d="M26 99 C24 118 30 132 44 137 C50 139 70 139 76 137 C90 132 96 118 94 99 Z" fill="url(#vJade)" stroke="#2E4A32" stroke-width=".8"/>
+      <path d="M36 106 C40 116 44 124 50 130" fill="none" stroke="#C2D8B8" stroke-width=".9" stroke-linecap="round" opacity=".55"/>
+      <path d="M33 104 C36 114 40 122 46 128" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity=".5"/>
       <path d="M28 109 C42 113 78 113 92 109" fill="none" stroke="url(#vGold)" stroke-width="1.1" opacity=".85"/>
       <ellipse cx="60" cy="99" rx="34" ry="6.2" fill="#243B26" stroke="url(#vGold)" stroke-width="1.2"/>
       <ellipse cx="60" cy="99" rx="29" ry="4.4" fill="#1B2E1F"/>
@@ -7414,13 +7466,13 @@ const PEB_VESSELS={
       </defs>
       <circle class="gl" cx="60" cy="70" r="56" fill="url(#gMatcha)"/>
       <ellipse cx="60" cy="142" rx="35" ry="3.5" fill="#243B26" opacity=".18"/>
-      <ellipse cx="60" cy="138" rx="24" ry="4" fill="#3E5C38" stroke="url(#vGold)" stroke-width=".7"/>
-      <!-- Cuenco de matcha profundo con kintsugi dorado -->
-      <path d="M24 98 C25 125 40 138 60 138 C80 138 95 125 96 98 Z" fill="url(#pMatcha)" stroke="#243B26" stroke-width=".8"/>
+      <!-- Cuenco de matcha profundo y redondo, con kintsugi dorado -->
+      <path d="M24 98 C23 126 38 140 60 140 C82 140 97 126 96 98 Z" fill="url(#pMatcha)" stroke="#243B26" stroke-width=".8"/>
       <path d="M30 104 C32 114 36 124 42 130" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity=".45"/>
       <path d="M42 99 Q46 114 43 124 T52 137 M44 116 Q53 121 58 126" fill="none" stroke="url(#goldVein)" stroke-width="1.6" stroke-linecap="round"/>
       <path d="M78 99 Q75 112 80 125 T76 137" fill="none" stroke="url(#goldVein)" stroke-width="1.3" stroke-linecap="round"/>
       <path d="M62 99 Q64 112 60 124 T66 137" fill="none" stroke="url(#goldVein)" stroke-width="1.1" stroke-linecap="round" opacity=".9"/>
+      <ellipse cx="60" cy="140" rx="18" ry="3.5" fill="#3E5C38" stroke="url(#vGold)" stroke-width=".7"/>
       <ellipse cx="60" cy="98" rx="36" ry="6" fill="url(#pGlazeLip)" stroke="url(#vGold)" stroke-width="1.1"/>
       <ellipse cx="60" cy="98" rx="30" ry="4.4" fill="#243B26"/>
       <ellipse class="emb" cx="60" cy="98" rx="14" ry="2.2" fill="#D4AF37"/>
@@ -7431,29 +7483,24 @@ const PEB_VESSELS={
       </g>`
   },
   quartz:{
-    title:'Cuarzo Rosa & Alabastro · Santuario',pro:true,relic:'#4E9A6A',
+    title:'Cuarzo Rosa & Alabastro · Santuario',pro:true,relic:'#C98A96',
     svg:()=>`
       <defs>
-        <radialGradient id="gQuartz" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#E4F2E6" stop-opacity=".95"/><stop offset=".55" stop-color="#B7D9BE" stop-opacity=".42"/><stop offset="1" stop-color="#7FBF95" stop-opacity="0"/></radialGradient>
-        <linearGradient id="qJade" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#DFF2DF"/><stop offset=".4" stop-color="#8FCB9B"/><stop offset=".75" stop-color="#4E9A6A"/><stop offset="1" stop-color="#2A5C40"/></linearGradient>
+        <radialGradient id="gQuartz" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#F9E9E7" stop-opacity=".95"/><stop offset=".55" stop-color="#F2C9CE" stop-opacity=".42"/><stop offset="1" stop-color="#E5A8B0" stop-opacity="0"/></radialGradient>
+        <linearGradient id="qRose" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F9E9E7"/><stop offset=".4" stop-color="#EFC3C8"/><stop offset=".75" stop-color="#D99AA6"/><stop offset="1" stop-color="#A85A6B"/></linearGradient>
         <linearGradient id="vGold" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#B08D3E"/><stop offset=".5" stop-color="#E9C979"/><stop offset="1" stop-color="#B08D3E"/></linearGradient>
         <linearGradient id="fGoldO" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF0C9"/><stop offset="1" stop-color="#9E7339"/></linearGradient>
         <linearGradient id="fGoldM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E6C587"/></linearGradient>
         <linearGradient id="fGoldC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFF1DE"/></linearGradient>
       </defs>
       <circle class="gl" cx="60" cy="70" r="56" fill="url(#gQuartz)"/>
-      <ellipse cx="60" cy="142" rx="32" ry="3.2" fill="#2A5C40" opacity=".16"/>
-      <ellipse cx="60" cy="138" rx="26" ry="4" fill="#1F4A2E" stroke="url(#vGold)" stroke-width=".8"/>
-      <!-- Copa de jade facetada, como una gema tallada -->
-      <path d="M28 99 L38 128 C44 136 52 138 60 138 C68 138 76 136 82 128 L92 99 Z" fill="url(#qJade)" stroke="#2A5C40" stroke-width=".8"/>
-      <polygon points="38,101 60,101 56,136 44,132" fill="#FFFFFF" opacity=".38"/>
-      <polygon points="60,101 82,101 76,132 64,136" fill="#1F4A2E" opacity=".38"/>
-      <line x1="60" y1="101" x2="60" y2="136" stroke="#FFFFFF" stroke-width="1.2" opacity=".6"/>
-      <line x1="60" y1="101" x2="44" y2="132" stroke="#FFFFFF" stroke-width=".8" opacity=".35"/>
-      <line x1="60" y1="101" x2="76" y2="132" stroke="#FFFFFF" stroke-width=".8" opacity=".35"/>
-      <path d="M80 108 L81.6 112.4 L86 114 L81.6 115.6 L80 120 L78.4 115.6 L74 114 L78.4 112.4 Z" fill="url(#vGold)"/>
-      <ellipse cx="60" cy="99" rx="32" ry="5.8" fill="#EAF7EC" stroke="url(#vGold)" stroke-width="1.1"/>
-      <ellipse cx="60" cy="99" rx="27" ry="4.2" fill="#2A5C40"/>
+      <ellipse cx="60" cy="142" rx="32" ry="3.2" fill="#8A4A56" opacity=".16"/>
+      <!-- Vasija redonda de cuarzo rosa: suave y delicada, sin facetas ni picos -->
+      <path d="M28 99 C26 118 32 132 46 137 C52 139 68 139 74 137 C88 132 94 118 92 99 Z" fill="url(#qRose)" stroke="#8A4A56" stroke-width=".8"/>
+      <path d="M36 106 C40 116 44 124 50 130" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity=".5"/>
+      <path d="M70 108 C78 112 82 118 84 124" fill="none" stroke="url(#vGold)" stroke-width="1.4" stroke-linecap="round" opacity=".8"/>
+      <ellipse cx="60" cy="99" rx="32" ry="5.8" fill="#F9E9E7" stroke="url(#vGold)" stroke-width="1.1"/>
+      <ellipse cx="60" cy="99" rx="27" ry="4.2" fill="#7A3A48"/>
       <ellipse class="emb" cx="60" cy="99" rx="13" ry="2.2" fill="#D4AF37"/>
       <g id="fl">
         <path class="f1" d="M60 94 C44 86 47 58 60 26 C73 58 76 86 60 94Z" fill="url(#fGoldO)" opacity=".95"/>
@@ -7462,28 +7509,24 @@ const PEB_VESSELS={
       </g>`
   },
   spartan:{
-    title:'Bronce Espartano · Forja Heroica',pro:true,relic:'#2F6B47',
+    title:'Bronce Espartano · Forja Heroica',pro:true,relic:'#B08D3E',
     svg:()=>`
       <defs>
-        <radialGradient id="gSpartan" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#DDEBD6" stop-opacity=".95"/><stop offset=".55" stop-color="#7FA87C" stop-opacity=".45"/><stop offset="1" stop-color="#3F6B45" stop-opacity="0"/></radialGradient>
-        <linearGradient id="pForest" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3D5C40"/><stop offset=".45" stop-color="#22391F"/><stop offset="1" stop-color="#141F16"/></linearGradient>
+        <radialGradient id="gSpartan" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#F7E8C8" stop-opacity=".95"/><stop offset=".55" stop-color="#D4A95C" stop-opacity=".45"/><stop offset="1" stop-color="#8F6E3E" stop-opacity="0"/></radialGradient>
+        <linearGradient id="pBronze" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#C99B5F"/><stop offset=".45" stop-color="#8A6A3A"/><stop offset="1" stop-color="#3D2C17"/></linearGradient>
         <linearGradient id="sOuter" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFD98E"/><stop offset="1" stop-color="#B85D28"/></linearGradient>
         <linearGradient id="sMid" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF5D6"/><stop offset="1" stop-color="#E09448"/></linearGradient>
         <linearGradient id="goldPatina" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8F6E3E"/><stop offset=".5" stop-color="#D4AF6A"/><stop offset="1" stop-color="#8F6E3E"/></linearGradient>
         <linearGradient id="vGold" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#B08D3E"/><stop offset=".5" stop-color="#E9C979"/><stop offset="1" stop-color="#B08D3E"/></linearGradient>
       </defs>
       <circle class="gl" cx="60" cy="68" r="58" fill="url(#gSpartan)"/>
-      <ellipse cx="60" cy="144" rx="38" ry="4" fill="#0E1A10" opacity=".35"/>
-      <!-- Trípode de bronce verde bosque, con lambda dorada -->
-      <path d="M34 118 L25 142 M86 118 L95 142 M60 124 L60 143" stroke="#D4AF6A" stroke-width="3" stroke-linecap="round"/>
-      <circle cx="25" cy="142" r="2.2" fill="#D4AF6A"/>
-      <circle cx="95" cy="142" r="2.2" fill="#D4AF6A"/>
-      <circle cx="60" cy="143" r="2.2" fill="#D4AF6A"/>
-      <path d="M22 98 C24 124 40 131 60 131 C80 131 96 124 98 98 Z" fill="url(#pForest)" stroke="#D4AF6A" stroke-width="1.2"/>
-      <path d="M24 105 H96" stroke="url(#goldPatina)" stroke-width="2.5" stroke-dasharray="6 3"/>
-      <path d="M52 120 L60 110 L68 120" fill="none" stroke="url(#vGold)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-      <ellipse cx="60" cy="98" rx="38" ry="6" fill="#1B2A1C" stroke="url(#goldPatina)" stroke-width="1.3"/>
-      <ellipse cx="60" cy="98" rx="33" ry="4.4" fill="#101A11"/>
+      <ellipse cx="60" cy="144" rx="38" ry="4" fill="#2A1F12" opacity=".35"/>
+      <!-- Urna redonda de bronce: cuerpo pleno y fluido, sin trípode ni ángulos -->
+      <path d="M24 98 C22 118 30 132 46 137 C52 139 68 139 74 137 C90 132 98 118 96 98 Z" fill="url(#pBronze)" stroke="#D4AF6A" stroke-width="1.2"/>
+      <path d="M30 106 C34 116 38 124 44 130" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity=".4"/>
+      <path d="M26 110 C42 114 78 114 94 110" fill="none" stroke="url(#goldPatina)" stroke-width="2.5" opacity=".9"/>
+      <ellipse cx="60" cy="98" rx="38" ry="6" fill="#2A1F12" stroke="url(#goldPatina)" stroke-width="1.3"/>
+      <ellipse cx="60" cy="98" rx="33" ry="4.4" fill="#1A120A"/>
       <ellipse class="emb" cx="60" cy="98" rx="22" ry="2.8" fill="#D46A28"/>
       <g id="fl">
         <path class="f1" d="M60 94 C39 88 41 62 60 30 C79 62 81 88 60 94Z" fill="url(#sOuter)" opacity=".95"/>
@@ -7505,11 +7548,10 @@ const PEB_VESSELS={
       </defs>
       <circle class="gl" cx="60" cy="68" r="58" fill="url(#gObs)"/>
       <ellipse cx="60" cy="144" rx="35" ry="3.5" fill="#050505" opacity=".4"/>
-      <polygon points="34,136 86,136 88,142 32,142" fill="#141312" stroke="#45423E" stroke-width=".8"/>
-      <polygon points="28,98 92,98 84,137 36,137" fill="url(#pObsidian)" stroke="#45423E" stroke-width=".9"/>
-      <line x1="60" y1="99" x2="60" y2="137" stroke="url(#pPlatinum)" stroke-width="1.8"/>
-      <line x1="44" y1="102" x2="48" y2="136" stroke="url(#pPlatinum)" stroke-width="1"/>
-      <line x1="76" y1="102" x2="72" y2="136" stroke="url(#pPlatinum)" stroke-width="1"/>
+      <!-- Piedra redonda de obsidiana pulida: negra y elegante, sin esquinas -->
+      <path d="M28 98 C26 118 32 132 46 137 C52 139 68 139 74 137 C88 132 94 118 92 98 Z" fill="url(#pObsidian)" stroke="#45423E" stroke-width=".9"/>
+      <path d="M36 106 C40 116 44 124 50 130" fill="none" stroke="url(#pPlatinum)" stroke-width="1.8" stroke-linecap="round" opacity=".8"/>
+      <path d="M72 108 C78 114 82 120 84 126" fill="none" stroke="url(#pPlatinum)" stroke-width="1" stroke-linecap="round" opacity=".5"/>
       <ellipse cx="60" cy="98" rx="32" ry="5.5" fill="#181615" stroke="url(#pPlatinum)" stroke-width="1.4"/>
       <ellipse cx="60" cy="98" rx="27" ry="4" fill="#0D0C0B"/>
       <ellipse class="emb" cx="60" cy="98" rx="14" ry="2" fill="#E6C587"/>
@@ -7886,7 +7928,7 @@ function buildMagicSummaryText(){
   }else if(isNoPeriod){
     cycleTxt='Bienestar y balance hormonal constante';
   }else{
-    cycleTxt='Día '+b.currentCycleDay+' del ciclo hormonal';
+    cycleTxt='Día '+b.currentCycleDay+' de tu ciclo';
   }
   const topTrig=S.trigLogs[0]?(S.trigLogs[0].emo+' asociado a '+S.trigLogs[0].ctx+' ('+S.trigLogs[0].hora+')'):'sin disparadores agudos registrados aún';
   const withAfter=S.trigLogs.filter(t=>typeof t.pre==='number' && typeof t.after==='number');
@@ -7933,7 +7975,7 @@ function renderClinicalReport(){
   const recentMoods=[...new Set(S.notes.slice(0,10).flatMap(n=>n.moodNames||[n.estado]))].slice(0,4).join(', ')||'Sin registros aún';
   const lastCiclo=S.bioMode==='male'
     ?'Ritmo biológico y fuerza (calistenia antiansiedad)'
-    :(S.clue?.goal==='noperiod'?'Balance hormonal constante':(S.notes.find(n=>n.ciclo)?.ciclo||('Día '+computeClueBayesian().currentCycleDay+' del ciclo hormonal')));
+    :(S.clue?.goal==='noperiod'?'Balance hormonal constante':(S.notes.find(n=>n.ciclo)?.ciclo||('Día '+computeClueBayesian().currentCycleDay+' de tu ciclo')));
   const todayRout=getPlannedRoutineForDate(today())||CALISTHENICS_PLAN[(new Date().getDay()+6)%7];
   const lastFuerza=S.notes.find(n=>n.fuerza)?.fuerza||todayRout.short;
   const lastTrig=S.trigLogs[0]?(S.trigLogs[0].emo+' · '+S.trigLogs[0].ctx+' ('+S.trigLogs[0].hora+')'):'Sin disparadores';
@@ -7944,7 +7986,7 @@ function renderClinicalReport(){
     '<div><span>Último disparador SOS:</span><b>'+esc(lastTrig)+'</b></div>'+
     '<div><span>Horas de riesgo:</span><b>'+esc(topHours)+'</b></div>'+
     '<div><span>Emociones frecuentes:</span><b>'+esc(recentMoods)+'</b></div>'+
-    '<div><span>'+(S.bioMode==='male'?'Ritmo biológico:':'Ciclo hormonal:')+'</span><b>'+esc(lastCiclo)+'</b></div>'+
+    '<div><span>'+(S.bioMode==='male'?'Ritmo biológico:':'Tu ritmo:')+'</span><b>'+esc(lastCiclo)+'</b></div>'+
     '<div><span>Movimiento / Fuerza:</span><b>'+esc(lastFuerza)+'</b></div>';
 }
 
@@ -8041,7 +8083,7 @@ function renderPaletteGrid(){
       '<span>'+esc(p.name)+'</span>';
     b.onclick=()=>{
       if(locked){
-        openPaywall('Desbloquea la colección completa de 11 paletas editoriales Ex Libris con Wavy Pro.');
+        openPaywall('Desbloquea la colección completa de 11 paletas editoriales con Wavy Pro.');
         return;
       }
       S.sealStyle=p.id;save();

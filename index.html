@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" data-theme="white">
+<html lang="es" data-theme="pulcritud">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -324,6 +324,7 @@ h1{font-family:var(--serif);font-weight:500;font-size:clamp(28px,7vw,36px);line-
    arriba se encoge hasta quedar solo el corazón, que se coloca en el
    renglón de progreso (ver #heartSocket) */
 .sos-sticky{position:sticky;bottom:calc(env(safe-area-inset-bottom,0px) + 92px);width:100%;margin:18px 0 12px;z-index:40}
+#sosb{overflow:hidden}
 #sosb.docking{animation:none;transition:none}
 .heart-socket{
   width:34px;height:34px;border-radius:50%;flex-shrink:0;
@@ -1145,9 +1146,9 @@ textarea::placeholder{font-style:italic;color:var(--muted);opacity:.65}
    contenido detrás, difuminado, no un blanco sólido */
 .bnav{
   position:fixed;left:12px;right:12px;bottom:calc(env(safe-area-inset-bottom,0px) + 10px);z-index:85;
-  background:color-mix(in srgb, var(--card-solid) 62%, transparent);
-  backdrop-filter:blur(24px) saturate(180%);
-  -webkit-backdrop-filter:blur(24px) saturate(180%);
+  background:color-mix(in srgb, var(--card-solid) 30%, transparent);
+  backdrop-filter:blur(16px) saturate(180%);
+  -webkit-backdrop-filter:blur(16px) saturate(180%);
   border:1px solid var(--glass-border);
   border-radius:999px;
   box-shadow:var(--glass-spec),0 12px 32px -12px rgba(0,0,0,0.18);
@@ -1914,30 +1915,34 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
           <span id="pebVesselTitle">Travertino Clásico</span>
           <span class="peb-chip"><i></i><span id="as">Vínculos · 0</span></span>
         </div>
-        <svg id="pebSvgArt" viewBox="0 0 120 150" aria-hidden="true">
+                <svg id="pebSvgArt" viewBox="0 0 120 150" aria-hidden="true">
           <defs>
             <radialGradient id="g4" cx="50%" cy="50%" r="50%">
               <stop offset="0" stop-color="#E9F1E2" stop-opacity=".95"/>
               <stop offset=".55" stop-color="#C2D8B8" stop-opacity=".45"/>
               <stop offset="1" stop-color="#8FB083" stop-opacity="0"/>
             </radialGradient>
-            <linearGradient id="pfOuter" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F8D6BC"/><stop offset="1" stop-color="#E7A286"/></linearGradient>
-            <linearGradient id="pfMid" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF3E6"/><stop offset="1" stop-color="#F5C3A0"/></linearGradient>
-            <linearGradient id="pfCore" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFF1DE"/></linearGradient>
-            <linearGradient id="pVessel" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F6F0E8"/><stop offset=".6" stop-color="#E9DFD2"/><stop offset="1" stop-color="#D6C7B5"/></linearGradient>
+            <linearGradient id="vJade" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9DBE8C"/><stop offset=".45" stop-color="#5C7A4E"/><stop offset="1" stop-color="#2E4A32"/></linearGradient>
+            <linearGradient id="vGold" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#B08D3E"/><stop offset=".5" stop-color="#E9C979"/><stop offset="1" stop-color="#B08D3E"/></linearGradient>
+            <linearGradient id="fGoldO" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF0C9"/><stop offset="1" stop-color="#9E7339"/></linearGradient>
+            <linearGradient id="fGoldM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E6C587"/></linearGradient>
+            <linearGradient id="fGoldC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFF1DE"/></linearGradient>
           </defs>
           <circle class="gl" cx="60" cy="72" r="56" fill="url(#g4)"/>
-          <ellipse cx="60" cy="141" rx="32" ry="3.2" fill="#8A6A50" opacity=".12"/>
-          <path d="M30 103 C30 124 41 137 60 137 C79 137 90 124 90 103 Z" fill="url(#pVessel)" stroke="#BFAE9A" stroke-opacity=".45" stroke-width=".8"/>
-          <path d="M37 110 C39 122 46 130 55 133" fill="none" stroke="#FFFFFF" stroke-opacity=".7" stroke-width="1.4" stroke-linecap="round"/>
-          <ellipse cx="60" cy="103" rx="30" ry="5.2" fill="#EFE6DA" stroke="#BFAE9A" stroke-opacity=".45" stroke-width=".8"/>
-          <ellipse cx="60" cy="103" rx="25.5" ry="3.6" fill="#FBF6EF"/>
-          <ellipse class="emb" cx="60" cy="103" rx="13" ry="2" fill="#F5C3A0"/>
-          <line x1="60" y1="96" x2="60" y2="103" stroke="#7A6656" stroke-width="1.2" stroke-linecap="round"/>
+          <ellipse cx="60" cy="142" rx="34" ry="3.5" fill="#2E4A32" opacity=".18"/>
+          <path d="M42 136 C42 133 46 131 60 131 C74 131 78 133 78 136 L79 140 C79 141 73 143 60 143 C47 143 41 141 41 140 Z" fill="url(#vJade)" stroke="#2E4A32" stroke-width=".6"/>
+          <path d="M53 120 L51 132 C55 133 65 133 69 132 L67 120 Z" fill="url(#vJade)"/>
+          <path d="M26 99 C26 122 42 126 60 126 C78 126 94 122 94 99 Z" fill="url(#vJade)" stroke="#2E4A32" stroke-width=".8"/>
+          <path d="M36 104 C40 112 44 118 50 122 M84 104 C80 112 76 118 70 122" fill="none" stroke="#C2D8B8" stroke-width=".9" stroke-linecap="round" opacity=".55"/>
+          <path d="M33 102 C35 112 39 120 45 124" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity=".5"/>
+          <path d="M28 109 C42 113 78 113 92 109" fill="none" stroke="url(#vGold)" stroke-width="1.1" opacity=".85"/>
+          <ellipse cx="60" cy="99" rx="34" ry="6.2" fill="#243B26" stroke="url(#vGold)" stroke-width="1.2"/>
+          <ellipse cx="60" cy="99" rx="29" ry="4.4" fill="#1B2E1F"/>
+          <ellipse class="emb" cx="60" cy="99" rx="14" ry="2.2" fill="#D4AF37"/>
           <g id="fl">
-            <path class="f1" d="M60 97 C44 93 44 72 60 42 C76 72 76 93 60 97Z" fill="url(#pfOuter)" opacity=".92"/>
-            <path class="f2" d="M60 97 C50 94 50 78 60 56 C70 78 70 94 60 97Z" fill="url(#pfMid)"/>
-            <path class="f3" d="M60 97 C55 95 55 87 60 74 C65 87 65 95 60 97Z" fill="url(#pfCore)"/>
+            <path class="f1" d="M60 94 C44 86 47 58 60 26 C73 58 76 86 60 94Z" fill="url(#fGoldO)" opacity=".95"/>
+            <path class="f2" d="M60 94 C52 88 53 68 60 42 C67 68 68 88 60 94Z" fill="url(#fGoldM)"/>
+            <path class="f3" d="M60 94 C56 91 56 83 60 70 C64 83 64 91 60 94Z" fill="url(#fGoldC)"/>
           </g>
         </svg>
         <div class="peb-read">
@@ -3871,7 +3876,7 @@ function load(){
     }
   }catch(e){}
   save(false);
-  applyTheme(S.theme||'white');
+  applyTheme(S.theme||'pulcritud');
   renderAccountSwitcherUI();
 }
 
@@ -4111,7 +4116,7 @@ function closeAllTransientUI(targetVid){
 }
 
 function switchMainView(vid){
-  window.scrollTo(0,0);
+  window.scrollTo({top:0,behavior:'instant'});
   closeAllTransientUI(vid);
   document.querySelectorAll('.bnav-btn').forEach(b=>{
     const active=(b.dataset.v===vid);
@@ -4121,14 +4126,20 @@ function switchMainView(vid){
   document.querySelectorAll('.vpage').forEach(p=>p.classList.toggle('on',p.id===vid));
   if(vid==='v-breathe'){fit();startLoop()}else{stopLoop()}
   if(vid==='v-today'){renderPebeteroBanner();flameView();requestSosDock()}
-  if(vid==='v-circle'){renderHomeCoRegulation()}
+  if(vid==='v-circle'){renderHomeCoRegulation();updateCircleComposerYield()}
   if(vid==='v-clinic'){stats();hours(true);renderClinicalReport()}
   if(vid==='v-profile'){syncProfileForm();syncProWifiSwitchUI();renderSealsCarousel()}
 }
 
 $('bnav').addEventListener('click',e=>{
   const b=e.target.closest('.bnav-btn');if(!b)return;
+  /* Re-tocar el icono de la página en la que ya estás sube hasta arriba */
+  const reTap=b.classList.contains('on');
   switchMainView(b.dataset.v);
+  if(reTap){
+    window.scrollTo({top:0,behavior:'instant'});
+    requestAnimationFrame(()=>window.scrollTo({top:0,behavior:'instant'}));
+  }
 });
 
 $('todaySubTabs').addEventListener('click',e=>{
@@ -4614,8 +4625,8 @@ function renderCircleFeed(){
     emptyCard.className='wavy-card empty-allies-card';
     emptyCard.style.cssText='text-align:center;padding:28px 18px;margin-top:12px;background:var(--wash);border:1px dashed var(--rule);border-radius:16px;';
     emptyCard.innerHTML=
-      '<div style="font-family:var(--serif);font-size:18px;color:var(--ink);margin-bottom:6px">Aún no tienes aliados</div>'+
-      '<p style="font-size:12px;color:var(--muted);max-width:280px;margin:0 auto 16px;line-height:1.5">Aún no tienes aliados. Invita a alguien de confianza</p>'+
+      '<div style="font-family:var(--serif);font-size:18px;color:var(--ink);margin-bottom:6px">Amplía tu espacio seguro</div>'+
+      '<p style="font-size:12px;color:var(--muted);max-width:280px;margin:0 auto 16px;line-height:1.5">Este es tu espacio y solo entra quien tú elijas. Cuando quieras, invita a alguien de confianza.</p>'+
       '<button type="button" class="btn" id="emptyAllyConnectBtn" style="font-size:11px;padding:8px 18px">Vincular</button>';
     const btn=emptyCard.querySelector('#emptyAllyConnectBtn');
     if(btn){
@@ -4791,6 +4802,7 @@ function renderHomeCoRegulation(){
   renderStoriesBar();
   renderPebeteroBanner();
   renderCircleFeed();
+  updateCircleComposerYield();
 }
 
 /* Invitación por WhatsApp con enlace directo a la cuenta aliada */
@@ -5348,12 +5360,20 @@ $('sosb').onclick=()=>{
 };
 
 /* =========================================================
-   ANIMACIÓN SOS · LA BARRA SE ENCOGE AL SUBIR Y EL CORAZÓN
-   SE COLOCA EN EL RENGLÓN DE PROGRESO, COMO UNA GEMA
-   - Abajo (barra entera) → arriba (corazón colocado en #heartSocket).
-   - Guiada por el scroll, suavizada por interpolación en rAF.
+   ANIMACIÓN SOS · EL RECTÁNGULO VIAJA Y SE ACHICA HASTA EL
+   CORAZÓN DEL RENGLÓN DE PROGRESO (Y AL REVÉS AL BAJAR)
+   - No es un encogimiento en su sitio: el rectángulo rojo
+     estrecha su ancho visible (clip-path, sin tocar el layout)
+     MIENTRAS su centro viaja hasta #heartSocket, en el renglón
+     "1.1% · PROGRESO Día 1 / 90". Las letras se van
+     desapareciendo al estrecharse el rectángulo (se encogen y
+     se recortan por los bordes) y solo queda el corazón, que
+     encaja en el renglón como una gema. Al scrollear para abajo
+     el proceso se invierte: corazón → rectángulo rojo completo
+     al final de la hoja. Guiada por el scroll, suavizada por
+     interpolación en rAF.
    ========================================================= */
-let sosDockCur=0, sosDockRaf=0;
+let sosDockCur=0, sosDockRaf=0, sosLastTx=0, sosLastTy=0, sosSpanW0=0;
 function sosDockDocY(){
   const b=$('sosb');if(!b)return 0;
   let y=0,el=b;
@@ -5373,18 +5393,50 @@ function sosDockTargetCalc(){
 function applySosDock(d){
   const sosb=$('sosb'),socket=$('heartSocket');
   if(!sosb)return;
+  const e=d*d*(3-2*d); /* suavizado para la geometría */
   sosb.classList.toggle('docking',d>0.02);
-  sosb.style.transform='translateY('+(-d*150).toFixed(1)+'px) scale('+(1-d*0.6).toFixed(3)+')';
-  sosb.style.opacity=Math.max(0,1-Math.max(0,(d-0.72)/0.28)).toFixed(3);
-  sosb.style.pointerEvents=d>0.92?'none':'';
-  const span=sosb.querySelector('span');
-  if(span)span.style.opacity=Math.max(0,1-d*2.2).toFixed(3);
+  const r=sosb.getBoundingClientRect();
+  /* centro natural de la barra (sin el translate del frame anterior) */
+  const natCX=r.left+r.width/2-sosLastTx;
+  const natCY=r.top+r.height/2-sosLastTy;
+  let tx=0,ty=0;
   if(socket){
+    const sr=socket.getBoundingClientRect();
+    tx=(sr.left+sr.width/2-natCX)*e;
+    ty=(sr.top+sr.height/2-natCY)*e;
     const s=Math.min(1,Math.max(0,(d-0.55)/0.45));
     socket.style.opacity=s.toFixed(3);
     socket.style.transform='scale('+(0.55+s*0.5).toFixed(3)+')';
     socket.style.pointerEvents=s>0.6?'':'none';
     socket.style.boxShadow=s>0.85?'0 0 0 3px rgba(186,92,104,.14),0 0 18px rgba(186,92,104,.35)':'';
+  }
+  sosb.style.transform=(tx||ty)?('translate('+tx.toFixed(1)+'px,'+ty.toFixed(1)+'px)'):'';
+  sosLastTx=tx; sosLastTy=ty;
+  /* el rectángulo se estrecha hasta un círculo de 34px (el corazón) */
+  const cx=Math.max(0,(r.width-34)/2*e);
+  const cy=Math.max(0,(r.height-34)/2*e);
+  sosb.style.clipPath=e>0?('inset('+cy.toFixed(1)+'px '+cx.toFixed(1)+'px '+cy.toFixed(1)+'px '+cx.toFixed(1)+'px round 999px)'):'';
+  /* al final la barra se desvanece y el corazón queda en el renglón */
+  sosb.style.opacity=Math.max(0,1-Math.max(0,(d-0.72)/0.28)).toFixed(3);
+  sosb.style.pointerEvents=d>0.35?'none':'';
+  /* las letras desaparecen durante la reducción: se encogen y se recortan */
+  const span=sosb.querySelector('span');
+  if(span){
+    if(d>0.02 && !sosSpanW0){
+      span.style.whiteSpace='nowrap';
+      span.style.maxWidth='none';
+      sosSpanW0=span.offsetWidth||280;
+    }
+    if(d<=0.02){
+      span.style.whiteSpace='';span.style.maxWidth='';span.style.overflow='';
+      span.style.opacity='';span.style.display='';sosSpanW0=0;
+    }else{
+      const k=Math.max(0,1-d*1.8);
+      span.style.maxWidth=(sosSpanW0*k).toFixed(1)+'px';
+      span.style.overflow='hidden';
+      span.style.opacity=Math.max(0,1-d*2.2).toFixed(3);
+      span.style.display=d>0.6?'none':'';
+    }
   }
 }
 function sosDockTick(){
@@ -5398,9 +5450,45 @@ function sosDockTick(){
 function requestSosDock(){
   if(!sosDockRaf)sosDockRaf=requestAnimationFrame(sosDockTick);
 }
-window.addEventListener('scroll',()=>{requestSosDock();},{passive:true});
-window.addEventListener('resize',()=>{requestSosDock();});
+window.addEventListener('scroll',()=>{requestSosDock();updateCircleComposerYield();updateMastheadFade();},{passive:true});
+window.addEventListener('resize',()=>{requestSosDock();updateCircleComposerYield();updateMastheadFade();});
 if($('heartSocket'))$('heartSocket').onclick=()=>{const b=$('sosb');if(b)b.click();};
+
+/* =========================================================
+   CÍRCULO · EL COMPOSITOR CEDE EL PASO
+   El recuadro "Dejar una nota o canción en mi círculo" sube
+   flotando (sticky) — eso está perfecto. Pero cuando choca con
+   el último recuadro de arriba (hoy, el de aliados), se BAJA
+   lo que haga falta para no taparlo, dándole prioridad a los
+   textos de aliados. Al scrollear de vuelta, sube a su sitio.
+   ========================================================= */
+let circleYieldCur=0;
+function updateCircleComposerYield(){
+  const wrap=document.querySelector('#v-circle .circle-sticky-wrap');
+  if(!wrap)return;
+  const vc=$('v-circle');
+  const list=$('circleFeedList');
+  const last=list && list.lastElementChild;
+  if(!vc || !vc.classList.contains('on') || !last){
+    if(circleYieldCur){wrap.style.transform='';circleYieldCur=0;}
+    return;
+  }
+  const wr=wrap.getBoundingClientRect();
+  const lr=last.getBoundingClientRect();
+  const natTop=wr.top-circleYieldCur;
+  const push=Math.max(0,(lr.bottom+10)-natTop);
+  circleYieldCur=push;
+  wrap.style.transform=push>0?('translateY('+push.toFixed(1)+'px)'):'';
+}
+
+/* El encabezado se difumina conforme el usuario scrollea para abajo */
+function updateMastheadFade(){
+  const m=document.querySelector('.masthead');if(!m)return;
+  const y=window.scrollY||0;
+  const o=Math.max(0,Math.min(1,1-y/110));
+  m.style.opacity=o.toFixed(3);
+  m.style.transform=o<1?('translateY('+(-6*(1-o)).toFixed(1)+'px)'):'';
+}
 
 /* Entrada fresca: si el usuario vuelve tras 3+ minutos fuera de la app,
    todas las páginas empiezan desde arriba */
@@ -7223,30 +7311,28 @@ const PEB_VESSELS={
     svg:()=>`
       <defs>
         <radialGradient id="g4" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#E9F1E2" stop-opacity=".95"/><stop offset=".55" stop-color="#C2D8B8" stop-opacity=".45"/><stop offset="1" stop-color="#8FB083" stop-opacity="0"/></radialGradient>
-        <linearGradient id="pVessel" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FBF8F3"/><stop offset=".4" stop-color="#EFE7DA"/><stop offset="1" stop-color="#D5C5B0"/></linearGradient>
-        <linearGradient id="pLip" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFDF9"/><stop offset="1" stop-color="#E5DAC8"/></linearGradient>
-        <linearGradient id="pfOuter" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F8D6BC"/><stop offset="1" stop-color="#E7A286"/></linearGradient>
-        <linearGradient id="pfMid" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF3E6"/><stop offset="1" stop-color="#F5C3A0"/></linearGradient>
-        <linearGradient id="pfCore" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFF1DE"/></linearGradient>
+        <linearGradient id="vJade" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9DBE8C"/><stop offset=".45" stop-color="#5C7A4E"/><stop offset="1" stop-color="#2E4A32"/></linearGradient>
+        <linearGradient id="vGold" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#B08D3E"/><stop offset=".5" stop-color="#E9C979"/><stop offset="1" stop-color="#B08D3E"/></linearGradient>
+        <linearGradient id="fGoldO" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF0C9"/><stop offset="1" stop-color="#9E7339"/></linearGradient>
+        <linearGradient id="fGoldM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E6C587"/></linearGradient>
+        <linearGradient id="fGoldC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFF1DE"/></linearGradient>
       </defs>
       <circle class="gl" cx="60" cy="72" r="56" fill="url(#g4)"/>
-      <ellipse cx="60" cy="142" rx="34" ry="3.5" fill="#5A4030" opacity=".14"/>
-      <!-- Classical pedestal base -->
-      <path d="M42 136 C42 133 46 131 60 131 C74 131 78 133 78 136 L79 140 C79 141 73 143 60 143 C47 143 41 141 41 140 Z" fill="url(#pVessel)" stroke="#BFAF9B" stroke-width=".8"/>
-      <!-- Stem -->
-      <path d="M53 120 L51 132 C55 133 65 133 69 132 L67 120 Z" fill="url(#pVessel)"/>
-      <!-- Chalice Bowl with Classical Fluting -->
-      <path d="M26 99 C26 122 42 126 60 126 C78 126 94 122 94 99 Z" fill="url(#pVessel)" stroke="#BFAF9B" stroke-width=".9"/>
-      <!-- Fluted relief grooves -->
-      <path d="M38 101 C40 114 48 122 55 125 M82 101 C80 114 72 122 65 125 M60 102 L60 125" fill="none" stroke="#D3C1A9" stroke-width=".8" opacity=".7"/>
-      <!-- Inner basin rim with specular lip -->
-      <ellipse cx="60" cy="99" rx="34" ry="6.2" fill="url(#pLip)" stroke="#BFAF9B" stroke-width=".9"/>
-      <ellipse cx="60" cy="99" rx="29" ry="4.4" fill="#E8DEC9"/>
-      <ellipse class="emb" cx="60" cy="99" rx="14" ry="2.2" fill="#ECA985"/>
+      <ellipse cx="60" cy="142" rx="34" ry="3.5" fill="#2E4A32" opacity=".18"/>
+      <!-- Cáliz de jade salvia sobre pedestal, con veta y filo dorado -->
+      <path d="M42 136 C42 133 46 131 60 131 C74 131 78 133 78 136 L79 140 C79 141 73 143 60 143 C47 143 41 141 41 140 Z" fill="url(#vJade)" stroke="#2E4A32" stroke-width=".6"/>
+      <path d="M53 120 L51 132 C55 133 65 133 69 132 L67 120 Z" fill="url(#vJade)"/>
+      <path d="M26 99 C26 122 42 126 60 126 C78 126 94 122 94 99 Z" fill="url(#vJade)" stroke="#2E4A32" stroke-width=".8"/>
+      <path d="M36 104 C40 112 44 118 50 122 M84 104 C80 112 76 118 70 122" fill="none" stroke="#C2D8B8" stroke-width=".9" stroke-linecap="round" opacity=".55"/>
+      <path d="M33 102 C35 112 39 120 45 124" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity=".5"/>
+      <path d="M28 109 C42 113 78 113 92 109" fill="none" stroke="url(#vGold)" stroke-width="1.1" opacity=".85"/>
+      <ellipse cx="60" cy="99" rx="34" ry="6.2" fill="#243B26" stroke="url(#vGold)" stroke-width="1.2"/>
+      <ellipse cx="60" cy="99" rx="29" ry="4.4" fill="#1B2E1F"/>
+      <ellipse class="emb" cx="60" cy="99" rx="14" ry="2.2" fill="#D4AF37"/>
       <g id="fl">
-        <path class="f1" d="M60 94 C44 89 44 68 60 38 C76 68 76 89 60 94Z" fill="url(#pfOuter)" opacity=".92"/>
-        <path class="f2" d="M60 94 C50 90 50 74 60 52 C70 74 70 90 60 94Z" fill="url(#pfMid)"/>
-        <path class="f3" d="M60 94 C55 91 55 83 60 70 C65 83 65 91 60 94Z" fill="url(#pfCore)"/>
+        <path class="f1" d="M60 94 C44 86 47 58 60 26 C73 58 76 86 60 94Z" fill="url(#fGoldO)" opacity=".95"/>
+        <path class="f2" d="M60 94 C52 88 53 68 60 42 C67 68 68 88 60 94Z" fill="url(#fGoldM)"/>
+        <path class="f3" d="M60 94 C56 91 56 83 60 70 C64 83 64 91 60 94Z" fill="url(#fGoldC)"/>
       </g>`
   },
   matcha:{
@@ -7254,25 +7340,30 @@ const PEB_VESSELS={
     svg:()=>`
       <defs>
         <radialGradient id="gMatcha" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#E2EFE0" stop-opacity=".95"/><stop offset=".55" stop-color="#B4D1AF" stop-opacity=".42"/><stop offset="1" stop-color="#8EAB89" stop-opacity="0"/></radialGradient>
-        <linearGradient id="pCeladon" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".25" stop-color="#EAF2E8"/><stop offset=".7" stop-color="#C5D9C2"/><stop offset="1" stop-color="#A8C4A5"/></linearGradient>
+        <linearGradient id="pMatcha" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8FBF7A"/><stop offset=".5" stop-color="#4A6B45"/><stop offset="1" stop-color="#243B26"/></linearGradient>
         <linearGradient id="pGlazeLip" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#D6E5D3"/></linearGradient>
-        <linearGradient id="mOuter" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E7F2E4"/><stop offset="1" stop-color="#7D9D7E"/></linearGradient>
-        <linearGradient id="mMid" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FBFDF9"/><stop offset="1" stop-color="#B8D0B5"/></linearGradient>
         <linearGradient id="goldVein" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFE899"/><stop offset=".5" stop-color="#D4AF37"/><stop offset="1" stop-color="#997A15"/></linearGradient>
+        <linearGradient id="vGold" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#B08D3E"/><stop offset=".5" stop-color="#E9C979"/><stop offset="1" stop-color="#B08D3E"/></linearGradient>
+        <linearGradient id="fGoldO" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF0C9"/><stop offset="1" stop-color="#9E7339"/></linearGradient>
+        <linearGradient id="fGoldM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E6C587"/></linearGradient>
+        <linearGradient id="fGoldC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFF1DE"/></linearGradient>
       </defs>
       <circle class="gl" cx="60" cy="70" r="56" fill="url(#gMatcha)"/>
-      <ellipse cx="60" cy="142" rx="35" ry="3.5" fill="#3E543D" opacity=".18"/>
-      <ellipse cx="60" cy="138" rx="24" ry="4" fill="#B0C7AE" stroke="#8CA68A" stroke-width=".7"/>
-      <path d="M24 98 C25 125 40 138 60 138 C80 138 95 125 96 98 Z" fill="url(#pCeladon)" stroke="#8CA68A" stroke-width=".8"/>
+      <ellipse cx="60" cy="142" rx="35" ry="3.5" fill="#243B26" opacity=".18"/>
+      <ellipse cx="60" cy="138" rx="24" ry="4" fill="#3E5C38" stroke="url(#vGold)" stroke-width=".7"/>
+      <!-- Cuenco de matcha profundo con kintsugi dorado -->
+      <path d="M24 98 C25 125 40 138 60 138 C80 138 95 125 96 98 Z" fill="url(#pMatcha)" stroke="#243B26" stroke-width=".8"/>
+      <path d="M30 104 C32 114 36 124 42 130" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity=".45"/>
       <path d="M42 99 Q46 114 43 124 T52 137 M44 116 Q53 121 58 126" fill="none" stroke="url(#goldVein)" stroke-width="1.6" stroke-linecap="round"/>
       <path d="M78 99 Q75 112 80 125 T76 137" fill="none" stroke="url(#goldVein)" stroke-width="1.3" stroke-linecap="round"/>
-      <ellipse cx="60" cy="98" rx="36" ry="6" fill="url(#pGlazeLip)" stroke="#8CA68A" stroke-width=".9"/>
-      <ellipse cx="60" cy="98" rx="30" ry="4.4" fill="#698566"/>
+      <path d="M62 99 Q64 112 60 124 T66 137" fill="none" stroke="url(#goldVein)" stroke-width="1.1" stroke-linecap="round" opacity=".9"/>
+      <ellipse cx="60" cy="98" rx="36" ry="6" fill="url(#pGlazeLip)" stroke="url(#vGold)" stroke-width="1.1"/>
+      <ellipse cx="60" cy="98" rx="30" ry="4.4" fill="#243B26"/>
       <ellipse class="emb" cx="60" cy="98" rx="14" ry="2.2" fill="#D4AF37"/>
       <g id="fl">
-        <path class="f1" d="M60 94 C46 89 46 68 60 38 C74 68 74 89 60 94Z" fill="url(#mOuter)" opacity=".92"/>
-        <path class="f2" d="M60 94 C51 90 51 74 60 52 C69 74 69 90 60 94Z" fill="url(#mMid)"/>
-        <path d="M60 94 C56 91 56 83 60 70 C64 83 64 91 60 94Z" fill="#FFFFFF"/>
+        <path class="f1" d="M60 94 C44 86 47 58 60 26 C73 58 76 86 60 94Z" fill="url(#fGoldO)" opacity=".95"/>
+        <path class="f2" d="M60 94 C52 88 53 68 60 42 C67 68 68 88 60 94Z" fill="url(#fGoldM)"/>
+        <path class="f3" d="M60 94 C56 91 56 83 60 70 C64 83 64 91 60 94Z" fill="url(#fGoldC)"/>
       </g>`
   },
   quartz:{
@@ -7280,25 +7371,30 @@ const PEB_VESSELS={
     svg:()=>`
       <defs>
         <radialGradient id="gQuartz" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#E4F2E6" stop-opacity=".95"/><stop offset=".55" stop-color="#B7D9BE" stop-opacity=".42"/><stop offset="1" stop-color="#7FBF95" stop-opacity="0"/></radialGradient>
-        <linearGradient id="pQuartz" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFF5F4"/><stop offset=".4" stop-color="#F8DEDB"/><stop offset=".8" stop-color="#EBBDB7"/><stop offset="1" stop-color="#D9A19A"/></linearGradient>
-        <linearGradient id="qOuter" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF0EE"/><stop offset="1" stop-color="#D9948C"/></linearGradient>
-        <linearGradient id="qMid" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#F5CBC5"/></linearGradient>
-        <linearGradient id="alabaster" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#EBE3DE"/></linearGradient>
+        <linearGradient id="qJade" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#DFF2DF"/><stop offset=".4" stop-color="#8FCB9B"/><stop offset=".75" stop-color="#4E9A6A"/><stop offset="1" stop-color="#2A5C40"/></linearGradient>
+        <linearGradient id="vGold" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#B08D3E"/><stop offset=".5" stop-color="#E9C979"/><stop offset="1" stop-color="#B08D3E"/></linearGradient>
+        <linearGradient id="fGoldO" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF0C9"/><stop offset="1" stop-color="#9E7339"/></linearGradient>
+        <linearGradient id="fGoldM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E6C587"/></linearGradient>
+        <linearGradient id="fGoldC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFF1DE"/></linearGradient>
       </defs>
       <circle class="gl" cx="60" cy="70" r="56" fill="url(#gQuartz)"/>
-      <ellipse cx="60" cy="142" rx="32" ry="3.2" fill="#754E48" opacity=".16"/>
-      <ellipse cx="60" cy="138" rx="26" ry="4" fill="url(#alabaster)" stroke="#D8C4BC" stroke-width=".8"/>
-      <path d="M28 99 L36 126 C42 134 50 136 60 136 C70 136 78 134 84 126 L92 99 Z" fill="url(#pQuartz)" stroke="#D4A7A0" stroke-width=".8"/>
-      <polygon points="46,101 60,101 58,135 48,132" fill="#FFFFFF" opacity=".35"/>
-      <polygon points="60,101 74,101 72,132 62,135" fill="#EAAFA8" opacity=".35"/>
-      <line x1="60" y1="101" x2="60" y2="135" stroke="#FFFFFF" stroke-width="1.2" opacity=".65"/>
-      <ellipse cx="60" cy="99" rx="32" ry="5.8" fill="#FFF4F3" stroke="#DCAEAA" stroke-width=".8"/>
-      <ellipse cx="60" cy="99" rx="27" ry="4.2" fill="#F4CAC4"/>
-      <ellipse class="emb" cx="60" cy="99" rx="13" ry="2.2" fill="#EEA098"/>
+      <ellipse cx="60" cy="142" rx="32" ry="3.2" fill="#2A5C40" opacity=".16"/>
+      <ellipse cx="60" cy="138" rx="26" ry="4" fill="#1F4A2E" stroke="url(#vGold)" stroke-width=".8"/>
+      <!-- Copa de jade facetada, como una gema tallada -->
+      <path d="M28 99 L38 128 C44 136 52 138 60 138 C68 138 76 136 82 128 L92 99 Z" fill="url(#qJade)" stroke="#2A5C40" stroke-width=".8"/>
+      <polygon points="38,101 60,101 56,136 44,132" fill="#FFFFFF" opacity=".38"/>
+      <polygon points="60,101 82,101 76,132 64,136" fill="#1F4A2E" opacity=".38"/>
+      <line x1="60" y1="101" x2="60" y2="136" stroke="#FFFFFF" stroke-width="1.2" opacity=".6"/>
+      <line x1="60" y1="101" x2="44" y2="132" stroke="#FFFFFF" stroke-width=".8" opacity=".35"/>
+      <line x1="60" y1="101" x2="76" y2="132" stroke="#FFFFFF" stroke-width=".8" opacity=".35"/>
+      <path d="M80 108 L81.6 112.4 L86 114 L81.6 115.6 L80 120 L78.4 115.6 L74 114 L78.4 112.4 Z" fill="url(#vGold)"/>
+      <ellipse cx="60" cy="99" rx="32" ry="5.8" fill="#EAF7EC" stroke="url(#vGold)" stroke-width="1.1"/>
+      <ellipse cx="60" cy="99" rx="27" ry="4.2" fill="#2A5C40"/>
+      <ellipse class="emb" cx="60" cy="99" rx="13" ry="2.2" fill="#D4AF37"/>
       <g id="fl">
-        <path class="f1" d="M60 94 C45 89 45 68 60 38 C75 68 75 89 60 94Z" fill="url(#qOuter)" opacity=".92"/>
-        <path class="f2" d="M60 94 C51 90 51 74 60 52 C69 74 69 90 60 94Z" fill="url(#qMid)"/>
-        <path d="M60 36 C55 26 65 20 60 12" fill="none" stroke="#FFF8F6" stroke-width="1.3" stroke-linecap="round" opacity=".85"/>
+        <path class="f1" d="M60 94 C44 86 47 58 60 26 C73 58 76 86 60 94Z" fill="url(#fGoldO)" opacity=".95"/>
+        <path class="f2" d="M60 94 C52 88 53 68 60 42 C67 68 68 88 60 94Z" fill="url(#fGoldM)"/>
+        <path class="f3" d="M60 94 C56 91 56 83 60 70 C64 83 64 91 60 94Z" fill="url(#fGoldC)"/>
       </g>`
   },
   spartan:{
@@ -7306,21 +7402,24 @@ const PEB_VESSELS={
     svg:()=>`
       <defs>
         <radialGradient id="gSpartan" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#DDEBD6" stop-opacity=".95"/><stop offset=".55" stop-color="#7FA87C" stop-opacity=".45"/><stop offset="1" stop-color="#3F6B45" stop-opacity="0"/></radialGradient>
-        <linearGradient id="pBronze" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5E4B38"/><stop offset=".4" stop-color="#3F3124"/><stop offset="1" stop-color="#231A12"/></linearGradient>
+        <linearGradient id="pForest" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3D5C40"/><stop offset=".45" stop-color="#22391F"/><stop offset="1" stop-color="#141F16"/></linearGradient>
         <linearGradient id="sOuter" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFD98E"/><stop offset="1" stop-color="#B85D28"/></linearGradient>
         <linearGradient id="sMid" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF5D6"/><stop offset="1" stop-color="#E09448"/></linearGradient>
         <linearGradient id="goldPatina" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8F6E3E"/><stop offset=".5" stop-color="#D4AF6A"/><stop offset="1" stop-color="#8F6E3E"/></linearGradient>
+        <linearGradient id="vGold" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#B08D3E"/><stop offset=".5" stop-color="#E9C979"/><stop offset="1" stop-color="#B08D3E"/></linearGradient>
       </defs>
       <circle class="gl" cx="60" cy="68" r="58" fill="url(#gSpartan)"/>
-      <ellipse cx="60" cy="144" rx="38" ry="4" fill="#140E0A" opacity=".35"/>
-      <path d="M34 118 L25 142 M86 118 L95 142 M60 124 L60 143" stroke="#8A6739" stroke-width="3" stroke-linecap="round"/>
+      <ellipse cx="60" cy="144" rx="38" ry="4" fill="#0E1A10" opacity=".35"/>
+      <!-- Trípode de bronce verde bosque, con lambda dorada -->
+      <path d="M34 118 L25 142 M86 118 L95 142 M60 124 L60 143" stroke="#D4AF6A" stroke-width="3" stroke-linecap="round"/>
       <circle cx="25" cy="142" r="2.2" fill="#D4AF6A"/>
       <circle cx="95" cy="142" r="2.2" fill="#D4AF6A"/>
       <circle cx="60" cy="143" r="2.2" fill="#D4AF6A"/>
-      <path d="M22 98 C24 124 40 131 60 131 C80 131 96 124 98 98 Z" fill="url(#pBronze)" stroke="#8A6739" stroke-width="1.2"/>
+      <path d="M22 98 C24 124 40 131 60 131 C80 131 96 124 98 98 Z" fill="url(#pForest)" stroke="#D4AF6A" stroke-width="1.2"/>
       <path d="M24 105 H96" stroke="url(#goldPatina)" stroke-width="2.5" stroke-dasharray="6 3"/>
-      <ellipse cx="60" cy="98" rx="38" ry="6" fill="#3A2C1E" stroke="url(#goldPatina)" stroke-width="1.3"/>
-      <ellipse cx="60" cy="98" rx="33" ry="4.4" fill="#20170E"/>
+      <path d="M52 120 L60 110 L68 120" fill="none" stroke="url(#vGold)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      <ellipse cx="60" cy="98" rx="38" ry="6" fill="#1B2A1C" stroke="url(#goldPatina)" stroke-width="1.3"/>
+      <ellipse cx="60" cy="98" rx="33" ry="4.4" fill="#101A11"/>
       <ellipse class="emb" cx="60" cy="98" rx="22" ry="2.8" fill="#D46A28"/>
       <g id="fl">
         <path class="f1" d="M60 94 C39 88 41 62 60 30 C79 62 81 88 60 94Z" fill="url(#sOuter)" opacity=".95"/>
@@ -8226,7 +8325,7 @@ $('deleteAllDataBtn').onclick=function(){
 };
 
 function renderAll(){
-  applyTheme(S.theme||'white');
+  applyTheme(S.theme||'pulcritud');
   renderAccountSwitcherUI();
   syncAudioBtnUI();
   syncProWifiSwitchUI();
@@ -8265,6 +8364,7 @@ renderAll();
 if('scrollRestoration' in history)history.scrollRestoration='manual';
 window.scrollTo(0,0);
 requestSosDock();
+updateMastheadFade();
 initLiveSyncChannels();
 broadcastLiveEvent('state_sync');
 setInterval(clock,30000);

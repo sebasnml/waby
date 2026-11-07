@@ -1330,6 +1330,11 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
   display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:10px;
 }
 @media(min-width:520px){.bento-track-grid{grid-template-columns:repeat(3,1fr)}}
+/* Grupo de tarjetas por dimensión: un renglón con el nombre de la
+   dimensión y abajo las tarjetas de ese aspecto. */
+.bento-dim-group{margin-bottom:14px}
+.bento-dim-group:last-child{margin-bottom:0}
+.bento-dim-hd{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:700;margin:2px 0 8px}
 .bento-card{
   background:var(--paper);border:1px solid var(--rule);border-radius:14px;
   padding:11px 12px;text-align:left;cursor:pointer;transition:all .18s ease;
@@ -1344,7 +1349,6 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
   width:28px;height:28px;border-radius:50%;background:var(--wash);color:var(--ink);
   display:grid;place-items:center;flex-shrink:0;
 }
-.bento-dim{display:block;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:700;font-style:normal;margin-bottom:1px}
 .bento-card.has .bento-ic{background:rgba(99,130,100,0.18);color:var(--ok)}
 .bento-card strong{font-family:var(--serif);font-size:15.5px;font-weight:500;color:var(--ink);line-height:1.15;display:block}
 .bento-card small{font-size:11.5px;color:var(--muted);font-family:var(--serif);font-style:normal;display:block;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -1689,14 +1693,14 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
     <div class="checkin-banner" id="pebBanner">
       <div>
         <strong id="pebTitle">Sintonización diaria pendiente</strong>
-        <span id="pebDesc">Cumple 1 minuto de respiración, un registro en tu Diario o una práctica breve para encender tu llama en verde y desbloquear los ecos de tu círculo.</span>
+        <span id="pebDesc">Cumple 1 minuto de respiración, un registro del día o una práctica breve para encender tu llama en verde y desbloquear los ecos de tu círculo.</span>
       </div>
       <button class="btn" id="pebActionBtn" style="white-space:nowrap">Ir a respirar</button>
     </div>
 
     <nav class="tabs" id="todaySubTabs" role="tablist" aria-label="Instrumentos de hoy">
       <button class="tab on" data-sub="sub-habit" role="tab" aria-selected="true"><b>Hábito</b>Mi Racha</button>
-      <button class="tab" data-sub="sub-journal" role="tab" aria-selected="false"><b>Diario</b>Ciclo y Ánimo</button>
+      <button class="tab" data-sub="sub-journal" role="tab" aria-selected="false"><b>Bienestar</b>Ciclo y Ánimo</button>
       <button class="tab" data-sub="sub-flame" role="tab" aria-selected="false"><b>Pebetero</b>Mi Llama</button>
     </nav>
 
@@ -1766,40 +1770,23 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
     <!-- SUB-PANEL 1B: DIARIO BIOPSICOSOCIAL Y CICLO -->
     <section class="panel card" id="sub-journal">
       <div class="hd">
-        <span>Mi Diario <button type="button" class="help-q" data-help="helpBio" aria-label="Ayuda sobre el diario">?</button></span>
+        <span>Tu bienestar</span>
         <div class="chips" id="bioTrackMode">
           <button type="button" class="chip on" data-bm="female" style="min-height:36px;padding:4px 13px;font-size:13px">Mujer</button>
           <button type="button" class="chip" data-bm="male" style="min-height:36px;padding:4px 13px;font-size:13px">Hombre</button>
         </div>
       </div>
-      <div class="help-tip" id="helpBio" hidden>Observa cómo se conectan tus emociones, tu descanso y tu ritmo biológico. Todo lo que escribas aquí es privado.</div>
 
-      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px;padding:11px 14px;border-radius:14px;background:var(--wash);border:1px solid var(--glass-border);box-shadow:var(--glass-spec);flex-wrap:wrap">
-        <div>
-          <strong style="font-family:var(--serif);font-size:16px;font-weight:500;display:block">Reflexión libre del día</strong>
-          <span style="font-size:11.5px;color:var(--muted)">Lienzo a pantalla completa sin distracciones.</span>
-        </div>
-        <button type="button" class="btn" id="openBlankSheetBtn" style="min-height:34px;padding:6px 14px;font-size:11px;border-radius:20px;width:100%;justify-content:center;margin-top:4px">
-          <svg class="w-ico sm" viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-          <span>Abrir hoja en blanco</span>
-        </button>
-      </div>
-
-      <div class="retract-body" id="wkRetractBody">
-        <div class="wk" id="wk"></div>
-      </div>
-
+      <!-- HÁBITOS DE CUIDADO AGRUPADOS POR DIMENSIÓN (CUERPO, MENTE, VÍNCULO) -->
       <div class="bio-sec">
-        <div class="bio-sec-hd"><span>Emociones de hoy</span><span id="moodCounterLbl">Elige hasta 3 (0/3)</span></div>
-        <div class="moods" id="moodsCore"></div>
-        <div class="extra-box" id="moodsExtraBox" hidden>
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-            <span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:700">Matices emocionales · Wavy Pro</span>
-            <span id="vipMoodHint" style="font-size:11px;color:var(--muted)">Desbloqueable</span>
-          </div>
-          <div class="moods" id="moodsVip" style="margin-bottom:0"></div>
+        <div class="bio-sec-hd">
+          <span>Hábitos de cuidado</span>
+          <span id="clueTrackCount">Toca una tarjeta</span>
         </div>
+        <div id="clueTrackList"></div>
+        <div class="bento-drawer" id="bentoActiveDrawer" hidden></div>
       </div>
+      <div hidden><div id="ffuerza"></div><div id="ffuerzaExtra"></div><div id="fcuerpo"></div><div id="fcuerpoExtra"></div><div id="fsl"></div><div id="fslExtra"></div><div id="fsoc"></div><div id="fsocExtra"></div></div>
 
       <div class="bio-sec" id="femaleBioBlock">
         <div class="bio-sec-hd">
@@ -1919,23 +1906,6 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
         </div>
 
       </div>
-
-      <!-- CUADRÍCULA BENTO HORIZONTAL UNIFICADA (AGUA, NUTRICIÓN, SUEÑO, CUERPO, ENTORNO Y BIOLOGÍA) -->
-      <div class="bio-sec">
-        <div class="bio-sec-hd">
-          <span>Hábitos de cuidado</span>
-          <span id="clueTrackCount">Toca una tarjeta</span>
-        </div>
-        <div class="bento-track-grid" id="clueTrackList"></div>
-        <div class="bento-drawer" id="bentoActiveDrawer" hidden></div>
-      </div>
-      <div hidden><div id="ffuerza"></div><div id="ffuerzaExtra"></div><div id="fcuerpo"></div><div id="fcuerpoExtra"></div><div id="fsl"></div><div id="fslExtra"></div><div id="fsoc"></div><div id="fsocExtra"></div></div>
-
-      <textarea id="ni" class="echo-input" placeholder="Escribe una línea sobre cómo te sientes hoy o qué aprendiste (opcional) y presiona Enter…"></textarea>
-      <button class="btn" style="width:100%" id="na">Guardar registro del día</button>
-      <p class="ins" id="ins"></p>
-      <div id="nb"></div>
-      <button class="btn ghost" id="more" style="width:100%;margin-top:10px" hidden>Ver registros anteriores</button>
     </section>
 
     <!-- SUB-PANEL 1C: PEBETERO Y PRÁCTICAS VERIFICADAS CON TEMPORIZADOR -->
@@ -1944,7 +1914,7 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
         <span>Tu pebetero de constancia <button type="button" class="help-q" data-help="helpPeb" aria-label="Ayuda sobre el pebetero">?</button></span>
         <span>Llama diaria</span>
       </div>
-      <div class="help-tip" id="helpPeb" hidden>Tu vela de travertino representa tu presencia diaria. Se enciende automáticamente al completar una respiración, guardar en tu Diario o realizar una práctica de 60 segundos.</div>
+      <div class="help-tip" id="helpPeb" hidden>Tu vela de travertino representa tu presencia diaria. Se enciende automáticamente al completar una respiración, guardar un registro del día o realizar una práctica de 60 segundos.</div>
 
       <div style="margin-bottom:8px">
         <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:5px">
@@ -2055,7 +2025,7 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
             <svg class="w-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/></svg>
             <span id="bbTxt">Comenzar respiración</span>
           </button>
-          <button type="button" class="btn ghost" id="bbDurBtn" aria-label="Elegir duración de la respiración" style="min-width:86px">5 min ▾</button>
+          <button type="button" class="btn" id="bbDurBtn" aria-label="Elegir duración de la respiración" style="min-width:86px">5 min ▾</button>
         </div>
         <div id="bbDurMenu" hidden style="margin-top:8px;padding:10px;border-radius:14px;background:var(--card);border:1px solid var(--glass-border);display:grid;gap:6px">
           <div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600">Duración · lo que la ciencia respalda</div>
@@ -2122,6 +2092,11 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
        VISTA 3: CÍRCULO Y ALIADO (CO-REGULACIÓN + INVITACIÓN WHATSAPP)
        ========================================================= -->
   <div class="vpage" id="v-circle">
+    <div class="circle-tabs" style="display:flex;gap:8px;margin-bottom:12px">
+      <button type="button" class="chip on" id="circleTabFeedBtn" style="flex:1;justify-content:center;min-height:38px">Círculo</button>
+      <button type="button" class="chip" id="circleTabDiaryBtn" style="flex:1;justify-content:center;min-height:38px">Diario</button>
+    </div>
+    <div id="circleFeedPane">
     <div class="stories-bar" id="storiesBar"></div>
     <span id="p2pPeerIdLabel" hidden></span>
 
@@ -2186,6 +2161,48 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
           </div>
         </div>
       </div>
+    </div>
+    </div>
+    <div id="circleDiaryPane" hidden>
+      <section class="panel card" id="sub-diary">
+      <div class="hd">
+        <span>Mi Diario <button type="button" class="help-q" data-help="helpBio" aria-label="Ayuda sobre el diario">?</button></span>
+      </div>
+      <div class="help-tip" id="helpBio" hidden>Observa cómo se conectan tus emociones, tu descanso y tu ritmo biológico. Todo lo que escribas aquí es privado.</div>
+
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px;padding:11px 14px;border-radius:14px;background:var(--wash);border:1px solid var(--glass-border);box-shadow:var(--glass-spec);flex-wrap:wrap">
+        <div>
+          <strong style="font-family:var(--serif);font-size:16px;font-weight:500;display:block">Reflexión libre del día</strong>
+          <span style="font-size:11.5px;color:var(--muted)">Lienzo a pantalla completa sin distracciones.</span>
+        </div>
+        <button type="button" class="btn" id="openBlankSheetBtn" style="min-height:34px;padding:6px 14px;font-size:11px;border-radius:20px;width:100%;justify-content:center;margin-top:4px">
+          <svg class="w-ico sm" viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          <span>Abrir hoja en blanco</span>
+        </button>
+      </div>
+
+      <div class="retract-body" id="wkRetractBody">
+        <div class="wk" id="wk"></div>
+      </div>
+
+      <div class="bio-sec">
+        <div class="bio-sec-hd"><span>Emociones de hoy</span><span id="moodCounterLbl">Elige hasta 3 (0/3)</span></div>
+        <div class="moods" id="moodsCore"></div>
+        <div class="extra-box" id="moodsExtraBox" hidden>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+            <span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:700">Matices emocionales · Wavy Pro</span>
+            <span id="vipMoodHint" style="font-size:11px;color:var(--muted)">Desbloqueable</span>
+          </div>
+          <div class="moods" id="moodsVip" style="margin-bottom:0"></div>
+        </div>
+      </div>
+
+      <textarea id="ni" class="echo-input" placeholder="Escribe una línea sobre tu día…"></textarea>
+      <button class="btn" style="width:100%" id="na">Guardar registro del día</button>
+      <p class="ins" id="ins"></p>
+      <div id="nb"></div>
+      <button class="btn ghost" id="more" style="width:100%;margin-top:10px" hidden>Ver registros anteriores</button>
+      </section>
     </div>
   </div>
 
@@ -4194,6 +4211,21 @@ function switchMainView(vid){
   if(vid==='v-profile'){syncProfileForm();syncProWifiSwitchUI();renderSealsCarousel()}
 }
 
+/* Pestañas de Círculo: Círculo (el feed, copia de Twitter) y Diario
+   (el diario, copia de Medium). Cada pestaña muestra su sección y
+   esconde la otra. */
+function switchCircleTab(tab){
+  const feed=(tab==='feed');
+  if($('circleTabFeedBtn'))$('circleTabFeedBtn').classList.toggle('on',feed);
+  if($('circleTabDiaryBtn'))$('circleTabDiaryBtn').classList.toggle('on',!feed);
+  if($('circleFeedPane'))$('circleFeedPane').hidden=!feed;
+  if($('circleDiaryPane'))$('circleDiaryPane').hidden=feed;
+  updateCircleComposerYield();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+if($('circleTabFeedBtn'))$('circleTabFeedBtn').onclick=()=>switchCircleTab('feed');
+if($('circleTabDiaryBtn'))$('circleTabDiaryBtn').onclick=()=>switchCircleTab('diary');
+
 $('bnav').addEventListener('click',e=>{
   const b=e.target.closest('.bnav-btn');if(!b)return;
   /* Re-tocar el icono de la página en la que ya estás sube hasta arriba */
@@ -5719,6 +5751,13 @@ let circleYieldCur=0;
 function updateCircleComposerYield(){
   const wrap=document.querySelector('#v-circle .circle-sticky-wrap');
   if(!wrap)return;
+  /* En la pestaña Diario el compositor está escondido (el feed no se ve):
+     no hay nada que ceder, el transform se resetea. */
+  const feedPane=$('circleFeedPane');
+  if(feedPane && feedPane.hidden){
+    if(circleYieldCur){wrap.style.transform='';circleYieldCur=0;}
+    return;
+  }
   const vc=$('v-circle');
   const list=$('circleFeedList');
   const last=list && list.lastElementChild;
@@ -6007,7 +6046,7 @@ function syncCoBreathVisualState(){
 /* =========================================================
    MOTOR GRÁFICO DE 15 CAPAS DE PERSPECTIVA EN COSTA:
    - Adaptado al reloj solar real del usuario (Amanecer, Mediodía, Atardecer, Noche con reflejo de luna y luces blancas)
-   - Transición continua 0% a 100% con olas salvajes multi-armónicas, lluvia fina de hilos de plata y micro-temblor ansioso sutil
+   - Transición continua 0% a 100% con olas salvajes multi-armónicas y lluvia fina de hilos de plata. Sin temblor: cuando sube la ansiedad, las OLAS se ponen ansiosas (más rápidas, más altas y más picadas).
    ========================================================= */
 function renderOceanCanvas(ctx,w,h,a,ts,dt,isMainCanvas){
   if(!ctx||w<=0||h<=0)return;
@@ -6023,14 +6062,6 @@ function renderOceanCanvas(ctx,w,h,a,ts,dt,isMainCanvas){
   const deepTide=Math.max(0,(a-0.62)/0.38);
 
   ctx.save();
-
-  /* Micro-temblor ansioso sub-píxel atenuado en 25% para conservar la calma estética */
-  if(a>=0.70){
-    const tremor=((a-0.70)/0.30)*(isMainCanvas?1.24:0.64);
-    const tx=Math.sin(t*44.0)*tremor*0.75 + Math.cos(t*59.0)*tremor*0.45;
-    const ty=Math.cos(t*38.0)*tremor*0.65 + Math.sin(t*51.0)*tremor*0.40;
-    ctx.translate(tx,ty);
-  }
 
   const hz=h*(0.43-a*0.035);
 
@@ -6151,8 +6182,10 @@ function renderOceanCanvas(ctx,w,h,a,ts,dt,isMainCanvas){
     const depth=Math.pow(p,1.55);
     const yBase=hz+(h-hz)*depth;
     const swell=(1.6+depth*13.5)*(0.32+a*1.35+deepTide*0.55);
-    const freq=0.014/(0.45+depth*1.2);
-    const speed=(0.45+depth*0.80)*(0.60+a*1.15+storm*0.65);
+    /* Con ansiedad, las olas se ponen más picadas (más crestas por
+       píxel) y más rápidas: el mar se agita, no tiembla. */
+    const freq=(0.014/(0.45+depth*1.2))*(1+a*0.85);
+    const speed=(0.45+depth*0.80)*(0.60+a*1.45+storm*0.65);
 
     const waveGrad=ctx.createLinearGradient(0,yBase-swell*1.8,0,yBase+swell*2.4+18);
     const crestLight=mix(crestLightCalm,crestLightStorm,a);
@@ -6299,6 +6332,16 @@ function renderBreathOverlay(ctx,w,h,dt,ts){
   ctx.strokeStyle='rgba(255,255,255,'+(0.28*al).toFixed(3)+')';
   ctx.lineWidth=1.2;ctx.stroke();
 
+  /* Halos concéntricos que acompañan al círculo: respiran con él
+     (siguen a r, que crece al inhalar y se recoge al exhalar), sutiles
+     y sin competir con el orbe central. */
+  ctx.beginPath();ctx.arc(cx0,cy0,r*1.58,0,Math.PI*2);
+  ctx.strokeStyle='rgba(255,255,255,'+(0.18*al).toFixed(3)+')';
+  ctx.lineWidth=1;ctx.stroke();
+  ctx.beginPath();ctx.arc(cx0,cy0,r*1.86,0,Math.PI*2);
+  ctx.strokeStyle='rgba(255,255,255,'+(0.11*al).toFixed(3)+')';
+  ctx.lineWidth=0.9;ctx.stroke();
+
   const orbGrad=ctx.createRadialGradient(cx0-r*0.28,cy0-r*0.28,r*0.05,cx0,cy0,r);
   orbGrad.addColorStop(0,'rgba(255,255,255,'+(0.99*al).toFixed(3)+')');
   orbGrad.addColorStop(0.68,bothSync?'rgba(255,248,232,'+(0.96*al).toFixed(3)+')':'rgba(252,248,244,'+(0.95*al).toFixed(3)+')');
@@ -6310,7 +6353,13 @@ function renderBreathOverlay(ctx,w,h,dt,ts){
   ctx.stroke();
 
   const ringBreathR=maxR+16;
-  const phaseAngle=-Math.PI/2+Math.PI*2*(br.phaseProg||0);
+  /* El anillo de progreso sigue a br.p (el valor continuo de la
+     respiración), no a phaseProg: br.p va 0→1 al inhalar, se queda en 1
+     al sostener y vuelve 1→0 al exhalar, sin saltos. Con phaseProg el
+     anillo saltaba de lleno a vacío en cada cambio de fase (el
+     "microrefresh" al pasar de exhalar a inhalar); con br.p el anillo
+     respira con el orbe y la transición es continua y sutil. */
+  const phaseAngle=-Math.PI/2+Math.PI*2*(br.p||0);
   ctx.beginPath();ctx.arc(cx0,cy0,ringBreathR,0,Math.PI*2);
   ctx.strokeStyle='rgba(255,255,255,'+(0.26*al).toFixed(3)+')';
   ctx.lineWidth=2.2;ctx.stroke();
@@ -6766,10 +6815,13 @@ const CLUE_CATEGORIES=[
   {id:'sleep',dim:'Cuerpo',icon:'<svg class="w-ico" viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5Z"/></svg>',name:'Sueño',sub:'Descanso de anoche',multi:false,opts:['Dormí 8+ h','Dormí 7–8 h','Menos de 6 h','Me costó dormir','Despertares nocturnos']},
   {id:'movement',dim:'Cuerpo',icon:'<svg class="w-ico" viewBox="0 0 24 24"><path d="M3 12h4l3-7 4 14 3-7h4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',name:'Movimiento',sub:'¿Te moviste hoy?',multi:true,opts:['Pilates / Pádel / Entreno','Caminata larga','Calistenia / Fuerza','Estiramiento suave','Hoy no me moví']},
   {id:'energy',dim:'Cuerpo',icon:'<svg class="w-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1"/></svg>',name:'Cuerpo y Energía',sub:'Sensación física hoy',multi:true,opts:['Cuerpo en calma y ligero','Energía alta','Tensión cuello / mandíbula','Inflamación / Pesadez','Cansada/o · Sin pila']},
+  {id:'bodypain',dim:'Cuerpo',icon:'<svg class="w-ico" viewBox="0 0 24 24"><path d="M12 21s-7-4.5-7-10a7 7 0 1 1 14 0c0 5.5-7 10-7 10Z" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="11" r="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>',name:'Dolor',sub:'¿Te duele algo hoy?',multi:true,opts:['Sin dolor','Dolor de cabeza','Tensión / Dolor muscular','Espalda / Cuello','Malestar general']},
   {id:'mood',dim:'Mente',icon:'<svg class="w-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 14s1.5 2 4 2 4-2 4-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="9" cy="10" r=".9" fill="currentColor"/><circle cx="15" cy="10" r=".9" fill="currentColor"/></svg>',name:'Ánimo',sub:'¿Cómo está tu ánimo hoy?',multi:false,opts:['En calma','Bien','Regular','Bajo','Muy bajo']},
   {id:'anxiety',dim:'Mente',icon:'<svg class="w-ico" viewBox="0 0 24 24"><path d="M3 12c2-4 4-4 6 0s4 4 6 0 4-4 6 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',name:'Ansiedad',sub:'¿Cuánta ansiedad sientes hoy?',multi:false,opts:['Casi nada','Un poco','Moderada','Alta','Muy alta']},
   {id:'craving',dim:'Mente',icon:'<svg class="w-ico" viewBox="0 0 24 24"><path d="M12 3c3 4 5 6 5 9a5 5 0 1 1-10 0c0-3 2-5 5-9Z"/></svg>',name:'Antojo / Impulso',sub:'¿Sentiste el impulso hoy?',multi:false,opts:['No lo sentí','Lo sentí y lo resistí','Lo sentí y cedí','Lo sentí varias veces']},
-  {id:'connection',dim:'Vínculo',icon:'<svg class="w-ico" viewBox="0 0 24 24"><path d="M12 20s-7-4.5-7-9a4 4 0 0 1 7-2.5A4 4 0 0 1 19 11c0 4.5-7 9-7 9Z"/></svg>',name:'Conexión',sub:'¿Te sentiste acompañada/o hoy?',multi:true,opts:['Sí, con alguien cercano','Sí, en mi círculo','Me sentí sola/o','Necesito compañía']},
+  {id:'meaning',dim:'Mente',icon:'<svg class="w-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>',name:'Sentido',sub:'¿Hoy tu día tuvo sentido?',multi:false,opts:['Sí, con propósito','Un día normal','Vacío / Sin sentido']},
+  {id:'connection',dim:'Vínculo',icon:'<svg class="w-ico" viewBox="0 0 24 24"><path d="M12 20s-7-4.5-7-9a4 4 0 0 1 7-2.5A4 4 0 0 1 19 11c0 4.5-7 9-7 9Z"/></svg>',name:'Conexión',sub:'¿Con quién estuviste hoy?',multi:true,opts:['Con alguien cercano','En mi círculo','Con mi familia / amigos','En comunidad / grupo']},
+  {id:'loneliness',dim:'Vínculo',icon:'<svg class="w-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 8v4M12 16v.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',name:'Soledad',sub:'¿Te sentiste sola/o hoy?',multi:false,opts:['Acompañada/o','Sola/o pero bien','Sola/o y me pesó','Necesito compañía']},
   {id:'soc',dim:'Vínculo',icon:'<svg class="w-ico" viewBox="0 0 24 24"><circle cx="9" cy="12" r="5"/><circle cx="15" cy="12" r="5"/></svg>',name:'Entorno y Día',sub:'Contexto del día',multi:true,opts:['Tiempo a solas nutritivo','Mucho trabajo / Pantalla','Límites sanos hoy']},
   {id:'bleeding',femaleOnly:true,hideNoPeriod:true,dim:'Cuerpo',icon:'<svg class="w-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2.5"/></svg>',name:'Periodo y Flujo',sub:'Sangrado o manchado',multi:false,opts:['Ligero','Medio','Abundante','Manchado']},
   {id:'pain',femaleOnly:true,dim:'Cuerpo',icon:'<svg class="w-ico" viewBox="0 0 24 24"><path d="M12 3l2.2 6.8L21 12l-6.8 2.2L12 21l-2.2-6.8L3 12l6.8-2.2L12 3Z"/></svg>',name:'Bienestar Hormonal',sub:'Síntomas o confort',multi:true,opts:['Sin molestias','Cólicos leves','Sensibilidad emocional','Piel luminosa','Retención de líquidos','Cabeza / Migraña']}
@@ -6801,7 +6853,32 @@ function renderClueTrackList(){
     openClueCatId=visibleCats[0]?visibleCats[0].id:'';
   }
 
+  /* Agrupar por dimensión (Cuerpo, Mente, Vínculo): un renglón por
+     dimensión y abajo las tarjetas de ese aspecto. */
+  const dimOrder=['Cuerpo','Mente','Vínculo'];
+  const groups={};
   visibleCats.forEach(cat=>{
+    const d=cat.dim||'';
+    if(!groups[d])groups[d]=[];
+    groups[d].push(cat);
+  });
+  const dims=Object.keys(groups).sort((a,b)=>{
+    const ia=dimOrder.indexOf(a),ib=dimOrder.indexOf(b);
+    return (ia<0?99:ia)-(ib<0?99:ib);
+  });
+  dims.forEach(dim=>{
+    const cats=groups[dim];
+    const group=document.createElement('div');
+    group.className='bento-dim-group';
+    if(dim){
+      const hd=document.createElement('div');
+      hd.className='bento-dim-hd';
+      hd.textContent=dim.toUpperCase();
+      group.appendChild(hd);
+    }
+    const grid=document.createElement('div');
+    grid.className='bento-track-grid';
+    cats.forEach(cat=>{
     const cur=log[cat.id];
     const arr=Array.isArray(cur)?cur:(cur?[cur]:[]);
     const count=arr.length;
@@ -6817,14 +6894,16 @@ function renderClueTrackList(){
         '<span class="bento-ic">'+cat.icon+'</span>'+
         '<span class="bento-badge">'+(count>0?(count+' ✓'):'+')+'</span>'+
       '</div>'+
-      (cat.dim?'<em class="bento-dim">'+esc(cat.dim.toUpperCase())+'</em>':'')+
       '<strong>'+esc(cat.name)+'</strong>'+
       '<small>'+esc(selTxt)+'</small>';
     card.onclick=()=>{
       openClueCatId=(openClueCatId===cat.id)?'':cat.id;
       renderClueTrackList();
     };
-    list.appendChild(card);
+    grid.appendChild(card);
+    });
+    group.appendChild(grid);
+    list.appendChild(group);
   });
 
   if(drawer){

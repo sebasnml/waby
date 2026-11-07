@@ -55,8 +55,28 @@
   --shadow:0 22px 48px -20px rgba(48,39,31,0.12),0 2px 6px rgba(48,39,31,0.04);
   color-scheme:light;
 }
+/* Blanco Pulcritud: blanco total, neutro, como Apple Music / Instagram /
+   WhatsApp / Facebook — sin el tinte cálido del papel editorial */
+:root[data-theme="pulcritud"]{
+  --paper:#FFFFFF;
+  --paper-grad:linear-gradient(180deg,#FFFFFF 0%,#FFFFFF 100%);
+  --card:rgba(255,255,255,0.88);
+  --card-solid:#FFFFFF;
+  --glass-border:rgba(0,0,0,0.08);
+  --glass-spec:inset 0 1.5px 0 rgba(255,255,255,0.95),inset 0 -1px 0 rgba(0,0,0,0.03);
+  --ink:#111111;
+  --muted:#6E6E73;
+  --rule:rgba(0,0,0,0.08);
+  --crimson:#B87077;
+  --gold:#C2A068;
+  --ok:#638264;
+  --spotify:#1DB954;
+  --wash:rgba(0,0,0,0.04);
+  --shadow:0 24px 52px -22px rgba(0,0,0,0.10),0 2px 8px rgba(0,0,0,0.04);
+  color-scheme:light;
+}
 @media(prefers-color-scheme:dark){
-  :root:not([data-theme="light"]):not([data-theme="white"]){
+  :root:not([data-theme="light"]):not([data-theme="white"]):not([data-theme="pulcritud"]){
     --paper:#0D110F;
     --paper-grad:radial-gradient(circle at 20% -10%,#1C2621 0%,#101512 54%,#080B09 100%);
     --card:rgba(22,29,25,0.75);
@@ -98,6 +118,7 @@
 }
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 *{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none !important}
 button,input,select,textarea,label,.chip,.react-btn,.story,.wavy-card{touch-action:manipulation}
 :focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 body{
@@ -109,12 +130,13 @@ body{
   -webkit-font-smoothing:antialiased;
   min-height:100vh;
   min-height:100dvh;
-  padding:14px 12px calc(env(safe-area-inset-bottom,0px) + 82px);
+  padding:14px 12px calc(env(safe-area-inset-bottom,0px) + 68px);
   display:flex;
   justify-content:center;
   transition:background .3s ease,color .25s ease;
+  overflow-x:clip;
 }
-.book{width:100%;max-width:600px;padding-bottom:8px}
+.book{width:100%;max-width:600px;padding-bottom:8px;min-width:0}
 
 /* Cabecera Editorial */
 .masthead{
@@ -260,10 +282,13 @@ h1{font-family:var(--serif);font-weight:500;font-size:clamp(28px,7vw,36px);line-
 .sub strong{display:block;font-family:var(--serif);font-size:24px;color:var(--ink);letter-spacing:0;text-transform:none}
 .bar{height:14px;border:1px solid var(--ink);border-radius:8px;padding:2px;background:var(--paper)}
 .fill{height:100%;width:0;border-radius:5px;background:linear-gradient(90deg,var(--ink),var(--crimson));transition:width .5s cubic-bezier(.2,.8,.2,1)}
-.marks{position:relative;height:46px;margin:6px 10px 14px}
+.marks{position:relative;height:82px;margin:6px 14px 14px}
 .mk{position:absolute;top:0;transform:translateX(-50%);background:none;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;font-family:var(--serif);font-size:13px;color:var(--muted);min-width:30px;min-height:44px}
+/* Los hitos 7, 14 y 21 están a pocos píxeles entre sí: se escalonan en dos
+   filas para que sus circunferencias jamás se toquen */
+.mk:nth-child(even){top:34px}
 .mk i{width:1px;height:8px;background:var(--rule)}
-.mk span{width:26px;height:26px;border-radius:50%;border:1px solid var(--muted);display:grid;place-items:center;background:var(--card-solid);transition:transform .2s,background .2s}
+.mk span{width:clamp(22px,6.4vw,26px);height:clamp(22px,6.4vw,26px);font-size:12px;border-radius:50%;border:1px solid var(--muted);display:grid;place-items:center;background:var(--card-solid);transition:transform .2s,background .2s}
 .mk.got span{background:var(--ink);color:var(--paper);border-color:var(--ink)}
 .mk.cur span{background:var(--crimson);border-color:var(--crimson);color:#fff;transform:scale(1.14)}
 .sig{border-left:3px solid var(--crimson);background:var(--wash);padding:14px 16px;border-radius:0 12px 12px 0;margin-bottom:16px;min-height:132px;cursor:pointer}
@@ -443,7 +468,7 @@ input[type=range]{width:100%;accent-color:var(--crimson);cursor:pointer;min-heig
 .sea{
   position:relative;border:1px solid var(--glass-border);border-radius:16px;
   overflow:hidden;margin-bottom:12px;background:#07131E;
-  touch-action:none;user-select:none;-webkit-user-select:none;cursor:pointer;
+  touch-action:pan-y;user-select:none;-webkit-user-select:none;cursor:pointer;
   box-shadow:0 20px 44px -18px rgba(0,0,0,0.48);
 }
 #sea{display:block;width:100%;height:clamp(320px,52vh,430px);transition:filter 1.4s cubic-bezier(.2,.8,.2,1),transform 1.4s cubic-bezier(.2,.8,.2,1);will-change:filter,transform}
@@ -540,11 +565,13 @@ input[type=range]{width:100%;accent-color:var(--crimson);cursor:pointer;min-heig
   box-shadow:var(--glass-spec),0 14px 30px -24px rgba(15,23,42,.22);
 }
 .cycle-hero{display:flex;align-items:center;gap:14px;margin-bottom:14px}
-.cycle-ring{width:74px;height:74px;flex-shrink:0;position:relative}
+/* Nada con tamaño fijo que se pueda desconfigurar: el anillo y su texto
+   escalan juntos con el ancho real del celular */
+.cycle-ring{width:clamp(64px,19vw,84px);height:auto;aspect-ratio:1/1;flex-shrink:0;position:relative;max-width:100%}
 .cycle-ring svg{width:100%;height:100%;display:block}
 .cycle-ring .ctr{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none;padding:4px;text-align:center}
-.cycle-ring .ctr small{font-size:11px;letter-spacing:.06em;max-width:58px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-transform:uppercase;color:var(--muted);font-weight:600;line-height:1}
-.cycle-ring .ctr b{font-family:var(--serif);font-size:21px;font-weight:500;line-height:1.05;margin-top:2px}
+.cycle-ring .ctr small{font-size:clamp(9px,2.4vw,11px);letter-spacing:.06em;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-transform:uppercase;color:var(--muted);font-weight:600;line-height:1}
+.cycle-ring .ctr b{font-family:var(--serif);font-size:clamp(17px,5vw,21px);font-weight:500;line-height:1.05;margin-top:2px}
 .cycle-hero-txt{min-width:0;flex:1}
 .cycle-hero-txt small{display:block;font-size:11px;letter-spacing:.08em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:3px}
 .cycle-hero-txt strong{display:block;font-family:var(--serif);font-size:21px;font-weight:500;line-height:1.15;color:var(--ink)}
@@ -909,7 +936,7 @@ textarea::placeholder{font-style:italic;color:var(--muted);opacity:.65}
 .peb-chip i{width:7px;height:7px;border-radius:50%;background:#DDA88D;box-shadow:0 0 0 3px rgba(221,168,141,.2)}
 .pd.kept .peb-chip i{background:#9DB59A;box-shadow:0 0 0 3px rgba(157,181,154,.25)}
 .pd.low .peb-chip i{background:#C9BBB0;box-shadow:none}
-.pd svg{display:block;width:146px;height:auto;margin:4px auto 0;overflow:visible}
+.pd svg{display:block;width:clamp(120px,38vw,146px);max-width:100%;height:auto;margin:4px auto 0;overflow:visible}
 .pd .gl{opacity:var(--g,.6);transform-origin:60px 72px;transition:opacity 1.4s ease}
 .pd.flare .gl{animation:flare 1.2s ease-out}
 #fl{transform:scale(var(--s,.6));transform-origin:60px 96px;transition:transform 1.4s cubic-bezier(.2,.8,.2,1)}
@@ -1051,6 +1078,7 @@ textarea::placeholder{font-style:italic;color:var(--muted);opacity:.65}
   position:fixed;inset:0;background:rgba(6,11,18,0.72);
   backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
   z-index:100;display:flex;align-items:center;justify-content:center;padding:14px;
+  overflow-y:auto;
 }
 .modal-backdrop[hidden]{display:none}
 .ext-card{
@@ -1144,10 +1172,10 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
   box-shadow:var(--glass-spec),var(--shadow);margin-bottom:14px;
 }
 @media(max-width:420px){.cmd-hero{grid-template-columns:1fr;text-align:center}.cmd-ring-wrap{margin:0 auto}}
-.cmd-ring-wrap{width:122px;height:122px;position:relative;flex-shrink:0}
+.cmd-ring-wrap{width:clamp(100px,30vw,122px);height:auto;aspect-ratio:1/1;position:relative;flex-shrink:0;max-width:100%}
 .cmd-ring-wrap svg{width:100%;height:100%;display:block}
 .cmd-ring-ctr{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none}
-.cmd-ring-ctr b{font-family:var(--serif);font-size:38px;font-weight:400;line-height:1;color:var(--ink)}
+.cmd-ring-ctr b{font-family:var(--serif);font-size:clamp(30px,9.5vw,38px);font-weight:400;line-height:1;color:var(--ink)}
 .cmd-ring-ctr small{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ok);font-weight:700;margin-top:3px}
 .cmd-kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:10px}
 .cmd-kpi{background:var(--paper);border:1px solid var(--rule);border-radius:11px;padding:8px 10px;text-align:left}
@@ -1225,12 +1253,12 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
 
 /* Corrección del Círculo de Pulso para que el texto jamás se salga */
 .cmd-ring-col{display:flex;flex-direction:column;align-items:center;gap:6px;flex-shrink:0}
-.cmd-ring-wrap{width:118px;height:118px;position:relative;flex-shrink:0}
+.cmd-ring-wrap{width:clamp(100px,30vw,118px);height:auto;aspect-ratio:1/1;position:relative;flex-shrink:0;max-width:100%}
 .cmd-ring-ctr{
   position:absolute;inset:0;display:flex;flex-direction:column;
   align-items:center;justify-content:center;pointer-events:none;padding:12px;
 }
-.cmd-ring-ctr b{font-family:var(--serif);font-size:40px;font-weight:400;line-height:1;color:var(--ink)}
+.cmd-ring-ctr b{font-family:var(--serif);font-size:clamp(30px,9.5vw,40px);font-weight:400;line-height:1;color:var(--ink)}
 .cmd-ring-ctr span{font-size:11px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-top:2px}
 .cmd-state-pill{
   font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;
@@ -1292,120 +1320,67 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
   }
 }
 
-/* Enfoque Puro al Respirar: Todo se desenfoca suavemente excepto el círculo blanco y sus halos */
+/* La respiración vive dentro de su recuadro: sin expansión a pantalla completa */
 #fullScreenGlassVeil{display:none !important}
-body.is-breathing-focus #seab #sea,
 .sea.breathing #sea{
   filter:none !important;
   transform:none !important;
   opacity:1 !important;
 }
-body.is-breathing-focus .masthead,
-body.is-breathing-focus .bnav,
-body.is-breathing-focus #v-breathe .hd,
-body.is-breathing-focus #v-breathe .horizon-line,
-body.is-breathing-focus #v-breathe .bmode,
-body.is-breathing-focus #v-breathe #bt,
-body.is-breathing-focus #v-breathe .row,
-body.is-breathing-focus #v-breathe .cobreath-box,
-body.is-breathing-focus #v-breathe .rate,
-body.is-breathing-focus .note{
-  display:none !important;
-}
-body.is-breathing-focus #v-breathe .card{
-  padding:0 !important;border:none !important;background:transparent !important;box-shadow:none !important;margin:0 !important;
-}
-body.is-breathing-focus #seab{
-  position:fixed !important;inset:0 !important;width:100vw !important;height:100vh !important;height:100dvh !important;border-radius:0 !important;margin:0 !important;z-index:950 !important;
-}
-body.is-breathing-focus #seab #sea{
-  width:100% !important;height:100% !important;
-}
-body.is-breathing-focus #seab .gauge{
-  opacity:0 !important;
-  visibility:hidden !important;
-  pointer-events:none !important;
-}
-body.is-breathing-focus{overflow:hidden}
-body.is-breathing-focus #seab .gauge{
-  opacity:0;
-  pointer-events:none;
-}
-body.is-breathing-focus #breathLayer{
-  position:fixed !important;
-  inset:0 !important;
-  width:100% !important;
-  height:100vh !important;
-  height:100dvh !important;
-  z-index:955 !important;
-  filter:none !important;
-  opacity:1 !important;
-  pointer-events:auto !important;
-  cursor:pointer;
-}
-#breathFocusExitBtn{
-  position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 22px);transform:translateX(-50%);
-  z-index:960;
-  padding:11px 24px;border-radius:999px;
-  background:rgba(255,253,250,0.92);
-  border:1px solid var(--rule);
-  color:var(--ink);font-family:var(--sans);font-size:11px;font-weight:600;
-  letter-spacing:.1em;text-transform:uppercase;cursor:pointer;
-  box-shadow:0 14px 32px -10px rgba(15,23,42,0.22);
-  transition:transform .2s ease, background .2s ease;
-}
-#breathFocusExitBtn:hover{transform:translateX(-50%) scale(1.03);background:#FFFDF9}
 
-/* Pantalla de bienvenida Oxford University Press × Harvard Publications */
-.oxford-plate{
-  max-width:450px;width:100%;
+/* Portada de bienvenida · Tarjeta editorial minimalista (cabe en una pantalla) */
+.cover-plate{
+  max-width:450px;width:100%;margin:auto;
   background:var(--paper);
   border:1px solid var(--rule);
   border-radius:18px;
   padding:7px;
   box-shadow:0 32px 70px -24px rgba(24,20,17,0.38);
 }
-.oxford-inner{
+.cover-inner{
   border:1px solid rgba(184,146,90,0.38);
   border-radius:13px;
-  padding:24px 22px 20px;
+  padding:18px 18px 16px;
   background:linear-gradient(180deg, rgba(255,255,255,0.72) 0%, rgba(246,244,240,0.92) 100%);
   text-align:center;
 }
-.oxford-crest{
-  width:68px;height:82px;margin:0 auto 10px;
+.cover-crest{
+  width:56px;height:68px;margin:0 auto 6px;
   display:flex;align-items:center;justify-content:center;
 }
-.oxford-edition{
+.cover-edition{
   font-size:11px;letter-spacing:.1em;text-transform:uppercase;
   color:var(--gold);font-weight:600;margin-bottom:4px;
 }
-.oxford-kicker{
+.cover-kicker{
   font-size:11px;letter-spacing:.1em;text-transform:uppercase;
   color:var(--muted);font-weight:600;margin-bottom:6px;
 }
-.oxford-title{
-  font-family:var(--serif);font-size:38px;font-weight:400;
+.cover-title{
+  font-family:var(--serif);font-size:32px;font-weight:400;
   letter-spacing:-.02em;line-height:1.02;color:var(--ink);margin:0;
 }
-.oxford-sub{
-  font-family:var(--serif);font-style:italic;font-size:15.5px;
-  color:var(--muted);margin:4px 0 12px;
+.cover-sub{
+  font-family:var(--serif);font-style:italic;font-size:15px;
+  color:var(--muted);margin:4px 0 8px;
 }
-.oxford-rule{
-  display:flex;align-items:center;gap:10px;margin:10px 0 14px;
+.cover-rule{
+  display:flex;align-items:center;gap:10px;margin:8px 0 10px;
   color:var(--gold);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
 }
-.oxford-rule::before,.oxford-rule::after{
+.cover-rule::before,.cover-rule::after{
   content:"";flex:1;height:1px;background:var(--rule);
 }
-.oxford-form{text-align:left;display:grid;gap:11px;margin-bottom:14px}
-.oxford-field label{
-  display:flex;justify-content:space-between;align-items:baseline;
+.cover-form{text-align:left;display:grid;gap:8px;margin-bottom:10px}
+.cover-field label{
+  display:flex;justify-content:space-between;align-items:baseline;gap:8px;
   font-size:11px;letter-spacing:.1em;text-transform:uppercase;
   color:var(--muted);font-weight:600;margin-bottom:3px;
 }
-.oxford-quick{
+.cover-field label span{white-space:nowrap}
+.cover-field label span:last-child{flex-shrink:0}
+.cover-field .chip{white-space:nowrap;font-size:13px;padding:6px 8px}
+.cover-quick{
   margin-top:12px;padding-top:11px;border-top:1px solid var(--rule);
   display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;
   font-size:11px;color:var(--muted);
@@ -1576,7 +1551,6 @@ body.is-breathing-focus #breathLayer{
 <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
 <canvas id="coFirefliesOverlay" aria-hidden="true"></canvas>
 <div id="fullScreenGlassVeil" aria-hidden="true"></div>
-<button type="button" id="breathFocusExitBtn" hidden>Terminar respiración</button>
 <div id="printClinicalSheet" aria-hidden="true"></div>
 
 <main class="book">
@@ -1625,7 +1599,7 @@ body.is-breathing-focus #breathLayer{
 
       <div class="habit-grid" id="habitGrid"></div>
 
-      <div class="hd"><span id="habitSubTitle">Seguimiento&nbsp;·&nbsp;Redes / Scrolling</span><span>Ciclo&nbsp;·&nbsp;90 días</span></div>
+      <div class="hd"><span id="habitSubTitle">Redes / Scrolling</span><span>Ciclo&nbsp;·&nbsp;90 días</span></div>
       <div class="read">
         <div class="big"><span id="pct">0.0</span><small>%</small></div>
         <div class="sub">Progreso<strong>Día <span id="days">0</span> / 90</strong></div>
@@ -1639,7 +1613,7 @@ body.is-breathing-focus #breathLayer{
       </div>
 
       <div class="sl">
-        <label><span>Mi razón de cuidado hoy</span><span>alimenta tu recordatorio SOS</span></label>
+        <label><span>Mi razón de cuidado hoy</span><span>Aparece en tu SOS</span></label>
         <div class="chips" id="loss"></div>
       </div>
 
@@ -1697,10 +1671,6 @@ body.is-breathing-focus #breathLayer{
         </button>
       </div>
 
-      <button type="button" class="retract-toggle" id="wkToggleBtn">
-        <span>Constancia semanal</span>
-        <b id="wkToggleIcon">Ocultar ▴</b>
-      </button>
       <div class="retract-body" id="wkRetractBody">
         <div class="wk" id="wk"></div>
       </div>
@@ -1863,9 +1833,9 @@ body.is-breathing-focus #breathLayer{
       <div class="help-tip" id="helpPeb" hidden>Tu vela de travertino representa tu presencia diaria. Se enciende automáticamente al completar una respiración, guardar en tu Diario o realizar una práctica de 60 segundos.</div>
 
       <div style="margin-bottom:8px">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px">
-          <span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600">Elige tu reliquia (1 Clásica + 4 Wavy Pro)</span>
-          <span id="pebEvolutionBadge" style="font-size:11px;color:var(--gold);font-weight:600">Nivel II · Doble Halo</span>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:5px">
+          <span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0">Elige tu reliquia</span>
+          <span id="pebEvolutionBadge" style="font-size:11px;color:var(--gold);font-weight:600;white-space:nowrap;flex-shrink:0">Nivel II · Doble Halo</span>
         </div>
         <div class="peb-vessels" id="pebVesselBar">
           <button type="button" class="peb-vessel-btn on" data-vessel="classic"><span>Travertino</span></button>
@@ -1974,8 +1944,8 @@ body.is-breathing-focus #breathLayer{
           <button class="btn" id="applyCustomPat" style="width:100%">Aplicar mi ritmo personalizado</button>
         </div>
       </div>
-      <p class="note" id="bt" style="margin:0 0 12px">Toca el círculo central o el botón inferior para comenzar con sonido armónico.</p>
-      <div class="row" style="grid-template-columns:1fr auto;margin-bottom:10px">
+      <p class="note" id="bt" style="margin:0 0 12px">Toca el botón inferior para comenzar con sonido armónico.</p>
+      <div class="row" style="grid-template-columns:1fr;margin-bottom:10px">
         <button class="btn" id="bb" style="width:100%">
           <svg class="w-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/></svg>
           <span id="bbTxt">Comenzar respiración&nbsp;·&nbsp;5 min</span>
@@ -1987,7 +1957,7 @@ body.is-breathing-focus #breathLayer{
       <div class="cobreath-box" id="coBreathBox">
         <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap">
           <div>
-            <span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:600;display:block">Respirar en pareja (2 dedos)</span>
+            <span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:600;display:block">Respirar en pareja</span>
             <strong style="font-family:var(--serif);font-size:18px;font-weight:500">Sintonía abierta con tu círculo</strong>
           </div>
           <button type="button" class="btn ghost" id="reqCoBreathBtn" style="border-radius:30px;padding:8px 14px;font-size:11px">
@@ -2259,7 +2229,7 @@ body.is-breathing-focus #breathLayer{
       <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;background:var(--wash);padding:14px 16px;border-radius:14px;border:1px solid var(--rule);margin-bottom:16px">
         <div>
           <strong id="subCardTitle" style="font-family:var(--serif);font-size:19px;display:block">Wavy Básico (Gratuito)</strong>
-          <span id="subCardDesc" style="font-size:12.5px;color:var(--muted)">Desbloquea los 9 hábitos, todos los ritmos con audio, 19 emociones, 10 paletas y exportación clínica con Wavy Pro.</span>
+          <span id="subCardDesc" style="font-size:12.5px;color:var(--muted)">Desbloquea los 9 hábitos, todos los ritmos con audio, 19 emociones, 11 paletas y exportación clínica con Wavy Pro.</span>
         </div>
         <button type="button" class="btn gold" id="openPaywallBtn">Ver Planes Wavy Pro</button>
       </div>
@@ -2268,6 +2238,7 @@ body.is-breathing-focus #breathLayer{
         <label><span>Acabado visual</span><span>elige tu atmósfera</span></label>
         <div class="chips" id="themePick">
           <button type="button" class="chip" data-th="white">Cristal Blanco</button>
+          <button type="button" class="chip" data-th="pulcritud">Blanco Pulcritud</button>
           <button type="button" class="chip" data-th="light">Papel Editorial</button>
           <button type="button" class="chip" data-th="dark">Modo Nocturno</button>
           <button type="button" class="chip" data-th="auto">Automático</button>
@@ -2454,16 +2425,15 @@ body.is-breathing-focus #breathLayer{
      MODAL 1: ONBOARDING ADAPTATIVO EN 3 PASOS
      ========================================================= -->
 <div class="modal-backdrop" id="onboardingModal" hidden role="dialog" aria-modal="true" aria-labelledby="onbTitle">
-  <div class="oxford-plate">
-    <div class="oxford-inner">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
-        <span class="oxford-edition" id="onbStepIndicator">OXFORD &amp; HARVARD INSPIRED EDITION</span>
-        <button type="button" class="mode-link" id="onbSkipBtn" style="font-size:11px">Entrar directo →</button>
+  <div class="cover-plate">
+    <div class="cover-inner">
+      <div style="display:flex;justify-content:center;align-items:center;margin-bottom:4px">
+        <span class="cover-edition" id="onbStepIndicator">Registro personal</span>
       </div>
 
       <!-- SELLO MONOGRAMA W GRABADO -->
-      <div class="oxford-crest" aria-hidden="true">
-        <svg viewBox="0 0 88 104" width="66" height="78" fill="none">
+      <div class="cover-crest" aria-hidden="true">
+        <svg viewBox="0 0 88 104" width="54" height="64" fill="none">
           <ellipse cx="44" cy="52" rx="39" ry="48" stroke="#B8925A" stroke-width="1"/>
           <ellipse cx="44" cy="52" rx="35" ry="44" stroke="#B8925A" stroke-width="0.6" stroke-dasharray="2 2"/>
           <path d="M23 36 L31 66 L44 43 L57 66 L65 36" stroke="#231F1D" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
@@ -2473,28 +2443,28 @@ body.is-breathing-focus #breathLayer{
         </svg>
       </div>
 
-      <div class="oxford-kicker">MENOS RUIDO · MÁS VÍNCULO</div>
-      <h2 class="oxford-title" id="onbTitle">Wavy</h2>
-      <p class="oxford-sub">Donde tu calma se encuentra con los tuyos.</p>
+      <div class="cover-kicker">MENOS RUIDO · MÁS VÍNCULO</div>
+      <h2 class="cover-title" id="onbTitle">Wavy</h2>
+      <p class="cover-sub">Donde tu calma se encuentra con los tuyos.</p>
 
       <!-- PASO 1: INICIO DE SESIÓN Y REGISTRO EDITORIAL -->
       <div id="onbStep1">
-        <div class="oxford-rule"><span>Ex Libris · Registro Personal</span></div>
+        <div class="cover-rule"><span>Ex Libris · Registro Personal</span></div>
 
-        <div class="oxford-form">
-          <div class="oxford-field">
-            <label><span>Nombre en tu sello</span><span>Visible en tu círculo</span></label>
+        <div class="cover-form">
+          <div class="cover-field">
+            <label><span>Nombre en tu sello</span><span>En tu círculo</span></label>
             <input class="line" id="obNameInput" maxlength="28" placeholder="Tu nombre">
           </div>
 
-          <div class="oxford-field">
-            <label><span>Tu identificador único</span><span>Sin seguidores públicos</span></label>
+          <div class="cover-field">
+            <label><span>Tu identificador único</span><span>Privado</span></label>
             <input class="line" id="obAliasInput" maxlength="22" placeholder="@tu.alias">
             <div id="obError" role="alert" style="color:var(--crimson,#9E4738);font-size:11px;min-height:16px;margin-top:4px;"></div>
           </div>
 
-          <div class="oxford-field">
-            <label><span>Biología para tu Ciclo</span><span>Homologado 1:1</span></label>
+          <div class="cover-field">
+            <label><span>Biología para tu Ciclo</span></label>
             <div class="chips" id="obBioChoice" style="justify-content:center">
               <button type="button" class="chip" data-obm="female" style="flex:1;justify-content:center">Mujer · Ciclo hormonal</button>
               <button type="button" class="chip on" data-obm="male" style="flex:1;justify-content:center">Hombre · Ritmo y fuerza</button>
@@ -2502,26 +2472,17 @@ body.is-breathing-focus #breathLayer{
           </div>
         </div>
 
-        <label style="display:flex;align-items:flex-start;gap:9px;margin:10px 0 14px;font-size:11.5px;color:var(--muted);cursor:pointer;line-height:1.4;text-align:left;background:var(--wash);padding:9px 11px;border-radius:10px;border:1px solid var(--rule)">
+        <label style="display:flex;align-items:flex-start;gap:9px;margin:8px 0 10px;font-size:11px;color:var(--muted);cursor:pointer;line-height:1.4;text-align:left;background:var(--wash);padding:9px 11px;border-radius:10px;border:1px solid var(--rule)">
           <input type="checkbox" id="obConsentCheck" checked style="margin-top:2px;width:16px;height:16px;accent-color:var(--ok)">
           <span>Mis datos emocionales y biológicos residen de forma privada en mi dispositivo (LFPDPPP). Cero algoritmos de vanidad.</span>
         </label>
 
-        <button type="button" class="btn" id="onbNext1" style="width:100%;margin-bottom:8px">Entrar a mi espacio →</button>
-        <button type="button" class="mode-link" id="onbCustomizeHabitBtn" style="font-size:12px">Personalizar primero mi hábito de 90 días ▾</button>
-
-        <div class="oxford-quick">
-          <span>Acceso rápido en este dispositivo:</span>
-          <div style="display:flex;gap:6px">
-            <button type="button" class="chip" data-quick-login="sebastian" style="min-height:26px;padding:2px 10px;font-size:11px">@sebastian</button>
-            <button type="button" class="chip" data-quick-login="natalia" style="min-height:26px;padding:2px 10px;font-size:11px">@natalia</button>
-          </div>
-        </div>
+        <button type="button" class="btn" id="onbNext1" style="width:100%">Entrar a mi espacio →</button>
       </div>
 
       <!-- PASO 2: HÁBITO Y RAZÓN DE CUIDADO -->
       <div id="onbStep2" hidden style="text-align:left">
-        <div class="oxford-rule"><span>Paso II · Enfoque de 90 Días</span></div>
+        <div class="cover-rule"><span>Paso II · Enfoque de 90 Días</span></div>
         <p style="font-size:12.5px;color:var(--muted);line-height:1.45;margin-bottom:10px;text-align:center">Elige el impulso principal que deseas observar y regular:</p>
         <div class="habit-grid" id="obHabitGrid"></div>
         <button type="button" class="btn" id="onbNext2" style="width:100%;margin-top:8px">Guardar y entrar a Wavy →</button>
@@ -2529,7 +2490,7 @@ body.is-breathing-focus #breathLayer{
 
       <!-- PASO 3: PRIMERA RESPIRACIÓN DE 15 SEGUNDOS CON AUDIO -->
       <div id="onbStep3" hidden style="text-align:center">
-        <div class="oxford-rule"><span>Paso III · Primera Calibración</span></div>
+        <div class="cover-rule"><span>Paso III · Primera Calibración</span></div>
         <div style="width:116px;height:116px;border-radius:50%;margin:12px auto;background:radial-gradient(circle,#FFF8EE 0%,#E7A286 100%);display:grid;place-items:center;box-shadow:0 0 32px rgba(231,162,134,0.5);transition:transform 3s ease-in-out;cursor:pointer" id="obBreathOrb">
           <span id="obBreathTxt" style="font-family:var(--serif);font-style:italic;font-size:16px;color:#0A1628;padding:10px">Toca para respirar</span>
         </div>
@@ -2554,7 +2515,7 @@ body.is-breathing-focus #breathLayer{
     <div style="background:var(--wash);border:1px solid var(--rule);border-radius:12px;padding:12px 14px;font-size:13px;line-height:1.6;margin-bottom:12px">
       <div><svg class="w-ico sm gold" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.2 6.8L21 12l-6.8 2.2L12 21l-2.2-6.8L3 12l6.8-2.2L12 3Z"/></svg> <b>Las 9 baterías de hábitos</b> (Videojuegos, Apuestas, Compras, Vapeo, Alcohol, Contacto cero)</div>
       <div><svg class="w-ico sm gold" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.2 6.8L21 12l-6.8 2.2L12 21l-2.2-6.8L3 12l6.8-2.2L12 3Z"/></svg> <b>Todos los ritmos respiratorios</b> (4·7·8, Box 4·4·4, Suspiro de Stanford y Personalizado)</div>
-      <div><svg class="w-ico sm gold" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.2 6.8L21 12l-6.8 2.2L12 21l-2.2-6.8L3 12l6.8-2.2L12 3Z"/></svg> <b>Los 19 matices emocionales</b> y las <b>10 paletas editoriales Ex Libris</b></div>
+      <div><svg class="w-ico sm gold" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.2 6.8L21 12l-6.8 2.2L12 21l-2.2-6.8L3 12l6.8-2.2L12 3Z"/></svg> <b>Los 19 matices emocionales</b> y las <b>11 paletas editoriales Ex Libris</b></div>
       <div><svg class="w-ico sm gold" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.2 6.8L21 12l-6.8 2.2L12 21l-2.2-6.8L3 12l6.8-2.2L12 3Z"/></svg> <b>Hoja Clínica en PDF</b> para tu terapeuta y Velas de Vigilia ilimitadas</div>
     </div>
 
@@ -3229,6 +3190,7 @@ const HABITS=[
 const SEAL_PALETTES=[
   {id:'obsidian',name:'Obsidiana',bg:'linear-gradient(145deg,#132235 0%,#0B1522 55%,#1E1926 100%)',c1:'#132235',c2:'#09101A',fg:'#F7F3EB',sw:'#132235',vip:false},
   {id:'pearl',name:'Perla Editorial',bg:'linear-gradient(145deg,#FAF6EE 0%,#EAE0CE 100%)',c1:'#FAF6EE',c2:'#E5DAC6',fg:'#0B1F3A',sw:'#EAE0CE',vip:false},
+  {id:'pulcritud',name:'Blanco Pulcritud',bg:'#FFFFFF',c1:'#FFFFFF',c2:'#FFFFFF',fg:'#111111',sw:'#FFFFFF',vip:false},
   {id:'crimson',name:'Carmesí Clásico',bg:'linear-gradient(145deg,#631524 0%,#28080F 100%)',c1:'#631524',c2:'#28080F',fg:'#F7F3EB',sw:'#7A1C2E',vip:false},
   {id:'matcha',name:'Matcha Kyoto',bg:'linear-gradient(145deg,#1E352B 0%,#0E1C16 100%)',c1:'#1E352B',c2:'#0E1C16',fg:'#EBF2EE',sw:'#2A4B3C',vip:true},
   {id:'velvet',name:'Terciopelo Azul',bg:'linear-gradient(145deg,#1A2442 0%,#0B1021 100%)',c1:'#1A2442',c2:'#0B1021',fg:'#E8EEF8',sw:'#23325B',vip:true},
@@ -3852,7 +3814,7 @@ function load(){
 
 function applyTheme(th){
   S.theme=th;
-  if(th==='light'||th==='dark'||th==='white')document.documentElement.setAttribute('data-theme',th);
+  if(th==='light'||th==='dark'||th==='white'||th==='pulcritud')document.documentElement.setAttribute('data-theme',th);
   else document.documentElement.removeAttribute('data-theme');
   document.querySelectorAll('#themePick .chip').forEach(c=>c.classList.toggle('on',c.dataset.th===th));
 }
@@ -4006,11 +3968,11 @@ function syncProWifiSwitchUI(){
     else topTag.textContent='mi espacio';
   }
   if(proSt)proSt.textContent=proActive?'Wavy Pro Activo':'3 Libres · 6 Pro';
-  if(palInd)palInd.textContent=proActive?'10 Paletas Activas':'3 Libres · 7 Pro';
+  if(palInd)palInd.textContent=proActive?'11 Paletas Activas':'4 Libres · 7 Pro';
   if(moodHint)moodHint.textContent=proActive?'19 Emociones Activas':'Toca para desbloquear';
   if(pBadge)pBadge.textContent=proActive?(S.vip?'Modo Desarrollador':(tLeft>0?'Prueba Gratis ('+tLeft+' días)':'Wavy Pro Activo')):'Plan Básico';
   if(sTitle)sTitle.textContent=proActive?(S.vip?'Wavy Pro · Modo Desarrollador Activo':(tLeft>0?'Prueba Gratuita Wavy Pro ('+tLeft+' días restantes)':'Suscripción Wavy Pro Activa')):'Wavy Básico (Gratuito)';
-  if(sDesc)sDesc.textContent=proActive?'Tienes acceso ilimitado a los 9 hábitos, audio psicoacústico, 19 emociones, 10 paletas y exportación clínica en PDF.':'Desbloquea los 9 hábitos, todos los ritmos con audio, 19 emociones, 10 paletas y exportación clínica con Wavy Pro.';
+  if(sDesc)sDesc.textContent=proActive?'Tienes acceso ilimitado a los 9 hábitos, audio psicoacústico, 19 emociones, 11 paletas y exportación clínica en PDF.':'Desbloquea los 9 hábitos, todos los ritmos con audio, 19 emociones, 11 paletas y exportación clínica con Wavy Pro.';
   if(pwBtn)pwBtn.textContent=proActive?'Cambiar plan':'Ver Planes Wavy Pro';
   if($('retentionMetricLbl'))$('retentionMetricLbl').textContent='Días activos registrados: '+S.opens.length;
 }
@@ -4254,7 +4216,7 @@ function finishOnboarding(withPractice){
   $('onboardingModal').hidden=true;
   renderAll();
 }
-$('onbSkipBtn').onclick=()=>finishOnboarding(false);
+if($('onbSkipBtn'))$('onbSkipBtn').onclick=()=>finishOnboarding(false);
 $('onbFinishDirectBtn').onclick=()=>finishOnboarding(false);
 $('onbStartBreathBtn').onclick=$('obBreathOrb').onclick=()=>{
   if(obBreathTimer)return;
@@ -4278,7 +4240,7 @@ $('onbStartBreathBtn').onclick=$('obBreathOrb').onclick=()=>{
 };
 $('repeatOnbBtn').onclick=()=>{
   $('onbStep1').hidden=false;$('onbStep2').hidden=true;$('onbStep3').hidden=true;
-  $('onbStepIndicator').textContent='OXFORD & HARVARD INSPIRED EDITION';
+  $('onbStepIndicator').textContent='Registro personal';
   initOnboarding(true);
 };
 
@@ -4839,7 +4801,7 @@ function renderHabitGrid(){
     g.appendChild(b);
   });
   const cur=currentHabitObj();
-  $('habitSubTitle').textContent='Seguimiento · '+cur.name;
+  $('habitSubTitle').textContent=cur.name;
   syncProWifiSwitchUI();
 }
 
@@ -5423,6 +5385,7 @@ $('applyCustomPat').onclick=()=>{
     out:Math.max(3,Math.min(16,+$('cpOut').value||6))
   };
   S.patId='custom';save();renderPatternsMenu();$('patDrawer').hidden=true;
+  if($('patTrigger'))$('patTrigger').classList.remove('on');
   toast('Ritmo personalizado activado','ok');
 };
 
@@ -5523,13 +5486,12 @@ function updateCoastLabels(aVal){
   $('rs').setAttribute('aria-valuetext',pct+'% - '+st);
 }
 
+/* La respiración nunca sale de su recuadro: sin pantalla completa, sin saltos.
+   El botón Terminar solo existe mientras hay sesión (apilado dentro del marco). */
 function setBreathingFocus(active){
-  if(active)window.scrollTo(0,0);
   const seab=$('seab');
   if(seab)seab.classList.toggle('breathing',!!active);
-  document.body.classList.toggle('is-breathing-focus',!!active);
-  if($('bbFinishEarly'))$('bbFinishEarly').hidden=true;
-  if($('breathFocusExitBtn'))$('breathFocusExitBtn').hidden=!active;
+  if($('bbFinishEarly'))$('bbFinishEarly').hidden=!active;
   requestAnimationFrame(()=>fit());
 }
 
@@ -5912,7 +5874,7 @@ const vib=n=>{try{navigator.vibrate && navigator.vibrate(n)}catch(e){}};
 function updateBreathHint(){
   if(br.on)return;
   $('bt').textContent=S.bmode==='auto'
-    ?'Modo Automático: toca el círculo o el botón, cierra los ojos y déjate guiar por los cuencos y el oleaje.'
+    ?'Modo Automático: toca el botón inferior, cierra los ojos y déjate guiar por los cuencos y el oleaje.'
     :'Modo Táctil: mantén presionado el círculo central para inhalar; suelta para exhalar.';
 }
 
@@ -6034,7 +5996,6 @@ $('bb').onclick=()=>{
     :'Modo Táctil activo · Mantén presionado el círculo mientras inhalas';
 };
 $('bbFinishEarly').onclick=()=>endBreath(false);
-if($('breathFocusExitBtn'))$('breathFocusExitBtn').onclick=()=>endBreath(false);
 if(bcv){
   bcv.addEventListener('pointerdown',e=>{
     if(!br.on)return;
@@ -6056,11 +6017,14 @@ if(bcv){
 }
 
 const sb=$('seab');
+/* El mar nunca arranca la respiración: solo se respira desde el botón.
+   Tocar o desplazar sobre el mar no hace nada si no hay sesión; con sesión
+   activa, mantener presionado inhala (modo Táctil / co-respiración). El
+   desplazamiento vertical siempre pertenece a la página. */
 sb.addEventListener('pointerdown',e=>{
   if(e.target.closest('.pattern-pill'))return;
-  e.preventDefault();
+  if(!br.on)return;
   WavyAudio.unlockNow();
-  if(!br.on)$('bb').click();
   br.down=true;
   coBreath.myInhaling=true;
   syncCoBreathVisualState();
@@ -6080,7 +6044,7 @@ sb.addEventListener('contextmenu',e=>e.preventDefault());
 /* =========================================================
    RITUAL DE RESPIRACIÓN MUTUA SINCRONIZADA ("RESPIRAR JUNTOS")
    - Modal Ético de Presencia
-   - Sincronización de 2 dedos + Toggle simulación + Vibración + Luciérnagas
+   - Sincronización mutua + Toggle simulación + Vibración + Luciérnagas
    - Ofrenda de Cierre: Vela de Vigilia gratuita con mensaje
    ========================================================= */
 function openCoBreathEthicsModal(partnerUname){
@@ -6242,14 +6206,13 @@ function parseIso(s){const p=String(s||today()).split('-').map(Number);return ne
 function fmtShortDate(ms){const d=new Date(ms);return d.getDate()+' de '+MONTHS_ES[d.getMonth()].slice(0,3)}
 
 function syncRetractUI(){
-  if($('wkRetractBody'))$('wkRetractBody').hidden=!S.wkOpen;
-  if($('wkToggleIcon'))$('wkToggleIcon').textContent=S.wkOpen?'Ocultar ▴':'Abrir ▾';
+  /* Los días de la semana siempre se ven: ya no hay botón para comprimirlos */
+  if($('wkRetractBody'))$('wkRetractBody').hidden=false;
   if($('clueCalBody'))$('clueCalBody').hidden=!S.clueCalOpen;
   if($('clueCalToggleIcon'))$('clueCalToggleIcon').textContent=S.clueCalOpen?'Cerrar ▴':'Abrir ▾';
   if($('caliRetractBody'))$('caliRetractBody').hidden=!S.caliOpen;
   if($('caliToggleIcon'))$('caliToggleIcon').textContent=S.caliOpen?'Cerrar ▴':'Abrir ▾';
 }
-$('wkToggleBtn').onclick=()=>{S.wkOpen=!S.wkOpen;save();syncRetractUI()};
 $('clueCalToggleBtn').onclick=()=>{S.clueCalOpen=!S.clueCalOpen;save();syncRetractUI();if(S.clueCalOpen)renderClueCalendar()};
 $('caliToggleBtn').onclick=()=>{S.caliOpen=!S.caliOpen;save();syncRetractUI();if(S.caliOpen){renderCaliCalendar();renderCaliDetail()}};
 
@@ -7324,7 +7287,7 @@ function flameView(){
   const evoEl=$('pebEvolutionBadge');
   if(evoEl){
     const dCount=S.days||1;
-    evoEl.textContent=dCount>=21?'Nivel III · Corona Invicta ('+dCount+'d)':(dCount>=7?'Nivel II · Doble Halo ('+dCount+'d)':'Nivel I · Chispa Inicial ('+dCount+'d)');
+    evoEl.textContent=dCount>=21?'Nivel III · Corona ('+dCount+'d)':(dCount>=7?'Nivel II · Doble Halo ('+dCount+'d)':'Nivel I · Chispa ('+dCount+'d)');
   }
 
   if($('pebHint')){
@@ -7786,7 +7749,7 @@ function renderPaletteGrid(){
       '<span>'+esc(p.name)+'</span>';
     b.onclick=()=>{
       if(locked){
-        openPaywall('Desbloquea la colección completa de 10 paletas editoriales Ex Libris con Wavy Pro.');
+        openPaywall('Desbloquea la colección completa de 11 paletas editoriales Ex Libris con Wavy Pro.');
         return;
       }
       S.sealStyle=p.id;save();
@@ -8195,9 +8158,8 @@ function closeTransientPopovers(){
   if($('maleGoalSheet') && !$('maleGoalSheet').hidden){
     $('maleGoalSheet').hidden=true;
   }
-  if($('bentoActiveDrawer') && !$('bentoActiveDrawer').hidden){
-    $('bentoActiveDrawer').hidden=true;
-  }
+  /* El cajón de hidratación/alimentación NO se cierra aquí: solo se esconde
+     con otro clic en su tarjeta o con el botón Listo */
 }
 
 document.addEventListener('pointerdown',e=>{
@@ -8227,11 +8189,8 @@ document.addEventListener('pointerdown',e=>{
       $('inlineSongBox').hidden=true;
     }
   }
-  if($('bentoActiveDrawer') && !$('bentoActiveDrawer').hidden){
-    if(!e.target.closest('#bentoActiveDrawer') && !e.target.closest('#clueTrackList')){
-      $('bentoActiveDrawer').hidden=true;
-    }
-  }
+  /* El cajón de hidratación/alimentación no se cierra al tocar fuera ni al
+     desplazar: solo otro clic en su tarjeta o el botón Listo lo esconde */
 });
 
 let _lastScrollY=window.scrollY||0;

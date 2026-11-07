@@ -283,8 +283,11 @@ h1{font-family:var(--serif);font-weight:500;font-size:clamp(28px,7vw,36px);line-
 }
 /* Privacidad de hábitos: el ojo inicia cerrado y las opciones borrosas.
    Solo un click en el ojo las revela; otro click las vuelve a borrar. */
-.eye-q{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;border:1px solid var(--rule);background:var(--card-solid);color:var(--muted);cursor:pointer;vertical-align:middle;margin-left:4px}
-.eye-q svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;display:block}
+.eye-q,.arrow-q{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;border:1px solid var(--rule);background:var(--card-solid);color:var(--muted);cursor:pointer;vertical-align:middle;margin-left:4px}
+.eye-q svg,.arrow-q svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;display:block}
+.arrow-q svg{transition:transform .2s ease}
+#sub-habit:not(.habits-collapsed) .arrow-q svg{transform:rotate(180deg)}
+#sub-habit.habits-collapsed #habitGrid{display:none}
 #sub-habit.habits-hidden #habitGrid,
 #sub-habit.habits-hidden #habitSubTitle,
 #sub-habit.habits-hidden #sm{filter:blur(9px);pointer-events:none;user-select:none}
@@ -359,13 +362,17 @@ h1{font-family:var(--serif);font-weight:500;font-size:clamp(28px,7vw,36px);line-
   border:1px solid rgba(255,255,255,0.42);
   border-radius:999px;
   color:#FFFDF9;
-  padding:13px 20px;
-  font-size:11.5px;
-  letter-spacing:.1em;
+  padding:13px 15px;
+  font-size:10.5px;
+  letter-spacing:.06em;
   box-shadow:inset 0 1.5px 0 rgba(255,255,255,0.88), 0 14px 30px -8px rgba(142, 58, 72, 0.34);
   animation:anxiousHeartbeat 2.2s cubic-bezier(.25,.8,.25,1) infinite;
   transition:transform .25s ease, box-shadow .25s ease, background .25s ease;
 }
+/* El texto de la barra nunca se parte en dos líneas: una sola línea,
+   siempre, para que al llegar abajo la barra se vea completa. */
+#sosb span{white-space:nowrap;flex-shrink:0}
+#sosb svg{flex-shrink:0}
 #sosb:hover,#sosb:focus-visible{
   animation:anxiousHeartbeat 0.75s cubic-bezier(.36,.07,.19,.97) infinite;
   box-shadow:inset 0 1.5px 0 rgba(255,255,255,0.92), 0 0 0 9px rgba(186, 92, 104, 0.22), 0 18px 38px rgba(142, 58, 72, 0.48);
@@ -1680,9 +1687,9 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
     </nav>
 
     <!-- SUB-PANEL 1A: HÁBITO Y BATERÍA + FLUJO SOS -->
-    <section class="panel on card habits-hidden" id="sub-habit">
+    <section class="panel on card habits-hidden habits-collapsed" id="sub-habit">
       <div class="hd">
-        <span>¿Qué hábito regulas? <button type="button" class="help-q" data-help="helpHabit" aria-label="Ayuda sobre hábitos">?</button> <button type="button" class="eye-q" id="habitEyeBtn" aria-label="Mostrar u ocultar hábitos" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"/><circle cx="12" cy="12" r="2.8"/><path d="M4 20L20 4"/></svg></button></span>
+        <span>¿Qué hábito regulas? <button type="button" class="help-q" data-help="helpHabit" aria-label="Ayuda sobre hábitos">?</button> <button type="button" class="eye-q" id="habitEyeBtn" aria-label="Mostrar u ocultar hábitos" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"/><circle cx="12" cy="12" r="2.8"/><path d="M4 20L20 4"/></svg></button> <button type="button" class="arrow-q" id="habitExpandBtn" aria-label="Expandir o contraer hábitos" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button></span>
         <span id="proStatusBadge" style="color:var(--gold);font-weight:700">Plan Básico</span>
       </div>
       <div class="help-tip" id="helpHabit" hidden>Elige el hábito o impulso principal que deseas observar. Los hitos reflejan etapas conductuales frecuentes durante un ciclo de 90 días.</div>
@@ -2050,19 +2057,11 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
       </div>
 
       <!-- RITUAL DE RESPIRACIÓN MUTUA SINCRONIZADA ("RESPIRAR JUNTOS") -->
-      <div class="cobreath-box" id="coBreathBox">
-        <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap">
-          <div>
-            <span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:600;display:block">Respirar en pareja</span>
-            <strong style="font-family:var(--serif);font-size:18px;font-weight:500">Sintonía abierta con tu círculo</strong>
-          </div>
-          <button type="button" class="btn ghost" id="reqCoBreathBtn" style="border-radius:30px;padding:8px 14px;font-size:11px">
-            <svg class="w-ico" viewBox="0 0 24 24"><path d="M12 20.5s-7-4.4-7-9.8a4 4 0 0 1 7-2.6 4 4 0 0 1 7 2.6c0 5.4-7 9.8-7 9.8Z"/></svg>
-            <span>Abrir sintonía</span>
-          </button>
-        </div>
-
-        <div id="coBreathActivePanel" hidden style="margin-top:10px;padding-top:10px;border-top:1px solid var(--rule)">
+      <!-- El recuadro de "Abrir sintonía" de Círculo, copiado aquí tal cual
+           (lo dibuja renderCoastSyncBanner con el mismo constructor). -->
+      <div id="coastSyncBanner"></div>
+      <div class="cobreath-box" id="coBreathBox" hidden>
+        <div id="coBreathActivePanel" hidden>
           <p style="font-size:12.5px;color:var(--muted);line-height:1.45;margin-bottom:8px">
             Mantengan ambos presionado el círculo central del mar al inhalar. Cuando los dos dedos inhalan al mismo tiempo, el entorno se difumina, brotan luciérnagas doradas y vibran en sintonía.
           </p>
@@ -3709,6 +3708,7 @@ function handleIncomingLivePacket(pkt){
     coBreath.partnerInhaling=isInh;
     if(pkt.payload && pkt.payload.active && !coBreath.active){
       coBreath.active=true;
+      if($('coBreathBox'))$('coBreathBox').hidden=false;
       if($('coBreathActivePanel'))$('coBreathActivePanel').hidden=false;
     }
     syncCoBreathVisualState();
@@ -4592,6 +4592,38 @@ function getDailyCircleQuestion(){
   return DAILY_CIRCLE_QUESTIONS[dayIdx];
 }
 
+/* El recuadro de "Abrir sintonía": el mismo en Círculo y en Costa, con el
+   mismo diseño, las mismas dimensiones y el mismo botón. Se construye con
+   una función compartida para que los dos queden idénticos y en sintonía.
+   El botón se busca por clase dentro del recuadro, no por id, para no
+   duplicar ids al tener el recuadro en dos vistas. */
+function buildOpenSyncBanner(){
+  const b=document.createElement('div');
+  b.style.cssText='display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 14px;margin-bottom:11px;border-radius:14px;background:var(--wash);border:1px solid var(--glass-border);box-shadow:var(--glass-spec)';
+  b.innerHTML=
+    '<div>'+
+      '<strong style="font-family:var(--serif);font-size:16px;font-weight:500;display:block">'+(S.openSync?'Tu sintonía está abierta en la orilla':'¿Deseas respirar acompañada/o hoy?')+'</strong>'+
+      '<span style="font-size:11.5px;color:var(--muted)">'+(S.openSync?'Tu círculo ve tu señal encendida y puede sumarse o enviarte un gesto.':'Enciende tu señal sin presionar a nadie; quien esté libre se unirá.')+'</span>'+
+    '</div>'+
+    '<button type="button" class="open-sync-pill"><i></i><span>'+(S.openSync?'Sintonía abierta':'Abrir sintonía')+'</span></button>';
+  b.querySelector('.open-sync-pill').onclick=()=>{
+    if(!S.openSync){
+      openCoBreathEthicsModal(S.following[0]);
+    }else{
+      S.openSync=false;S.inCoBreathWith='';coBreath.active=false;
+      save(true);renderCircleFeed();
+      toast('Cerraste tu señal de sintonía');
+    }
+  };
+  return b;
+}
+/* La copia del recuadro en Costa: idéntica a la de Círculo. */
+function renderCoastSyncBanner(){
+  const c=$('coastSyncBanner');if(!c)return;
+  c.innerHTML='';
+  c.appendChild(buildOpenSyncBanner());
+}
+
 function renderCircleFeed(){
   const box=$('circleFeedList');if(!box)return;box.innerHTML='';
   if($('circleCountBadge'))$('circleCountBadge').textContent=S.following.length+(S.following.length===1?' vínculo en vivo':' vínculos en vivo');
@@ -4620,25 +4652,9 @@ function renderCircleFeed(){
   };
   box.appendChild(promptBanner);
 
-  /* 2. Barra sutil propia para Abrir / Cerrar tu propia Sintonía al Círculo sin presionar a nadie */
-  const mySyncBanner=document.createElement('div');
-  mySyncBanner.style.cssText='display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 14px;margin-bottom:11px;border-radius:14px;background:var(--wash);border:1px solid var(--glass-border);box-shadow:var(--glass-spec)';
-  mySyncBanner.innerHTML=
-    '<div>'+
-      '<strong style="font-family:var(--serif);font-size:16px;font-weight:500;display:block">'+(S.openSync?'Tu sintonía está abierta en la orilla':'¿Deseas respirar acompañada/o hoy?')+'</strong>'+
-      '<span style="font-size:11.5px;color:var(--muted)">'+(S.openSync?'Tu círculo ve tu señal encendida y puede sumarse o enviarte un gesto.':'Enciende tu señal sin presionar a nadie; quien esté libre se unirá.')+'</span>'+
-    '</div>'+
-    '<button type="button" class="open-sync-pill" id="toggleMyOpenSyncBtn"><i></i><span>'+(S.openSync?'Sintonía abierta':'Abrir sintonía')+'</span></button>';
-  mySyncBanner.querySelector('#toggleMyOpenSyncBtn').onclick=()=>{
-    if(!S.openSync){
-      openCoBreathEthicsModal(S.following[0]);
-    }else{
-      S.openSync=false;S.inCoBreathWith='';coBreath.active=false;
-      save(true);renderCircleFeed();
-      toast('Cerraste tu señal de sintonía');
-    }
-  };
-  box.appendChild(mySyncBanner);
+  /* 2. Barra sutil propia para Abrir / Cerrar tu propia Sintonía al Círculo sin presionar a nadie.
+     El mismo recuadro se copia en Costa (ver renderCoastSyncBanner). */
+  box.appendChild(buildOpenSyncBanner());
 
   const hasMySong=!!(S.soundCapsule && (S.soundCapsule.title||S.soundCapsule.url));
   const myPlatId=hasMySong?detectMusicPlatformId(S.soundCapsule.url):'spotify';
@@ -4803,6 +4819,8 @@ function renderCircleFeed(){
     });
     box.appendChild(card);
   });
+  /* La copia del recuadro en Costa se mantiene en sintonía con Círculo. */
+  renderCoastSyncBanner();
 }
 
 function updateStoredAllyAccount(uname,mutator){
@@ -4943,6 +4961,12 @@ if($('habitEyeBtn'))$('habitEyeBtn').onclick=()=>{
   const btn=$('habitEyeBtn');
   btn.setAttribute('aria-pressed',hidden?'false':'true');
   btn.innerHTML=hidden?HABIT_EYE_CLOSED:HABIT_EYE_OPEN;
+};
+/* Flecha de hábitos: el menú inicia colapsado y solo el click lo expande. */
+if($('habitExpandBtn'))$('habitExpandBtn').onclick=()=>{
+  const sec=$('sub-habit');if(!sec)return;
+  const collapsed=sec.classList.toggle('habits-collapsed');
+  $('habitExpandBtn').setAttribute('aria-expanded',collapsed?'false':'true');
 };
 
 function build(){
@@ -5486,7 +5510,9 @@ function sosDockTargetCalc(){
   }
   if(y0<=0)return 0; /* página corta: sin recorrido, la barra se queda */
   const y=window.scrollY||0;
-  return 1-Math.min(1,Math.max(0,y/y0));
+  const p=1-Math.min(1,Math.max(0,y/y0));
+  /* 15% más rápida: el corazón llega a su lugar scrolleando 15% menos. */
+  return Math.min(1,p/0.85);
 }
 function applySosDock(d){
   const sosb=$('sosb'),socket=$('heartSocket');
@@ -6389,7 +6415,6 @@ function openCoBreathEthicsModal(partnerUname){
   $('coBreathEthicsModal').hidden=false;
 }
 
-if($('reqCoBreathBtn'))$('reqCoBreathBtn').onclick=()=>openCoBreathEthicsModal(S.following[0]);
 if($('cbEthicsCloseBtn'))$('cbEthicsCloseBtn').onclick=()=>{$('coBreathEthicsModal').hidden=true};
 if($('confirmCoBreathEthicsBtn')){
   $('confirmCoBreathEthicsBtn').onclick=()=>{
@@ -6400,7 +6425,9 @@ if($('confirmCoBreathEthicsBtn')){
     S.inCoBreathWith=coBreath.partnerUser||'';
     S.bmode='touch';
     save(true);
+    renderCoastSyncBanner();
     document.querySelectorAll('#bmode button[data-m]').forEach(x=>x.classList.toggle('on',x.dataset.m==='touch'));
+    if($('coBreathBox'))$('coBreathBox').hidden=false;
     if($('coBreathActivePanel'))$('coBreathActivePanel').hidden=false;
     switchMainView('v-breathe');
     broadcastLiveEvent('cobreath_request',{partner:coBreath.partnerUser});

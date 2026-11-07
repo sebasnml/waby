@@ -292,7 +292,6 @@ h1{font-family:var(--serif);font-weight:500;font-size:clamp(28px,7vw,36px);line-
 #sub-habit:not(.habits-collapsed) .arrow-q svg{transform:rotate(180deg)}
 #sub-habit.habits-collapsed #habitGrid{display:none}
 #sub-habit.habits-hidden #habitGrid,
-#sub-habit.habits-hidden #habitSubTitle,
 #sub-habit.habits-hidden #sm{filter:blur(9px);pointer-events:none;user-select:none}
 
 .read{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:12px}
@@ -969,15 +968,15 @@ textarea::placeholder{font-style:italic;color:var(--muted);opacity:.65}
   display:inline-flex;align-items:center;gap:4px;
 }
 
-/* Vela de Travertino (Pebetero) */
+/* Vela (Pebetero) */
 .pd{
   position:relative;overflow:hidden;border-radius:20px;margin-bottom:14px;
   padding:16px 18px 18px;text-align:center;color:var(--ink);
   background:
-    radial-gradient(90% 60% at 50% 36%,color-mix(in srgb, var(--relic,#8FAE85) 42%, transparent) 0%,transparent 64%),
+    radial-gradient(90% 60% at 50% 36%,color-mix(in srgb, var(--relic,#5A7A9A) 42%, transparent) 0%,transparent 64%),
     linear-gradient(180deg,var(--card-solid) 0%,var(--wash) 100%);
   border:1px solid var(--glass-border);
-  box-shadow:var(--glass-spec),0 22px 44px -28px color-mix(in srgb, var(--relic,#8FAE85) 45%, transparent);
+  box-shadow:var(--glass-spec),0 22px 44px -28px color-mix(in srgb, var(--relic,#5A7A9A) 45%, transparent);
 }
 .peb-top{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600}
 .peb-chip{display:inline-flex;align-items:center;gap:7px;padding:5px 11px;border-radius:30px;background:var(--card);border:1px solid var(--glass-border);letter-spacing:.10em;white-space:nowrap}
@@ -1457,7 +1456,7 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
 .peb-vessel-btn.on{
   border-color:var(--gold);
   background:var(--card-solid);
-  box-shadow:0 0 0 1px var(--gold),0 12px 24px -10px color-mix(in srgb, var(--g3,#8FAE85) 65%, transparent);
+  box-shadow:0 0 0 1px var(--gold),0 12px 24px -10px color-mix(in srgb, var(--g3,#5A7A9A) 65%, transparent);
   transform:translateY(-2px);
 }
 .peb-vessel-btn .v-pro{
@@ -1493,11 +1492,12 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
     0 0 0 2px var(--card-solid),0 0 0 3.5px var(--gold),
     0 10px 20px -6px color-mix(in srgb, var(--g3,#5C7A4E) 70%, transparent);
 }
-[data-vessel="classic"] .v-gem{--g1:#E4EDDC;--g2:#9DBE8C;--g3:#5C7A4E}
-[data-vessel="matcha"] .v-gem{--g1:#E8F0E0;--g2:#7FA66B;--g3:#3F5A34}
-[data-vessel="quartz"] .v-gem{--g1:#F9E9E7;--g2:#E5A8B0;--g3:#C07A8A}
-[data-vessel="spartan"] .v-gem{--g1:#F7E8C8;--g2:#D4A95C;--g3:#8F6E3E}
-[data-vessel="obsidian"] .v-gem{--g1:#E9E9EE;--g2:#8A8F99;--g3:#1A1A1E}
+[data-vessel="luna"] .v-gem{--g1:#F5F0E8;--g2:#C9C2D4;--g3:#8A7FA0}
+[data-vessel="concha"] .v-gem{--g1:#F2E8D5;--g2:#E8A88C;--g3:#C87858}
+[data-vessel="loto"] .v-gem{--g1:#F9E8EA;--g2:#D4A8C8;--g3:#A878A8}
+[data-vessel="faro"] .v-gem{--g1:#D8E0E8;--g2:#8A9AA8;--g3:#2A3A4A}
+[data-vessel="cumbre"] .v-gem{--g1:#D8E0E8;--g2:#7A8A9A;--g3:#3A4A5A}
+[data-vessel="forja"] .v-gem{--g1:#E8D8D0;--g2:#C87848;--g3:#2A2A2A}
 @keyframes gemShine{to{transform:rotate(360deg)}}
 @media(prefers-reduced-motion:reduce){.v-gem::after{animation:none}}
 .peb-decay-pill{
@@ -1699,7 +1699,6 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
 
       <div class="habit-grid" id="habitGrid"></div>
 
-      <div class="hd"><span id="habitSubTitle">Redes</span><span>Ciclo&nbsp;·&nbsp;90 días</span></div>
       <div class="read">
         <div class="big"><span id="pct">0.0</span><small>%</small></div>
         <button type="button" class="heart-socket" id="heartSocket" aria-label="Siento un impulso ahora · Acompañarme">
@@ -1941,47 +1940,37 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
           <span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0">Elige tu reliquia</span>
           <span id="pebEvolutionBadge" style="font-size:11px;color:var(--gold);font-weight:600;white-space:nowrap;flex-shrink:0">Nivel II · Doble Halo</span>
         </div>
-        <div class="peb-vessels" id="pebVesselBar">
-          <button type="button" class="peb-vessel-btn on" data-vessel="classic"><i class="v-gem" aria-hidden="true"></i><span>Travertino</span></button>
-          <button type="button" class="peb-vessel-btn" data-vessel="matcha"><i class="v-gem" aria-hidden="true"></i><span>Matcha Kintsugi</span><em class="v-pro">Pro</em></button>
-          <button type="button" class="peb-vessel-btn" data-vessel="quartz"><i class="v-gem" aria-hidden="true"></i><span>Cuarzo &amp; Sándalo</span><em class="v-pro">Pro</em></button>
-          <button type="button" class="peb-vessel-btn" data-vessel="spartan"><i class="v-gem" aria-hidden="true"></i><span>Bronce Espartano</span><em class="v-pro">Pro</em></button>
-          <button type="button" class="peb-vessel-btn" data-vessel="obsidian"><i class="v-gem" aria-hidden="true"></i><span>Obsidiana Gladii</span><em class="v-pro">Pro</em></button>
-        </div>
+        <div class="peb-vessels" id="pebVesselBar"></div>
       </div>
 
       <div class="pd" id="pd">
         <div class="peb-top">
-          <span id="pebVesselTitle">Travertino Clásico</span>
+          <span id="pebVesselTitle">Faro del Norte</span>
           <span class="peb-chip"><i></i><span id="as">Vínculos · 0</span></span>
         </div>
                 <svg id="pebSvgArt" viewBox="0 0 120 150" aria-hidden="true">
-          <defs>
-            <radialGradient id="g4" cx="50%" cy="50%" r="50%">
-              <stop offset="0" stop-color="#E9F1E2" stop-opacity=".95"/>
-              <stop offset=".55" stop-color="#C2D8B8" stop-opacity=".45"/>
-              <stop offset="1" stop-color="#8FB083" stop-opacity="0"/>
-            </radialGradient>
-            <linearGradient id="vJade" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9DBE8C"/><stop offset=".45" stop-color="#5C7A4E"/><stop offset="1" stop-color="#2E4A32"/></linearGradient>
-            <linearGradient id="vGold" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#B08D3E"/><stop offset=".5" stop-color="#E9C979"/><stop offset="1" stop-color="#B08D3E"/></linearGradient>
-            <linearGradient id="fGoldO" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF0C9"/><stop offset="1" stop-color="#9E7339"/></linearGradient>
-            <linearGradient id="fGoldM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E6C587"/></linearGradient>
-            <linearGradient id="fGoldC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFF1DE"/></linearGradient>
-          </defs>
-          <circle class="gl" cx="60" cy="72" r="56" fill="url(#g4)"/>
-          <ellipse cx="60" cy="142" rx="34" ry="3.5" fill="#2E4A32" opacity=".18"/>
-          <path d="M26 99 C24 118 30 132 44 137 C50 139 70 139 76 137 C90 132 96 118 94 99 Z" fill="url(#vJade)" stroke="#2E4A32" stroke-width=".8"/>
-          <path d="M36 106 C40 116 44 124 50 130" fill="none" stroke="#C2D8B8" stroke-width=".9" stroke-linecap="round" opacity=".55"/>
-          <path d="M33 104 C36 114 40 122 46 128" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity=".5"/>
-          <path d="M28 109 C42 113 78 113 92 109" fill="none" stroke="url(#vGold)" stroke-width="1.1" opacity=".85"/>
-          <ellipse cx="60" cy="99" rx="34" ry="6.2" fill="#243B26" stroke="url(#vGold)" stroke-width="1.2"/>
-          <ellipse cx="60" cy="99" rx="29" ry="4.4" fill="#1B2E1F"/>
-          <ellipse class="emb" cx="60" cy="99" rx="14" ry="2.2" fill="#D4AF37"/>
-          <g id="fl">
-            <path class="f1" d="M60 94 C44 86 47 58 60 26 C73 58 76 86 60 94Z" fill="url(#fGoldO)" opacity=".95"/>
-            <path class="f2" d="M60 94 C52 88 53 68 60 42 C67 68 68 88 60 94Z" fill="url(#fGoldM)"/>
-            <path class="f3" d="M60 94 C56 91 56 83 60 70 C64 83 64 91 60 94Z" fill="url(#fGoldC)"/>
-          </g>
+<defs>
+        <radialGradient id="gFaro" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#D8E0E8" stop-opacity=".95"/><stop offset=".55" stop-color="#8A9AA8" stop-opacity=".45"/><stop offset="1" stop-color="#2A3A4A" stop-opacity="0"/></radialGradient>
+        <linearGradient id="bFaro" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5A7A9A"/><stop offset=".5" stop-color="#2A3A4A"/><stop offset="1" stop-color="#1A2A38"/></linearGradient>
+        <linearGradient id="bBrass" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#C8A85A"/><stop offset=".5" stop-color="#F2D8A0"/><stop offset="1" stop-color="#C8A85A"/></linearGradient>
+        <linearGradient id="fFaroO" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF0C9"/><stop offset="1" stop-color="#E8A838"/></linearGradient>
+        <linearGradient id="fFaroM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFE8A8"/></linearGradient>
+        <linearGradient id="fFaroC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFF5D6"/></linearGradient>
+      </defs>
+      <circle class="gl" cx="60" cy="68" r="58" fill="url(#gFaro)"/>
+      <ellipse cx="60" cy="144" rx="36" ry="3.5" fill="#1A2A38" opacity=".35"/>
+      <!-- Faro del norte: una torre que guía, la llama es su haz -->
+      <path d="M48 140 L52 102 L68 102 L72 140 Z" fill="url(#bFaro)" stroke="#1A2A38" stroke-width=".8"/>
+      <path d="M52 102 L54 90 L66 90 L68 102 Z" fill="url(#bBrass)" stroke="#8A6A2A" stroke-width=".7"/>
+      <path d="M54 90 C54 84 66 84 66 90 Z" fill="url(#bFaro)" stroke="#1A2A38" stroke-width=".7"/>
+      <path d="M50 122 L70 122 M51 112 L69 112" fill="none" stroke="url(#bBrass)" stroke-width="1.6" opacity=".9"/>
+      <path d="M54 108 C56 118 58 128 60 136" fill="none" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round" opacity=".35"/>
+      <ellipse class="emb" cx="60" cy="96" rx="7" ry="2.4" fill="#F2D8A0"/>
+      <g id="fl">
+        <path class="f1" d="M60 94 C44 86 47 58 60 26 C73 58 76 86 60 94Z" fill="url(#fFaroO)" opacity=".95"/>
+        <path class="f2" d="M60 94 C52 88 53 68 60 42 C67 68 68 88 60 94Z" fill="url(#fFaroM)"/>
+        <path class="f3" d="M60 94 C56 91 56 83 60 70 C64 83 64 91 60 94Z" fill="url(#fFaroC)"/>
+      </g>
         </svg>
         <div class="peb-read">
           <b><span id="fp">65</span><small>%</small></b>
@@ -2058,10 +2047,6 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
         </button>
         <button class="btn ghost" id="bbFinishEarly" hidden>Terminar</button>
       </div>
-
-      <!-- El recuadro "Amplía tu espacio seguro", justo abajo del botón de
-           respiración (lo dibuja renderCoastAlliesCard). -->
-      <div id="coastAlliesCard"></div>
 
       <!-- RITUAL DE RESPIRACIÓN MUTUA SINCRONIZADA ("RESPIRAR JUNTOS") -->
       <!-- El recuadro de "Abrir sintonía" de Círculo, copiado aquí tal cual
@@ -4466,7 +4451,11 @@ if($('openCircleComposerBtn')){
     const dr=$('circleComposerDrawer');
     if(dr){
       dr.hidden=!dr.hidden;
-      if(!dr.hidden && $('echoInput'))$('echoInput').focus();
+      if(!dr.hidden){
+        if($('echoInput'))$('echoInput').focus();
+        /* La pantalla baja hasta abajo para que el cuadro de texto se vea completo. */
+        window.scrollTo({top:document.documentElement.scrollHeight,behavior:'smooth'});
+      }
     }
     updateCircleComposerYield(); /* el cajón cambia la altura del compositor */
   };
@@ -4655,15 +4644,12 @@ function buildEmptyAlliesCard(){
   }
   return c;
 }
-/* El recuadro en Costa, justo abajo de "Comenzar respiración · 5 min". */
-function renderCoastAlliesCard(){
-  const c=$('coastAlliesCard');if(!c)return;
-  c.innerHTML='';
-  if(!S.following.length && !S.echoes.length)c.appendChild(buildEmptyAlliesCard());
-}
 
 function renderCircleFeed(){
   const box=$('circleFeedList');if(!box)return;box.innerHTML='';
+  /* La copia del recuadro en Costa se mantiene en sintonía con Círculo
+     (se llama aquí arriba para que corra aunque el feed esté vacío). */
+  renderCoastSyncBanner();
   if($('circleCountBadge'))$('circleCountBadge').textContent=S.following.length+(S.following.length===1?' vínculo en vivo':' vínculos en vivo');
   const maintained=isPebeteroMaintained();
 
@@ -4676,23 +4662,40 @@ function renderCircleFeed(){
       '<span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:700;display:block">Sintonía del Día en el Círculo</span>'+
       '<strong style="font-family:var(--serif);font-style:italic;font-size:15.5px;font-weight:400;color:var(--ink);line-height:1.3">'+esc(dailyQ)+'</strong>'+
     '</div>'+
-    '<button type="button" class="chip" id="answerDailyPromptBtn" style="min-height:30px;padding:4px 11px;font-size:11.5px;border-color:var(--gold);color:var(--ink)">Responder ↓</button>';
+    '<button type="button" class="chip" id="answerDailyPromptBtn" style="min-height:30px;padding:4px 11px;font-size:11.5px;border-color:var(--gold);color:var(--ink)">Responder ↓</button>'+
+    '<div class="daily-reply" hidden style="flex-basis:100%;margin-top:10px;display:grid;gap:8px">'+
+      '<textarea class="echo-input" maxlength="200" placeholder="Responde a la pregunta de hoy…"></textarea>'+
+      '<div style="display:flex;justify-content:flex-end;gap:8px">'+
+        '<button type="button" class="btn ghost daily-reply-cancel" style="padding:6px 14px;font-size:11px">Cancelar</button>'+
+        '<button type="button" class="btn daily-reply-publish" style="padding:6px 16px;font-size:11px">Publicar respuesta</button>'+
+      '</div>'+
+    '</div>';
+  /* Responder abre la caja de texto justo abajo de la pregunta (en línea,
+     en contexto), no hasta abajo de la pantalla. */
   promptBanner.querySelector('#answerDailyPromptBtn').onclick=()=>{
-    const dr=$('circleComposerDrawer');
-    if(dr){
-      dr.hidden=false;
-      if($('echoInput')){
-        $('echoInput').placeholder=dailyQ;
-        $('echoInput').focus();
-      }
+    const reply=promptBanner.querySelector('.daily-reply');
+    if(!reply)return;
+    reply.hidden=!reply.hidden;
+    if(!reply.hidden){
+      const ta=reply.querySelector('textarea');
+      if(ta)ta.focus();
     }
-    updateCircleComposerYield();
+  };
+  const replyCancel=promptBanner.querySelector('.daily-reply-cancel');
+  if(replyCancel)replyCancel.onclick=()=>{
+    const r=promptBanner.querySelector('.daily-reply');
+    if(r)r.hidden=true;
+  };
+  const replyPublish=promptBanner.querySelector('.daily-reply-publish');
+  if(replyPublish)replyPublish.onclick=()=>{
+    const ta=promptBanner.querySelector('.daily-reply textarea');
+    const txt=ta?ta.value.trim():'';
+    if(!txt){toast('Escribe tu respuesta a la pregunta de hoy','er');return}
+    S.echoes.unshift({user:S.me.username,name:S.me.name,av:S.me.av,text:txt,vibe:'',ts:Date.now()});
+    save(true);renderCircleFeed();
+    toast('Respuesta publicada en tu círculo','ok');
   };
   box.appendChild(promptBanner);
-
-  /* 2. Barra sutil propia para Abrir / Cerrar tu propia Sintonía al Círculo sin presionar a nadie.
-     El mismo recuadro se copia en Costa (ver renderCoastSyncBanner). */
-  box.appendChild(buildOpenSyncBanner());
 
   const hasMySong=!!(S.soundCapsule && (S.soundCapsule.title||S.soundCapsule.url));
   const myPlatId=hasMySong?detectMusicPlatformId(S.soundCapsule.url):'spotify';
@@ -4725,6 +4728,13 @@ function renderCircleFeed(){
     }
     box.appendChild(myCard);
   });
+
+  /* El recuadro "Amplía tu espacio seguro" vuelve a Círculo: solo se
+     muestra cuando aún no hay vínculos ni ecos. */
+  if(!S.following.length && !S.echoes.length){
+    box.appendChild(buildEmptyAlliesCard());
+    return;
+  }
 
   const sortedFollowing=[...S.following].sort((a,b)=>{
     const ua=findUser(a),ub=findUser(b);
@@ -4838,9 +4848,6 @@ function renderCircleFeed(){
     });
     box.appendChild(card);
   });
-  /* La copia del recuadro en Costa se mantiene en sintonía con Círculo. */
-  renderCoastSyncBanner();
-  renderCoastAlliesCard();
 }
 
 function updateStoredAllyAccount(uname,mutator){
@@ -4968,7 +4975,7 @@ function renderHabitGrid(){
     g.appendChild(b);
   });
   const cur=currentHabitObj();
-  $('habitSubTitle').textContent=cur.name;
+  const st=$('habitSubTitle');if(st)st.textContent=cur.name;
   syncProWifiSwitchUI();
 }
 
@@ -7232,6 +7239,13 @@ function applyBioTrackMode(mode){
   document.querySelectorAll('#bioTrackMode .chip').forEach(c=>c.classList.toggle('on',c.dataset.bm===S.bioMode));
   $('femaleBioBlock').hidden=(S.bioMode==='male');
   $('maleBioBlock').hidden=(S.bioMode==='female');
+  /* Al cambiar de modo, la reliquia pasa a la libre de ese modo si la
+     actual no pertenece a él (cada modo tiene sus 3 reliquias). */
+  if(!PEB_VESSELS[S.pebVessel] || PEB_VESSELS[S.pebVessel].mode!==S.bioMode){
+    S.pebVessel=pebDefaultVessel();
+    pebBarMode='';
+    renderPebVesselArt();
+  }
   renderClueTrackList();
   save();
 }
@@ -7489,149 +7503,182 @@ const fuel=()=>{
 };
 function addFuel(n){S.fuel={v:Math.min(100,fuel()+n),t:Date.now()};save();flameView()}
 const PEB_VESSELS={
-  classic:{
-    title:'Travertino Clásico · Imperial',pro:false,relic:'#8FAE85',
+  luna:{
+    title:'Luna de Nácar',mode:'female',short:'Luna',pro:false,relic:'#B8A8C8',
     svg:()=>`
       <defs>
-        <radialGradient id="g4" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#E9F1E2" stop-opacity=".95"/><stop offset=".55" stop-color="#C2D8B8" stop-opacity=".45"/><stop offset="1" stop-color="#8FB083" stop-opacity="0"/></radialGradient>
-        <linearGradient id="vJade" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9DBE8C"/><stop offset=".45" stop-color="#5C7A4E"/><stop offset="1" stop-color="#2E4A32"/></linearGradient>
-        <linearGradient id="vGold" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#B08D3E"/><stop offset=".5" stop-color="#E9C979"/><stop offset="1" stop-color="#B08D3E"/></linearGradient>
-        <linearGradient id="fGoldO" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF0C9"/><stop offset="1" stop-color="#9E7339"/></linearGradient>
-        <linearGradient id="fGoldM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E6C587"/></linearGradient>
-        <linearGradient id="fGoldC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFF1DE"/></linearGradient>
+        <radialGradient id="gLuna" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#F5F0E8" stop-opacity=".95"/><stop offset=".55" stop-color="#C9C2D4" stop-opacity=".45"/><stop offset="1" stop-color="#8A7FA0" stop-opacity="0"/></radialGradient>
+        <linearGradient id="bLuna" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E8E0F0"/><stop offset=".5" stop-color="#B8A8C8"/><stop offset="1" stop-color="#6A5A80"/></linearGradient>
+        <linearGradient id="fLunaO" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#B8A8D8"/></linearGradient>
+        <linearGradient id="fLunaM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E8E0F0"/></linearGradient>
+        <linearGradient id="fLunaC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#F5F0FF"/></linearGradient>
       </defs>
-      <circle class="gl" cx="60" cy="72" r="56" fill="url(#g4)"/>
-      <ellipse cx="60" cy="142" rx="34" ry="3.5" fill="#2E4A32" opacity=".18"/>
-      <!-- Vasija redonda de jade salvia: cuerpo pleno y fluido, sin esquinas -->
-      <path d="M26 99 C24 118 30 132 44 137 C50 139 70 139 76 137 C90 132 96 118 94 99 Z" fill="url(#vJade)" stroke="#2E4A32" stroke-width=".8"/>
-      <path d="M36 106 C40 116 44 124 50 130" fill="none" stroke="#C2D8B8" stroke-width=".9" stroke-linecap="round" opacity=".55"/>
-      <path d="M33 104 C36 114 40 122 46 128" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity=".5"/>
-      <path d="M28 109 C42 113 78 113 92 109" fill="none" stroke="url(#vGold)" stroke-width="1.1" opacity=".85"/>
-      <ellipse cx="60" cy="99" rx="34" ry="6.2" fill="#243B26" stroke="url(#vGold)" stroke-width="1.2"/>
-      <ellipse cx="60" cy="99" rx="29" ry="4.4" fill="#1B2E1F"/>
-      <ellipse class="emb" cx="60" cy="99" rx="14" ry="2.2" fill="#D4AF37"/>
-      <g id="fl">
-        <path class="f1" d="M60 94 C44 86 47 58 60 26 C73 58 76 86 60 94Z" fill="url(#fGoldO)" opacity=".95"/>
-        <path class="f2" d="M60 94 C52 88 53 68 60 42 C67 68 68 88 60 94Z" fill="url(#fGoldM)"/>
-        <path class="f3" d="M60 94 C56 91 56 83 60 70 C64 83 64 91 60 94Z" fill="url(#fGoldC)"/>
-      </g>`
-  },
-  matcha:{
-    title:'Porcelana Kintsugi & Matcha · Edición Imperial',pro:true,relic:'#5F7D4F',
-    svg:()=>`
-      <defs>
-        <radialGradient id="gMatcha" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#E2EFE0" stop-opacity=".95"/><stop offset=".55" stop-color="#B4D1AF" stop-opacity=".42"/><stop offset="1" stop-color="#8EAB89" stop-opacity="0"/></radialGradient>
-        <linearGradient id="pMatcha" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8FBF7A"/><stop offset=".5" stop-color="#4A6B45"/><stop offset="1" stop-color="#243B26"/></linearGradient>
-        <linearGradient id="pGlazeLip" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#D6E5D3"/></linearGradient>
-        <linearGradient id="goldVein" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFE899"/><stop offset=".5" stop-color="#D4AF37"/><stop offset="1" stop-color="#997A15"/></linearGradient>
-        <linearGradient id="vGold" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#B08D3E"/><stop offset=".5" stop-color="#E9C979"/><stop offset="1" stop-color="#B08D3E"/></linearGradient>
-        <linearGradient id="fGoldO" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF0C9"/><stop offset="1" stop-color="#9E7339"/></linearGradient>
-        <linearGradient id="fGoldM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E6C587"/></linearGradient>
-        <linearGradient id="fGoldC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFF1DE"/></linearGradient>
-      </defs>
-      <circle class="gl" cx="60" cy="70" r="56" fill="url(#gMatcha)"/>
-      <ellipse cx="60" cy="142" rx="35" ry="3.5" fill="#243B26" opacity=".18"/>
-      <!-- Cuenco de matcha profundo y redondo, con kintsugi dorado -->
-      <path d="M24 98 C23 126 38 140 60 140 C82 140 97 126 96 98 Z" fill="url(#pMatcha)" stroke="#243B26" stroke-width=".8"/>
-      <path d="M30 104 C32 114 36 124 42 130" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity=".45"/>
-      <path d="M42 99 Q46 114 43 124 T52 137 M44 116 Q53 121 58 126" fill="none" stroke="url(#goldVein)" stroke-width="1.6" stroke-linecap="round"/>
-      <path d="M78 99 Q75 112 80 125 T76 137" fill="none" stroke="url(#goldVein)" stroke-width="1.3" stroke-linecap="round"/>
-      <path d="M62 99 Q64 112 60 124 T66 137" fill="none" stroke="url(#goldVein)" stroke-width="1.1" stroke-linecap="round" opacity=".9"/>
-      <ellipse cx="60" cy="140" rx="18" ry="3.5" fill="#3E5C38" stroke="url(#vGold)" stroke-width=".7"/>
-      <ellipse cx="60" cy="98" rx="36" ry="6" fill="url(#pGlazeLip)" stroke="url(#vGold)" stroke-width="1.1"/>
-      <ellipse cx="60" cy="98" rx="30" ry="4.4" fill="#243B26"/>
-      <ellipse class="emb" cx="60" cy="98" rx="14" ry="2.2" fill="#D4AF37"/>
-      <g id="fl">
-        <path class="f1" d="M60 94 C44 86 47 58 60 26 C73 58 76 86 60 94Z" fill="url(#fGoldO)" opacity=".95"/>
-        <path class="f2" d="M60 94 C52 88 53 68 60 42 C67 68 68 88 60 94Z" fill="url(#fGoldM)"/>
-        <path class="f3" d="M60 94 C56 91 56 83 60 70 C64 83 64 91 60 94Z" fill="url(#fGoldC)"/>
-      </g>`
-  },
-  quartz:{
-    title:'Cuarzo Rosa & Alabastro · Santuario',pro:true,relic:'#C98A96',
-    svg:()=>`
-      <defs>
-        <radialGradient id="gQuartz" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#F9E9E7" stop-opacity=".95"/><stop offset=".55" stop-color="#F2C9CE" stop-opacity=".42"/><stop offset="1" stop-color="#E5A8B0" stop-opacity="0"/></radialGradient>
-        <linearGradient id="qRose" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F9E9E7"/><stop offset=".4" stop-color="#EFC3C8"/><stop offset=".75" stop-color="#D99AA6"/><stop offset="1" stop-color="#A85A6B"/></linearGradient>
-        <linearGradient id="vGold" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#B08D3E"/><stop offset=".5" stop-color="#E9C979"/><stop offset="1" stop-color="#B08D3E"/></linearGradient>
-        <linearGradient id="fGoldO" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF0C9"/><stop offset="1" stop-color="#9E7339"/></linearGradient>
-        <linearGradient id="fGoldM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E6C587"/></linearGradient>
-        <linearGradient id="fGoldC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFF1DE"/></linearGradient>
-      </defs>
-      <circle class="gl" cx="60" cy="70" r="56" fill="url(#gQuartz)"/>
-      <ellipse cx="60" cy="142" rx="32" ry="3.2" fill="#8A4A56" opacity=".16"/>
-      <!-- Vasija redonda de cuarzo rosa: suave y delicada, sin facetas ni picos -->
-      <path d="M28 99 C26 118 32 132 46 137 C52 139 68 139 74 137 C88 132 94 118 92 99 Z" fill="url(#qRose)" stroke="#8A4A56" stroke-width=".8"/>
+      <circle class="gl" cx="60" cy="70" r="56" fill="url(#gLuna)"/>
+      <ellipse cx="60" cy="142" rx="34" ry="3.5" fill="#6A5A80" opacity=".18"/>
+      <!-- Luna creciente de nácar: una media luna que acuna la llama -->
+      <path d="M28 98 C28 122 42 138 60 138 C78 138 92 122 92 98 C84 112 74 120 60 120 C46 120 36 112 28 98 Z" fill="url(#bLuna)" stroke="#6A5A80" stroke-width=".8"/>
       <path d="M36 106 C40 116 44 124 50 130" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity=".5"/>
-      <path d="M70 108 C78 112 82 118 84 124" fill="none" stroke="url(#vGold)" stroke-width="1.4" stroke-linecap="round" opacity=".8"/>
-      <ellipse cx="60" cy="99" rx="32" ry="5.8" fill="#F9E9E7" stroke="url(#vGold)" stroke-width="1.1"/>
-      <ellipse cx="60" cy="99" rx="27" ry="4.2" fill="#7A3A48"/>
-      <ellipse class="emb" cx="60" cy="99" rx="13" ry="2.2" fill="#D4AF37"/>
+      <ellipse cx="60" cy="120" rx="14" ry="2.6" fill="#8A7FA0"/>
+      <ellipse class="emb" cx="60" cy="120" rx="7" ry="1.6" fill="#E8E0F0"/>
       <g id="fl">
-        <path class="f1" d="M60 94 C44 86 47 58 60 26 C73 58 76 86 60 94Z" fill="url(#fGoldO)" opacity=".95"/>
-        <path class="f2" d="M60 94 C52 88 53 68 60 42 C67 68 68 88 60 94Z" fill="url(#fGoldM)"/>
-        <path class="f3" d="M60 94 C56 91 56 83 60 70 C64 83 64 91 60 94Z" fill="url(#fGoldC)"/>
+        <path class="f1" d="M60 94 C44 86 47 58 60 26 C73 58 76 86 60 94Z" fill="url(#fLunaO)" opacity=".95"/>
+        <path class="f2" d="M60 94 C52 88 53 68 60 42 C67 68 68 88 60 94Z" fill="url(#fLunaM)"/>
+        <path class="f3" d="M60 94 C56 91 56 83 60 70 C64 83 64 91 60 94Z" fill="url(#fLunaC)"/>
       </g>`
   },
-  spartan:{
-    title:'Bronce Espartano · Forja Heroica',pro:true,relic:'#B08D3E',
+  concha:{
+    title:'Concha Marina',mode:'female',short:'Concha',pro:true,relic:'#D4A88C',
     svg:()=>`
       <defs>
-        <radialGradient id="gSpartan" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#F7E8C8" stop-opacity=".95"/><stop offset=".55" stop-color="#D4A95C" stop-opacity=".45"/><stop offset="1" stop-color="#8F6E3E" stop-opacity="0"/></radialGradient>
-        <linearGradient id="pBronze" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#C99B5F"/><stop offset=".45" stop-color="#8A6A3A"/><stop offset="1" stop-color="#3D2C17"/></linearGradient>
-        <linearGradient id="sOuter" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFD98E"/><stop offset="1" stop-color="#B85D28"/></linearGradient>
-        <linearGradient id="sMid" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF5D6"/><stop offset="1" stop-color="#E09448"/></linearGradient>
-        <linearGradient id="goldPatina" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8F6E3E"/><stop offset=".5" stop-color="#D4AF6A"/><stop offset="1" stop-color="#8F6E3E"/></linearGradient>
-        <linearGradient id="vGold" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#B08D3E"/><stop offset=".5" stop-color="#E9C979"/><stop offset="1" stop-color="#B08D3E"/></linearGradient>
+        <radialGradient id="gConcha" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#F2E8D5" stop-opacity=".95"/><stop offset=".55" stop-color="#E8A88C" stop-opacity=".45"/><stop offset="1" stop-color="#C87858" stop-opacity="0"/></radialGradient>
+        <linearGradient id="bConcha" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F2D8B8"/><stop offset=".5" stop-color="#E8A88C"/><stop offset="1" stop-color="#B86848"/></linearGradient>
+        <linearGradient id="fConchaO" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF0C9"/><stop offset="1" stop-color="#F2A058"/></linearGradient>
+        <linearGradient id="fConchaM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFE8B8"/></linearGradient>
+        <linearGradient id="fConchaC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFF5D6"/></linearGradient>
       </defs>
-      <circle class="gl" cx="60" cy="68" r="58" fill="url(#gSpartan)"/>
-      <ellipse cx="60" cy="144" rx="38" ry="4" fill="#2A1F12" opacity=".35"/>
-      <!-- Urna redonda de bronce: cuerpo pleno y fluido, sin trípode ni ángulos -->
-      <path d="M24 98 C22 118 30 132 46 137 C52 139 68 139 74 137 C90 132 98 118 96 98 Z" fill="url(#pBronze)" stroke="#D4AF6A" stroke-width="1.2"/>
-      <path d="M30 106 C34 116 38 124 44 130" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity=".4"/>
-      <path d="M26 110 C42 114 78 114 94 110" fill="none" stroke="url(#goldPatina)" stroke-width="2.5" opacity=".9"/>
-      <ellipse cx="60" cy="98" rx="38" ry="6" fill="#2A1F12" stroke="url(#goldPatina)" stroke-width="1.3"/>
-      <ellipse cx="60" cy="98" rx="33" ry="4.4" fill="#1A120A"/>
-      <ellipse class="emb" cx="60" cy="98" rx="22" ry="2.8" fill="#D46A28"/>
+      <circle class="gl" cx="60" cy="70" r="56" fill="url(#gConcha)"/>
+      <ellipse cx="60" cy="142" rx="34" ry="3.5" fill="#B86848" opacity=".18"/>
+      <!-- Concha marina: un abanico con vetas que se abren al mar -->
+      <path d="M24 100 C24 125 40 140 60 140 C80 140 96 125 96 100 C80 108 40 108 24 100 Z" fill="url(#bConcha)" stroke="#B86848" stroke-width=".8"/>
+      <path d="M60 140 L36 102 M60 140 L48 100 M60 140 L60 98 M60 140 L72 100 M60 140 L84 102" fill="none" stroke="#F2D8B8" stroke-width="1" stroke-linecap="round" opacity=".6"/>
+      <path d="M32 106 C36 116 40 124 46 130" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity=".45"/>
+      <ellipse cx="60" cy="100" rx="36" ry="5" fill="#F2E8D5" stroke="#C87858" stroke-width="1"/>
+      <ellipse cx="60" cy="100" rx="30" ry="3.6" fill="#B86848"/>
+      <ellipse class="emb" cx="60" cy="100" rx="13" ry="2" fill="#F2A058"/>
       <g id="fl">
-        <path class="f1" d="M60 94 C39 88 41 62 60 30 C79 62 81 88 60 94Z" fill="url(#sOuter)" opacity=".95"/>
-        <path class="f2" d="M48 92 C42 82 45 68 52 52 C54 70 54 84 48 92Z" fill="url(#sOuter)" opacity=".8"/>
-        <path class="f2" d="M72 92 C78 82 75 68 68 52 C66 70 66 84 72 92Z" fill="url(#sOuter)" opacity=".8"/>
-        <path class="f3" d="M60 94 C50 90 50 72 60 46 C70 72 70 90 60 94Z" fill="url(#sMid)"/>
+        <path class="f1" d="M60 94 C44 86 47 58 60 26 C73 58 76 86 60 94Z" fill="url(#fConchaO)" opacity=".95"/>
+        <path class="f2" d="M60 94 C52 88 53 68 60 42 C67 68 68 88 60 94Z" fill="url(#fConchaM)"/>
+        <path class="f3" d="M60 94 C56 91 56 83 60 70 C64 83 64 91 60 94Z" fill="url(#fConchaC)"/>
+      </g>`
+  },
+  loto:{
+    title:'Loto del Alba',mode:'female',short:'Loto',pro:true,relic:'#C8A8C8',
+    svg:()=>`
+      <defs>
+        <radialGradient id="gLoto" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#F9E8EA" stop-opacity=".95"/><stop offset=".55" stop-color="#D4A8C8" stop-opacity=".45"/><stop offset="1" stop-color="#A878A8" stop-opacity="0"/></radialGradient>
+        <linearGradient id="bLoto" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F2D5D8"/><stop offset=".5" stop-color="#C8A8D4"/><stop offset="1" stop-color="#8A5A90"/></linearGradient>
+        <linearGradient id="fLotoO" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE8F0"/><stop offset="1" stop-color="#D488A8"/></linearGradient>
+        <linearGradient id="fLotoM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFE8F0"/></linearGradient>
+        <linearGradient id="fLotoC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFF5F8"/></linearGradient>
+      </defs>
+      <circle class="gl" cx="60" cy="70" r="56" fill="url(#gLoto)"/>
+      <ellipse cx="60" cy="142" rx="34" ry="3.5" fill="#8A5A90" opacity=".18"/>
+      <!-- Loto del alba: tres pétalos que se abren al amanecer -->
+      <path d="M28 102 C28 122 42 138 60 138 C78 138 92 122 92 102 C86 110 80 114 74 114 C76 108 76 104 74 100 C70 108 66 112 60 112 C54 112 50 108 46 100 C44 104 44 108 46 114 C40 114 34 110 28 102 Z" fill="url(#bLoto)" stroke="#8A5A90" stroke-width=".8"/>
+      <path d="M36 110 C40 118 44 126 50 131" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity=".5"/>
+      <ellipse cx="60" cy="112" rx="20" ry="3" fill="#C8A8D4"/>
+      <ellipse class="emb" cx="60" cy="112" rx="9" ry="1.8" fill="#E8C878"/>
+      <g id="fl">
+        <path class="f1" d="M60 94 C44 86 47 58 60 26 C73 58 76 86 60 94Z" fill="url(#fLotoO)" opacity=".95"/>
+        <path class="f2" d="M60 94 C52 88 53 68 60 42 C67 68 68 88 60 94Z" fill="url(#fLotoM)"/>
+        <path class="f3" d="M60 94 C56 91 56 83 60 70 C64 83 64 91 60 94Z" fill="url(#fLotoC)"/>
+      </g>`
+  },
+  faro:{
+    title:'Faro del Norte',mode:'male',short:'Faro',pro:false,relic:'#5A7A9A',
+    svg:()=>`
+      <defs>
+        <radialGradient id="gFaro" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#D8E0E8" stop-opacity=".95"/><stop offset=".55" stop-color="#8A9AA8" stop-opacity=".45"/><stop offset="1" stop-color="#2A3A4A" stop-opacity="0"/></radialGradient>
+        <linearGradient id="bFaro" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5A7A9A"/><stop offset=".5" stop-color="#2A3A4A"/><stop offset="1" stop-color="#1A2A38"/></linearGradient>
+        <linearGradient id="bBrass" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#C8A85A"/><stop offset=".5" stop-color="#F2D8A0"/><stop offset="1" stop-color="#C8A85A"/></linearGradient>
+        <linearGradient id="fFaroO" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF0C9"/><stop offset="1" stop-color="#E8A838"/></linearGradient>
+        <linearGradient id="fFaroM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFE8A8"/></linearGradient>
+        <linearGradient id="fFaroC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFF5D6"/></linearGradient>
+      </defs>
+      <circle class="gl" cx="60" cy="68" r="58" fill="url(#gFaro)"/>
+      <ellipse cx="60" cy="144" rx="36" ry="3.5" fill="#1A2A38" opacity=".35"/>
+      <!-- Faro del norte: una torre que guía, la llama es su haz -->
+      <path d="M48 140 L52 102 L68 102 L72 140 Z" fill="url(#bFaro)" stroke="#1A2A38" stroke-width=".8"/>
+      <path d="M52 102 L54 90 L66 90 L68 102 Z" fill="url(#bBrass)" stroke="#8A6A2A" stroke-width=".7"/>
+      <path d="M54 90 C54 84 66 84 66 90 Z" fill="url(#bFaro)" stroke="#1A2A38" stroke-width=".7"/>
+      <path d="M50 122 L70 122 M51 112 L69 112" fill="none" stroke="url(#bBrass)" stroke-width="1.6" opacity=".9"/>
+      <path d="M54 108 C56 118 58 128 60 136" fill="none" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round" opacity=".35"/>
+      <ellipse class="emb" cx="60" cy="96" rx="7" ry="2.4" fill="#F2D8A0"/>
+      <g id="fl">
+        <path class="f1" d="M60 94 C44 86 47 58 60 26 C73 58 76 86 60 94Z" fill="url(#fFaroO)" opacity=".95"/>
+        <path class="f2" d="M60 94 C52 88 53 68 60 42 C67 68 68 88 60 94Z" fill="url(#fFaroM)"/>
+        <path class="f3" d="M60 94 C56 91 56 83 60 70 C64 83 64 91 60 94Z" fill="url(#fFaroC)"/>
+      </g>`
+  },
+  cumbre:{
+    title:'Cumbre de Acero',mode:'male',short:'Cumbre',pro:true,relic:'#7A8A9A',
+    svg:()=>`
+      <defs>
+        <radialGradient id="gCumbre" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#D8E0E8" stop-opacity=".95"/><stop offset=".55" stop-color="#8A9AA8" stop-opacity=".45"/><stop offset="1" stop-color="#3A4A5A" stop-opacity="0"/></radialGradient>
+        <linearGradient id="bCumbre" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8A9AA8"/><stop offset=".5" stop-color="#4A5A6A"/><stop offset="1" stop-color="#2A3A4A"/></linearGradient>
+        <linearGradient id="fCumbreO" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E8F0F8"/><stop offset="1" stop-color="#7AA8D8"/></linearGradient>
+        <linearGradient id="fCumbreM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#D8E8F8"/></linearGradient>
+        <linearGradient id="fCumbreC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#F0F8FF"/></linearGradient>
+      </defs>
+      <circle class="gl" cx="60" cy="68" r="58" fill="url(#gCumbre)"/>
+      <ellipse cx="60" cy="144" rx="38" ry="3.5" fill="#2A3A4A" opacity=".3"/>
+      <!-- Cumbre de acero: una cima firme, la llama en lo más alto -->
+      <path d="M60 92 L28 140 L92 140 Z" fill="url(#bCumbre)" stroke="#2A3A4A" stroke-width=".8"/>
+      <path d="M60 92 L52 106 L58 104 L54 112 L60 108 L66 112 L62 104 L68 106 Z" fill="#FFFFFF" opacity=".9"/>
+      <path d="M44 122 L52 132 M76 122 L68 132" fill="none" stroke="#FFFFFF" stroke-width="1.4" stroke-linecap="round" opacity=".4"/>
+      <ellipse class="emb" cx="60" cy="96" rx="6" ry="2" fill="#C8D8E8"/>
+      <g id="fl">
+        <path class="f1" d="M60 94 C44 86 47 58 60 26 C73 58 76 86 60 94Z" fill="url(#fCumbreO)" opacity=".95"/>
+        <path class="f2" d="M60 94 C52 88 53 68 60 42 C67 68 68 88 60 94Z" fill="url(#fCumbreM)"/>
+        <path class="f3" d="M60 94 C56 91 56 83 60 70 C64 83 64 91 60 94Z" fill="url(#fCumbreC)"/>
+      </g>`
+  },
+  forja:{
+    title:'Forja del Capitán',mode:'male',short:'Forja',pro:true,relic:'#C87848',
+    svg:()=>`
+      <defs>
+        <radialGradient id="gForja" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#F2A878" stop-opacity=".95"/><stop offset=".55" stop-color="#C87848" stop-opacity=".45"/><stop offset="1" stop-color="#2A2A2A" stop-opacity="0"/></radialGradient>
+        <linearGradient id="bForja" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4A4A4A"/><stop offset=".5" stop-color="#2A2A2A"/><stop offset="1" stop-color="#141414"/></linearGradient>
+        <linearGradient id="fForjaO" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF0C9"/><stop offset="1" stop-color="#E05818"/></linearGradient>
+        <linearGradient id="fForjaM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFB878"/></linearGradient>
+        <linearGradient id="fForjaC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFE8C8"/></linearGradient>
+      </defs>
+      <circle class="gl" cx="60" cy="68" r="58" fill="url(#gForja)"/>
+      <ellipse cx="60" cy="144" rx="38" ry="4" fill="#141414" opacity=".4"/>
+      <!-- Forja del capitán: un crisol de hierro con brasas vivas -->
+      <path d="M22 100 C22 124 40 140 60 140 C80 140 98 124 98 100 C82 108 38 108 22 100 Z" fill="url(#bForja)" stroke="#6A6A6A" stroke-width="1"/>
+      <path d="M30 108 C34 118 38 126 44 131" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" opacity=".35"/>
+      <ellipse cx="60" cy="100" rx="38" ry="6" fill="#1A1A1A" stroke="#E87838" stroke-width="1.4"/>
+      <ellipse cx="60" cy="100" rx="33" ry="4.4" fill="#0D0D0D"/>
+      <circle cx="45" cy="100" r="2" fill="#F07828"/><circle cx="60" cy="100" r="2.4" fill="#FFB878"/><circle cx="75" cy="100" r="2" fill="#F07828"/>
+      <ellipse class="emb" cx="60" cy="100" rx="14" ry="2.2" fill="#E87838"/>
+      <g id="fl">
+        <path class="f1" d="M60 94 C39 88 41 62 60 30 C79 62 81 88 60 94Z" fill="url(#fForjaO)" opacity=".95"/>
+        <path class="f2" d="M48 92 C42 82 45 68 52 52 C54 70 54 84 48 92Z" fill="url(#fForjaO)" opacity=".8"/>
+        <path class="f2" d="M72 92 C78 82 75 68 68 52 C66 70 66 84 72 92Z" fill="url(#fForjaO)" opacity=".8"/>
+        <path class="f3" d="M60 94 C50 90 50 72 60 46 C70 72 70 90 60 94Z" fill="url(#fForjaM)"/>
         <circle cx="49" cy="42" r="1.4" fill="#FFF2C2"/><circle cx="71" cy="37" r="1.2" fill="#FFF2C2"/><circle cx="60" cy="23" r="1.5" fill="#FFFFFF"/>
-      </g>`
-  },
-  obsidian:{
-    title:'Monolito de Obsidiana & Platino',pro:true,relic:'#33523F',
-    svg:()=>`
-      <defs>
-        <radialGradient id="gObs" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#E2EBDD" stop-opacity=".95"/><stop offset=".55" stop-color="#7A9A72" stop-opacity=".38"/><stop offset="1" stop-color="#1E3325" stop-opacity="0"/></radialGradient>
-        <linearGradient id="pObsidian" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2D2B29"/><stop offset=".4" stop-color="#191716"/><stop offset="1" stop-color="#090808"/></linearGradient>
-        <linearGradient id="pPlatinum" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#CCD4DC"/><stop offset=".5" stop-color="#FFFFFF"/><stop offset="1" stop-color="#ABB4BC"/></linearGradient>
-        <linearGradient id="oOuter" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF0C9"/><stop offset="1" stop-color="#9E7339"/></linearGradient>
-        <linearGradient id="oMid" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E6C587"/></linearGradient>
-      </defs>
-      <circle class="gl" cx="60" cy="68" r="58" fill="url(#gObs)"/>
-      <ellipse cx="60" cy="144" rx="35" ry="3.5" fill="#050505" opacity=".4"/>
-      <!-- Piedra redonda de obsidiana pulida: negra y elegante, sin esquinas -->
-      <path d="M28 98 C26 118 32 132 46 137 C52 139 68 139 74 137 C88 132 94 118 92 98 Z" fill="url(#pObsidian)" stroke="#45423E" stroke-width=".9"/>
-      <path d="M36 106 C40 116 44 124 50 130" fill="none" stroke="url(#pPlatinum)" stroke-width="1.8" stroke-linecap="round" opacity=".8"/>
-      <path d="M72 108 C78 114 82 120 84 126" fill="none" stroke="url(#pPlatinum)" stroke-width="1" stroke-linecap="round" opacity=".5"/>
-      <ellipse cx="60" cy="98" rx="32" ry="5.5" fill="#181615" stroke="url(#pPlatinum)" stroke-width="1.4"/>
-      <ellipse cx="60" cy="98" rx="27" ry="4" fill="#0D0C0B"/>
-      <ellipse class="emb" cx="60" cy="98" rx="14" ry="2" fill="#E6C587"/>
-      <g id="fl">
-        <path class="f1" d="M60 94 C44 86 47 58 60 26 C73 58 76 86 60 94Z" fill="url(#oOuter)" opacity=".95"/>
-        <path class="f2" d="M60 94 C52 88 53 68 60 42 C67 68 68 88 60 94Z" fill="url(#oMid)"/>
       </g>`
   }
 };
 
+/* La reliquia libre por defecto según el modo (mujer / hombre). */
+function pebDefaultVessel(){return S.bioMode==='female'?'luna':'faro';}
+/* La barra de reliquias muestra solo las 3 del modo actual; se reconstruye
+   solo cuando cambia el modo (si no, solo se actualiza el estado .on). */
+let pebBarMode='';
+function renderPebVesselBar(){
+  const bar=$('pebVesselBar');if(!bar)return;
+  const mode=S.bioMode==='female'?'female':'male';
+  if(pebBarMode===mode && bar.children.length)return;
+  pebBarMode=mode;
+  bar.innerHTML='';
+  Object.entries(PEB_VESSELS).forEach(([k,cfg])=>{
+    if(cfg.mode!==mode)return;
+    const b=document.createElement('button');
+    b.type='button';b.className='peb-vessel-btn';b.dataset.vessel=k;
+    b.innerHTML='<i class="v-gem" aria-hidden="true"></i><span>'+esc(cfg.short)+'</span>'+(cfg.pro?'<em class="v-pro">Pro</em>':'');
+    bar.appendChild(b);
+  });
+}
+
 function renderPebVesselArt(){
-  const vKey=S.pebVessel||'classic';
-  const cfg=PEB_VESSELS[vKey]||PEB_VESSELS.classic;
+  let vKey=S.pebVessel;
+  if(!PEB_VESSELS[vKey] || PEB_VESSELS[vKey].mode!==S.bioMode)vKey=pebDefaultVessel();
+  const cfg=PEB_VESSELS[vKey];
+  renderPebVesselBar();
   if($('pebSvgArt'))$('pebSvgArt').innerHTML=cfg.svg();
-  if($('pd'))$('pd').style.setProperty('--relic',cfg.relic||'#8FAE85');
+  if($('pd'))$('pd').style.setProperty('--relic',cfg.relic||'#5A7A9A');
   if($('pebVesselTitle'))$('pebVesselTitle').textContent=cfg.title;
   document.querySelectorAll('#pebVesselBar .peb-vessel-btn').forEach(b=>{
     b.classList.toggle('on',b.dataset.vessel===vKey);
@@ -7644,7 +7691,7 @@ if($('pebVesselBar')){
     const vk=b.dataset.vessel;
     const cfg=PEB_VESSELS[vk];
     if(cfg && cfg.pro && !isPro()){
-      openPaywall('Desbloquea las 4 reliquias exclusivas del Pebetero (Matcha Kintsugi, Cuarzo & Sándalo, Bronce Espartano y Obsidiana Gladii) con Wavy Pro.');
+      openPaywall('Desbloquea las reliquias exclusivas del Pebetero (Concha Marina, Loto del Alba, Cumbre de Acero y Forja del Capitán) con Wavy Pro.');
       return;
     }
     S.pebVessel=vk;

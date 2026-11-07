@@ -257,9 +257,16 @@ h1{font-family:var(--serif);font-weight:500;font-size:clamp(28px,7vw,36px);line-
    cuadro al lado de "Bienestar / Ciclo y Ánimo"): verde cuando la
    cuota del día está cumplida, rojo (carmín) cuando falta. El color da
    vueltas alrededor del botón: un gradiente cónico que rota, una línea
-   muy fina (1.5 px) pero suficiente para llamar la atención. */
+   muy fina (1.5 px) pero suficiente para llamar la atención. Además
+   el anillo LATE suave (un respiro de opacidad cada 2.2 s, como el
+   corazón) para que llame la atención sin gritar. La pestaña SIEMPRE
+   está pintada (verde o carmín, nunca sin color): el anillo ES su
+   estado. Por eso, cuando el anillo está puesto, se quita la rayita
+   carmín predeterminada del tab seleccionado (.tab.on): dos rojos en
+   el mismo botón chocaban. */
 @property --peb-angle{syntax:'<angle>';initial-value:0deg;inherits:false}
 .tab.peb-ring{position:relative}
+.tab.peb-ring.on{box-shadow:none}
 .tab.peb-ring::before{
   content:"";position:absolute;inset:0;border-radius:9px;pointer-events:none;z-index:3;
   padding:1.5px;
@@ -268,9 +275,11 @@ h1{font-family:var(--serif);font-weight:500;font-size:clamp(28px,7vw,36px);line-
   -webkit-mask-composite:xor;
   mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
   mask-composite:exclude;
-  animation:pebRingSpin 6s linear infinite;
+  animation:pebRingSpin 6s linear infinite, pebRingPulse 2.2s ease-in-out infinite;
 }
 @keyframes pebRingSpin{to{--peb-angle:360deg}}
+@keyframes pebRingPulse{0%,100%{opacity:1}50%{opacity:.55}}
+@media(prefers-reduced-motion:reduce){.tab.peb-ring::before{animation:pebRingSpin 6s linear infinite}}
 .tab.peb-ring-done{--peb-ring:var(--ok)}
 .tab.peb-ring-pending{--peb-ring:var(--crimson)}
 
@@ -338,30 +347,25 @@ h1{font-family:var(--serif);font-weight:500;font-size:clamp(28px,7vw,36px);line-
 .btn.red{background:var(--crimson);color:#fff;border-color:var(--crimson)}
 .btn.red-outline{background:transparent;color:var(--crimson);border-color:var(--crimson)}
 .btn.gold{background:var(--gold);color:#fff;border-color:var(--gold)}
-/* La barra SOS flota sobre la barra inferior mientras se sube; al llegar
-   arriba se encoge hasta quedar solo el corazón, que se coloca en el
-   renglón de progreso (ver #heartSocket) */
+/* La barra SOS flota sobre la barra inferior. Estilo Instagram: se
+   esconde al bajar y aparece al subir, con solo `translate` y `opacity`
+   (propiedades del compositor). Nada de morph ni clip-path. */
 .sos-sticky{position:sticky;bottom:calc(env(safe-area-inset-bottom,0px) + 92px);width:100%;margin:18px 0 12px;z-index:40}
-/* Ancla estática para medir la posición REAL de la barra SOS en la página.
-   Es un marcador invisible en flujo normal, justo antes de la barra. No se
-   mide la barra misma: #sosb es position:sticky y en Safari offsetTop de
-   un elemento pegado devuelve su posición pegada, no su posición real. */
-#sosAnchor{height:0;overflow:hidden;pointer-events:none}
-#sosb.docking{animation:none;transition:none;backdrop-filter:none;-webkit-backdrop-filter:none}
 .heart-socket{
   width:34px;height:34px;border-radius:50%;flex-shrink:0;
   border:1px solid rgba(184,146,90,.5);background:var(--card-solid);
   display:grid;place-items:center;cursor:pointer;color:var(--crimson);
-  opacity:0;transform:scale(.55);pointer-events:none;
+  opacity:1;transform:scale(1);
   align-self:center;
 }
-.heart-socket svg{width:18px;height:18px;fill:currentColor;stroke:none;display:block}
+.heart-socket svg{width:18px;height:18px;fill:currentColor;stroke:none;display:block;animation:heartBeat 2.2s cubic-bezier(.25,.8,.25,1) infinite}
 /* El corazón late como la barra completa (mismo latido, mismo carmín):
    el latido va en el SVG de adentro, no en el círculo, para no pelear
-   con la escala de entrada del socket. */
-.heart-socket.docked svg{animation:heartBeat 2.2s cubic-bezier(.25,.8,.25,1) infinite}
+   con la escala de entrada del socket. Siempre late: es un botón
+   estable y siempre visible, la entrada al SOS cuando la píldora está
+   escondida. */
 @keyframes heartBeat{0%,100%{transform:scale(1)}16%{transform:scale(1.14)}30%{transform:scale(1)}46%{transform:scale(1.2)}68%{transform:scale(1)}}
-@media(prefers-reduced-motion:reduce){.heart-socket.docked svg{animation:none}}
+@media(prefers-reduced-motion:reduce){.heart-socket svg{animation:none}}
 #sosb{
   overflow:hidden;will-change:transform;
   background:linear-gradient(135deg, rgba(186, 92, 104, 0.85), rgba(142, 58, 72, 0.92));
@@ -375,8 +379,12 @@ h1{font-family:var(--serif);font-weight:500;font-size:clamp(28px,7vw,36px);line-
   letter-spacing:.06em;
   box-shadow:inset 0 1.5px 0 rgba(255,255,255,0.88), 0 14px 30px -8px rgba(142, 58, 72, 0.34);
   animation:anxiousHeartbeat 2.2s cubic-bezier(.25,.8,.25,1) infinite;
-  transition:transform .25s ease, box-shadow .25s ease, background .25s ease;
+  transition:transform .25s ease, translate .28s ease, opacity .28s ease, box-shadow .25s ease, background .25s ease;
 }
+/* Escondida (al bajar): se desliza hacia abajo y se desvanece. Solo
+   `translate` y `opacity`: el latido (transform) sigue corriendo pero no
+   pelea con el deslizamiento porque son propiedades distintas. */
+#sosb.sos-hidden{translate:0 140%;opacity:0;pointer-events:none}
 /* El texto de la barra nunca se parte en dos líneas: una sola línea,
    siempre, para que al llegar abajo la barra se vea completa. */
 #sosb span{white-space:nowrap;flex-shrink:0}
@@ -839,6 +847,10 @@ textarea::placeholder{font-style:italic;color:var(--muted);opacity:.65}
    Pureza tipográfica en redonda, márgenes proporcionales y colofón fino
    ========================================================= */
 .wavy-card,
+.diary-entry{cursor:pointer;transition:transform .18s ease, box-shadow .18s ease}
+.diary-entry:active{transform:scale(.985)}
+.diary-entry .journal-quote{font-size:14.5px}
+.diary-read{font-family:var(--serif);font-style:italic;font-size:12.5px;color:var(--gold);margin-top:6px}
 .journal-card{
   background:linear-gradient(165deg, var(--card-solid) 0%, var(--card) 100%);
   border:1px solid var(--glass-border);
@@ -1733,7 +1745,6 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
         <div class="chips" id="loss"></div>
       </div>
 
-      <div id="sosAnchor" aria-hidden="true"></div>
       <button class="btn sos-sticky" id="sosb">
         <svg class="w-ico lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.3a4.3 4.3 0 0 1 7.5-2.8 4.3 4.3 0 0 1 7.5 2.8c0 5.7-7.5 10.3-7.5 10.3Z"/><path d="M7.5 12.2h2.2l1.4-2.8 2 5.4 1.5-2.6h2"/></svg>
         <span>Siento un impulso ahora · Acompañarme</span>
@@ -2201,6 +2212,15 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
           <svg class="w-ico sm" viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
           <span>Abrir hoja en blanco</span>
         </button>
+      </div>
+
+      <!-- TUS ESCRITOS · lista estilo Substack/Medium: lo que guardas en
+           la hoja en blanco se ve AQUÍ MISMO, en el Diario (no en Hoy).
+           Título, fecha y un pedacito del texto; al tocarlo se abre
+           para leerlo (y editarlo). -->
+      <div class="bio-sec">
+        <div class="bio-sec-hd"><span>Tus escritos</span><span id="diaryCountLbl" style="font-family:var(--serif);font-style:italic;text-transform:none;letter-spacing:0"></span></div>
+        <div id="diaryList"></div>
       </div>
       </section>
     </div>
@@ -4205,7 +4225,7 @@ function switchMainView(vid){
   });
   document.querySelectorAll('.vpage').forEach(p=>p.classList.toggle('on',p.id===vid));
   if(vid==='v-breathe'){fit();startLoop()}else{stopLoop()}
-  if(vid==='v-today'){syncPebeteroRing();flameView();measureSosGeo();requestSosDock()}
+  if(vid==='v-today'){syncPebeteroRing();flameView();const sb=$('sosb');if(sb){sb.classList.remove('sos-hidden');_sosHidden=false;_sosLastY=window.scrollY||0;}}
   if(vid==='v-circle'){renderHomeCoRegulation();updateCircleComposerYield()}
   if(vid==='v-clinic'){stats();hours(true);renderClinicalReport()}
   if(vid==='v-profile'){syncProfileForm();syncProWifiSwitchUI();renderSealsCarousel()}
@@ -4220,6 +4240,7 @@ function switchCircleTab(tab){
   if($('circleTabDiaryBtn'))$('circleTabDiaryBtn').classList.toggle('on',!feed);
   if($('circleFeedPane'))$('circleFeedPane').hidden=!feed;
   if($('circleDiaryPane'))$('circleDiaryPane').hidden=feed;
+  if(!feed)renderDiaryList();
   updateCircleComposerYield();
   window.scrollTo({top:0,behavior:'smooth'});
 }
@@ -4494,10 +4515,7 @@ if($('echoInput')){
     const dr=$('circleComposerDrawer');
     if(dr && dr.hidden){
       dr.hidden=false;
-      /* La pantalla baja hasta abajo para que el cuadro de texto se vea completo.
-         El scroll es programado: se marca la ventana para que el listener de
-         scroll no lo confunda con un scroll del usuario y no cierre el cajón. */
-      composerScrollUntil=Date.now()+1200;
+      /* La pantalla baja hasta abajo para que el cuadro de texto se vea completo. */
       window.scrollTo({top:document.documentElement.scrollHeight,behavior:'smooth'});
       updateCircleComposerYield(); /* los controles cambian la altura del compositor */
     }
@@ -5043,9 +5061,9 @@ if($('habitExpandBtn'))$('habitExpandBtn').onclick=()=>{
   const sec=$('sub-habit');if(!sec)return;
   const collapsed=sec.classList.toggle('habits-collapsed');
   $('habitExpandBtn').setAttribute('aria-expanded',collapsed?'false':'true');
-  /* Expandir/contraer cambia el alto del contenido de arriba: el corazón
-     y la barra se mueven, así que la geometría del morph se re-mide. */
-  measureSosGeo();
+  /* Expandir/contraer cambia el alto del contenido; el botón SOS ya no
+     depende de la geometría (es mostrar/esconder por dirección), así que
+     no hay nada que re-medir. */
 };
 
 function build(){
@@ -5526,178 +5544,39 @@ $('sosb').onclick=()=>{
 };
 
 /* =========================================================
-   ANIMACIÓN SOS · EL RECTÁNGULO VIAJA Y SE ACHICA HASTA EL
-   CORAZÓN DEL RENGLÓN DE PROGRESO (Y AL REVÉS AL BAJAR)
-   - No es un encogimiento en su sitio: el rectángulo rojo
-     estrecha su ancho visible (clip-path, sin tocar el layout)
-     MIENTRAS su centro viaja hasta #heartSocket, en el renglón
-     "1.1% · PROGRESO Día 1 / 90". Las letras se van
-     desapareciendo al estrecharse el rectángulo (se encogen y
-     se recortan por los bordes) y solo queda el corazón, que
-     encaja en el renglón como una gema. Al scrollear para abajo
-     el proceso se invierte: corazón → rectángulo rojo completo
-     al final de la hoja. Guiada por el scroll, suavizada por
-     interpolación en rAF.
+   BOTÓN SOS · ESTILO INSTAGRAM (mostrar / esconder por dirección)
+   - ANTES: un morph continuo (clip-path + translate3d) guiado por el
+     scrollY, que en iOS se atoraba a media animación durante el scroll
+     con impulso (el botón quedaba cortado, como en IMG_2650). Era
+     frágil porque dependía de actualizarse cuadro por cuadro durante
+     un scroll que iOS no reporta cuadro por cuadro.
+   - AHORA: como Instagram. El botón es un estado discreto, no un
+     morph: visible o escondido, nada a la mitad. Baja (scroll hacia
+     abajo) → se esconde; sube (scroll hacia arriba) → aparece. Solo
+     se tocan `translate` y `opacity` (propiedades del compositor: no
+     hay layout, no hay clip-path, no hay lecturas de geometría), con
+     una transición CSS. El corazón del renglón de progreso
+     (#heartSocket) es un botón estable y SIEMPRE visible: es la
+     entrada al SOS cuando la píldora está escondida. No hay ancla de
+     medición, no hay geometría cacheada, no hay rAF: el listener de
+     scroll solo compara dos números (la posición de ahora y la de
+     antes) y pone o quita una clase. A prueba de millones de usuarios.
    ========================================================= */
-let sosDockCur=0, sosDockRaf=0, sosLastTx=0, sosLastTy=0, sosSpanW0=0;
-/* La posición REAL de la barra en la página se mide con el ancla estática
-   (#sosAnchor), un marcador invisible en flujo normal justo antes de la
-   barra. NO se mide la barra misma: #sosb es position:sticky, y en Safari
-   offsetTop de un elemento pegado devuelve su posición pegada (visual),
-   no su posición real en la página. Por eso el morph nunca se activaba:
-   y0 salía diminuto y el objetivo del morph quedaba siempre en 0. */
-/* Posición del corazón en el renglón de progreso, medida una sola vez y
-   guardada. En cada frame solo se resta scrollY: sin leer el layout del
-   corazón en cada cuadro. Se re-mide en las posiciones de descanso
-   (arriba y abajo de la hoja), al redimensionar y, como mucho, una vez
-   por segundo mientras se scrollea, por si el contenido de arriba
-   cambia de alto. */
-let sosSockDoc=null, sosSockLastMeas=0, sosDockLastApplied=-1;
-function measureSosSocket(){
-  const s=$('heartSocket');
-  if(!s || !s.offsetParent){sosSockDoc=null;return;}
-  const r=s.getBoundingClientRect();
-  sosSockDoc={x:r.left+r.width/2,y:r.top+(window.scrollY||0)+r.height/2};
-  sosSockLastMeas=Date.now();
-  sosDockLastApplied=-1; /* la geometría cambió: forzar el siguiente repintado */
-}
-function sosDockDocY(){
-  const a=$('sosAnchor');
-  if(a){
-    const r=a.getBoundingClientRect();
-    /* rect.top + scrollY = posición real en el documento; +18px = el
-       margen superior de la barra (.sos-sticky{margin:18px 0 12px}) */
-    return (r.top+(window.scrollY||0))+18;
-  }
-  const b=$('sosb');if(!b)return 0;
-  let y=0,el=b;
-  while(el){y+=el.offsetTop||0;el=el.offsetParent;}
-  return y;
-}
-/* Geometría cacheada del morph SOS. Se mide una sola vez y se re-mide
-   solo cuando algo puede haberla movido (resize, cambio de vista,
-   expandir/contraer hábitos). El morph NUNCA lee el layout en el camino
-   del scroll: en iOS el rAF se pausa durante el scroll con impulso, y
-   leer el layout en cada cuadro era lo que congelaba la barra y luego
-   la teletransportaba. */
-let sosGeo={y0:0,barH:48,barW:280,barCX:0,barCY:0,valid:false};
-function measureSosGeo(){
-  const sosb=$('sosb');
-  if(!sosb){sosGeo.valid=false;return;}
-  let y0=sosDockDocY()-(window.innerHeight||800)+140;
-  if(!(y0>200))y0=Math.max(1,(document.documentElement.scrollHeight||0)-(window.innerHeight||800));
-  sosGeo.y0=y0;
-  /* Centro natural de la barra cuando está pegada (sticky) al fondo de
-     la ventana: es constante mientras la barra está pegada, y el morph
-     solo la mueve cuando d es grande (arriba de la hoja), que es justo
-     cuando la barra está pegada. Abajo (d~0) no hay traslación, así que
-     este valor es el correcto para todo el recorrido. */
-  const r=sosb.getBoundingClientRect();
-  sosGeo.barH=r.height||48;
-  sosGeo.barW=r.width||280;
-  sosGeo.barCX=r.left+r.width/2-sosLastTx;
-  sosGeo.barCY=r.top+r.height/2-sosLastTy;
-  measureSosSocket();
-  sosGeo.valid=y0>0;
-  sosDockLastApplied=-1; /* la geometría cambió: forzar el siguiente repintado */
-}
-function sosDockTargetCalc(){
-  const sosb=$('sosb');if(!sosb)return 0;
-  if($('sos') && !$('sos').hidden)return 0; /* SOS abierto: la barra se queda entera */
-  const vt=$('v-today');
-  if(!vt || !vt.classList.contains('on'))return sosDockCur; /* fuera de Hoy: congelar */
-  /* Sin geometría válida la barra se queda entera y VISIBLE: nunca puede
-     quedar invisible por un valor atascado. */
-  if(!sosGeo.valid || !(sosGeo.y0>0))return 0;
+let _sosLastY=window.scrollY||0, _sosHidden=false;
+function sosDirectionSync(){
+  const b=$('sosb');if(!b)return;
   const y=window.scrollY||0;
-  const p=1-Math.min(1,Math.max(0,y/sosGeo.y0));
-  /* 15% más rápida: el corazón llega a su lugar scrolleando 15% menos. */
-  return Math.min(1,p/0.85);
-}
-function applySosDock(d){
-  const sosb=$('sosb'),socket=$('heartSocket');
-  if(!sosb)return;
-  /* Si el morph no cambió desde el último cuadro, no se toca el DOM:
-     reescribir los mismos estilos en cada frame es lo que se veía como
-     saltitos. La geometría nueva (resize, cambio de vista) fuerza el
-     repintado poniendo sosDockLastApplied en -1. */
-  if(Math.abs(d-sosDockLastApplied)<0.0005 && sosSockDoc)return;
-  sosDockLastApplied=d;
-  /* La posición del corazón se re-mide como mucho 1 vez por segundo en
-     el camino del scroll (red de seguridad). Las re-mediciones de verdad
-     son por evento (resize, cambio de vista, expandir/contraer hábitos)
-     vía measureSosGeo(): así el scroll nunca fuerza un layout. */
-  if(!sosSockDoc || Date.now()-sosSockLastMeas>1000)measureSosSocket();
-  const e=d*d*(3-2*d); /* suavizado para el viaje */
-  sosb.classList.toggle('docking',d>0.02);
-  /* Centro natural de la barra desde la geometría cacheada (no se lee el
-     layout aquí): es el centro cuando la barra está pegada al fondo. */
-  const natCX=sosGeo.barCX||(window.innerWidth/2);
-  const natCY=sosGeo.barCY||((window.innerHeight||800)-140);
-  let tx=0,ty=0;
-  /* El corazón aparece antes y completo: a d=0.8 ya está al 100% y la
-     barra ya se fue a d=0.85. Del 0.85 al 1.0 solo queda el corazón, sin
-     nada rojizo alrededor (sin sombra rosada: el corazón queda limpio). */
-  const s=Math.min(1,Math.max(0,(d-0.5)/0.3));
-  if(socket && sosSockDoc){
-    tx=(sosSockDoc.x-natCX)*e;
-    ty=(sosSockDoc.y-(window.scrollY||0)-natCY)*e;
-    socket.style.opacity=s.toFixed(3);
-    socket.style.transform='scale('+(0.55+s*0.5).toFixed(3)+')';
-    socket.style.pointerEvents=s>0.6?'':'none';
-    socket.style.boxShadow='';
-    socket.classList.toggle('docked',s>=1);
+  const dy=y-_sosLastY;
+  /* Arriba del todo la píldora siempre está visible. Umbral de 8 px para
+     no parpadear con micro-scrolls. */
+  if(y<=120){
+    if(_sosHidden){_sosHidden=false;b.classList.remove('sos-hidden');}
+  }else if(dy>8 && !_sosHidden){
+    _sosHidden=true;b.classList.add('sos-hidden');
+  }else if(dy<-8 && _sosHidden){
+    _sosHidden=false;b.classList.remove('sos-hidden');
   }
-  sosb.style.transform=(tx||ty)?('translate3d('+tx.toFixed(1)+'px,'+ty.toFixed(1)+'px,0)'):'';
-  sosLastTx=tx; sosLastTy=ty;
-  /* La barra se estrecha rápido: a d=0.8 ya es un círculo de 34px, y se
-     desvanece antes de llegar (a d=0.85 su opacidad ya es 0). */
-  const ec=Math.min(1,Math.max(0,(d-0.05)/0.75));
-  const ec2=ec*ec*(3-2*ec);
-  const cx=Math.max(0,((sosGeo.barW||280)-34)/2*ec2);
-  const cy=Math.max(0,((sosGeo.barH||48)-34)/2*ec2);
-  sosb.style.clipPath=ec2>0?('inset('+cy.toFixed(1)+'px '+cx.toFixed(1)+'px '+cy.toFixed(1)+'px '+cx.toFixed(1)+'px round 999px)'):'';
-  sosb.style.opacity=Math.max(0,1-Math.max(0,(d-0.55)/0.3)).toFixed(3);
-  sosb.style.pointerEvents=d>0.35?'none':'';
-  /* las letras desaparecen durante la reducción: se encogen y se recortan */
-  const span=sosb.querySelector('span');
-  if(span){
-    if(d>0.02 && !sosSpanW0){
-      span.style.whiteSpace='nowrap';
-      span.style.maxWidth='none';
-      sosSpanW0=span.offsetWidth||280;
-    }
-    if(d<=0.02){
-      span.style.whiteSpace='';span.style.maxWidth='';span.style.overflow='';
-      span.style.opacity='';span.style.display='';sosSpanW0=0;
-    }else{
-      const k=Math.max(0,1-d*1.8);
-      span.style.maxWidth=(sosSpanW0*k).toFixed(1)+'px';
-      span.style.overflow='hidden';
-      span.style.opacity=Math.max(0,1-d*2.2).toFixed(3);
-      span.style.display=d>0.6?'none':'';
-    }
-  }
-}
-function sosDockTick(){
-  sosDockRaf=0;
-  /* Sin lerp: el morph sigue al scroll 1:1. El lerp hacía que la barra
-     persiguiera al objetivo y, con el rAF limitado en iOS durante el
-     scroll con impulso, avanzara a saltitos visibles. */
-  sosDockCur=sosDockTargetCalc();
-  applySosDock(sosDockCur);
-}
-/* Actualización SÍNCRONA del morph SOS en el listener de scroll (no por
-   rAF): en iOS el rAF se pausa durante el scroll con impulso, y eso era
-   lo que congelaba la barra y luego la teletransportaba. Como todo sale
-   de la geometría cacheada (sin leer el layout), es barato y la barra
-   siempre va pegada al scroll, incluso durante el impulso. */
-function sosDockSync(){
-  sosDockCur=sosDockTargetCalc();
-  applySosDock(sosDockCur);
-}
-function requestSosDock(){
-  if(!sosDockRaf)sosDockRaf=requestAnimationFrame(sosDockTick);
+  _sosLastY=y;
 }
 /* El compositor y el difuminado del encabezado solo se recalculan una vez
    por cuadro de animación, no en cada evento de scroll (en iOS el scroll
@@ -5712,21 +5591,15 @@ function requestComposerYield(){
     updateMastheadFade();
   });
 }
-let _lastScrollY=window.scrollY||0;
-/* Ventana durante la cual el scroll programado (al abrir el compositor)
-   NO cierra los cajones: sin esto, el scrollTo de apertura dispara el
-   cierre y el cajón se abre y se cierra en el mismo instante. */
-let composerScrollUntil=0;
+/* Los menús y cajones plegables SOLO se cierran por acción del usuario
+   (tocar el botón otra vez, tocar fuera, o elegir una opción). El scroll
+   NUNCA los cierra: el menú de "5 min", el compositor, las hojas de metas
+   y la cajita de canción se quedan abiertos aunque se scrollee. Por eso
+   el listener de scroll ya no llama a closeTransientPopovers(). */
 window.addEventListener('scroll',()=>{
-  sosDockSync();requestComposerYield();
-  const diff=Math.abs((window.scrollY||0)-_lastScrollY);
-  if(diff>50){
-    _lastScrollY=window.scrollY||0;
-    if(Date.now()<composerScrollUntil)return;
-    closeTransientPopovers();
-  }
+  sosDirectionSync();requestComposerYield();
 },{passive:true});
-window.addEventListener('resize',()=>{measureSosGeo();requestSosDock();updateCircleComposerYield();updateMastheadFade();});
+window.addEventListener('resize',()=>{updateCircleComposerYield();updateMastheadFade();});
 if($('heartSocket'))$('heartSocket').onclick=()=>{const b=$('sosb');if(b)b.click();};
 
 /* =========================================================
@@ -7682,6 +7555,51 @@ function notes(){
 }
 $('more').onclick=()=>{nshow=nshow<S.notes.length?nshow+5:4;notes()};
 
+/* TUS ESCRITOS (Diario, pestaña Círculo) · lista estilo Substack/Medium:
+   solo las escrituras largas de la hoja en blanco, no el registro corto
+   del día (ese vive en Hoy, en #nb). Una entrada es de hoja en blanco si
+   se guardó con blank:true, o si su texto es largo (>140 caracteres, las
+   de antes del flag). Al tocarla se abre para leerla y editarla. */
+let editingBlankId=null;
+function renderDiaryList(){
+  const b=$('diaryList');if(!b)return;
+  const list=(S.notes||[]).filter(n=>n&&((n.blank===true)||(n.texto && String(n.texto).length>140)));
+  const c=$('diaryCountLbl');if(c)c.textContent=list.length?list.length+(list.length===1?' escrito':' escritos'):'';
+  b.innerHTML='';
+  if(!list.length){
+    b.innerHTML='<p class="empty">Aún no hay escritos. Tu primera reflexión aparecerá aquí.</p>';
+    return;
+  }
+  list.slice(0,20).forEach(n=>{
+    const card=document.createElement('div');
+    card.className='journal-card diary-entry';
+    const dateLbl=(n.d===today()?'Hoy':esc((n.d||'').slice(5).replace('-','/')))+' · '+esc(n.hora)+' h';
+    const txt=String(n.texto||'');
+    const excerpt=txt.length>140?txt.slice(0,140).replace(/\s+\S*$/,'')+'…':txt;
+    card.innerHTML=
+      '<div class="journal-top">'+
+        '<span class="journal-date">'+dateLbl+'</span>'+
+      '</div>'+
+      '<div class="journal-title">'+esc(n.estado||'Reflexión del día')+'</div>'+
+      (excerpt?'<div class="journal-quote">'+esc(excerpt)+'</div>':'')+
+      '<div class="diary-read">Leer →</div>';
+    card.onclick=()=>openBlankEntry(n.id);
+    b.appendChild(card);
+  });
+}
+/* Abrir un escrito guardado para leerlo (y editarlo): llena la hoja en
+   blanco con su título y texto, y al guardar se ACTUALIZA en su lugar
+   (no se crea un duplicado). */
+function openBlankEntry(id){
+  const n=(S.notes||[]).find(x=>x&&(x.id===id));if(!n)return;
+  editingBlankId=n.id;
+  const bs=$('blankSheetModal');if(!bs)return;
+  bs.hidden=false;
+  if($('blankSheetTitle'))$('blankSheetTitle').value=n.estado&&n.estado!=='Registro del día'?n.estado:'';
+  if($('blankSheetBody')){$('blankSheetBody').value=n.texto||'';$('blankSheetBody').focus();}
+  if($('blankSheetCharCount'))$('blankSheetCharCount').textContent=(String(n.texto||'').length)+' caracteres';
+}
+
 function submitJournalEntry(){
   const v=$('ni').value.trim(),sel=[...document.querySelectorAll('.mo.on:not(.plus-btn)')];
   const clueSum=summarizeTodayClueForNote();
@@ -8796,6 +8714,7 @@ function renderAll(){
   renderMalePanel();
   lossView();
   notes();
+  renderDiaryList();
   renderHomeCoRegulation();
   renderClinicalReport();
   pulses();
@@ -8821,8 +8740,6 @@ renderAll();
 syncBreathMinUI();
 if('scrollRestoration' in history)history.scrollRestoration='manual';
 window.scrollTo(0,0);
-measureSosGeo();
-requestSosDock();
 updateMastheadFade();
 initLiveSyncChannels();
 broadcastLiveEvent('state_sync');
@@ -8896,6 +8813,7 @@ document.addEventListener('pointerdown',e=>{
    ========================================================= */
 if($('openBlankSheetBtn')){
   $('openBlankSheetBtn').onclick=()=>{
+    editingBlankId=null; /* hoja nueva: no se está editando un escrito guardado */
     const bs=$('blankSheetModal');if(!bs)return;
     bs.hidden=false;
     const now=new Date();
@@ -8930,23 +8848,35 @@ if($('saveBlankSheetBtn')){
     const clueSum=summarizeTodayClueForNote();
     const finalState=title||(txt?analyze(txt).e:'Registro del día');
     const finalTheory=txt?analyze(txt).t:'Reconocer cómo está tu cuerpo y tu ánimo ordena tu experiencia del día.';
-    S.notes.unshift({
-      d:today(),
-      hora:timeStr,
-      estado:finalState,
-      teoria:finalTheory,
-      texto:txt,
-      moods:[],
-      moodNames:[],
-      ciclo:S.bioMode==='male'?'Fuerza y recuperación':(clueSum||''),
-      fuerza:S.bioMode==='male'?(getPlannedRoutineForDate(today())?.short||'Calistenia'):'',
-      cuerpo:bioState.cuerpo||'',
-      sl:bioState.sl||'',
-      soc:bioState.soc||''
-    });
-    if(S.notes.length>120)S.notes.pop();
+    /* Escritura larga de la hoja en blanco: se marca blank:true (así la
+       lista "Tus escritos" del Diario la reconoce) y lleva id para poder
+       editarla después sin duplicarla. Si se abrió un escrito guardado,
+       se ACTUALIZA en su lugar; si es nuevo, se agrega arriba. */
+    const existing=editingBlankId!=null?(S.notes||[]).find(x=>x&&(x.id===editingBlankId)):null;
+    if(existing){
+      existing.estado=finalState;existing.teoria=finalTheory;existing.texto=txt;existing.blank=true;
+    }else{
+      S.notes.unshift({
+        id:Date.now(),
+        blank:true,
+        d:today(),
+        hora:timeStr,
+        estado:finalState,
+        teoria:finalTheory,
+        texto:txt,
+        moods:[],
+        moodNames:[],
+        ciclo:S.bioMode==='male'?'Fuerza y recuperación':(clueSum||''),
+        fuerza:S.bioMode==='male'?(getPlannedRoutineForDate(today())?.short||'Calistenia'):'',
+        cuerpo:bioState.cuerpo||'',
+        sl:bioState.sl||'',
+        soc:bioState.soc||''
+      });
+      if(S.notes.length>120)S.notes.pop();
+    }
+    editingBlankId=null;
     markVerifiedPractice('Entrada de diario libre registrada');
-    save();notes();renderClinicalReport();
+    save();notes();renderDiaryList();renderClinicalReport();
     if($('blankSheetModal'))$('blankSheetModal').hidden=true;
     if($('blankSheetBody'))$('blankSheetBody').value='';
     if($('blankSheetTitle'))$('blankSheetTitle').value='';

@@ -130,7 +130,7 @@ body{
   -webkit-font-smoothing:antialiased;
   min-height:100vh;
   min-height:100dvh;
-  padding:2px 12px calc(env(safe-area-inset-bottom,0px) + 76px);
+  padding:2px 12px calc(env(safe-area-inset-bottom,0px) + 92px);
   display:flex;
   justify-content:center;
   transition:background .3s ease,color .25s ease;
@@ -973,10 +973,10 @@ textarea::placeholder{font-style:italic;color:var(--muted);opacity:.65}
   position:relative;overflow:hidden;border-radius:20px;margin-bottom:14px;
   padding:16px 18px 18px;text-align:center;color:var(--ink);
   background:
-    radial-gradient(90% 60% at 50% 36%,color-mix(in srgb, var(--relic,#5A7A9A) 42%, transparent) 0%,transparent 64%),
+    radial-gradient(90% 60% at 50% 36%,color-mix(in srgb, var(--relic,#8A6A3A) 42%, transparent) 0%,transparent 64%),
     linear-gradient(180deg,var(--card-solid) 0%,var(--wash) 100%);
   border:1px solid var(--glass-border);
-  box-shadow:var(--glass-spec),0 22px 44px -28px color-mix(in srgb, var(--relic,#5A7A9A) 45%, transparent);
+  box-shadow:var(--glass-spec),0 22px 44px -28px color-mix(in srgb, var(--relic,#8A6A3A) 45%, transparent);
 }
 .peb-top{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600}
 .peb-chip{display:inline-flex;align-items:center;gap:7px;padding:5px 11px;border-radius:30px;background:var(--card);border:1px solid var(--glass-border);letter-spacing:.10em;white-space:nowrap}
@@ -1456,7 +1456,7 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
 .peb-vessel-btn.on{
   border-color:var(--gold);
   background:var(--card-solid);
-  box-shadow:0 0 0 1px var(--gold),0 12px 24px -10px color-mix(in srgb, var(--g3,#5A7A9A) 65%, transparent);
+  box-shadow:0 0 0 1px var(--gold),0 12px 24px -10px color-mix(in srgb, var(--g3,#8A6A3A) 65%, transparent);
   transform:translateY(-2px);
 }
 .peb-vessel-btn .v-pro{
@@ -1492,12 +1492,12 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
     0 0 0 2px var(--card-solid),0 0 0 3.5px var(--gold),
     0 10px 20px -6px color-mix(in srgb, var(--g3,#5C7A4E) 70%, transparent);
 }
-[data-vessel="luna"] .v-gem{--g1:#F5F0E8;--g2:#C9C2D4;--g3:#8A7FA0}
-[data-vessel="concha"] .v-gem{--g1:#F2E8D5;--g2:#E8A88C;--g3:#C87858}
-[data-vessel="loto"] .v-gem{--g1:#F9E8EA;--g2:#D4A8C8;--g3:#A878A8}
-[data-vessel="faro"] .v-gem{--g1:#D8E0E8;--g2:#8A9AA8;--g3:#2A3A4A}
-[data-vessel="cumbre"] .v-gem{--g1:#D8E0E8;--g2:#7A8A9A;--g3:#3A4A5A}
-[data-vessel="forja"] .v-gem{--g1:#E8D8D0;--g2:#C87848;--g3:#2A2A2A}
+[data-vessel="perla"] .v-gem{--g1:#FDF5F8;--g2:#E8C8D4;--g3:#B898A8}
+[data-vessel="rosa"] .v-gem{--g1:#F9D8E0;--g2:#D488A0;--g3:#9A4A68}
+[data-vessel="nube"] .v-gem{--g1:#F0F0F8;--g2:#C8C8E0;--g3:#8A8AB0}
+[data-vessel="roble"] .v-gem{--g1:#F2D8A8;--g2:#B89048;--g3:#5A3A1A}
+[data-vessel="brujula"] .v-gem{--g1:#FFFDF5;--g2:#C8A85A;--g3:#5A7A9A}
+[data-vessel="escudo"] .v-gem{--g1:#E8D8C8;--g2:#8A9AA8;--g3:#4A2A20}
 @keyframes gemShine{to{transform:rotate(360deg)}}
 @media(prefers-reduced-motion:reduce){.v-gem::after{animation:none}}
 .peb-decay-pill{
@@ -1878,7 +1878,7 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
         </div>
 
         <button type="button" class="retract-toggle" id="caliToggleBtn">
-          <span>Calendario y ejercicios de calistenia antiansiedad</span>
+          <span>Calendario y calistenia</span>
           <b id="caliToggleIcon">Abrir ▾</b>
         </button>
         <div class="retract-body" id="caliRetractBody" hidden>
@@ -1912,15 +1912,15 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
       <!-- CUADRÍCULA BENTO HORIZONTAL UNIFICADA (AGUA, NUTRICIÓN, SUEÑO, CUERPO, ENTORNO Y BIOLOGÍA) -->
       <div class="bio-sec">
         <div class="bio-sec-hd">
-          <span>Hábitos de cuidado hoy</span>
-          <span id="clueTrackCount">Toca una tarjeta para registrar</span>
+          <span>Hábitos de cuidado</span>
+          <span id="clueTrackCount">Toca una tarjeta</span>
         </div>
         <div class="bento-track-grid" id="clueTrackList"></div>
         <div class="bento-drawer" id="bentoActiveDrawer" hidden></div>
       </div>
       <div hidden><div id="ffuerza"></div><div id="ffuerzaExtra"></div><div id="fcuerpo"></div><div id="fcuerpoExtra"></div><div id="fsl"></div><div id="fslExtra"></div><div id="fsoc"></div><div id="fsocExtra"></div></div>
 
-      <textarea id="ni" placeholder="Escribe una línea sobre cómo te sientes hoy o qué aprendiste (opcional) y presiona Enter…"></textarea>
+      <textarea id="ni" class="echo-input" placeholder="Escribe una línea sobre cómo te sientes hoy o qué aprendiste (opcional) y presiona Enter…"></textarea>
       <button class="btn" style="width:100%" id="na">Guardar registro del día</button>
       <p class="ins" id="ins"></p>
       <div id="nb"></div>
@@ -1945,31 +1945,31 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
 
       <div class="pd" id="pd">
         <div class="peb-top">
-          <span id="pebVesselTitle">Faro del Norte</span>
+          <span id="pebVesselTitle">Roble</span>
           <span class="peb-chip"><i></i><span id="as">Vínculos · 0</span></span>
         </div>
                 <svg id="pebSvgArt" viewBox="0 0 120 150" aria-hidden="true">
 <defs>
-        <radialGradient id="gFaro" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#D8E0E8" stop-opacity=".95"/><stop offset=".55" stop-color="#8A9AA8" stop-opacity=".45"/><stop offset="1" stop-color="#2A3A4A" stop-opacity="0"/></radialGradient>
-        <linearGradient id="bFaro" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5A7A9A"/><stop offset=".5" stop-color="#2A3A4A"/><stop offset="1" stop-color="#1A2A38"/></linearGradient>
-        <linearGradient id="bBrass" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#C8A85A"/><stop offset=".5" stop-color="#F2D8A0"/><stop offset="1" stop-color="#C8A85A"/></linearGradient>
-        <linearGradient id="fFaroO" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF0C9"/><stop offset="1" stop-color="#E8A838"/></linearGradient>
-        <linearGradient id="fFaroM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFE8A8"/></linearGradient>
-        <linearGradient id="fFaroC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFF5D6"/></linearGradient>
+        <radialGradient id="gRoble" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#F2D8A8" stop-opacity=".95"/><stop offset=".55" stop-color="#C8A058" stop-opacity=".45"/><stop offset="1" stop-color="#6A4A28" stop-opacity="0"/></radialGradient>
+        <linearGradient id="bRoble" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8A6A3A"/><stop offset=".5" stop-color="#5A3A1A"/><stop offset="1" stop-color="#3A2410"/></linearGradient>
+        <linearGradient id="bRobleTop" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#D8B878"/><stop offset=".5" stop-color="#B89048"/><stop offset="1" stop-color="#D8B878"/></linearGradient>
+        <linearGradient id="fRobleO" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF0C9"/><stop offset="1" stop-color="#D48818"/></linearGradient>
+        <linearGradient id="fRobleM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFE8A8"/></linearGradient>
+        <linearGradient id="fRobleC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFF5D6"/></linearGradient>
       </defs>
-      <circle class="gl" cx="60" cy="68" r="58" fill="url(#gFaro)"/>
-      <ellipse cx="60" cy="144" rx="36" ry="3.5" fill="#1A2A38" opacity=".35"/>
-      <!-- Faro del norte: una torre que guía, la llama es su haz -->
-      <path d="M48 140 L52 102 L68 102 L72 140 Z" fill="url(#bFaro)" stroke="#1A2A38" stroke-width=".8"/>
-      <path d="M52 102 L54 90 L66 90 L68 102 Z" fill="url(#bBrass)" stroke="#8A6A2A" stroke-width=".7"/>
-      <path d="M54 90 C54 84 66 84 66 90 Z" fill="url(#bFaro)" stroke="#1A2A38" stroke-width=".7"/>
-      <path d="M50 122 L70 122 M51 112 L69 112" fill="none" stroke="url(#bBrass)" stroke-width="1.6" opacity=".9"/>
-      <path d="M54 108 C56 118 58 128 60 136" fill="none" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round" opacity=".35"/>
-      <ellipse class="emb" cx="60" cy="96" rx="7" ry="2.4" fill="#F2D8A0"/>
+      <circle class="gl" cx="60" cy="68" r="58" fill="url(#gRoble)"/>
+      <ellipse cx="60" cy="144" rx="36" ry="3.5" fill="#2A1A08" opacity=".35"/>
+      <!-- Roble: un tocón pulido con sus anillos de crecimiento, madera noble -->
+      <path d="M32 102 C32 100 88 100 88 102 L88 132 C88 138 80 142 60 142 C40 142 32 138 32 132 Z" fill="url(#bRoble)" stroke="#2A1A08" stroke-width=".8"/>
+      <path d="M40 108 C42 118 42 128 40 136 M52 108 C54 118 54 128 52 136 M68 108 C66 118 66 128 68 136 M80 108 C78 118 78 128 80 136" fill="none" stroke="#D8B878" stroke-width=".9" stroke-linecap="round" opacity=".5"/>
+      <ellipse cx="60" cy="102" rx="28" ry="6" fill="url(#bRobleTop)" stroke="#6A4A28" stroke-width=".9"/>
+      <ellipse cx="60" cy="102" rx="20" ry="4" fill="none" stroke="#8A6A3A" stroke-width=".8"/>
+      <ellipse cx="60" cy="102" rx="12" ry="2.4" fill="none" stroke="#8A6A3A" stroke-width=".7"/>
+      <ellipse class="emb" cx="60" cy="102" rx="6" ry="1.6" fill="#E8A838"/>
       <g id="fl">
-        <path class="f1" d="M60 94 C44 86 47 58 60 26 C73 58 76 86 60 94Z" fill="url(#fFaroO)" opacity=".95"/>
-        <path class="f2" d="M60 94 C52 88 53 68 60 42 C67 68 68 88 60 94Z" fill="url(#fFaroM)"/>
-        <path class="f3" d="M60 94 C56 91 56 83 60 70 C64 83 64 91 60 94Z" fill="url(#fFaroC)"/>
+        <path class="f1" d="M60 94 C44 86 47 58 60 26 C73 58 76 86 60 94Z" fill="url(#fRobleO)" opacity=".95"/>
+        <path class="f2" d="M60 94 C52 88 53 68 60 42 C67 68 68 88 60 94Z" fill="url(#fRobleM)"/>
+        <path class="f3" d="M60 94 C56 91 56 83 60 70 C64 83 64 91 60 94Z" fill="url(#fRobleC)"/>
       </g>
         </svg>
         <div class="peb-read">
@@ -1998,7 +1998,7 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
   <div class="vpage" id="v-breathe">
     <section class="card">
       <div class="hd">
-        <span>Tu mar en vivo · Respiración guiada <button type="button" class="help-q" data-help="helpCoast" aria-label="Ayuda sobre Respirar">?</button></span>
+        <span>Tu mar en vivo <button type="button" class="help-q" data-help="helpCoast" aria-label="Ayuda sobre Respirar">?</button></span>
         <span id="clk">--:--</span>
       </div>
       <div class="help-tip" id="helpCoast" hidden>Activa el sonido para escuchar el oleaje real y los cuencos armónicos en cada inhalación y exhalación. Así puedes respirar con los ojos cerrados.</div>
@@ -2199,11 +2199,11 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
           <p id="pulsoSubline" style="font-size:12.5px;color:var(--muted);line-height:1.4">Suma tu descanso, tu hidratación, tu comida real y cuánto baja tu ansiedad después de respirar.</p>
           <div class="cmd-kpis">
             <div class="cmd-kpi"><small>Días en calma</small><b id="cs1">14 d</b></div>
-            <div class="cmd-kpi"><small>Alivio al respirar</small><b id="cs3">—</b></div>
+            <div class="cmd-kpi"><small>Alivio</small><b id="cs3">—</b></div>
             <div class="cmd-kpi"><small>Check-ins</small><b id="cs2">0</b></div>
             <div class="cmd-kpi"><small>Tu mejor hora</small><b id="pulsoBestWindow">09:00–12:00</b></div>
           </div>
-          <button type="button" class="cmd-action-btn" id="pulsoHeroActionBtn">Subir mi balance con 2 min en Costa →</button>
+          <button type="button" class="cmd-action-btn" id="pulsoHeroActionBtn">Subir mi balance en Costa</button>
         </div>
       </div>
 
@@ -2211,7 +2211,7 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
       <div class="cmd-chart-box">
         <div class="cmd-chart-hd">
           <div>
-            <strong>Tus Horas de Calma vs. Horas de Antojo o Impulso (24 h)</strong>
+            <strong>Tus Horas de Calma vs. Antojo</strong>
             <p id="cins" style="font-size:12px;color:var(--muted);margin-top:2px"></p>
           </div>
           <span id="pulsoPeakHourBadge">Pico: 21:00 h</span>
@@ -2228,14 +2228,14 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
           <span>18:00 Tarde</span>
           <span>23:00 Noche</span>
         </div>
-        <button type="button" class="cmd-action-btn" id="pulsoScheduleReminderBtn">Programar recordatorio 15 min antes de mi hora sensible →</button><div id="chours" hidden></div>
+        <button type="button" class="cmd-action-btn" id="pulsoScheduleReminderBtn">Recordatorio 15 min antes</button><div id="chours" hidden></div>
       </div>
 
       <!-- GRÁFICA 2: EFICACIA REGULATORIA (TENSIÓN ANTES VS DESPUÉS DE RESPIRAR EN WAVY) -->
       <div class="cmd-chart-box">
         <div class="cmd-chart-hd">
           <div>
-            <strong>Cuánto Baja tu Ansiedad al Respirar en Wavy (Antes vs. Después)</strong>
+            <strong>Tu Ansiedad Antes vs. Después</strong>
             <p id="trigDiagnosisTxt" style="font-size:12px;color:var(--muted);margin-top:2px">Comparativa cuantitativa de cómo desciende tu activación simpática tras 5 minutos en Wavy.</p>
           </div>
           <span id="pulsoDeltaBadge">Alivio prom. -4.2 pts</span>
@@ -2245,25 +2245,25 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
       </div>
 
       <!-- MATRIZ DE CORRELACIONES BIOPSICOSOCIALES (DATA SCIENCE CARDS) -->
-      <div class="hd" style="margin-top:16px"><span>Lo que tu Cuerpo te está Diciendo</span><span>Hábitos × Emociones</span></div>
+      <div class="hd" style="margin-top:16px"><span>Lo que tu cuerpo te dice</span><span>Hábitos × Emociones</span></div>
       <div class="cmd-matrix" id="pulsoCorrelationMatrix"></div>
 
       <!-- GRÁFICA 3: CURVA DE CONSTANCIA DE 90 DÍAS -->
       <div class="cmd-chart-box">
         <div class="cmd-chart-hd">
           <div>
-            <strong>Trayectoria de Autonomía Conductual (Ciclo 90 días)</strong>
+            <strong>Trayectoria de Autonomía</strong>
             <p id="csparkSubtitle" style="font-size:12px;color:var(--muted);margin-top:2px">Neuroplasticidad y consolidación de hábitos de calma</p>
           </div>
           <span id="csparkBadge" style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ok);font-weight:700">Día 1 de 90</span>
         </div>
         <svg class="spark" id="cspark" viewBox="0 0 440 96" preserveAspectRatio="none" style="height:96px;width:100%"></svg>
         <div style="display:flex;justify-content:space-between;font-size:11px;letter-spacing:.08em;color:var(--muted);margin-top:6px;font-variant-numeric:tabular-nums;border-top:1px solid var(--rule);padding-top:4px">
-          <span>Día 1 · Inicio</span>
-          <span>Día 21 · Hábito</span>
-          <span>Día 45 · Mitad</span>
-          <span>Día 60 · Integración</span>
-          <span>Día 90 · Autonomía</span>
+          <span>Día 1</span>
+          <span>Día 21</span>
+          <span>Día 45</span>
+          <span>Día 60</span>
+          <span>Día 90</span>
         </div>
       </div>
 
@@ -2278,21 +2278,21 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
 
       <div class="prem">
         <span class="tag" id="premBadge">Reporte & Especialistas</span>
-        <h3 id="premTitle">Exporta tu Reporte de Bienestar o comparte con tu especialista</h3>
+        <h3 id="premTitle">Tu Reporte de Bienestar</h3>
         <p id="premDesc">Descarga tu reporte de 1 página en PDF o vincula el código de tu psicóloga/o si llevas acompañamiento externo (ej. <b>GARCIATERAPEUTA</b>).</p>
         <div class="row" style="margin-bottom:10px">
-          <input class="line" id="therCode" maxlength="30" placeholder="Código opcional de especialista" style="text-transform:uppercase">
+          <input class="line" id="therCode" maxlength="30" placeholder="Código" style="text-transform:uppercase">
           <button class="btn gold" id="applyCode">Vincular</button>
         </div>
         <div class="row" style="grid-template-columns:1fr 1fr;padding-top:10px;border-top:1px solid var(--rule)">
-          <button class="btn" id="exportClinicalPdfBtn">Descargar PDF / Imprimir</button>
+          <button class="btn" id="exportClinicalPdfBtn">Descargar PDF</button>
           <button class="btn ghost" id="toggleShare">Vista previa de tabla</button>
         </div>
         <div class="rep" id="therReport" hidden></div>
       </div>
 
       <details>
-        <summary>Portal para Especialistas de Salud (Validación de Cédula)</summary>
+        <summary>Portal para Especialistas</summary>
         <div style="margin-top:10px;line-height:1.55">
           <p style="margin-bottom:8px">La cédula profesional se valida ante el Registro Nacional de Profesionistas (SEP) antes de activar un código.</p>
           <input class="line" id="proName" placeholder="Nombre completo y especialidad" style="margin-bottom:8px">
@@ -4453,7 +4453,10 @@ if($('openCircleComposerBtn')){
       dr.hidden=!dr.hidden;
       if(!dr.hidden){
         if($('echoInput'))$('echoInput').focus();
-        /* La pantalla baja hasta abajo para que el cuadro de texto se vea completo. */
+        /* La pantalla baja hasta abajo para que el cuadro de texto se vea completo.
+           El scroll es programado: se marca la ventana para que el listener de
+           scroll no lo confunda con un scroll del usuario y no cierre el cajón. */
+        composerScrollUntil=Date.now()+1200;
         window.scrollTo({top:document.documentElement.scrollHeight,behavior:'smooth'});
       }
     }
@@ -4563,7 +4566,7 @@ $('postEchoBtn').onclick=async()=>{
   save(true);renderCircleFeed();
   toast('Nota publicada y sincronizada con tu círculo','ok');
 };
-$('echoInput').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();$('postEchoBtn').click()}});
+$('echoInput').addEventListener('keydown',e=>{if(e.key==='Enter' && !e.shiftKey){e.preventDefault();$('postEchoBtn').click()}});
 
 document.querySelectorAll('.react-btn').forEach(btn=>{
   btn.onclick=()=>{
@@ -4582,7 +4585,7 @@ document.querySelectorAll('.react-btn').forEach(btn=>{
 const DAILY_CIRCLE_QUESTIONS=[
   '¿Qué pensamiento decidiste soltar hoy para proteger tu paz?',
   '¿Qué parte de tu cuerpo pide descanso o silencio en este momento?',
-  '¿Qué pequeño gesto de hoy te devolvió a tu centro?',
+  '¿Qué gesto de hoy te devolvió a tu centro?',
   '¿Qué límite sano pusiste esta semana del que te sientes en paz?',
   '¿Qué canción o sonido describe cómo está tu mar interior hoy?',
   'Si hoy no tuvieras que demostrar nada a nadie, ¿cómo respirarías?',
@@ -4603,7 +4606,7 @@ function buildOpenSyncBanner(){
   b.style.cssText='display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 14px;margin-bottom:11px;border-radius:14px;background:var(--wash);border:1px solid var(--glass-border);box-shadow:var(--glass-spec)';
   b.innerHTML=
     '<div>'+
-      '<strong style="font-family:var(--serif);font-size:16px;font-weight:500;display:block">'+(S.openSync?'Tu sintonía está abierta en la orilla':'¿Deseas respirar acompañada/o hoy?')+'</strong>'+
+      '<strong style="font-family:var(--serif);font-size:16px;font-weight:500;display:block">'+(S.openSync?'Tu sintonía está abierta en la orilla':'¿Respirar acompañada/o hoy?')+'</strong>'+
       '<span style="font-size:11.5px;color:var(--muted)">'+(S.openSync?'Tu círculo ve tu señal encendida y puede sumarse o enviarte un gesto.':'Enciende tu señal sin presionar a nadie; quien esté libre se unirá.')+'</span>'+
     '</div>'+
     '<button type="button" class="open-sync-pill"><i></i><span>'+(S.openSync?'Sintonía abierta':'Abrir sintonía')+'</span></button>';
@@ -4687,6 +4690,10 @@ function renderCircleFeed(){
     if(r)r.hidden=true;
   };
   const replyPublish=promptBanner.querySelector('.daily-reply-publish');
+  const replyTa=promptBanner.querySelector('.daily-reply textarea');
+  /* Misma regla que el Diario y el compositor: Enter publica, Mayús+Enter
+     baja de renglón. Así las tres notas cortas se comportan igual. */
+  if(replyTa)replyTa.addEventListener('keydown',e=>{if(e.key==='Enter' && !e.shiftKey){e.preventDefault();if(replyPublish)replyPublish.click()}});
   if(replyPublish)replyPublish.onclick=()=>{
     const ta=promptBanner.querySelector('.daily-reply textarea');
     const txt=ta?ta.value.trim():'';
@@ -5307,7 +5314,7 @@ function renderPulsoCommandCenter(){
     const samples=withAfter.length>=2?withAfter.slice(0,6).reverse():[
       {emo:'Estrés',pre:8,after:3,hora:'21:15'},
       {emo:'Ansiedad',pre:7,after:2,hora:'18:40'},
-      {emo:'Aburrimiento',pre:6,after:2,hora:'22:10'},
+      {emo:'Aburrido',pre:6,after:2,hora:'22:10'},
       {emo:'Tensión',pre:8,after:3,hora:'16:20'},
       {emo:'Impulso',pre:7,after:2,hora:'23:05'}
     ];
@@ -5627,10 +5634,18 @@ function requestComposerYield(){
   });
 }
 let _lastScrollY=window.scrollY||0;
+/* Ventana durante la cual el scroll programado (al abrir el compositor)
+   NO cierra los cajones: sin esto, el scrollTo de apertura dispara el
+   cierre y el cajón se abre y se cierra en el mismo instante. */
+let composerScrollUntil=0;
 window.addEventListener('scroll',()=>{
   requestSosDock();requestComposerYield();
   const diff=Math.abs((window.scrollY||0)-_lastScrollY);
-  if(diff>50){closeTransientPopovers();_lastScrollY=window.scrollY||0;}
+  if(diff>50){
+    _lastScrollY=window.scrollY||0;
+    if(Date.now()<composerScrollUntil)return;
+    closeTransientPopovers();
+  }
 },{passive:true});
 window.addEventListener('resize',()=>{measureSosSocket();requestSosDock();updateCircleComposerYield();updateMastheadFade();});
 if($('heartSocket'))$('heartSocket').onclick=()=>{const b=$('sosb');if(b)b.click();};
@@ -5665,7 +5680,21 @@ function updateCircleComposerYield(){
      pasando el último cuadro de texto. El último recuadro del feed pinta
      por encima del compositor (ver CSS), así que sus textos y el botón
      VINCULAR siempre quedan legibles y nunca los tapa. */
-  const push=Math.max(0,(lr.bottom+10)-natTop);
+  const push0=Math.max(0,(lr.bottom+10)-natTop);
+  /* Con el cajón ABIERTO el usuario está escribiendo: el compositor nunca
+     puede quedar escondido debajo de la barra. Se topa el empuje para que
+     el fondo del compositor quede siempre arriba de la barra (con 6 px de
+     aire). Con el cajón cerrado se mantiene el comportamiento sin límite. */
+  let push=push0;
+  const dr=$('circleComposerDrawer');
+  if(dr && !dr.hidden){
+    const nav=document.querySelector('.bnav');
+    const navTop=nav?nav.getBoundingClientRect().top:window.innerHeight;
+    const wrapH=wr.bottom-wr.top;
+    const natBottom=natTop+wrapH;
+    const maxPush=Math.max(0,navTop-6-natBottom);
+    push=Math.min(push,maxPush);
+  }
   circleYieldCur=push;
   wrap.style.transform=push>0?('translateY('+push.toFixed(1)+'px)'):'';
 }
@@ -6744,7 +6773,7 @@ function renderClueTrackList(){
   }
 
   if($('clueTrackCount')){
-    $('clueTrackCount').textContent=totalCount>0?(totalCount+(totalCount===1?' hábito marcado hoy':' hábitos marcados hoy')):'Toca una tarjeta para registrar';
+    $('clueTrackCount').textContent=totalCount>0?(totalCount+(totalCount===1?' hábito marcado hoy':' hábitos marcados hoy')):'Toca una tarjeta';
   }
 }
 
@@ -7503,157 +7532,176 @@ const fuel=()=>{
 };
 function addFuel(n){S.fuel={v:Math.min(100,fuel()+n),t:Date.now()};save();flameView()}
 const PEB_VESSELS={
-  luna:{
-    title:'Luna de Nácar',mode:'female',short:'Luna',pro:false,relic:'#B8A8C8',
+  perla:{
+    title:'Perla',mode:'female',short:'Perla',pro:false,relic:'#D8B8C8',
     svg:()=>`
       <defs>
-        <radialGradient id="gLuna" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#F5F0E8" stop-opacity=".95"/><stop offset=".55" stop-color="#C9C2D4" stop-opacity=".45"/><stop offset="1" stop-color="#8A7FA0" stop-opacity="0"/></radialGradient>
-        <linearGradient id="bLuna" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E8E0F0"/><stop offset=".5" stop-color="#B8A8C8"/><stop offset="1" stop-color="#6A5A80"/></linearGradient>
-        <linearGradient id="fLunaO" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#B8A8D8"/></linearGradient>
-        <linearGradient id="fLunaM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E8E0F0"/></linearGradient>
-        <linearGradient id="fLunaC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#F5F0FF"/></linearGradient>
+        <radialGradient id="gPerla" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#FDF5F8" stop-opacity=".95"/><stop offset=".55" stop-color="#F2D8E0" stop-opacity=".45"/><stop offset="1" stop-color="#C8A8B8" stop-opacity="0"/></radialGradient>
+        <radialGradient id="bPerla" cx="38%" cy="32%" r="75%"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".45" stop-color="#F9E8EC"/><stop offset=".8" stop-color="#E8C8D4"/><stop offset="1" stop-color="#C8A8B8"/></radialGradient>
+        <linearGradient id="fPerlaO" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E8B8C8"/></linearGradient>
+        <linearGradient id="fPerlaM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#F9E8EC"/></linearGradient>
+        <linearGradient id="fPerlaC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFF5F8"/></linearGradient>
       </defs>
-      <circle class="gl" cx="60" cy="70" r="56" fill="url(#gLuna)"/>
-      <ellipse cx="60" cy="142" rx="34" ry="3.5" fill="#6A5A80" opacity=".18"/>
-      <!-- Luna creciente de nácar: una media luna que acuna la llama -->
-      <path d="M28 98 C28 122 42 138 60 138 C78 138 92 122 92 98 C84 112 74 120 60 120 C46 120 36 112 28 98 Z" fill="url(#bLuna)" stroke="#6A5A80" stroke-width=".8"/>
-      <path d="M36 106 C40 116 44 124 50 130" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity=".5"/>
-      <ellipse cx="60" cy="120" rx="14" ry="2.6" fill="#8A7FA0"/>
-      <ellipse class="emb" cx="60" cy="120" rx="7" ry="1.6" fill="#E8E0F0"/>
+      <circle class="gl" cx="60" cy="70" r="56" fill="url(#gPerla)"/>
+      <ellipse cx="60" cy="143" rx="32" ry="3.2" fill="#8A6A78" opacity=".16"/>
+      <!-- Perla: una esfera lisa e iridiscente sobre una bandeja, sin picos -->
+      <ellipse cx="60" cy="140" rx="30" ry="4.5" fill="#E8D8D0" stroke="#C8A898" stroke-width=".8"/>
+      <circle cx="60" cy="118" r="24" fill="url(#bPerla)" stroke="#B898A8" stroke-width=".7"/>
+      <ellipse cx="51" cy="109" rx="8" ry="5" fill="#FFFFFF" opacity=".75" transform="rotate(-25 51 109)"/>
+      <ellipse cx="68" cy="128" rx="5" ry="3" fill="#F2D8E0" opacity=".5"/>
+      <ellipse class="emb" cx="60" cy="94" rx="7" ry="1.8" fill="#E8C8D4"/>
       <g id="fl">
-        <path class="f1" d="M60 94 C44 86 47 58 60 26 C73 58 76 86 60 94Z" fill="url(#fLunaO)" opacity=".95"/>
-        <path class="f2" d="M60 94 C52 88 53 68 60 42 C67 68 68 88 60 94Z" fill="url(#fLunaM)"/>
-        <path class="f3" d="M60 94 C56 91 56 83 60 70 C64 83 64 91 60 94Z" fill="url(#fLunaC)"/>
+        <path class="f1" d="M60 94 C44 86 47 58 60 26 C73 58 76 86 60 94Z" fill="url(#fPerlaO)" opacity=".95"/>
+        <path class="f2" d="M60 94 C52 88 53 68 60 42 C67 68 68 88 60 94Z" fill="url(#fPerlaM)"/>
+        <path class="f3" d="M60 94 C56 91 56 83 60 70 C64 83 64 91 60 94Z" fill="url(#fPerlaC)"/>
       </g>`
   },
-  concha:{
-    title:'Concha Marina',mode:'female',short:'Concha',pro:true,relic:'#D4A88C',
+  rosa:{
+    title:'Rosa',mode:'female',short:'Rosa',pro:true,relic:'#C87890',
     svg:()=>`
       <defs>
-        <radialGradient id="gConcha" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#F2E8D5" stop-opacity=".95"/><stop offset=".55" stop-color="#E8A88C" stop-opacity=".45"/><stop offset="1" stop-color="#C87858" stop-opacity="0"/></radialGradient>
-        <linearGradient id="bConcha" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F2D8B8"/><stop offset=".5" stop-color="#E8A88C"/><stop offset="1" stop-color="#B86848"/></linearGradient>
-        <linearGradient id="fConchaO" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF0C9"/><stop offset="1" stop-color="#F2A058"/></linearGradient>
-        <linearGradient id="fConchaM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFE8B8"/></linearGradient>
-        <linearGradient id="fConchaC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFF5D6"/></linearGradient>
+        <radialGradient id="gRosa" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#FDE8EC" stop-opacity=".95"/><stop offset=".55" stop-color="#E8A8B8" stop-opacity=".45"/><stop offset="1" stop-color="#B85A78" stop-opacity="0"/></radialGradient>
+        <linearGradient id="bRosa" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F2B8C8"/><stop offset=".5" stop-color="#D488A0"/><stop offset="1" stop-color="#9A4A68"/></linearGradient>
+        <linearGradient id="bRosaIn" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F9D8E0"/><stop offset="1" stop-color="#C87890"/></linearGradient>
+        <linearGradient id="fRosaO" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE8F0"/><stop offset="1" stop-color="#D488A8"/></linearGradient>
+        <linearGradient id="fRosaM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFE8F0"/></linearGradient>
+        <linearGradient id="fRosaC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFF5F8"/></linearGradient>
       </defs>
-      <circle class="gl" cx="60" cy="70" r="56" fill="url(#gConcha)"/>
-      <ellipse cx="60" cy="142" rx="34" ry="3.5" fill="#B86848" opacity=".18"/>
-      <!-- Concha marina: un abanico con vetas que se abren al mar -->
-      <path d="M24 100 C24 125 40 140 60 140 C80 140 96 125 96 100 C80 108 40 108 24 100 Z" fill="url(#bConcha)" stroke="#B86848" stroke-width=".8"/>
-      <path d="M60 140 L36 102 M60 140 L48 100 M60 140 L60 98 M60 140 L72 100 M60 140 L84 102" fill="none" stroke="#F2D8B8" stroke-width="1" stroke-linecap="round" opacity=".6"/>
-      <path d="M32 106 C36 116 40 124 46 130" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity=".45"/>
-      <ellipse cx="60" cy="100" rx="36" ry="5" fill="#F2E8D5" stroke="#C87858" stroke-width="1"/>
-      <ellipse cx="60" cy="100" rx="30" ry="3.6" fill="#B86848"/>
-      <ellipse class="emb" cx="60" cy="100" rx="13" ry="2" fill="#F2A058"/>
+      <circle class="gl" cx="60" cy="70" r="56" fill="url(#gRosa)"/>
+      <ellipse cx="60" cy="143" rx="32" ry="3.2" fill="#8A4A5A" opacity=".16"/>
+      <!-- Rosa: cinco pétalos redondos alrededor de un centro dorado, sin espinas -->
+      <ellipse cx="60" cy="140" rx="26" ry="4" fill="#7A3A50" opacity=".2"/>
+      <g fill="url(#bRosa)" stroke="#9A4A68" stroke-width=".7">
+        <ellipse cx="60" cy="104" rx="13" ry="19"/>
+        <ellipse cx="41" cy="118" rx="13" ry="19" transform="rotate(-72 41 118)"/>
+        <ellipse cx="79" cy="118" rx="13" ry="19" transform="rotate(72 79 118)"/>
+        <ellipse cx="47" cy="132" rx="13" ry="19" transform="rotate(-36 47 132)"/>
+        <ellipse cx="73" cy="132" rx="13" ry="19" transform="rotate(36 73 132)"/>
+      </g>
+      <ellipse cx="60" cy="120" rx="12" ry="14" fill="url(#bRosaIn)" stroke="#B85A78" stroke-width=".6"/>
+      <circle cx="60" cy="120" r="5" fill="#E8C878"/>
+      <ellipse class="emb" cx="60" cy="94" rx="7" ry="1.8" fill="#D488A8"/>
       <g id="fl">
-        <path class="f1" d="M60 94 C44 86 47 58 60 26 C73 58 76 86 60 94Z" fill="url(#fConchaO)" opacity=".95"/>
-        <path class="f2" d="M60 94 C52 88 53 68 60 42 C67 68 68 88 60 94Z" fill="url(#fConchaM)"/>
-        <path class="f3" d="M60 94 C56 91 56 83 60 70 C64 83 64 91 60 94Z" fill="url(#fConchaC)"/>
+        <path class="f1" d="M60 94 C44 86 47 58 60 26 C73 58 76 86 60 94Z" fill="url(#fRosaO)" opacity=".95"/>
+        <path class="f2" d="M60 94 C52 88 53 68 60 42 C67 68 68 88 60 94Z" fill="url(#fRosaM)"/>
+        <path class="f3" d="M60 94 C56 91 56 83 60 70 C64 83 64 91 60 94Z" fill="url(#fRosaC)"/>
       </g>`
   },
-  loto:{
-    title:'Loto del Alba',mode:'female',short:'Loto',pro:true,relic:'#C8A8C8',
+  nube:{
+    title:'Nube',mode:'female',short:'Nube',pro:true,relic:'#A8A8C8',
     svg:()=>`
       <defs>
-        <radialGradient id="gLoto" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#F9E8EA" stop-opacity=".95"/><stop offset=".55" stop-color="#D4A8C8" stop-opacity=".45"/><stop offset="1" stop-color="#A878A8" stop-opacity="0"/></radialGradient>
-        <linearGradient id="bLoto" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F2D5D8"/><stop offset=".5" stop-color="#C8A8D4"/><stop offset="1" stop-color="#8A5A90"/></linearGradient>
-        <linearGradient id="fLotoO" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE8F0"/><stop offset="1" stop-color="#D488A8"/></linearGradient>
-        <linearGradient id="fLotoM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFE8F0"/></linearGradient>
-        <linearGradient id="fLotoC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFF5F8"/></linearGradient>
+        <radialGradient id="gNube" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#F0F0F8" stop-opacity=".95"/><stop offset=".55" stop-color="#C8C8E0" stop-opacity=".45"/><stop offset="1" stop-color="#8A8AB0" stop-opacity="0"/></radialGradient>
+        <linearGradient id="bNube" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".6" stop-color="#E0E0F0"/><stop offset="1" stop-color="#B8B8D4"/></linearGradient>
+        <linearGradient id="fNubeO" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#B8B8D8"/></linearGradient>
+        <linearGradient id="fNubeM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E8E8F8"/></linearGradient>
+        <linearGradient id="fNubeC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#F5F0FF"/></linearGradient>
       </defs>
-      <circle class="gl" cx="60" cy="70" r="56" fill="url(#gLoto)"/>
-      <ellipse cx="60" cy="142" rx="34" ry="3.5" fill="#8A5A90" opacity=".18"/>
-      <!-- Loto del alba: tres pétalos que se abren al amanecer -->
-      <path d="M28 102 C28 122 42 138 60 138 C78 138 92 122 92 102 C86 110 80 114 74 114 C76 108 76 104 74 100 C70 108 66 112 60 112 C54 112 50 108 46 100 C44 104 44 108 46 114 C40 114 34 110 28 102 Z" fill="url(#bLoto)" stroke="#8A5A90" stroke-width=".8"/>
-      <path d="M36 110 C40 118 44 126 50 131" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity=".5"/>
-      <ellipse cx="60" cy="112" rx="20" ry="3" fill="#C8A8D4"/>
-      <ellipse class="emb" cx="60" cy="112" rx="9" ry="1.8" fill="#E8C878"/>
+      <circle class="gl" cx="60" cy="70" r="56" fill="url(#gNube)"/>
+      <ellipse cx="60" cy="143" rx="34" ry="3.2" fill="#6A6A90" opacity=".16"/>
+      <!-- Nube: tres círculos suaves que forman una nube, todo curvas -->
+      <ellipse cx="60" cy="138" rx="36" ry="5" fill="url(#bNube)" stroke="#9A9AC0" stroke-width=".7"/>
+      <circle cx="42" cy="124" r="16" fill="url(#bNube)" stroke="#9A9AC0" stroke-width=".7"/>
+      <circle cx="60" cy="114" r="20" fill="url(#bNube)" stroke="#9A9AC0" stroke-width=".7"/>
+      <circle cx="78" cy="124" r="16" fill="url(#bNube)" stroke="#9A9AC0" stroke-width=".7"/>
+      <ellipse cx="52" cy="108" rx="7" ry="4" fill="#FFFFFF" opacity=".7" transform="rotate(-20 52 108)"/>
+      <ellipse class="emb" cx="60" cy="94" rx="7" ry="1.8" fill="#C8C8E0"/>
       <g id="fl">
-        <path class="f1" d="M60 94 C44 86 47 58 60 26 C73 58 76 86 60 94Z" fill="url(#fLotoO)" opacity=".95"/>
-        <path class="f2" d="M60 94 C52 88 53 68 60 42 C67 68 68 88 60 94Z" fill="url(#fLotoM)"/>
-        <path class="f3" d="M60 94 C56 91 56 83 60 70 C64 83 64 91 60 94Z" fill="url(#fLotoC)"/>
+        <path class="f1" d="M60 94 C44 86 47 58 60 26 C73 58 76 86 60 94Z" fill="url(#fNubeO)" opacity=".95"/>
+        <path class="f2" d="M60 94 C52 88 53 68 60 42 C67 68 68 88 60 94Z" fill="url(#fNubeM)"/>
+        <path class="f3" d="M60 94 C56 91 56 83 60 70 C64 83 64 91 60 94Z" fill="url(#fNubeC)"/>
       </g>`
   },
-  faro:{
-    title:'Faro del Norte',mode:'male',short:'Faro',pro:false,relic:'#5A7A9A',
+  roble:{
+    title:'Roble',mode:'male',short:'Roble',pro:false,relic:'#8A6A3A',
     svg:()=>`
       <defs>
-        <radialGradient id="gFaro" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#D8E0E8" stop-opacity=".95"/><stop offset=".55" stop-color="#8A9AA8" stop-opacity=".45"/><stop offset="1" stop-color="#2A3A4A" stop-opacity="0"/></radialGradient>
-        <linearGradient id="bFaro" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5A7A9A"/><stop offset=".5" stop-color="#2A3A4A"/><stop offset="1" stop-color="#1A2A38"/></linearGradient>
-        <linearGradient id="bBrass" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#C8A85A"/><stop offset=".5" stop-color="#F2D8A0"/><stop offset="1" stop-color="#C8A85A"/></linearGradient>
-        <linearGradient id="fFaroO" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF0C9"/><stop offset="1" stop-color="#E8A838"/></linearGradient>
-        <linearGradient id="fFaroM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFE8A8"/></linearGradient>
-        <linearGradient id="fFaroC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFF5D6"/></linearGradient>
+        <radialGradient id="gRoble" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#F2D8A8" stop-opacity=".95"/><stop offset=".55" stop-color="#C8A058" stop-opacity=".45"/><stop offset="1" stop-color="#6A4A28" stop-opacity="0"/></radialGradient>
+        <linearGradient id="bRoble" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8A6A3A"/><stop offset=".5" stop-color="#5A3A1A"/><stop offset="1" stop-color="#3A2410"/></linearGradient>
+        <linearGradient id="bRobleTop" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#D8B878"/><stop offset=".5" stop-color="#B89048"/><stop offset="1" stop-color="#D8B878"/></linearGradient>
+        <linearGradient id="fRobleO" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF0C9"/><stop offset="1" stop-color="#D48818"/></linearGradient>
+        <linearGradient id="fRobleM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFE8A8"/></linearGradient>
+        <linearGradient id="fRobleC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFF5D6"/></linearGradient>
       </defs>
-      <circle class="gl" cx="60" cy="68" r="58" fill="url(#gFaro)"/>
-      <ellipse cx="60" cy="144" rx="36" ry="3.5" fill="#1A2A38" opacity=".35"/>
-      <!-- Faro del norte: una torre que guía, la llama es su haz -->
-      <path d="M48 140 L52 102 L68 102 L72 140 Z" fill="url(#bFaro)" stroke="#1A2A38" stroke-width=".8"/>
-      <path d="M52 102 L54 90 L66 90 L68 102 Z" fill="url(#bBrass)" stroke="#8A6A2A" stroke-width=".7"/>
-      <path d="M54 90 C54 84 66 84 66 90 Z" fill="url(#bFaro)" stroke="#1A2A38" stroke-width=".7"/>
-      <path d="M50 122 L70 122 M51 112 L69 112" fill="none" stroke="url(#bBrass)" stroke-width="1.6" opacity=".9"/>
-      <path d="M54 108 C56 118 58 128 60 136" fill="none" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round" opacity=".35"/>
-      <ellipse class="emb" cx="60" cy="96" rx="7" ry="2.4" fill="#F2D8A0"/>
+      <circle class="gl" cx="60" cy="68" r="58" fill="url(#gRoble)"/>
+      <ellipse cx="60" cy="144" rx="36" ry="3.5" fill="#2A1A08" opacity=".35"/>
+      <!-- Roble: un tocón pulido con sus anillos de crecimiento, madera noble -->
+      <path d="M32 102 C32 100 88 100 88 102 L88 132 C88 138 80 142 60 142 C40 142 32 138 32 132 Z" fill="url(#bRoble)" stroke="#2A1A08" stroke-width=".8"/>
+      <path d="M40 108 C42 118 42 128 40 136 M52 108 C54 118 54 128 52 136 M68 108 C66 118 66 128 68 136 M80 108 C78 118 78 128 80 136" fill="none" stroke="#D8B878" stroke-width=".9" stroke-linecap="round" opacity=".5"/>
+      <ellipse cx="60" cy="102" rx="28" ry="6" fill="url(#bRobleTop)" stroke="#6A4A28" stroke-width=".9"/>
+      <ellipse cx="60" cy="102" rx="20" ry="4" fill="none" stroke="#8A6A3A" stroke-width=".8"/>
+      <ellipse cx="60" cy="102" rx="12" ry="2.4" fill="none" stroke="#8A6A3A" stroke-width=".7"/>
+      <ellipse class="emb" cx="60" cy="102" rx="6" ry="1.6" fill="#E8A838"/>
       <g id="fl">
-        <path class="f1" d="M60 94 C44 86 47 58 60 26 C73 58 76 86 60 94Z" fill="url(#fFaroO)" opacity=".95"/>
-        <path class="f2" d="M60 94 C52 88 53 68 60 42 C67 68 68 88 60 94Z" fill="url(#fFaroM)"/>
-        <path class="f3" d="M60 94 C56 91 56 83 60 70 C64 83 64 91 60 94Z" fill="url(#fFaroC)"/>
+        <path class="f1" d="M60 94 C44 86 47 58 60 26 C73 58 76 86 60 94Z" fill="url(#fRobleO)" opacity=".95"/>
+        <path class="f2" d="M60 94 C52 88 53 68 60 42 C67 68 68 88 60 94Z" fill="url(#fRobleM)"/>
+        <path class="f3" d="M60 94 C56 91 56 83 60 70 C64 83 64 91 60 94Z" fill="url(#fRobleC)"/>
       </g>`
   },
-  cumbre:{
-    title:'Cumbre de Acero',mode:'male',short:'Cumbre',pro:true,relic:'#7A8A9A',
+  brujula:{
+    title:'Brújula',mode:'male',short:'Brújula',pro:true,relic:'#5A7A9A',
     svg:()=>`
       <defs>
-        <radialGradient id="gCumbre" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#D8E0E8" stop-opacity=".95"/><stop offset=".55" stop-color="#8A9AA8" stop-opacity=".45"/><stop offset="1" stop-color="#3A4A5A" stop-opacity="0"/></radialGradient>
-        <linearGradient id="bCumbre" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8A9AA8"/><stop offset=".5" stop-color="#4A5A6A"/><stop offset="1" stop-color="#2A3A4A"/></linearGradient>
-        <linearGradient id="fCumbreO" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E8F0F8"/><stop offset="1" stop-color="#7AA8D8"/></linearGradient>
-        <linearGradient id="fCumbreM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#D8E8F8"/></linearGradient>
-        <linearGradient id="fCumbreC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#F0F8FF"/></linearGradient>
+        <radialGradient id="gBrujula" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#D8E0E8" stop-opacity=".95"/><stop offset=".55" stop-color="#8A9AA8" stop-opacity=".45"/><stop offset="1" stop-color="#2A3A4A" stop-opacity="0"/></radialGradient>
+        <linearGradient id="bBrass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E8C878"/><stop offset=".5" stop-color="#B89048"/><stop offset="1" stop-color="#8A6A28"/></linearGradient>
+        <radialGradient id="bBrujulaFace" cx="50%" cy="42%" r="65%"><stop offset="0" stop-color="#FFFDF5"/><stop offset="1" stop-color="#E8DCC0"/></radialGradient>
+        <linearGradient id="fBrujulaO" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF0C9"/><stop offset="1" stop-color="#C87828"/></linearGradient>
+        <linearGradient id="fBrujulaM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFE8A8"/></linearGradient>
+        <linearGradient id="fBrujulaC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFF5D6"/></linearGradient>
       </defs>
-      <circle class="gl" cx="60" cy="68" r="58" fill="url(#gCumbre)"/>
-      <ellipse cx="60" cy="144" rx="38" ry="3.5" fill="#2A3A4A" opacity=".3"/>
-      <!-- Cumbre de acero: una cima firme, la llama en lo más alto -->
-      <path d="M60 92 L28 140 L92 140 Z" fill="url(#bCumbre)" stroke="#2A3A4A" stroke-width=".8"/>
-      <path d="M60 92 L52 106 L58 104 L54 112 L60 108 L66 112 L62 104 L68 106 Z" fill="#FFFFFF" opacity=".9"/>
-      <path d="M44 122 L52 132 M76 122 L68 132" fill="none" stroke="#FFFFFF" stroke-width="1.4" stroke-linecap="round" opacity=".4"/>
-      <ellipse class="emb" cx="60" cy="96" rx="6" ry="2" fill="#C8D8E8"/>
+      <circle class="gl" cx="60" cy="68" r="58" fill="url(#gBrujula)"/>
+      <ellipse cx="60" cy="144" rx="34" ry="3.5" fill="#1A2A38" opacity=".35"/>
+      <!-- Brújula: una esfera de latón con su dial, la aguja apunta al norte -->
+      <circle cx="60" cy="120" r="27" fill="url(#bBrass)" stroke="#6A4A18" stroke-width="1"/>
+      <circle cx="60" cy="120" r="22" fill="url(#bBrujulaFace)" stroke="#8A6A28" stroke-width=".7"/>
+      <g stroke="#5A4A28" stroke-width="1" stroke-linecap="round">
+        <line x1="60" y1="101" x2="60" y2="105"/><line x1="60" y1="135" x2="60" y2="139"/>
+        <line x1="41" y1="120" x2="45" y2="120"/><line x1="75" y1="120" x2="79" y2="120"/>
+        <line x1="47" y1="107" x2="49" y2="109"/><line x1="73" y1="107" x2="71" y2="109"/>
+        <line x1="47" y1="133" x2="49" y2="131"/><line x1="73" y1="133" x2="71" y2="131"/>
+      </g>
+      <path d="M60 102 C63 110 63 118 60 126 C57 118 57 110 60 102 Z" fill="#B85A28" stroke="#8A3A18" stroke-width=".6"/>
+      <path d="M60 138 C57 130 57 122 60 114 C63 122 63 130 60 138 Z" fill="#E8E0D0" stroke="#8A7A58" stroke-width=".6"/>
+      <circle cx="60" cy="120" r="3.5" fill="url(#bBrass)" stroke="#6A4A18" stroke-width=".7"/>
+      <ellipse class="emb" cx="60" cy="94" rx="7" ry="1.8" fill="#C8A85A"/>
       <g id="fl">
-        <path class="f1" d="M60 94 C44 86 47 58 60 26 C73 58 76 86 60 94Z" fill="url(#fCumbreO)" opacity=".95"/>
-        <path class="f2" d="M60 94 C52 88 53 68 60 42 C67 68 68 88 60 94Z" fill="url(#fCumbreM)"/>
-        <path class="f3" d="M60 94 C56 91 56 83 60 70 C64 83 64 91 60 94Z" fill="url(#fCumbreC)"/>
+        <path class="f1" d="M60 94 C44 86 47 58 60 26 C73 58 76 86 60 94Z" fill="url(#fBrujulaO)" opacity=".95"/>
+        <path class="f2" d="M60 94 C52 88 53 68 60 42 C67 68 68 88 60 94Z" fill="url(#fBrujulaM)"/>
+        <path class="f3" d="M60 94 C56 91 56 83 60 70 C64 83 64 91 60 94Z" fill="url(#fBrujulaC)"/>
       </g>`
   },
-  forja:{
-    title:'Forja del Capitán',mode:'male',short:'Forja',pro:true,relic:'#C87848',
+  escudo:{
+    title:'Escudo',mode:'male',short:'Escudo',pro:true,relic:'#8A5A4A',
     svg:()=>`
       <defs>
-        <radialGradient id="gForja" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#F2A878" stop-opacity=".95"/><stop offset=".55" stop-color="#C87848" stop-opacity=".45"/><stop offset="1" stop-color="#2A2A2A" stop-opacity="0"/></radialGradient>
-        <linearGradient id="bForja" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4A4A4A"/><stop offset=".5" stop-color="#2A2A2A"/><stop offset="1" stop-color="#141414"/></linearGradient>
-        <linearGradient id="fForjaO" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF0C9"/><stop offset="1" stop-color="#E05818"/></linearGradient>
-        <linearGradient id="fForjaM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFB878"/></linearGradient>
-        <linearGradient id="fForjaC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFE8C8"/></linearGradient>
+        <radialGradient id="gEscudo" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#E8D8C8" stop-opacity=".95"/><stop offset=".55" stop-color="#B89078" stop-opacity=".45"/><stop offset="1" stop-color="#4A2A20" stop-opacity="0"/></radialGradient>
+        <linearGradient id="bEscudo" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8A9AA8"/><stop offset=".45" stop-color="#5A6A7A"/><stop offset="1" stop-color="#2A3A48"/></linearGradient>
+        <linearGradient id="bEscudoBronze" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#C8A85A"/><stop offset=".5" stop-color="#E8C878"/><stop offset="1" stop-color="#C8A85A"/></linearGradient>
+        <linearGradient id="fEscudoO" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF0C9"/><stop offset="1" stop-color="#E05818"/></linearGradient>
+        <linearGradient id="fEscudoM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFB878"/></linearGradient>
+        <linearGradient id="fEscudoC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFE8C8"/></linearGradient>
       </defs>
-      <circle class="gl" cx="60" cy="68" r="58" fill="url(#gForja)"/>
-      <ellipse cx="60" cy="144" rx="38" ry="4" fill="#141414" opacity=".4"/>
-      <!-- Forja del capitán: un crisol de hierro con brasas vivas -->
-      <path d="M22 100 C22 124 40 140 60 140 C80 140 98 124 98 100 C82 108 38 108 22 100 Z" fill="url(#bForja)" stroke="#6A6A6A" stroke-width="1"/>
-      <path d="M30 108 C34 118 38 126 44 131" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" opacity=".35"/>
-      <ellipse cx="60" cy="100" rx="38" ry="6" fill="#1A1A1A" stroke="#E87838" stroke-width="1.4"/>
-      <ellipse cx="60" cy="100" rx="33" ry="4.4" fill="#0D0D0D"/>
-      <circle cx="45" cy="100" r="2" fill="#F07828"/><circle cx="60" cy="100" r="2.4" fill="#FFB878"/><circle cx="75" cy="100" r="2" fill="#F07828"/>
-      <ellipse class="emb" cx="60" cy="100" rx="14" ry="2.2" fill="#E87838"/>
+      <circle class="gl" cx="60" cy="68" r="58" fill="url(#gEscudo)"/>
+      <ellipse cx="60" cy="144" rx="34" ry="3.5" fill="#1A120A" opacity=".4"/>
+      <!-- Escudo: un escudo de acero y bronce, base redondeada, sin puntas -->
+      <path d="M34 100 L86 100 L86 116 C86 130 74 140 60 140 C46 140 34 130 34 116 Z" fill="url(#bEscudo)" stroke="#1A2A38" stroke-width="1"/>
+      <path d="M38 104 L82 104 L82 116 C82 128 72 136 60 136 C48 136 38 128 38 116 Z" fill="none" stroke="url(#bEscudoBronze)" stroke-width="1.6" opacity=".9"/>
+      <circle cx="60" cy="118" r="9" fill="url(#bEscudoBronze)" stroke="#6A4A18" stroke-width=".8"/>
+      <circle cx="60" cy="118" r="4" fill="#F2D8A0"/>
+      <path d="M44 106 C46 114 46 124 44 132 M76 106 C74 114 74 124 76 132" fill="none" stroke="#FFFFFF" stroke-width="1.4" stroke-linecap="round" opacity=".3"/>
+      <ellipse class="emb" cx="60" cy="94" rx="7" ry="1.8" fill="#E8C878"/>
       <g id="fl">
-        <path class="f1" d="M60 94 C39 88 41 62 60 30 C79 62 81 88 60 94Z" fill="url(#fForjaO)" opacity=".95"/>
-        <path class="f2" d="M48 92 C42 82 45 68 52 52 C54 70 54 84 48 92Z" fill="url(#fForjaO)" opacity=".8"/>
-        <path class="f2" d="M72 92 C78 82 75 68 68 52 C66 70 66 84 72 92Z" fill="url(#fForjaO)" opacity=".8"/>
-        <path class="f3" d="M60 94 C50 90 50 72 60 46 C70 72 70 90 60 94Z" fill="url(#fForjaM)"/>
+        <path class="f1" d="M60 94 C39 88 41 62 60 30 C79 62 81 88 60 94Z" fill="url(#fEscudoO)" opacity=".95"/>
+        <path class="f2" d="M48 92 C42 82 45 68 52 52 C54 70 54 84 48 92Z" fill="url(#fEscudoO)" opacity=".8"/>
+        <path class="f2" d="M72 92 C78 82 75 68 68 52 C66 70 66 84 72 92Z" fill="url(#fEscudoO)" opacity=".8"/>
+        <path class="f3" d="M60 94 C50 90 50 72 60 46 C70 72 70 90 60 94Z" fill="url(#fEscudoM)"/>
         <circle cx="49" cy="42" r="1.4" fill="#FFF2C2"/><circle cx="71" cy="37" r="1.2" fill="#FFF2C2"/><circle cx="60" cy="23" r="1.5" fill="#FFFFFF"/>
       </g>`
   }
 };
 
 /* La reliquia libre por defecto según el modo (mujer / hombre). */
-function pebDefaultVessel(){return S.bioMode==='female'?'luna':'faro';}
+function pebDefaultVessel(){return S.bioMode==='female'?'perla':'roble';}
 /* La barra de reliquias muestra solo las 3 del modo actual; se reconstruye
    solo cuando cambia el modo (si no, solo se actualiza el estado .on). */
 let pebBarMode='';
@@ -7678,7 +7726,7 @@ function renderPebVesselArt(){
   const cfg=PEB_VESSELS[vKey];
   renderPebVesselBar();
   if($('pebSvgArt'))$('pebSvgArt').innerHTML=cfg.svg();
-  if($('pd'))$('pd').style.setProperty('--relic',cfg.relic||'#5A7A9A');
+  if($('pd'))$('pd').style.setProperty('--relic',cfg.relic||'#8A6A3A');
   if($('pebVesselTitle'))$('pebVesselTitle').textContent=cfg.title;
   document.querySelectorAll('#pebVesselBar .peb-vessel-btn').forEach(b=>{
     b.classList.toggle('on',b.dataset.vessel===vKey);
@@ -7691,7 +7739,7 @@ if($('pebVesselBar')){
     const vk=b.dataset.vessel;
     const cfg=PEB_VESSELS[vk];
     if(cfg && cfg.pro && !isPro()){
-      openPaywall('Desbloquea las reliquias exclusivas del Pebetero (Concha Marina, Loto del Alba, Cumbre de Acero y Forja del Capitán) con Wavy Pro.');
+      openPaywall('Desbloquea las reliquias exclusivas del Pebetero (Rosa, Nube, Brújula y Escudo) con Wavy Pro.');
       return;
     }
     S.pebVessel=vk;
@@ -8077,7 +8125,7 @@ function renderClinicalReport(){
     desc.textContent='Código '+S.therapist.code+' vinculado. Puedes imprimir o exportar tu Hoja Clínica Editorial en PDF en cualquier momento.';
     $('therCode').value=S.therapist.code;
   }
-  btn.textContent=S.shareClinical?'Ocultar vista previa':'Ver vista previa clínica';
+  btn.textContent=S.shareClinical?'Ocultar vista previa':'Ver vista previa';
   if(!S.shareClinical){rep.hidden=true;return}
   rep.hidden=false;
 

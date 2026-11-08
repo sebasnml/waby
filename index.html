@@ -354,7 +354,12 @@ h1{font-family:var(--serif);font-weight:500;font-size:clamp(28px,7vw,36px);line-
 /* La barra SOS flota sobre la barra inferior. Estilo Instagram: se
    esconde al bajar y aparece al subir, con solo `translate` y `opacity`
    (propiedades del compositor). Nada de morph ni clip-path. */
-.sos-sticky{position:sticky;bottom:calc(env(safe-area-inset-bottom,0px) + 92px);width:100%;margin:18px 0 12px;z-index:40}
+/* El botón SOS es una caja de texto normal: se queda en su lugar siempre,
+   en su sitio del flujo de Hoy (después de "Mi razón de cuidado hoy"),
+   como cualquier otra caja. NO es sticky ni fijo: no se empuja junto con
+   la barra horizontal inferior ni se mueve al scrollear. Sí conserva el
+   latido (palpitar) en su lugar. */
+.sos-cta{width:100%;margin:18px 0 12px}
 .heart-socket{
   width:34px;height:34px;border-radius:50%;flex-shrink:0;
   border:1px solid rgba(184,146,90,.5);background:var(--card-solid);
@@ -382,7 +387,17 @@ h1{font-family:var(--serif);font-weight:500;font-size:clamp(28px,7vw,36px);line-
   font-size:10.5px;
   letter-spacing:.06em;
   box-shadow:inset 0 1.5px 0 rgba(255,255,255,0.88), 0 14px 30px -8px rgba(142, 58, 72, 0.34);
+  animation:anxiousHeartbeat 2.2s cubic-bezier(.25,.8,.25,1) infinite;
   transition:transform .25s ease, box-shadow .25s ease, background .25s ease;
+}
+/* El latido (palpitar) del botón SOS: late en su lugar, sin moverse.
+   Solo pulsa la escala; la sombra la maneja el hover, sin conflicto. */
+@keyframes anxiousHeartbeat{
+  0%,100%{transform:scale(1)}
+  16%{transform:scale(1.024)}
+  30%{transform:scale(0.996)}
+  46%{transform:scale(1.018)}
+  68%{transform:scale(1)}
 }
 /* La píldora SOS es ESTÁTICA: se queda en su lugar sin moverse al
    scrollear y sin animación (ni línea, ni morph, ni esconder, ni latido).
@@ -856,8 +871,9 @@ textarea::placeholder{font-style:italic;color:var(--muted);opacity:.65}
    Círculo/Pulso, sin hábitos ni SOS. Solo el perfil o el artículo,
    con la tipografía y la calma de Wavy (orgánicamente unido).
    Se muestran con la clase body.public-view (el router la pone/quita). */
-body.public-view .masthead, body.public-view .vpage, body.public-view #bnav{display:none!important}
-.pub-view{display:none;max-width:680px;margin:0 auto;padding:28px 20px 60px;min-height:100vh}
+body.public-view{display:block}
+body.public-view .masthead, body.public-view .vpage, body.public-view #bnav, body.public-view .book{display:none!important}
+.pub-view{display:none;width:100%;max-width:680px;margin:0 auto;padding:28px 20px 60px;min-height:100vh}
 body.public-view .pub-view.on{display:block}
 .pub-top{display:flex;justify-content:space-between;align-items:center;padding:6px 0 18px;border-bottom:1px solid var(--rule);margin-bottom:28px}
 .pub-wordmark{font-family:var(--serif);font-weight:600;font-size:26px;color:var(--ink);text-decoration:none}
@@ -869,7 +885,7 @@ body.public-view .pub-view.on{display:block}
 .pub-author .un{font-size:13px;color:var(--muted);margin-top:2px}
 .pub-bio{font-family:var(--serif);font-style:italic;font-size:15px;line-height:1.55;color:var(--ink);opacity:.85;margin:10px 0 26px}
 .pub-post{padding:22px 0;border-bottom:1px solid var(--rule);cursor:pointer}
-.pub-post .d{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:6px}
+.pub-post .d{font-size:12px;color:var(--ink);font-weight:600;margin-bottom:6px}
 .pub-post h3{font-family:var(--serif);font-size:22px;font-weight:700;line-height:1.25;margin:0 0 8px}
 .pub-post .ex{font-size:15px;line-height:1.55;color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .pub-foot{margin-top:32px;padding-top:18px;border-top:1px solid var(--rule);font-size:12.5px;color:var(--muted);text-align:center;line-height:1.7}
@@ -1804,7 +1820,7 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
         <div class="chips" id="loss"></div>
       </div>
 
-      <button class="btn sos-sticky" id="sosb">
+      <button class="btn sos-cta" id="sosb">
         <svg class="w-ico lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.3a4.3 4.3 0 0 1 7.5-2.8 4.3 4.3 0 0 1 7.5 2.8c0 5.7-7.5 10.3-7.5 10.3Z"/><path d="M7.5 12.2h2.2l1.4-2.8 2 5.4 1.5-2.6h2"/></svg>
         <span>Siento un impulso ahora · Acompañarme</span>
       </button>
@@ -3007,11 +3023,11 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
      No son parte de la app: no tienen barra inferior ni Hoy/Costa/
      Círculo/Pulso. Se muestran solo por ruta (#/usuario y
      #/usuario/id-del-post) y las llena el router (renderPublicProfile /
-     renderPublicArticle). -->
+     renderPublicArticle). Son SOLO el espacio público de los lectores:
+     no hay enlace que entre al perfil privado de la persona. -->
 <div class="pub-view" id="v-public-profile" hidden>
   <div class="pub-top">
-    <a class="pub-wordmark" href="#" data-pub-home>Wavy</a>
-    <a class="pub-back" href="#" data-pub-home>← Volver a Wavy</a>
+    <span class="pub-wordmark">Wavy</span>
   </div>
   <div id="pubProfileBody"></div>
   <div class="pub-foot">Publicado en <b>Wavy</b> · Donde tu calma se encuentra con los tuyos.<br><a href="#" data-pub-home>Crea tu propio espacio en Wavy →</a></div>
@@ -3019,8 +3035,7 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
 
 <div class="pub-view pub-article" id="v-public-article" hidden>
   <div class="pub-top">
-    <a class="pub-wordmark" href="#" data-pub-home>Wavy</a>
-    <a class="pub-back" href="#" data-pub-home>← Volver a Wavy</a>
+    <span class="pub-wordmark">Wavy</span>
   </div>
   <div id="pubArticleBody"></div>
   <div class="pub-foot">Publicado en <b>Wavy</b> · Donde tu calma se encuentra con los tuyos.<br><a href="#" data-pub-home>Crea tu propio espacio en Wavy →</a></div>
@@ -4851,26 +4866,6 @@ function renderCoastSyncBanner(){
   c.innerHTML='';
   c.appendChild(buildOpenSyncBanner());
 }
-/* El recuadro "Amplía tu espacio seguro": se muestra en Costa (ya no en
-   Círculo) cuando el usuario aún no tiene vínculos ni ecos. Se construye
-   con una función compartida para que el botón VINCULAR siga funcionando. */
-function buildEmptyAlliesCard(){
-  const c=document.createElement('div');
-  c.className='wavy-card empty-allies-card';
-  c.style.cssText='text-align:center;padding:28px 18px;margin-top:12px;background:var(--wash);border:1px dashed var(--rule);border-radius:16px;';
-  c.innerHTML=
-    '<div style="font-family:var(--serif);font-size:18px;color:var(--ink);margin-bottom:6px">Amplía tu espacio seguro</div>'+
-    '<p style="font-size:12px;color:var(--muted);max-width:280px;margin:0 auto 16px;line-height:1.5">Este es tu espacio y solo entra quien tú elijas. Cuando quieras, invita a alguien de confianza.</p>'+
-    '<button type="button" class="btn" style="font-size:11px;padding:8px 18px">Vincular</button>';
-  const btn=c.querySelector('.btn');
-  if(btn){
-    btn.onclick=()=>{
-      if($('openDirectoryBtn'))$('openDirectoryBtn').click();
-      else if($('allyUserInput'))$('allyUserInput').focus();
-    };
-  }
-  return c;
-}
 
 function renderCircleFeed(){
   const box=$('circleFeedList');if(!box)return;box.innerHTML='';
@@ -4921,12 +4916,11 @@ function renderCircleFeed(){
     box.appendChild(myCard);
   });
 
-  /* El recuadro "Amplía tu espacio seguro" vuelve a Círculo: solo se
-     muestra cuando aún no hay vínculos ni ecos. */
-  if(!S.following.length && !S.echoes.length){
-    box.appendChild(buildEmptyAlliesCard());
-    return;
-  }
+  /* El recuadro "Amplía tu espacio seguro" se quitó: era redundante con
+     el círculo "Vincular / Invitar / Buscar" de arriba (la barra de
+     presencia), que ya es la forma de invitar a alguien. Así se libera
+     espacio en el feed. Cuando no hay vínculos ni ecos, el feed queda
+     vacío y la invitación vive solo en ese círculo de arriba. */
 
   const sortedFollowing=[...S.following].sort((a,b)=>{
     const ua=findUser(a),ub=findUser(b);
@@ -5312,7 +5306,21 @@ function renderSpiritOpts(){
     box.appendChild(b);
   });
 }
+/* Límite de frases espirituales por día: 1 al día en el plan libre,
+   hasta 5 al día con Wavy Pro. Se cuenta cada frase nueva que se muestra
+   (deslizar a la izquierda); volver a la frase del hábito (deslizar a la
+   derecha) no cuenta. El contador se reinicia cada día. */
+function spiritSeenToday(){
+  if(!S.spiritSeen||S.spiritSeen.d!==today())S.spiritSeen={d:today(),n:0};
+  return S.spiritSeen.n;
+}
 function showRandomSpiritPhrase(){
+  const limit=isPro()?5:1;
+  const seen=spiritSeenToday();
+  if(seen>=limit){
+    toast(isPro()?'Ya viste tus 5 frases de hoy':'Ya viste tu frase de hoy · Con Wavy Pro puedes ver hasta 5','er');
+    return;
+  }
   const lines=spiritLines();
   const pool=lines.flatMap(id=>SPIRIT_PHRASES[id].map(p=>({...p,line:id})));
   if(!pool.length)return;
@@ -5322,6 +5330,7 @@ function showRandomSpiritPhrase(){
   $('sq').textContent=pick.t;
   $('st').textContent=pick.s;
   $('ss').textContent=(L?L.name:'')+' · Desliza → para volver';
+  S.spiritSeen.n=seen+1;save(false);
   sigShowingSpirit=true;
 }
 function restoreSigQuote(){
@@ -7758,8 +7767,14 @@ function summarizeTodayClueForNote(){
 
 function notes(){
   const b=$('nb');if(!b)return;b.innerHTML='';week();insight();renderClinicalReport();
-  if(!S.notes.length){b.innerHTML='<p class="empty">Aún no hay entradas. Elige tus emociones o escribe una línea sobre tu día.</p>';$('more').hidden=true;return}
-  S.notes.slice(0,nshow).forEach(n=>{
+  /* Los posts del Diario (hoja en blanco) se quedan en el Diario y NO
+     aparecen aquí en Hoy: esta lista es solo el registro corto del día
+     (línea + emociones). Nada salta de página innecesariamente. Un
+     escrito es del Diario si es de hoja en blanco (blank:true) o si su
+     texto es largo (>140 caracteres), igual que en renderDiaryList. */
+  const shorts=(S.notes||[]).filter(n=>n&&!(n.blank===true)&&!(n.texto&&String(n.texto).length>140));
+  if(!shorts.length){b.innerHTML='<p class="empty">Aún no hay entradas. Elige tus emociones o escribe una línea sobre tu día.</p>';$('more').hidden=true;return}
+  shorts.slice(0,nshow).forEach(n=>{
     const card=document.createElement('div');
     card.className='journal-card';
     const dateLbl=(n.d===today()?'Hoy':esc((n.d||'').slice(5).replace('-','/')))+' · '+esc(n.hora)+' h';
@@ -7782,9 +7797,9 @@ function notes(){
       '<div class="journal-theory">'+esc(n.teoria||'')+'</div>';
     b.appendChild(card);
   });
-  const m=$('more');m.hidden=S.notes.length<=4;m.textContent=nshow<S.notes.length?'Ver anteriores ('+(S.notes.length-nshow)+')':'Mostrar menos';
+  const m=$('more');m.hidden=shorts.length<=4;m.textContent=nshow<shorts.length?'Ver anteriores ('+(shorts.length-nshow)+')':'Mostrar menos';
 }
-$('more').onclick=()=>{nshow=nshow<S.notes.length?nshow+5:4;notes()};
+$('more').onclick=()=>{const shorts=(S.notes||[]).filter(n=>n&&!(n.blank===true)&&!(n.texto&&String(n.texto).length>140));nshow=nshow<shorts.length?nshow+5:4;notes()};
 
 /* TUS ESCRITOS (Diario, pestaña Círculo) · lista estilo Substack/Medium:
    solo las escrituras largas de la hoja en blanco, no el registro corto
@@ -7869,6 +7884,17 @@ function renderDiaryList(){
      de ESTE dispositivo (localStorage). La interfaz es la misma que
      usará el backend: solo cambia de dónde vienen los datos.
    ========================================================= */
+/* Fecha pública, elegante y minimalista: "08-Nov-2026" (día-mes-año,
+   mes abreviado). Sin el día de la semana (lunes, sábado, domingo…),
+   en negro (no gris), con la tipografía de la app. Solo para las vistas
+   públicas (perfil y artículo); el Diario privado sigue con su formato
+   de carta (formatDiaryDate). */
+const PUB_MONTHS=['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+function formatPublicDate(dstr){
+  const m=String(dstr||'').match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if(!m)return String(dstr||'');
+  return m[3]+'-'+(PUB_MONTHS[+m[2]-1]||'')+'-'+m[1];
+}
 function publicPosts(){
   return (S.notes||[]).filter(n=>n && n.public===true && ((n.blank===true)||(n.texto && String(n.texto).length>140)));
 }
@@ -7914,7 +7940,7 @@ function renderPublicProfile(username){
     }else{
       posts.forEach(n=>{
         html+='<article class="pub-post" data-pub-post="'+esc(String(n.id))+'">'+
-          '<div class="d">'+esc(formatDiaryDate(n.d))+'</div>'+
+          '<div class="d">'+esc(formatPublicDate(n.d))+'</div>'+
           '<h3>'+esc(n.estado||'Reflexión del día')+'</h3>'+
           (publicExcerpt(n)?'<div class="ex">'+esc(publicExcerpt(n))+'</div>':'')+
         '</article>';
@@ -7949,7 +7975,7 @@ function renderPublicArticle(username,postId){
     const bodyHtml=paras.length?paras.map(p=>'<p>'+esc(p)+'</p>').join(''):'<p>'+esc(n.estado||'')+'</p>';
     body.innerHTML=
       '<h1>'+esc(n.estado||'Reflexión del día')+'</h1>'+
-      '<div class="pub-meta"><div class="av">'+getAv(me.av)+'</div><div><div class="nm">'+name+'</div><div class="sub">'+esc(formatDiaryDate(n.d))+' · '+publicReadMins(n)+' min de lectura</div></div></div>'+
+      '<div class="pub-meta"><div class="av">'+getAv(me.av)+'</div><div><div class="nm">'+name+'</div><div class="sub">'+esc(formatPublicDate(n.d))+' · '+publicReadMins(n)+' min de lectura</div></div></div>'+
       '<div class="pub-actions">'+
         '<button type="button" id="pubGestoBtn" aria-label="Enviar un gesto"><svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.5-9C1 8.5 3 5 6.5 5c2 0 3.5 1 4.5 2.5l1 1.5 1-1.5C14 6 15.5 5 17.5 5 21 5 23 8.5 21.5 12c-2 4.4-9.5 9-9.5 9Z"/></svg><span>Gesto</span></button>'+
         '<button type="button" id="pubSaveBtn" aria-label="Guardar"><svg viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4.5L6 21V3Z"/></svg><span>Guardar</span></button>'+
@@ -7984,7 +8010,7 @@ function publicRouter(){
 }
 window.addEventListener('hashchange',publicRouter);
 document.querySelectorAll('[data-pub-home]').forEach(a=>{
-  a.addEventListener('click',e=>{e.preventDefault();location.hash='';showAppView();window.scrollTo(0,0);});
+  a.addEventListener('click',e=>{e.preventDefault();location.hash='';showAppView();switchMainView('v-today');window.scrollTo(0,0);});
 });
 /* Compartir mi perfil (desde el Diario): copia el enlace waby/sebas. */
 if($('shareProfileBtn')){

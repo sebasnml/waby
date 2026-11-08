@@ -1473,6 +1473,10 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
   background:linear-gradient(180deg, rgba(255,255,255,0.72) 0%, rgba(246,244,240,0.92) 100%);
   text-align:center;
 }
+/* Leyenda de versión en la portada/inicio de sesión (v19, v20…):
+   sube una por ronda para saber de un vistazo si la versión publicada
+   ya trae los últimos cambios. */
+.cover-version{font-size:10px;letter-spacing:.16em;color:var(--muted);text-align:center;margin-top:24px}
 .cover-crest{
   width:56px;height:68px;margin:0 auto 6px;
   display:flex;align-items:center;justify-content:center;
@@ -2718,6 +2722,9 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
         <button type="button" class="btn" id="onbStartBreathBtn" style="width:100%;margin-bottom:8px"><span>Iniciar respiración de 15 s</span></button>
         <button type="button" class="btn ghost" id="onbFinishDirectBtn" style="width:100%">Entrar directamente a Wavy</button>
       </div>
+      <!-- Versión de la app: sube una por ronda (v18, v19, v20…) para saber
+           de un vistazo si la versión publicada ya trae los últimos cambios. -->
+      <div class="cover-version">v19</div>
     </div>
   </div>
 </div>
@@ -3088,15 +3095,20 @@ function cleanAlias(raw){
   return String(raw||'').trim().toLowerCase().replace(/^@/,'').replace(/[^a-z0-9._-]/g,'').slice(0,22);
 }
 const DEMO = (typeof location!=='undefined') && new URLSearchParams(location.search).get('demo')==='1';
+/* El dueño / desarrollador de Wavy es 13061998. Ese es su nombre de
+   usuario y su llave de acceso, siempre, no importa dónde ni cómo se
+   abra la app. Antes era 'sebas'; se normaliza aquí para que todo lo
+   viejo apunte al nuevo nombre. */
+const OWNER_USER='13061998';
 function detectInitialUser(){
   try{
     const params=new URLSearchParams(window.location.search);
     const fromUrl=cleanAlias(params.get('user'));
-    if(fromUrl)return fromUrl;
+    if(fromUrl)return fromUrl==='sebas'?OWNER_USER:fromUrl;
     const fromSession=cleanAlias(sessionStorage.getItem('wavy_active_user'));
-    if(fromSession)return fromSession;
+    if(fromSession)return fromSession==='sebas'?OWNER_USER:fromSession;
     const fromLocal=cleanAlias(localStorage.getItem('wavy_last_user'));
-    if(fromLocal)return fromLocal;
+    if(fromLocal)return fromLocal==='sebas'?OWNER_USER:fromLocal;
   }catch(e){}
   return 'invitado';
 }
@@ -4009,10 +4021,25 @@ function renderAccountSwitcherUI(){
 function load(){
   if(DEMO)ensureRealAccountsSeeded();
   KEY='wavy_v18_'+activeUser;
+  /* Migración del dueño a 13061998: si los datos viejos están bajo
+     'wavy_v18_sebas' y aún no hay nada bajo 'wavy_v18_13061998', se
+     copian y el nombre de usuario pasa a ser 13061998. Así no se
+     pierde nada (racha, hábitos, diario) al cambiar el nombre. */
+  if(activeUser===OWNER_USER){
+    try{
+      if(!localStorage.getItem(KEY)&&localStorage.getItem('wavy_v18_sebas')){
+        const old=JSON.parse(localStorage.getItem('wavy_v18_sebas'));
+        if(old&&old.me)old.me.username=OWNER_USER;
+        localStorage.setItem(KEY,JSON.stringify(old));
+      }
+    }catch(e){}
+  }
   const existed = !!localStorage.getItem(KEY);
   try{
     sessionStorage.setItem('wavy_active_user',activeUser);
-    localStorage.setItem('wavy_last_user',activeUser);
+    /* Solo se guarda como «último usuario» un nombre real; nunca el
+       invitado, para que la app no se quede pegada en invitado. */
+    if(activeUser!=='invitado')localStorage.setItem('wavy_last_user',activeUser);
     const cur=localStorage.getItem(KEY);
     if(cur){
       mergeSafe(S,JSON.parse(cur));
@@ -7895,8 +7922,29 @@ function formatPublicDate(dstr){
   if(!m)return String(dstr||'');
   return m[3]+'-'+(PUB_MONTHS[+m[2]-1]||'')+'-'+m[1];
 }
+/* Busca los datos de un usuario por su nombre, en este dispositivo
+   (localStorage), sin importar quién sea el usuario activo. Así el
+   perfil público del dueño (13061998) se muestra aunque la app esté
+   como invitado. El alias viejo 'sebas' apunta al dueño. */
+function publicUserState(username){
+  const u=String(username||'').toLowerCase();
+  if(!u)return null;
+  const keys=(u===OWNER_USER||u==='sebas')?['wavy_v18_'+OWNER_USER,'wavy_v18_sebas']:['wavy_v18_'+u];
+  for(const k of keys){
+    try{
+      const raw=localStorage.getItem(k);
+      if(!raw)continue;
+      const st=JSON.parse(raw);
+      if(st&&st.me&&st.me.username)return st;
+    }catch(e){}
+  }
+  return null;
+}
+function publicPostsOf(st){
+  return ((st&&st.notes)||[]).filter(n=>n && n.public===true && ((n.blank===true)||(n.texto && String(n.texto).length>140)));
+}
 function publicPosts(){
-  return (S.notes||[]).filter(n=>n && n.public===true && ((n.blank===true)||(n.texto && String(n.texto).length>140)));
+  return publicPostsOf(S);
 }
 function publicExcerpt(n){
   const t=String(n.texto||'').replace(/\s+/g,' ').trim();
@@ -7924,12 +7972,13 @@ function showAppView(){
 }
 function renderPublicProfile(username){
   const body=$('pubProfileBody');if(!body)return;
-  const me=S.me||{};
-  const isOwner=String(username||'').toLowerCase()===String(me.username||'').toLowerCase();
-  if(!isOwner){
-    body.innerHTML='<p style="font-family:var(--serif);font-size:20px;line-height:1.5">Este perfil no existe en este dispositivo.</p><p style="color:var(--muted);line-height:1.6">Los perfiles públicos de Wavy viven en la nube. En este equipo solo está el perfil de @'+esc(me.username||'')+'.</p>';
+  const st=publicUserState(username);
+  if(!st){
+    const cur=(S.me&&S.me.username)||'invitado';
+    body.innerHTML='<p style="font-family:var(--serif);font-size:20px;line-height:1.5">Este perfil no existe en este dispositivo.</p><p style="color:var(--muted);line-height:1.6">Los perfiles públicos de Wavy viven en la nube. En este equipo solo está el perfil de @'+esc(cur)+'.</p>';
   }else{
-    const posts=publicPosts();
+    const me=st.me||{};
+    const posts=publicPostsOf(st);
     const name=esc(me.name||('@'+(me.username||'')));
     const bio=esc(me.bio||'');
     let html='<div class="pub-author"><div class="av">'+getAv(me.av)+'</div><div><h2>'+name+'</h2><div class="un">@'+esc(me.username||'')+'</div></div></div>';
@@ -7964,9 +8013,9 @@ function renderPublicProfile(username){
 }
 function renderPublicArticle(username,postId){
   const body=$('pubArticleBody');if(!body)return;
-  const me=S.me||{};
-  const isOwner=String(username||'').toLowerCase()===String(me.username||'').toLowerCase();
-  const n=isOwner?(S.notes||[]).find(x=>x&&String(x.id)===String(postId)):null;
+  const st=publicUserState(username);
+  const me=(st&&st.me)||{};
+  const n=st?(st.notes||[]).find(x=>x&&String(x.id)===String(postId)&&x.public===true):null;
   if(!n){
     body.innerHTML='<p style="font-family:var(--serif);font-size:20px;line-height:1.5">Este escrito no existe o no es público.</p><p style="color:var(--muted);line-height:1.6">Puede que su autor lo haya puesto en privado o que el enlace esté incompleto.</p>';
   }else{

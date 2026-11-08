@@ -382,35 +382,18 @@ h1{font-family:var(--serif);font-weight:500;font-size:clamp(28px,7vw,36px);line-
   font-size:10.5px;
   letter-spacing:.06em;
   box-shadow:inset 0 1.5px 0 rgba(255,255,255,0.88), 0 14px 30px -8px rgba(142, 58, 72, 0.34);
-  animation:anxiousHeartbeat 2.2s cubic-bezier(.25,.8,.25,1) infinite;
-  max-height:80px;
-  transition:transform .25s ease, opacity .28s ease, box-shadow .25s ease, background .25s ease, max-height .35s ease, width .35s ease, padding .35s ease, margin .35s ease;
+  transition:transform .25s ease, box-shadow .25s ease, background .25s ease;
 }
-/* LÍNEA (estado normal): una línea medianamente gruesa, del color de la
-   barra SOS, palpitando (el latido anxiousHeartbeat sigue corriendo),
-   arriba de la barra inferior. Solo cuando el usuario scrollea hasta
-   abajo la línea se convierte, muy sutilmente, en el rectángulo completo
-   con el texto. Al subir, vuelve a ser la línea. Nada se hace chiquito,
-   nada se esconde: la línea siempre está ahí. */
-#sosb.sos-line{
-  width:120px;max-height:10px;min-height:0;padding:0;margin:18px auto 12px;
-}
-#sosb.sos-line span, #sosb.sos-line svg{opacity:0}
-#sosb span, #sosb svg{transition:opacity .25s ease}
+/* La píldora SOS es ESTÁTICA: se queda en su lugar sin moverse al
+   scrollear y sin animación (ni línea, ni morph, ni esconder, ni latido).
+   Aparece cuando tiene que aparecer (en Hoy) y ahí se queda. El corazón
+   del renglón de progreso (#heartSocket) sí sigue latiendo y rojo. */
 /* El texto de la barra nunca se parte en dos líneas: una sola línea,
-   siempre, para que al llegar abajo la barra se vea completa. */
+   siempre, para que la barra se vea completa. */
 #sosb span{white-space:nowrap;flex-shrink:0}
 #sosb svg{flex-shrink:0}
 #sosb:hover,#sosb:focus-visible{
-  animation:anxiousHeartbeat 0.75s cubic-bezier(.36,.07,.19,.97) infinite;
   box-shadow:inset 0 1.5px 0 rgba(255,255,255,0.92), 0 0 0 9px rgba(186, 92, 104, 0.22), 0 18px 38px rgba(142, 58, 72, 0.48);
-}
-@keyframes anxiousHeartbeat{
-  0%,100%{transform:scale(1);box-shadow:inset 0 1.5px 0 rgba(255,255,255,0.88),0 12px 26px rgba(142,58,72,0.28),0 0 0 0 rgba(186,92,104,0.34)}
-  16%{transform:scale(1.024);box-shadow:inset 0 1.5px 0 rgba(255,255,255,0.95),0 16px 34px rgba(142,58,72,0.42),0 0 0 7px rgba(186,92,104,0.16)}
-  30%{transform:scale(0.996)}
-  46%{transform:scale(1.032);box-shadow:inset 0 1.5px 0 rgba(255,255,255,0.96),0 18px 38px rgba(142,58,72,0.46),0 0 0 13px rgba(186,92,104,0)}
-  68%{transform:scale(1)}
 }
 .w-ico{
   width:15px;height:15px;stroke:currentColor;fill:none;
@@ -863,9 +846,49 @@ textarea::placeholder{font-style:italic;color:var(--muted);opacity:.65}
 .wavy-card,
 .diary-entry{cursor:pointer;transition:transform .18s ease, box-shadow .18s ease}
 .diary-entry:active{transform:scale(.985)}
-.diary-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
-.diary-head .journal-title{margin-bottom:0;flex:1;min-width:0}
-.diary-head .journal-date{white-space:nowrap;flex-shrink:0}
+/* La fecha del escrito, en su propio renglón, como en una carta. */
+.diary-date{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:6px}
+.diary-vis-btn{border:1px solid var(--rule);background:var(--paper);color:var(--muted);font-family:var(--sans);font-size:11px;font-weight:600;padding:4px 10px;border-radius:999px;cursor:pointer;flex-shrink:0}
+.diary-vis-btn[data-vis="pub"]{border-color:var(--gold);color:var(--gold)}
+/* =========================================================
+   VISTAS PÚBLICAS (perfil waby/sebas + lectura de un post).
+   Son páginas APARTE de la app: sin barra inferior, sin Hoy/Costa/
+   Círculo/Pulso, sin hábitos ni SOS. Solo el perfil o el artículo,
+   con la tipografía y la calma de Wavy (orgánicamente unido).
+   Se muestran con la clase body.public-view (el router la pone/quita). */
+body.public-view .masthead, body.public-view .vpage, body.public-view #bnav{display:none!important}
+.pub-view{display:none;max-width:680px;margin:0 auto;padding:28px 20px 60px;min-height:100vh}
+body.public-view .pub-view.on{display:block}
+.pub-top{display:flex;justify-content:space-between;align-items:center;padding:6px 0 18px;border-bottom:1px solid var(--rule);margin-bottom:28px}
+.pub-wordmark{font-family:var(--serif);font-weight:600;font-size:26px;color:var(--ink);text-decoration:none}
+.pub-back{font-size:12px;color:var(--muted);text-decoration:none}
+.pub-author{display:flex;align-items:center;gap:14px;margin-bottom:8px}
+.pub-author .av{width:56px;height:56px;border-radius:50%;overflow:hidden;flex-shrink:0;border:1px solid var(--glass-border)}
+.pub-author .av svg{width:100%;height:100%;display:block}
+.pub-author h2{font-family:var(--serif);font-size:26px;font-weight:600;line-height:1.15;margin:0}
+.pub-author .un{font-size:13px;color:var(--muted);margin-top:2px}
+.pub-bio{font-family:var(--serif);font-style:italic;font-size:15px;line-height:1.55;color:var(--ink);opacity:.85;margin:10px 0 26px}
+.pub-post{padding:22px 0;border-bottom:1px solid var(--rule);cursor:pointer}
+.pub-post .d{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:6px}
+.pub-post h3{font-family:var(--serif);font-size:22px;font-weight:700;line-height:1.25;margin:0 0 8px}
+.pub-post .ex{font-size:15px;line-height:1.55;color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pub-foot{margin-top:32px;padding-top:18px;border-top:1px solid var(--rule);font-size:12.5px;color:var(--muted);text-align:center;line-height:1.7}
+.pub-foot a{color:var(--gold);text-decoration:none;font-weight:600}
+.pub-article h1{font-family:var(--serif);font-size:clamp(30px,7vw,42px);font-weight:700;line-height:1.15;margin:0 0 18px}
+.pub-meta{display:flex;align-items:center;gap:10px;padding-bottom:16px;border-bottom:1px solid var(--rule);margin-bottom:8px}
+.pub-meta .av{width:40px;height:40px;border-radius:50%;overflow:hidden;flex-shrink:0;border:1px solid var(--glass-border)}
+.pub-meta .av svg{width:100%;height:100%;display:block}
+.pub-meta .nm{font-size:14px;font-weight:600}
+.pub-meta .sub{font-size:12px;color:var(--muted);margin-top:1px}
+.pub-actions{display:flex;align-items:center;gap:18px;padding:12px 0;border-bottom:1px solid var(--rule);margin-bottom:26px}
+.pub-actions button{border:none;background:none;cursor:pointer;color:var(--muted);display:flex;align-items:center;gap:6px;font-size:13px;padding:6px 2px}
+.pub-actions button.on{color:var(--crimson)}
+.pub-actions svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.6}
+.pub-body{font-family:var(--serif);font-size:19px;line-height:1.75;color:var(--ink)}
+.pub-body p{margin:0 0 22px}
+.pub-author-foot{display:flex;gap:14px;align-items:flex-start;margin-top:36px;padding-top:24px;border-top:1px solid var(--rule)}
+.pub-author-foot .av{width:56px;height:56px;border-radius:50%;overflow:hidden;flex-shrink:0;border:1px solid var(--glass-border)}
+.pub-author-foot .av svg{width:100%;height:100%;display:block}
 .diary-entry .journal-quote{font-size:14.5px}
 .diary-read{font-family:var(--serif);font-style:italic;font-size:12.5px;color:var(--gold);margin-top:6px}
 .journal-card{
@@ -1597,6 +1620,26 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
    cerrado, y se convierte en el editor al darle click. El cajón de
    controles (debajo) es lo que marca el estado expandido. */
 .circle-composer{width:100%}
+/* La fila del compositor: el cuadro de texto (de una sola línea de alto,
+   crece solo si escribes más) + el botón de flecha para publicar, como
+   el de Muse.ai. Publicar es tocar la flecha, nada más. */
+.circle-composer-row{display:flex;align-items:flex-end;gap:8px}
+.circle-composer-row #echoInput{flex:1;min-width:0}
+.echo-send-btn{
+  width:40px;height:40px;flex-shrink:0;border-radius:50%;border:none;
+  background:var(--ink);color:var(--paper);cursor:pointer;
+  display:grid;place-items:center;font-size:18px;line-height:1;
+  box-shadow:var(--glass-spec);transition:opacity .18s ease, transform .18s ease;
+}
+.echo-send-btn:disabled{opacity:.35;cursor:default}
+.echo-send-btn:not(:disabled):active{transform:scale(.92)}
+/* La pregunta del día vive DENTRO del compositor, como una línea sutil
+   pegada al cuadro de texto (parte del ecosistema, no un banner aparte).
+   Tocarla enfoca el cuadro para responder. */
+.daily-prompt-line{
+  font-family:var(--serif);font-style:italic;font-size:13px;line-height:1.35;
+  color:var(--gold);opacity:.85;padding:0 4px 6px;cursor:pointer;
+}
 #circleComposer #echoInput{
   border:1px solid rgba(255,255,255,0.82);
   border-radius:999px;
@@ -1616,9 +1659,9 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
   backdrop-filter:none;-webkit-backdrop-filter:none;
   box-shadow:none;
   padding:10px 4px;
-  min-height:76px;height:auto;
+  min-height:44px;height:44px;
   font-size:18.5px;font-style:normal;
-  overflow:auto;cursor:text;
+  overflow:hidden;cursor:text;
 }
 .circle-composer-drawer{
   padding:16px;border-radius:22px;margin-bottom:8px;
@@ -1761,7 +1804,7 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
         <div class="chips" id="loss"></div>
       </div>
 
-      <button class="btn sos-sticky sos-line" id="sosb">
+      <button class="btn sos-sticky" id="sosb">
         <svg class="w-ico lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.3a4.3 4.3 0 0 1 7.5-2.8 4.3 4.3 0 0 1 7.5 2.8c0 5.7-7.5 10.3-7.5 10.3Z"/><path d="M7.5 12.2h2.2l1.4-2.8 2 5.4 1.5-2.6h2"/></svg>
         <span>Siento un impulso ahora · Acompañarme</span>
       </button>
@@ -1802,6 +1845,30 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
           <button type="button" class="chip" data-bm="male" style="min-height:36px;padding:4px 13px;font-size:13px">Hombre</button>
         </div>
       </div>
+
+
+      <!-- REGISTRO DEL DÍA (semana, emociones, línea y guardar) -->
+      <div class="retract-body" id="wkRetractBody">
+        <div class="wk" id="wk"></div>
+      </div>
+
+      <div class="bio-sec">
+        <div class="bio-sec-hd"><span>Emociones de hoy</span><span id="moodCounterLbl">Elige hasta 3 (0/3)</span></div>
+        <div class="moods" id="moodsCore"></div>
+        <div class="extra-box" id="moodsExtraBox" hidden>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+            <span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:700">Matices emocionales · Wavy Pro</span>
+            <span id="vipMoodHint" style="font-size:11px;color:var(--muted)">Desbloqueable</span>
+          </div>
+          <div class="moods" id="moodsVip" style="margin-bottom:0"></div>
+        </div>
+      </div>
+
+      <textarea id="ni" class="echo-input" placeholder="Escribe una línea sobre tu día…"></textarea>
+      <button class="btn" style="width:100%" id="na">Guardar registro del día</button>
+      <p class="ins" id="ins"></p>
+      <div id="nb"></div>
+      <button class="btn ghost" id="more" style="width:100%;margin-top:10px" hidden>Ver registros anteriores</button>
 
       <!-- HÁBITOS DE CUIDADO AGRUPADOS POR DIMENSIÓN (CUERPO, MENTE, VÍNCULO) -->
       <div class="bio-sec">
@@ -1933,28 +2000,6 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
 
       </div>
 
-      <!-- REGISTRO DEL DÍA (semana, emociones, línea y guardar) -->
-      <div class="retract-body" id="wkRetractBody">
-        <div class="wk" id="wk"></div>
-      </div>
-
-      <div class="bio-sec">
-        <div class="bio-sec-hd"><span>Emociones de hoy</span><span id="moodCounterLbl">Elige hasta 3 (0/3)</span></div>
-        <div class="moods" id="moodsCore"></div>
-        <div class="extra-box" id="moodsExtraBox" hidden>
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-            <span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:700">Matices emocionales · Wavy Pro</span>
-            <span id="vipMoodHint" style="font-size:11px;color:var(--muted)">Desbloqueable</span>
-          </div>
-          <div class="moods" id="moodsVip" style="margin-bottom:0"></div>
-        </div>
-      </div>
-
-      <textarea id="ni" class="echo-input" placeholder="Escribe una línea sobre tu día…"></textarea>
-      <button class="btn" style="width:100%" id="na">Guardar registro del día</button>
-      <p class="ins" id="ins"></p>
-      <div id="nb"></div>
-      <button class="btn ghost" id="more" style="width:100%;margin-top:10px" hidden>Ver registros anteriores</button>
     </section>
 
     <!-- SUB-PANEL 1C: PEBETERO Y PRÁCTICAS VERIFICADAS CON TEMPORIZADOR -->
@@ -2180,17 +2225,14 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
          cerrado, y se convierte en el editor al darle click (sin cajón aparte). -->
     <div class="circle-sticky-wrap">
       <div class="circle-composer" id="circleComposer">
-        <textarea class="echo-input" id="echoInput" maxlength="200" placeholder="Dejar una nota o canción en mi círculo…"></textarea>
+        <div class="daily-prompt-line" id="dailyPromptLine"></div>
+        <div class="circle-composer-row">
+          <textarea class="echo-input" id="echoInput" maxlength="200" rows="1" placeholder="Dejar una nota o canción en mi círculo…"></textarea>
+          <button type="button" class="echo-send-btn" id="postEchoBtn" aria-label="Publicar nota">↑</button>
+        </div>
         <div class="circle-composer-drawer" id="circleComposerDrawer" hidden>
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-            <span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:600">Compartir con mi círculo · Cero seguidores</span>
-            <button type="button" class="chip" id="closeCircleComposerBtn" style="min-height:26px;padding:2px 9px;font-size:11px">Cerrar</button>
-          </div>
-          <div style="display:flex;justify-content:flex-end;margin-bottom:8px">
-            <button class="btn" id="postEchoBtn" style="padding:6px 16px;font-size:11px">Publicar nota</button>
-          </div>
           <div style="margin-bottom:8px">
-            <span style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600;display:block;margin-bottom:5px">Etiqueta de momento (opcional):</span>
+            <span style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600;display:block;margin-bottom:5px">Etiqueta de momento:</span>
             <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap">
               <div class="chips" id="echoVibeChips">
                 <button type="button" class="chip" data-vibe="Tranquilidad" style="min-height:28px;padding:3px 10px;font-size:11.5px">Tranquilidad</button>
@@ -2201,10 +2243,16 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
             </div>
           </div>
           <div style="padding-top:8px;border-top:1px solid var(--rule)">
-            <button type="button" class="mode-link" id="toggleInlineSongBtn" style="font-size:13px">+ Adjuntar canción (Spotify, Apple Music, YouTube, Deezer, Amazon)</button>
+            <button type="button" class="mode-link" id="toggleInlineSongBtn" style="font-size:13px">+ Adjuntar canción</button>
             <div id="inlineSongBox" hidden style="margin-top:8px;display:grid;gap:6px">
-              <input class="line" id="inlineScUrl" maxlength="220" placeholder="Pega el enlace de Spotify, Apple Music, YouTube Music, Deezer o Amazon…">
-              <small id="inlineScMetaPreview" style="font-size:11px;color:var(--ok);font-family:var(--serif);font-style:italic">El nombre de la canción y el artista se leen automáticamente de los metadatos del enlace.</small>
+              <input class="line" id="inlineSongSearch" maxlength="80" placeholder="Busca una canción o artista…" autocomplete="off">
+              <div id="inlineSongResults" style="display:grid;gap:4px"></div>
+              <div id="inlineSongSelected" hidden style="display:flex;align-items:center;gap:10px;background:var(--wash);border-radius:12px;padding:8px 10px">
+                <img id="inlineSongArt" src="" alt="" style="width:40px;height:40px;border-radius:8px;object-fit:cover;flex-shrink:0">
+                <span style="flex:1;min-width:0"><strong id="inlineSongTitle" style="font-family:var(--serif);font-size:14.5px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"></strong><small id="inlineSongArtist" style="font-size:11.5px;color:var(--muted)"></small></span>
+                <button type="button" id="inlineSongClear" aria-label="Quitar canción" style="border:none;background:none;font-size:18px;color:var(--muted);cursor:pointer;padding:4px">×</button>
+              </div>
+              <small style="font-size:11px;color:var(--muted);font-family:var(--serif);font-style:italic">Busca y elige: no hay que ir a otra app ni copiar enlaces.</small>
             </div>
           </div>
         </div>
@@ -2234,7 +2282,7 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
            Título, fecha y un pedacito del texto; al tocarlo se abre
            para leerlo (y editarlo). -->
       <div class="bio-sec">
-        <div class="bio-sec-hd"><span>Tus escritos</span><span id="diaryCountLbl" style="font-family:var(--serif);font-style:italic;text-transform:none;letter-spacing:0"></span></div>
+        <div class="bio-sec-hd"><span>Tus escritos</span><span style="display:flex;align-items:center;gap:8px"><span id="diaryCountLbl" style="font-family:var(--serif);font-style:italic;text-transform:none;letter-spacing:0"></span><button type="button" class="chip" id="shareProfileBtn" style="min-height:28px;padding:4px 11px;font-size:11px">Compartir mi perfil</button></span></div>
         <div id="diaryList"></div>
       </div>
       </section>
@@ -2938,8 +2986,9 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
   <div class="blank-sheet-modal" id="blankSheetModal" hidden>
     <div class="blank-sheet-inner">
       <div class="blank-sheet-top">
-        <span class="blank-sheet-date" id="blankSheetDate">HOY · REFLEXIÓN PERSONAL</span>
+        <span class="blank-sheet-date" id="blankSheetDate">REFLEXIÓN PERSONAL</span>
         <div style="display:flex;align-items:center;gap:8px">
+          <button type="button" class="chip" id="blankSheetVisBtn" style="min-height:34px;padding:6px 12px;font-size:11.5px">🔒 Privado</button>
           <button type="button" class="chip" id="closeBlankSheetBtn">Cerrar</button>
           <button type="button" class="btn" id="saveBlankSheetBtn" style="min-height:34px;padding:6px 14px;font-size:11px">Guardar entrada</button>
         </div>
@@ -2952,6 +3001,30 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
       </div>
     </div>
   </div>
+
+<!-- =========================================================
+     VISTAS PÚBLICAS (perfil waby/sebas + lectura de un post).
+     No son parte de la app: no tienen barra inferior ni Hoy/Costa/
+     Círculo/Pulso. Se muestran solo por ruta (#/usuario y
+     #/usuario/id-del-post) y las llena el router (renderPublicProfile /
+     renderPublicArticle). -->
+<div class="pub-view" id="v-public-profile" hidden>
+  <div class="pub-top">
+    <a class="pub-wordmark" href="#" data-pub-home>Wavy</a>
+    <a class="pub-back" href="#" data-pub-home>← Volver a Wavy</a>
+  </div>
+  <div id="pubProfileBody"></div>
+  <div class="pub-foot">Publicado en <b>Wavy</b> · Donde tu calma se encuentra con los tuyos.<br><a href="#" data-pub-home>Crea tu propio espacio en Wavy →</a></div>
+</div>
+
+<div class="pub-view pub-article" id="v-public-article" hidden>
+  <div class="pub-top">
+    <a class="pub-wordmark" href="#" data-pub-home>Wavy</a>
+    <a class="pub-back" href="#" data-pub-home>← Volver a Wavy</a>
+  </div>
+  <div id="pubArticleBody"></div>
+  <div class="pub-foot">Publicado en <b>Wavy</b> · Donde tu calma se encuentra con los tuyos.<br><a href="#" data-pub-home>Crea tu propio espacio en Wavy →</a></div>
+</div>
 
 <script>
 (function(){let shown=false;
@@ -4252,7 +4325,7 @@ function switchMainView(vid){
   });
   document.querySelectorAll('.vpage').forEach(p=>p.classList.toggle('on',p.id===vid));
   if(vid==='v-breathe'){fit();startLoop()}else{stopLoop()}
-  if(vid==='v-today'){syncPebeteroRing();flameView();sosBottomSync()}
+  if(vid==='v-today'){syncPebeteroRing();flameView()}
   if(vid==='v-circle'){renderHomeCoRegulation();updateCircleComposerYield()}
   if(vid==='v-clinic'){stats();hours(true);renderClinicalReport()}
   if(vid==='v-profile'){syncProfileForm();syncProWifiSwitchUI();renderSealsCarousel()}
@@ -4542,18 +4615,27 @@ if($('echoInput')){
     const dr=$('circleComposerDrawer');
     if(dr && dr.hidden){
       dr.hidden=false;
-      /* La pantalla baja hasta abajo para que el cuadro de texto se vea completo. */
-      window.scrollTo({top:document.documentElement.scrollHeight,behavior:'smooth'});
-      updateCircleComposerYield(); /* los controles cambian la altura del compositor */
+      /* Publicar es simple: el compositor es sticky y ya está visible,
+         así que NO se scrollea la página ni se empuja con yield al abrir.
+         Ese scroll + yield con el teclado abierto era lo que desconfiguraba
+         todo (el cajón terminaba arriba, cortado). */
     }
   });
 }
-if($('closeCircleComposerBtn')){
-  $('closeCircleComposerBtn').onclick=()=>{
-    if($('circleComposerDrawer'))$('circleComposerDrawer').hidden=true;
-    if($('echoInput'))$('echoInput').blur();
-    updateCircleComposerYield();
-  };
+/* El cuadro crece solo si escribes más de una línea (hasta 120 px); en
+   reposo mide una sola línea (44 px). La flecha de publicar solo se
+   activa cuando hay algo que publicar (texto o canción). */
+function syncEchoSendBtn(){
+  const b=$('postEchoBtn');if(!b)return;
+  const hasTxt=!!($('echoInput') && $('echoInput').value.trim());
+  const hasSong=!!(resolvedInlineSong && resolvedInlineSong.url);
+  b.disabled=!(hasTxt||hasSong);
+}
+function autogrowEchoInput(){
+  const ta=$('echoInput');if(!ta)return;
+  ta.style.height='44px';
+  ta.style.height=Math.min(ta.scrollHeight,120)+'px';
+  syncEchoSendBtn();
 }
 if($('toggleInlineSongBtn')){
   $('toggleInlineSongBtn').onclick=()=>{
@@ -4576,6 +4658,7 @@ $('echoInput').oninput=e=>{
     el.textContent=len+' / 200';
     el.style.color=len>=180?'var(--crimson)':'var(--muted)';
   }
+  autogrowEchoInput();
 };
 /* Resolución automática de título y artista desde los metadatos del enlace de streaming (oEmbed + URL parser) */
 let resolvedInlineSong={title:'',artist:'',url:''};
@@ -4609,26 +4692,76 @@ function resolveStreamingMetadata(url){
   return resolvedInlineSong;
 }
 
-if($('inlineScUrl')){
-  $('inlineScUrl').addEventListener('input',e=>{
-    resolveStreamingMetadata(e.target.value);
+/* Búsqueda de canciones DENTRO de la app (como las notas de Instagram):
+   escribes el nombre, eliges de los resultados y listo. Sin ir a otra
+   app, sin Compartir, sin copiar enlaces. Usa la API pública de búsqueda
+   de iTunes (gratis, sin clave ni login): devuelve título, artista,
+   portada y un preview de 30 s. */
+let inlineSongSearchTimer=null;
+async function searchInlineSong(q){
+  const box=$('inlineSongResults');if(!box)return;
+  q=String(q||'').trim();
+  if(q.length<2){box.innerHTML='';return}
+  box.innerHTML='<small style="font-size:11.5px;color:var(--muted)">Buscando…</small>';
+  try{
+    const r=await fetch('https://itunes.apple.com/search?term='+encodeURIComponent(q)+'&media=music&entity=song&limit=8&country=MX&lang=es');
+    const d=await r.json();
+    const list=Array.isArray(d.results)?d.results:[];
+    if(!list.length){box.innerHTML='<small style="font-size:11.5px;color:var(--muted)">Sin resultados. Prueba con el artista o el título.</small>';return}
+    box.innerHTML='';
+    list.forEach(s=>{
+      const b=document.createElement('button');
+      b.type='button';
+      b.style.cssText='display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:var(--wash);border:1px solid var(--glass-border);border-radius:12px;padding:7px 10px;cursor:pointer';
+      b.innerHTML='<img src="'+esc(s.artworkUrl100||'')+'" alt="" style="width:38px;height:38px;border-radius:8px;object-fit:cover;flex-shrink:0"><span style="flex:1;min-width:0"><strong style="font-family:var(--serif);font-size:14px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+esc(s.trackName||'')+'</strong><small style="font-size:11.5px;color:var(--muted)">'+esc(s.artistName||'')+'</small></span>';
+      b.onclick=()=>{
+        resolvedInlineSong={title:s.trackName||'',artist:s.artistName||'',url:s.trackViewUrl||'',previewUrl:s.previewUrl||'',artwork:s.artworkUrl100||''};
+        const sel=$('inlineSongSelected');
+        if(sel){
+          sel.hidden=false;
+          if($('inlineSongArt'))$('inlineSongArt').src=s.artworkUrl100||'';
+          if($('inlineSongTitle'))$('inlineSongTitle').textContent=s.trackName||'';
+          if($('inlineSongArtist'))$('inlineSongArtist').textContent=s.artistName||'';
+        }
+        box.innerHTML='';
+        if($('inlineSongSearch'))$('inlineSongSearch').value='';
+        syncEchoSendBtn();
+      };
+      box.appendChild(b);
+    });
+  }catch(e){
+    box.innerHTML='<small style="font-size:11.5px;color:var(--crimson)">No se pudo buscar. Revisa tu conexión e inténtalo de nuevo.</small>';
+  }
+}
+if($('inlineSongSearch')){
+  $('inlineSongSearch').addEventListener('input',e=>{
+    clearTimeout(inlineSongSearchTimer);
+    inlineSongSearchTimer=setTimeout(()=>searchInlineSong(e.target.value),350);
   });
+}
+if($('inlineSongClear')){
+  $('inlineSongClear').onclick=()=>{
+    resolvedInlineSong={title:'',artist:'',url:''};
+    const sel=$('inlineSongSelected');if(sel)sel.hidden=true;
+    syncEchoSendBtn();
+  };
 }
 
 $('postEchoBtn').onclick=async()=>{
   const txt=$('echoInput').value.trim();
-  const inUrl=$('inlineScUrl')?$('inlineScUrl').value.trim():'';
-  if(!txt && !inUrl){toast('Escribe una nota o pega un enlace musical para tu círculo','er');return}
+  const inUrl=(resolvedInlineSong && resolvedInlineSong.url)?resolvedInlineSong.url:'';
+  if(!txt && !inUrl){toast('Escribe una nota o busca una canción para tu círculo','er');return}
   if(inUrl){
-    const meta=(resolvedInlineSong.url===inUrl && resolvedInlineSong.title)?resolvedInlineSong:parseSongFallbackFromUrl(inUrl);
+    const meta=resolvedInlineSong;
     S.soundCapsule={
       question:S.soundCapsule?.question||SOUND_QUESTIONS[0],
       title:meta.title,
       artist:meta.artist,
       url:inUrl,
+      previewUrl:meta.previewUrl||'',
+      artwork:meta.artwork||'',
       updatedAt:Date.now()
     };
-    resolveStreamingMetadata(inUrl);
   }
   if(selectedEchoVibe==='Sintonía abierta'){
     S.openSync=true;
@@ -4643,8 +4776,12 @@ $('postEchoBtn').onclick=async()=>{
     ts:Date.now()
   });
   $('echoInput').value='';
+  autogrowEchoInput();
   if($('echoCount'))$('echoCount').textContent='0 / 200';
-  if($('inlineScUrl'))$('inlineScUrl').value='';
+  resolvedInlineSong={title:'',artist:'',url:''};
+  if($('inlineSongSearch'))$('inlineSongSearch').value='';
+  if($('inlineSongResults'))$('inlineSongResults').innerHTML='';
+  if($('inlineSongSelected'))$('inlineSongSelected').hidden=true;
   if($('inlineSongBox'))$('inlineSongBox').hidden=true;
   if($('circleComposerDrawer'))$('circleComposerDrawer').hidden=true;
   if($('echoInput'))$('echoInput').blur();
@@ -4743,23 +4880,15 @@ function renderCircleFeed(){
   const maintained=isPebeteroMaintained();
 
   /* 1. Pregunta Editorial del Día para el Círculo (Novedad Diaria y Conversación Profunda) */
+  /* La pregunta del día ya no es un banner aparte que ocupa espacio: vive
+     DENTRO del compositor, como una línea sutil pegada al cuadro de texto
+     (#dailyPromptLine). Parte del ecosistema. Tocarla enfoca el cuadro. */
   const dailyQ=getDailyCircleQuestion();
-  const promptBanner=document.createElement('div');
-  promptBanner.style.cssText='padding:11px 14px;margin-bottom:10px;border-radius:14px;background:linear-gradient(135deg,rgba(184,146,90,0.10),var(--wash));display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap';
-  promptBanner.innerHTML=
-    '<div style="flex:1;min-width:200px">'+
-      '<span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:700;display:block">Sintonía del Día en el Círculo</span>'+
-      '<strong style="font-family:var(--serif);font-style:italic;font-size:15.5px;font-weight:400;color:var(--ink);line-height:1.3">'+esc(dailyQ)+'</strong>'+
-    '</div>'+
-    '<button type="button" class="chip" id="answerDailyPromptBtn" style="min-height:30px;padding:4px 11px;font-size:11.5px;border-color:var(--gold);color:var(--ink)">Responder ↓</button>';
-  /* La pregunta y el cuadro de texto son UNO: Responder solo abre el
-     compositor de abajo (el cuadro "Dejar una nota…"), que es donde se
-     escribe la respuesta. No hay una cajita de respuesta aparte. */
-  promptBanner.querySelector('#answerDailyPromptBtn').onclick=()=>{
-    const ci=$('echoInput');
-    if(ci)ci.focus();
-  };
-  box.appendChild(promptBanner);
+  const dpl=$('dailyPromptLine');
+  if(dpl){
+    dpl.textContent='Hoy · '+dailyQ;
+    dpl.onclick=()=>{const ci=$('echoInput');if(ci)ci.focus();};
+  }
 
   const hasMySong=!!(S.soundCapsule && (S.soundCapsule.title||S.soundCapsule.url));
   const myPlatId=hasMySong?detectMusicPlatformId(S.soundCapsule.url):'spotify';
@@ -5680,20 +5809,6 @@ $('sosb').onclick=()=>{
      scroll solo compara dos números (la posición de ahora y la de
      antes) y pone o quita una clase. A prueba de millones de usuarios.
    ========================================================= */
-/* SOS · LÍNEA QUE SE CONVIERTE EN RECTÁNGULO (al llegar abajo).
-   El botón es una línea gruesa palpitante arriba de la barra inferior
-   (estado normal) y solo al scrollear hasta el final se convierte, muy
-   sutilmente, en el rectángulo completo con el texto. El corazón del
-   renglón de progreso (#heartSocket) se mantiene SIEMPRE donde está,
-   latiendo y rojo: es independiente de la línea. No hay morph, no hay
-   esconder por dirección, no hay clip-path: solo una clase que se pone
-   o se quita cuando se llega al final de la página. */
-function sosBottomSync(){
-  const b=$('sosb');if(!b)return;
-  const doc=document.documentElement;
-  const nearBottom=(window.scrollY||0)+(window.innerHeight||0) >= (doc.scrollHeight||0)-24;
-  b.classList.toggle('sos-line',!nearBottom);
-}
 /* El compositor y el difuminado del encabezado solo se recalculan una vez
    por cuadro de animación, no en cada evento de scroll (en iOS el scroll
    con inercia dispara muchos eventos por cuadro y medir el layout en cada
@@ -5713,9 +5828,9 @@ function requestComposerYield(){
    y la cajita de canción se quedan abiertos aunque se scrollee. Por eso
    el listener de scroll ya no llama a closeTransientPopovers(). */
 window.addEventListener('scroll',()=>{
-  sosBottomSync();requestComposerYield();
+  requestComposerYield();
 },{passive:true});
-window.addEventListener('resize',()=>{sosBottomSync();updateCircleComposerYield();updateMastheadFade();});
+window.addEventListener('resize',()=>{updateCircleComposerYield();updateMastheadFade();});
 if($('heartSocket'))$('heartSocket').onclick=()=>{const b=$('sosb');if(b)b.click();};
 
 /* =========================================================
@@ -7677,6 +7792,35 @@ $('more').onclick=()=>{nshow=nshow<S.notes.length?nshow+5:4;notes()};
    se guardó con blank:true, o si su texto es largo (>140 caracteres, las
    de antes del flag). Al tocarla se abre para leerla y editarla. */
 let editingBlankId=null;
+/* Visibilidad de cada escrito (Público / Privado). Por default un escrito
+   nace PRIVADO: nada se hace público por accidente. Público significa que
+   aparece en el perfil público (waby/sebas) y cualquiera con el link lo
+   puede leer; Privado solo lo ve su autor, en su Diario. */
+let blankSheetPublic=false;
+function syncBlankSheetVisBtn(){
+  const b=$('blankSheetVisBtn');if(!b)return;
+  b.textContent=blankSheetPublic?'🌐 Público':'🔒 Privado';
+  b.style.borderColor=blankSheetPublic?'var(--gold)':'var(--rule)';
+  b.style.color=blankSheetPublic?'var(--gold)':'var(--muted)';
+}
+if($('blankSheetVisBtn')){
+  $('blankSheetVisBtn').onclick=()=>{
+    blankSheetPublic=!blankSheetPublic;
+    syncBlankSheetVisBtn();
+    toast(blankSheetPublic?'Este escrito será público: aparecerá en tu perfil (waby/sebas)':'Este escrito será privado: solo tú lo verás','ok');
+  };
+}
+/* Fecha de un escrito como en una carta: "Sábado, 7 de noviembre de 2026".
+   Nunca "Hoy": siempre la fecha, día y mes, aunque el escrito sea de hoy. */
+const DIARY_WEEKDAYS=['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
+const DIARY_MONTHS=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+function formatDiaryDate(dstr){
+  const m=String(dstr||'').match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if(!m)return String(dstr||'');
+  const dt=new Date(+m[1],+m[2]-1,+m[3]);
+  if(isNaN(dt.getTime()))return String(dstr||'');
+  return DIARY_WEEKDAYS[dt.getDay()]+', '+dt.getDate()+' de '+DIARY_MONTHS[dt.getMonth()]+' de '+dt.getFullYear();
+}
 function renderDiaryList(){
   const b=$('diaryList');if(!b)return;
   const list=(S.notes||[]).filter(n=>n&&((n.blank===true)||(n.texto && String(n.texto).length>140)));
@@ -7689,19 +7833,166 @@ function renderDiaryList(){
   list.slice(0,20).forEach(n=>{
     const card=document.createElement('div');
     card.className='journal-card diary-entry';
-    const dateLbl=(n.d===today()?'Hoy':esc((n.d||'').slice(5).replace('-','/')))+' · '+esc(n.hora)+' h';
-    /* Solo el asunto (título) y la fecha a la derecha: nada de la primera
-       línea del texto. Tipografía de siempre de la app (título en serif,
-       fecha en la sans de la app). "Leer →" se mantiene. */
+    /* Formato carta / postal / epístola: la fecha tiene SU renglón y el
+       título tiene OTRO renglón. Nunca "Hoy": siempre la fecha, día y mes.
+       Solo el asunto (no la primera línea del texto). "Leer →" se mantiene.
+       La pastilla de la derecha es el interruptor Público / Privado de
+       este escrito (tocarla lo cambia sin abrirlo). */
     card.innerHTML=
-      '<div class="diary-head">'+
-        '<div class="journal-title">'+esc(n.estado||'Reflexión del día')+'</div>'+
-        '<span class="journal-date">'+dateLbl+'</span>'+
-      '</div>'+
-      '<div class="diary-read">Leer →</div>';
+      '<div class="diary-date">'+esc(formatDiaryDate(n.d))+'</div>'+
+      '<div class="journal-title">'+esc(n.estado||'Reflexión del día')+'</div>'+
+      '<div style="display:flex;justify-content:space-between;align-items:center;gap:8px">'+
+        '<div class="diary-read">Leer →</div>'+
+        '<button type="button" class="diary-vis-btn" data-vis="'+(n.public?'pub':'priv')+'">'+(n.public?'🌐 Público':'🔒 Privado')+'</button>'+
+      '</div>';
+    card.querySelector('.diary-vis-btn').onclick=e=>{
+      e.stopPropagation();
+      n.public=!n.public;
+      save(false);renderDiaryList();
+      toast(n.public?'Este escrito ahora es público':'Este escrito ahora es privado','ok');
+    };
     card.onclick=()=>openBlankEntry(n.id);
     b.appendChild(card);
   });
+}
+
+/* =========================================================
+   VISTAS PÚBLICAS (perfil waby/sebas + lectura de un post).
+   - El perfil (#/usuario) muestra SOLO los escritos PÚBLICOS del autor,
+     estilo Medium: fecha, título en negrita, extracto en gris, rayita.
+   - El artículo (#/usuario/id) es la lectura aparte: solo el post
+     (título, autor, fecha, tiempo de lectura, cuerpo en serif), sin
+     nada de la app (sin barra, sin Hoy/Costa/Círculo/Pulso).
+   - La ruta es por hash (#/sebas) porque es un solo archivo estático;
+     el link bonito (waby/sebas, sin #) llega con el backend.
+   - Sin backend, el perfil muestra los escritos públicos del usuario
+     de ESTE dispositivo (localStorage). La interfaz es la misma que
+     usará el backend: solo cambia de dónde vienen los datos.
+   ========================================================= */
+function publicPosts(){
+  return (S.notes||[]).filter(n=>n && n.public===true && ((n.blank===true)||(n.texto && String(n.texto).length>140)));
+}
+function publicExcerpt(n){
+  const t=String(n.texto||'').replace(/\s+/g,' ').trim();
+  return t.length>140?t.slice(0,140).replace(/\s+\S*$/,'')+'…':t;
+}
+function publicReadMins(n){
+  const words=String(n.texto||'').trim().split(/\s+/).filter(Boolean).length;
+  return Math.max(1,Math.round(words/200));
+}
+function publicProfileUrl(username){
+  return location.origin+location.pathname+'#/'+encodeURIComponent(username||S.me.username||'');
+}
+function publicArticleUrl(username,id){
+  return publicProfileUrl(username)+'/'+encodeURIComponent(String(id));
+}
+function showPublicView(){
+  document.body.classList.add('public-view');
+  window.scrollTo(0,0);
+}
+function showAppView(){
+  document.body.classList.remove('public-view');
+  const p=$('v-public-profile'),a=$('v-public-article');
+  if(p){p.hidden=true;p.classList.remove('on')}
+  if(a){a.hidden=true;a.classList.remove('on')}
+}
+function renderPublicProfile(username){
+  const body=$('pubProfileBody');if(!body)return;
+  const me=S.me||{};
+  const isOwner=String(username||'').toLowerCase()===String(me.username||'').toLowerCase();
+  if(!isOwner){
+    body.innerHTML='<p style="font-family:var(--serif);font-size:20px;line-height:1.5">Este perfil no existe en este dispositivo.</p><p style="color:var(--muted);line-height:1.6">Los perfiles públicos de Wavy viven en la nube. En este equipo solo está el perfil de @'+esc(me.username||'')+'.</p>';
+  }else{
+    const posts=publicPosts();
+    const name=esc(me.name||('@'+(me.username||'')));
+    const bio=esc(me.bio||'');
+    let html='<div class="pub-author"><div class="av">'+getAv(me.av)+'</div><div><h2>'+name+'</h2><div class="un">@'+esc(me.username||'')+'</div></div></div>';
+    if(bio)html+='<p class="pub-bio">“'+bio+'”</p>';
+    html+='<div style="display:flex;gap:8px;margin-bottom:6px"><button type="button" class="chip" id="pubShareProfileBtn" style="min-height:34px;padding:6px 14px;font-size:12px">Compartir mi perfil</button></div>';
+    if(!posts.length){
+      html+='<p style="color:var(--muted);line-height:1.7;margin-top:24px">Aún no hay escritos públicos. Marca un escrito como <b>Público</b> en tu Diario y aparecerá aquí.</p>';
+    }else{
+      posts.forEach(n=>{
+        html+='<article class="pub-post" data-pub-post="'+esc(String(n.id))+'">'+
+          '<div class="d">'+esc(formatDiaryDate(n.d))+'</div>'+
+          '<h3>'+esc(n.estado||'Reflexión del día')+'</h3>'+
+          (publicExcerpt(n)?'<div class="ex">'+esc(publicExcerpt(n))+'</div>':'')+
+        '</article>';
+      });
+    }
+    body.innerHTML=html;
+    body.querySelectorAll('[data-pub-post]').forEach(el=>{
+      el.onclick=()=>{location.hash='#/'+encodeURIComponent(me.username||'')+'/'+encodeURIComponent(el.dataset.pubPost);};
+    });
+    const sp=$('pubShareProfileBtn');
+    if(sp)sp.onclick=async()=>{
+      const url=publicProfileUrl(me.username);
+      try{await navigator.clipboard.writeText(url);toast('Enlace de tu perfil copiado','ok')}
+      catch(e){toast(url,'ok')}
+    };
+  }
+  const p=$('v-public-profile'),a=$('v-public-article');
+  if(a){a.hidden=true;a.classList.remove('on')}
+  if(p){p.hidden=false;p.classList.add('on')}
+  showPublicView();
+}
+function renderPublicArticle(username,postId){
+  const body=$('pubArticleBody');if(!body)return;
+  const me=S.me||{};
+  const isOwner=String(username||'').toLowerCase()===String(me.username||'').toLowerCase();
+  const n=isOwner?(S.notes||[]).find(x=>x&&String(x.id)===String(postId)):null;
+  if(!n){
+    body.innerHTML='<p style="font-family:var(--serif);font-size:20px;line-height:1.5">Este escrito no existe o no es público.</p><p style="color:var(--muted);line-height:1.6">Puede que su autor lo haya puesto en privado o que el enlace esté incompleto.</p>';
+  }else{
+    const name=esc(me.name||('@'+(me.username||'')));
+    const paras=String(n.texto||'').split(/\n+/).map(p=>p.trim()).filter(Boolean);
+    const bodyHtml=paras.length?paras.map(p=>'<p>'+esc(p)+'</p>').join(''):'<p>'+esc(n.estado||'')+'</p>';
+    body.innerHTML=
+      '<h1>'+esc(n.estado||'Reflexión del día')+'</h1>'+
+      '<div class="pub-meta"><div class="av">'+getAv(me.av)+'</div><div><div class="nm">'+name+'</div><div class="sub">'+esc(formatDiaryDate(n.d))+' · '+publicReadMins(n)+' min de lectura</div></div></div>'+
+      '<div class="pub-actions">'+
+        '<button type="button" id="pubGestoBtn" aria-label="Enviar un gesto"><svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.5-9C1 8.5 3 5 6.5 5c2 0 3.5 1 4.5 2.5l1 1.5 1-1.5C14 6 15.5 5 17.5 5 21 5 23 8.5 21.5 12c-2 4.4-9.5 9-9.5 9Z"/></svg><span>Gesto</span></button>'+
+        '<button type="button" id="pubSaveBtn" aria-label="Guardar"><svg viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4.5L6 21V3Z"/></svg><span>Guardar</span></button>'+
+        '<button type="button" id="pubShareBtn" aria-label="Compartir"><svg viewBox="0 0 24 24"><path d="M12 3v13M7 8l5-5 5 5M5 13v7a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-7"/></svg><span>Compartir</span></button>'+
+      '</div>'+
+      '<div class="pub-body">'+bodyHtml+'</div>'+
+      '<div class="pub-author-foot"><div class="av">'+getAv(me.av)+'</div><div><div style="font-family:var(--serif);font-size:18px;font-weight:600">'+name+'</div>'+(me.bio?'<div style="font-family:var(--serif);font-style:italic;font-size:14px;color:var(--muted);line-height:1.5;margin-top:4px">“'+esc(me.bio)+'”</div>':'')+'<div style="margin-top:10px"><a href="#/'+encodeURIComponent(me.username||'')+'" style="color:var(--gold);text-decoration:none;font-weight:600;font-size:13.5px">Más de @'+esc(me.username||'')+' →</a></div></div></div>';
+    const gb=$('pubGestoBtn');
+    if(gb)gb.onclick=()=>{gb.classList.toggle('on');toast(gb.classList.contains('on')?'Gesto enviado a @'+(me.username||''):'Gesto retirado','ok');};
+    const sv=$('pubSaveBtn');
+    if(sv)sv.onclick=()=>{sv.classList.toggle('on');toast(sv.classList.contains('on')?'Guardado en tu Wavy':'Quitado de guardados','ok');};
+    const sh=$('pubShareBtn');
+    if(sh)sh.onclick=async()=>{
+      const url=publicArticleUrl(me.username,n.id);
+      try{await navigator.clipboard.writeText(url);toast('Enlace del escrito copiado','ok')}
+      catch(e){toast(url,'ok')}
+    };
+  }
+  const p=$('v-public-profile'),a=$('v-public-article');
+  if(p){p.hidden=true;p.classList.remove('on')}
+  if(a){a.hidden=false;a.classList.add('on')}
+  showPublicView();
+}
+function publicRouter(){
+  const h=(location.hash||'').replace(/^#\/?/,'');
+  const parts=h.split('/').filter(Boolean);
+  if(!parts.length){showAppView();return}
+  const username=decodeURIComponent(parts[0]);
+  const postId=parts[1]?decodeURIComponent(parts[1]):null;
+  if(postId)renderPublicArticle(username,postId);
+  else renderPublicProfile(username);
+}
+window.addEventListener('hashchange',publicRouter);
+document.querySelectorAll('[data-pub-home]').forEach(a=>{
+  a.addEventListener('click',e=>{e.preventDefault();location.hash='';showAppView();window.scrollTo(0,0);});
+});
+/* Compartir mi perfil (desde el Diario): copia el enlace waby/sebas. */
+if($('shareProfileBtn')){
+  $('shareProfileBtn').onclick=async()=>{
+    const url=publicProfileUrl(S.me.username);
+    try{await navigator.clipboard.writeText(url);toast('Enlace de tu perfil copiado: '+url,'ok')}
+    catch(e){toast(url,'ok')}
+  };
 }
 /* Abrir un escrito guardado para leerlo (y editarlo): llena la hoja en
    blanco con su título y texto, y al guardar se ACTUALIZA en su lugar
@@ -7709,8 +8000,10 @@ function renderDiaryList(){
 function openBlankEntry(id){
   const n=(S.notes||[]).find(x=>x&&(x.id===id));if(!n)return;
   editingBlankId=n.id;
+  blankSheetPublic=!!n.public;syncBlankSheetVisBtn();
   const bs=$('blankSheetModal');if(!bs)return;
   bs.hidden=false;
+  if($('blankSheetDate'))$('blankSheetDate').textContent=formatDiaryDate(n.d||today());
   if($('blankSheetTitle'))$('blankSheetTitle').value=n.estado&&n.estado!=='Registro del día'?n.estado:'';
   if($('blankSheetBody')){$('blankSheetBody').value=n.texto||'';$('blankSheetBody').focus();}
   if($('blankSheetCharCount'))$('blankSheetCharCount').textContent=(String(n.texto||'').length)+' caracteres';
@@ -8855,9 +9148,13 @@ initAllBioCategories();
 renderAll();
 syncBreathMinUI();
 initSpiritSwipe();
+syncEchoSendBtn();
+/* La pregunta del día del compositor (por si se entra a Círculo antes de
+   que renderCircleFeed corra): renderCircleFeed la vuelve a poner. */
+if($('dailyPromptLine'))$('dailyPromptLine').textContent='Hoy · '+getDailyCircleQuestion();
+publicRouter();
 if('scrollRestoration' in history)history.scrollRestoration='manual';
 window.scrollTo(0,0);
-sosBottomSync();
 updateMastheadFade();
 initLiveSyncChannels();
 broadcastLiveEvent('state_sync');
@@ -8935,8 +9232,9 @@ if($('openBlankSheetBtn')){
     const bs=$('blankSheetModal');if(!bs)return;
     bs.hidden=false;
     const now=new Date();
-    const dateStr='HOY · '+now.getDate()+' DE '+MONTHS_ES[now.getMonth()].toUpperCase();
+    const dateStr=formatDiaryDate(today());
     if($('blankSheetDate'))$('blankSheetDate').textContent=dateStr;
+    blankSheetPublic=false;syncBlankSheetVisBtn();
     if($('blankSheetTitle'))$('blankSheetTitle').value='';
     if($('blankSheetBody')){
       $('blankSheetBody').value=$('ni')?$('ni').value:'';
@@ -8974,11 +9272,12 @@ if($('saveBlankSheetBtn')){
        se ACTUALIZA en su lugar; si es nuevo, se agrega arriba. */
     const existing=editingBlankId!=null?(S.notes||[]).find(x=>x&&(x.id===editingBlankId)):null;
     if(existing){
-      existing.estado=finalState;existing.teoria=finalTheory;existing.texto=txt;existing.blank=true;
+      existing.estado=finalState;existing.teoria=finalTheory;existing.texto=txt;existing.blank=true;existing.public=blankSheetPublic;
     }else{
       S.notes.unshift({
         id:Date.now(),
         blank:true,
+        public:blankSheetPublic,
         d:today(),
         hora:timeStr,
         estado:finalState,

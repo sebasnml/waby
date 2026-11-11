@@ -202,8 +202,15 @@ h1{font-family:var(--serif);font-weight:500;font-size:clamp(28px,7vw,36px);line-
     backdrop-filter:blur(16px) saturate(160%);
     -webkit-backdrop-filter:blur(16px) saturate(160%);
   }
-  /* iPhone (390 px): los rótulos caben en un renglón sin partirse */
-  .hd{font-size:10px;letter-spacing:.05em;gap:6px}
+  /* iPhone (390 px): los rótulos caben en un renglón sin partirse.
+     Ronda 20: el encabezado de hábitos se cortaba con … porque título +
+     3 botones + «3 Libres · 7 Pro» no cabían en 330 px. Se baja la letra
+     a 9 px y los botones a 20 px para que todo quepa sin recortar. */
+  .hd{font-size:9px;letter-spacing:.04em;gap:5px}
+  .hd .help-q{width:20px;height:20px;font-size:12px;margin-left:3px}
+  .hd .eye-q,.hd .arrow-q{width:20px;height:20px;margin-left:3px}
+  .hd .eye-q svg,.hd .arrow-q svg{width:13px;height:13px}
+  .story small{font-size:10px}
   .sl label{font-size:10px;letter-spacing:.05em;gap:6px}
   .rate label{font-size:16px}
   .rate label b{font-size:20px}
@@ -1646,7 +1653,7 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
 .circle-composer-row{display:flex;align-items:flex-end;gap:8px}
 .circle-composer-row #echoInput{flex:1;min-width:0}
 .echo-send-btn{
-  width:40px;height:40px;flex-shrink:0;border-radius:50%;border:none;
+  width:44px;height:44px;flex-shrink:0;border-radius:50%;border:none;
   background:var(--ink);color:var(--paper);cursor:pointer;
   display:grid;place-items:center;font-size:18px;line-height:1;
   box-shadow:var(--glass-spec);transition:opacity .18s ease, transform .18s ease;
@@ -1797,7 +1804,7 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
     <!-- SUB-PANEL 1A: HÁBITO Y BATERÍA + FLUJO SOS -->
     <section class="panel on card habits-hidden habits-collapsed" id="sub-habit">
       <div class="hd">
-        <span>¿Qué hábito regulas? <button type="button" class="help-q" data-help="helpHabit" aria-label="Ayuda sobre hábitos">?</button> <button type="button" class="eye-q" id="habitEyeBtn" aria-label="Mostrar u ocultar hábitos" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"/><circle cx="12" cy="12" r="2.8"/><path d="M4 20L20 4"/></svg></button> <button type="button" class="arrow-q" id="habitExpandBtn" aria-label="Expandir o contraer hábitos" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button></span>
+        <span>¿Qué regulas? <button type="button" class="help-q" data-help="helpHabit" aria-label="Ayuda sobre hábitos">?</button> <button type="button" class="eye-q" id="habitEyeBtn" aria-label="Mostrar u ocultar hábitos" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"/><circle cx="12" cy="12" r="2.8"/><path d="M4 20L20 4"/></svg></button> <button type="button" class="arrow-q" id="habitExpandBtn" aria-label="Expandir o contraer hábitos" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button></span>
         <span id="proStatusBadge" style="color:var(--gold);font-weight:700">Plan Básico</span>
       </div>
       <div class="help-tip" id="helpHabit" hidden>Elige el hábito o impulso principal que deseas observar. Los hitos reflejan etapas conductuales frecuentes durante un ciclo de 90 días.</div>
@@ -1813,7 +1820,7 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
       </div>
       <div class="bar"><div class="fill" id="fill"></div></div>
       <div class="marks" id="marks"></div>
-      <div class="clock" id="dayClockBox"><span>Faltan para<br>completar el día</span><b id="cd">--:--:--</b><i id="cdb"></i></div>
+      <div class="clock" id="dayClockBox"><span>Falta hoy</span><b id="cd">--:--:--</b><i id="cdb"></i></div>
       <div class="sig" id="sigbox">
         <div class="m"><span style="display:flex;align-items:center;gap:8px"><button type="button" class="sig-spirit-btn" id="spiritBtn" aria-label="Elegir línea espiritual o filosófica">✦</button><span id="sm"></span></span><span id="sback" style="color:var(--muted)"></span></div>
         <q id="sq"></q><p id="st"></p><div class="s" id="ss"></div>
@@ -2724,7 +2731,7 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
       </div>
       <!-- Versión de la app: sube una por ronda (v18, v19, v20…) para saber
            de un vistazo si la versión publicada ya trae los últimos cambios. -->
-      <div class="cover-version">v19</div>
+      <div class="cover-version">v20</div>
     </div>
   </div>
 </div>
@@ -4608,7 +4615,7 @@ function renderStoriesBar(){
   const myMaintained=isPebeteroMaintained();
   meBtn.innerHTML=
     '<div class="story-ring '+(myMaintained?'ok':'')+'"><div class="story-av">'+getAv(S.me.av)+'</div></div>'+
-    '<span>Tú (@'+esc(S.me.username)+')</span><small>'+(myMaintained?'Encendido':Math.round(fuel())+'%')+'</small>';
+    '<span>Tú</span><small>'+(myMaintained?'Encendido':Math.round(fuel())+'%')+'</small>';
   meBtn.onclick=()=>openExternalProfile('ME');
   bar.appendChild(meBtn);
 
@@ -4632,7 +4639,7 @@ function renderStoriesBar(){
   addB.className='story add-right';
   addB.innerHTML=
     '<div class="story-ring add"><div class="story-av" style="font-family:var(--serif);font-size:20px;color:var(--ink)">+</div></div>'+
-    '<span>Vincular</span><small>Invitar / Buscar</small>';
+    '<span>Vincular</span><small>Invitar</small>';
   addB.onclick=()=>{if(!S.onb||!S.onb.done){initOnboarding(true);return}$('directoryModal').hidden=false;renderSearchDirectory()};
   bar.appendChild(addB);
 }
@@ -9418,7 +9425,7 @@ function setupAutoGrow(el){
   if(!el)return;
   const resize=()=>{
     el.style.height='auto';
-    el.style.height=Math.max(el.id==='echoInput'?76:90,el.scrollHeight)+'px';
+    el.style.height=Math.max(el.id==='echoInput'?44:90,el.scrollHeight)+'px';
   };
   el.addEventListener('input',resize);
   el.addEventListener('focus',resize);

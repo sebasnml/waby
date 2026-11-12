@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#F8FAFC" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#06090F" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0D110F" media="(prefers-color-scheme: dark)">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="format-detection" content="telephone=no">
@@ -56,14 +56,14 @@
   color-scheme:light;
 }
 /* Blanco Pulcritud: blanco total, neutro, como Apple Music / Instagram /
-   WhatsApp / Facebook — sin el tinte cálido del papel editorial */
+   WhatsApp / Facebook — un solo fondo continuo sin segundo marco */
 :root[data-theme="pulcritud"]{
   --paper:#FFFFFF;
-  --paper-grad:linear-gradient(180deg,#FFFFFF 0%,#FFFFFF 100%);
-  --card:rgba(255,255,255,0.88);
+  --paper-grad:none;
+  --card:#FFFFFF;
   --card-solid:#FFFFFF;
   --glass-border:rgba(0,0,0,0.08);
-  --glass-spec:inset 0 1.5px 0 rgba(255,255,255,0.95),inset 0 -1px 0 rgba(0,0,0,0.03);
+  --glass-spec:none;
   --ink:#111111;
   --muted:#6E6E73;
   --rule:rgba(0,0,0,0.08);
@@ -71,8 +71,8 @@
   --gold:#C2A068;
   --ok:#638264;
   --spotify:#1DB954;
-  --wash:rgba(0,0,0,0.04);
-  --shadow:0 24px 52px -22px rgba(0,0,0,0.10),0 2px 8px rgba(0,0,0,0.04);
+  --wash:#F6F6F7;
+  --shadow:none;
   color-scheme:light;
 }
 @media(prefers-color-scheme:dark){
@@ -139,24 +139,33 @@ body{
 .book{width:100%;max-width:600px;padding-bottom:8px;min-width:0}
 
 /* Cabecera Editorial */
-/* Encabezado: una sola fila compacta, pegada arriba como Instagram —
-   el nombre es el ancla, el avatar va solo a la derecha */
+/* Encabezado centrado estilo Instagram: Wavy grande al centro con pitch
+   sutil debajo, y avatar de perfil alineado a la derecha */
 .masthead{
   border-bottom:1px solid var(--rule);
-  padding:4px 0 8px;
-  margin-bottom:10px;
-  display:flex;
-  justify-content:space-between;
+  padding:6px 0 10px;
+  margin-bottom:12px;
+  display:grid;
+  grid-template-columns:40px 1fr 40px;
   align-items:center;
-  gap:10px;
+  gap:8px;
 }
-.masthead-left{text-align:left}
-.masthead .eyebrow{font-size:9px;letter-spacing:.14em;margin-bottom:1px}
-.masthead h1{font-family:var(--serif);font-weight:500;font-size:clamp(26px,6.5vw,30px);line-height:1;letter-spacing:.02em;margin:0}
-.masthead .tagline{font-family:var(--serif);font-style:normal;color:var(--muted);font-size:12px;margin-top:1px}
-.masthead .me-pill{padding:2px;border-radius:50%;min-height:0;gap:0}
+.masthead-left{
+  grid-column:2;
+  text-align:center;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  min-width:0;
+}
+.masthead .eyebrow{display:none}
+.masthead h1{font-family:var(--serif);font-weight:500;font-size:clamp(30px,7.5vw,35px);line-height:1;letter-spacing:-.01em;margin:0}
+.masthead .tagline{font-family:var(--serif);font-style:normal;color:var(--muted);font-size:11.5px;letter-spacing:.01em;margin-top:3px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.masthead-right{grid-column:3;display:flex;align-items:center;justify-content:flex-end}
+.masthead .me-pill{padding:2px;border-radius:50%;min-height:0;gap:0;box-shadow:none}
 .masthead .me-pill > div:last-child{display:none}
-.masthead .me-pill .mini-av{width:32px;height:32px}
+.masthead .me-pill .mini-av{width:34px;height:34px}
 /* Halo dorado atardecer en el avatar cuando Wavy Pro está activo: un
    anillo dorado y un resplandor suave alrededor de la circunferencia. */
 .masthead .me-pill.pro-halo .mini-av{border-color:#E9B949;box-shadow:0 0 0 2px #F2C14E,0 0 16px 4px rgba(242,193,78,.6)}
@@ -187,14 +196,14 @@ h1{font-family:var(--serif);font-weight:500;font-size:clamp(28px,7vw,36px);line-
   to{opacity:1;transform:translateY(0)}
 }
 
-/* Tarjetas Liquid Glass */
+/* Contenedores de vista sin segundo fondo ni sombra perimetral (estilo Instagram) */
 .card{
-  background:var(--card);
-  backdrop-filter:blur(32px) saturate(200%);
-  -webkit-backdrop-filter:blur(32px) saturate(200%);
-  border-radius:16px;
-  padding:18px 18px 22px;
-  box-shadow:var(--glass-spec),var(--shadow);
+  background:transparent;
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+  border-radius:0;
+  padding:6px 0 18px;
+  box-shadow:none;
   margin-bottom:14px;
 }
 @media(max-width:480px){
@@ -258,36 +267,8 @@ h1{font-family:var(--serif);font-weight:500;font-size:clamp(28px,7vw,36px);line-
 .tab.on{background:var(--wash);color:var(--ink);font-weight:600;box-shadow:inset 0 -2px 0 var(--crimson)}
 .panel{display:none;animation:fadeUp .24s ease}.panel.on{display:block}
 
-/* Check-in rápido tipo BeReal en Hoy */
-/* Perímetro fino y elegante en la pestaña "Pebetero / Mi Llama" (el
-   cuadro al lado de "Bienestar / Ciclo y Ánimo"): verde cuando la
-   cuota del día está cumplida, rojo (carmín) cuando falta. El color da
-   vueltas alrededor del botón: un gradiente cónico que rota, una línea
-   muy fina (1.5 px) pero suficiente para llamar la atención. Además
-   el anillo LATE suave (un respiro de opacidad cada 2.2 s, como el
-   corazón) para que llame la atención sin gritar. La pestaña SIEMPRE
-   está pintada (verde o carmín, nunca sin color): el anillo ES su
-   estado. Por eso, cuando el anillo está puesto, se quita la rayita
-   carmín predeterminada del tab seleccionado (.tab.on): dos rojos en
-   el mismo botón chocaban. */
-@property --peb-angle{syntax:'<angle>';initial-value:0deg;inherits:false}
+/* Check-in rápido en Hoy (sin animación giratoria en Pebetero) */
 .tab.peb-ring{position:relative}
-.tab.peb-ring.on{box-shadow:none}
-.tab.peb-ring::before{
-  content:"";position:absolute;inset:0;border-radius:9px;pointer-events:none;z-index:3;
-  padding:1.5px;
-  background:conic-gradient(from var(--peb-angle,0deg),var(--peb-ring) 0deg,transparent 22%,transparent 58%,var(--peb-ring) 82%,var(--peb-ring) 100%);
-  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
-  -webkit-mask-composite:xor;
-  mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
-  mask-composite:exclude;
-  animation:pebRingSpin 6s linear infinite, pebRingPulse 2.2s ease-in-out infinite;
-}
-@keyframes pebRingSpin{to{--peb-angle:360deg}}
-@keyframes pebRingPulse{0%,100%{opacity:1}50%{opacity:.55}}
-@media(prefers-reduced-motion:reduce){.tab.peb-ring::before{animation:pebRingSpin 6s linear infinite}}
-.tab.peb-ring-done{--peb-ring:var(--ok)}
-.tab.peb-ring-pending{--peb-ring:var(--crimson)}
 
 /* Cuadrícula 3x3 Hábitos */
 .habit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
@@ -636,9 +617,9 @@ input[type=range]{width:100%;accent-color:var(--crimson);cursor:pointer;min-heig
 .mode-sheet{display:flex;flex-wrap:wrap;gap:6px;margin:-2px 0 10px;animation:fadeUp .2s ease}
 .mode-sheet[hidden]{display:none}
 .cycle-card{
-  background:var(--card);border-radius:16px;
+  background:var(--card);border:1px solid var(--rule);border-radius:16px;
   padding:16px;margin-bottom:12px;
-  box-shadow:var(--glass-spec),0 14px 30px -24px rgba(15,23,42,.22);
+  box-shadow:none;
 }
 .cycle-hero{display:flex;align-items:center;gap:14px;margin-bottom:14px}
 /* Nada con tamaño fijo que se pueda desconfigurar: el anillo y su texto
@@ -660,8 +641,8 @@ input[type=range]{width:100%;accent-color:var(--crimson);cursor:pointer;min-heig
 .info-list{border-top:1px solid var(--rule);margin-top:12px}
 .info-item{padding:11px 0;border-bottom:1px solid var(--rule)}
 .info-item:last-child{border-bottom:none}
-.cycle-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.cycle-actions .btn{border-radius:30px;font-size:11px;letter-spacing:.08em;padding:10px 8px;white-space:nowrap}
+.cycle-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;align-items:stretch}
+.cycle-actions .btn{width:100%;min-width:0;border-radius:30px;font-size:11px;letter-spacing:.04em;padding:10px 6px;white-space:nowrap;text-align:center;justify-content:center}
 .male-top .btn{border-radius:30px}
 #bioTrackMode{display:inline-flex;flex-wrap:nowrap;flex-shrink:0;gap:4px}
 .male-top{display:flex;justify-content:space-between;align-items:center;gap:12px}
@@ -669,7 +650,7 @@ input[type=range]{width:100%;accent-color:var(--crimson);cursor:pointer;min-heig
 .male-top b{display:block;font-family:var(--serif);font-size:20px;font-weight:500;line-height:1.2}
 .fine{font-family:var(--serif);font-style:normal;font-size:12.5px;color:var(--muted);line-height:1.45;margin-top:10px}
 
-.cal{background:var(--card);border-radius:16px;padding:14px 12px 12px;box-shadow:var(--glass-spec)}
+.cal{background:var(--card);border:1px solid var(--rule);border-radius:16px;padding:14px 12px 12px;box-shadow:none}
 .cal-intro{font-family:var(--serif);font-size:15px;line-height:1.45;color:var(--ink);margin:0 2px 10px}
 .cal-head{display:flex;justify-content:space-between;align-items:center;margin:0 2px 10px}
 .cal-head strong{font-family:var(--serif);font-weight:500;font-size:18px;text-transform:capitalize}
@@ -824,8 +805,8 @@ textarea::placeholder{font-style:italic;color:var(--muted);opacity:.65}
    ========================================================= */
 .stories-bar{
   display:flex;gap:13px;overflow-x:auto;padding:12px 14px;margin-bottom:12px;
-  background:var(--card);border:1px solid var(--glass-border);
-  box-shadow:var(--glass-spec),var(--shadow);
+  background:var(--card);border:1px solid var(--rule);
+  box-shadow:none;
   border-radius:14px;scrollbar-width:none;align-items:center;
 }
 .stories-bar::-webkit-scrollbar{display:none}
@@ -915,11 +896,12 @@ body.public-view .pub-view.on{display:block}
 .diary-entry .journal-quote{font-size:14.5px}
 .diary-read{font-family:var(--serif);font-style:italic;font-size:12.5px;color:var(--gold);margin-top:6px}
 .journal-card{
-  background:linear-gradient(165deg, var(--card-solid) 0%, var(--card) 100%);
+  background:var(--card);
+  border:1px solid var(--rule);
   border-radius:16px;
   padding:14px 16px 13px;
   margin-bottom:12px;
-  box-shadow:var(--glass-spec), 0 14px 32px -20px rgba(56,46,38,0.10);
+  box-shadow:none;
   transition:transform .2s ease, border-color .2s ease;
   position:relative;
   animation:fadeUp .25s ease;
@@ -1299,8 +1281,8 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
    ========================================================= */
 .cmd-hero{
   display:grid;grid-template-columns:126px 1fr;gap:16px;align-items:center;
-  background:linear-gradient(135deg,var(--card-solid) 0%,var(--wash) 100%);border-radius:18px;padding:16px;
-  box-shadow:var(--glass-spec),var(--shadow);margin-bottom:14px;
+  background:var(--wash);border:1px solid var(--rule);border-radius:18px;padding:16px;
+  box-shadow:none;margin-bottom:14px;
 }
 @media(max-width:420px){.cmd-hero{grid-template-columns:1fr;text-align:center}.cmd-ring-wrap{margin:0 auto}}
 .cmd-ring-wrap{width:clamp(100px,30vw,122px);height:auto;aspect-ratio:1/1;position:relative;flex-shrink:0;max-width:100%}
@@ -1313,8 +1295,8 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
 .cmd-kpi small{display:block;font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);font-weight:600}
 .cmd-kpi b{font-family:var(--serif);font-size:18px;font-weight:500;color:var(--ink);display:block;margin-top:2px}
 .cmd-chart-box{
-  background:var(--paper);border-radius:16px;
-  padding:14px 14px 12px;margin-bottom:14px;box-shadow:var(--glass-spec);
+  background:var(--paper);border:1px solid var(--rule);border-radius:16px;
+  padding:14px 14px 12px;margin-bottom:14px;box-shadow:none;
 }
 .cmd-chart-hd{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:8px;flex-wrap:wrap}
 .cmd-chart-hd strong{font-family:var(--serif);font-size:18px;font-weight:500;color:var(--ink)}
@@ -1764,7 +1746,6 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="Wavy">
-  <meta name="theme-color" content="#FAF7F2">
 </head>
 <body>
 <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
@@ -1775,7 +1756,6 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
 <main class="book">
   <header class="masthead">
     <div class="masthead-left">
-      <div class="eyebrow">MENOS RUIDO · MÁS VÍNCULO</div>
       <h1>Wavy</h1>
       <div class="tagline">Donde tu calma se encuentra con los tuyos</div>
     </div>
@@ -1934,7 +1914,7 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
             <div class="info-box"><small id="clueLenLbl">Promedio de ciclo</small><b id="clueSummaryTxt">—</b><em id="clueSummarySub">—</em></div>
           </div>
           <div class="cycle-actions">
-            <button type="button" class="btn" id="logPeriodStartBtn">Hoy inició mi periodo</button>
+            <button type="button" class="btn" id="logPeriodStartBtn">Inició mi periodo</button>
             <button type="button" class="btn ghost" id="logPeriodEndBtn">Terminó mi periodo</button>
           </div>
         </div>
@@ -2103,15 +2083,15 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
       </div>
       <div class="help-tip" id="helpCoast" hidden>Activa el sonido para escuchar el oleaje real y los cuencos armónicos en cada inhalación y exhalación. Así puedes respirar con los ojos cerrados.</div>
 
-      <div class="horizon-line" style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)">
+      <div class="horizon-line" hidden>
         <span>Horizonte</span>
-        <b id="skyStatus" style="color:var(--ink);font-weight:600">Luz dorada</b>
+        <b id="skyStatus">Despejado</b>
       </div>
 
       <div class="sea" id="seab">
         <canvas id="sea" role="img" aria-label="Simulación interactiva del mar y guía de respiración"></canvas>
         <canvas id="breathLayer" aria-hidden="true"></canvas>
-        <div class="gauge"><span id="rpm">10%</span><small id="state">Mar en calma</small></div>
+        <div class="gauge"><span id="rpm">10%</span><small id="state">En calma</small></div>
       </div>
 
       <div class="bmode" id="bmode">
@@ -2139,7 +2119,7 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
           <button class="btn" id="applyCustomPat" style="width:100%">Aplicar mi ritmo personalizado</button>
         </div>
       </div>
-      <p class="note" id="bt" style="margin:0 0 12px">Toca el botón inferior para comenzar con sonido armónico.</p>
+      <p class="note" id="bt" style="margin:0 0 10px">Toca abajo para iniciar tu sesión.</p>
       <div style="margin-bottom:10px">
         <div class="row" style="grid-template-columns:1fr auto">
           <button class="btn" id="bb" style="width:100%">
@@ -2201,9 +2181,9 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
       </div>
 
       <div class="rate" style="margin-top:18px">
-        <label><span>Sintoniza tu marea en vivo</span><b id="rv">10%</b></label>
+        <label><span>Nivel de tensión</span><b id="rv">10%</b></label>
         <input type="range" id="rs" min="0" max="100" value="10" aria-label="Nivel de marea o activación interna">
-        <div class="tide-ticks"><span>0% Paz etérea</span><span>25% Brisa</span><span>50% Oleaje</span><span>75% Marea alta</span><span>100% Tormenta</span></div>
+        <div class="tide-ticks"><span>0% Calma</span><span>50% Medio</span><span>100% Alto</span></div>
         <button id="rset" hidden></button>
       </div>
     </section>
@@ -2731,7 +2711,7 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
       </div>
       <!-- Versión de la app: sube una por ronda (v18, v19, v20…) para saber
            de un vistazo si la versión publicada ya trae los últimos cambios. -->
-      <div class="cover-version">v20</div>
+      <div class="cover-version">v21</div>
     </div>
   </div>
 </div>
@@ -4129,6 +4109,12 @@ function applyTheme(th){
   if(th==='light'||th==='dark'||th==='white'||th==='pulcritud')document.documentElement.setAttribute('data-theme',th);
   else document.documentElement.removeAttribute('data-theme');
   document.querySelectorAll('#themePick .chip').forEach(c=>c.classList.toggle('on',c.dataset.th===th));
+  const tc=document.querySelector('meta[name="theme-color"]');
+  if(tc){
+    if(th==='dark')tc.setAttribute('content','#0D110F');
+    else if(th==='light')tc.setAttribute('content','#F4EFE6');
+    else tc.setAttribute('content','#FFFFFF');
+  }
 }
 
 /* Eventos del Selector Multi-Cuenta en el Header */
@@ -4644,15 +4630,10 @@ function renderStoriesBar(){
   bar.appendChild(addB);
 }
 
-/* Perímetro de la pestaña "Pebetero / Mi Llama": verde si la cuota del
-   día está cumplida (práctica verificada hoy), carmín si falta. El
-   anillo da vueltas (CSS) y el color lo pone esta función. */
+/* Pestaña "Pebetero / Mi Llama": sin animación giratoria */
 function syncPebeteroRing(){
   const b=document.querySelector('.tab[data-sub="sub-flame"]');if(!b)return;
-  const maintained=isPebeteroMaintained();
-  b.classList.add('peb-ring');
-  b.classList.toggle('peb-ring-done',maintained);
-  b.classList.toggle('peb-ring-pending',!maintained);
+  b.classList.remove('peb-ring','peb-ring-done','peb-ring-pending');
 }
 
 let selectedEchoVibe='';
@@ -4879,10 +4860,10 @@ function buildOpenSyncBanner(){
   b.style.cssText='display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 14px;margin-bottom:11px;border-radius:14px;background:var(--wash);border:1px solid var(--glass-border);box-shadow:var(--glass-spec)';
   b.innerHTML=
     '<div>'+
-      '<strong style="font-family:var(--serif);font-size:16px;font-weight:500;display:block">'+(S.openSync?'Tu sintonía está abierta en la orilla':'¿Respirar acompañada/o hoy?')+'</strong>'+
-      '<span style="font-size:11.5px;color:var(--muted)">'+(S.openSync?'Tu círculo ve tu señal encendida y puede sumarse o enviarte un gesto.':'Enciende tu señal sin presionar a nadie; quien esté libre se unirá.')+'</span>'+
+      '<strong style="font-family:var(--serif);font-size:15.5px;font-weight:500;display:block">'+(S.openSync?'Tu sintonía está abierta':'¿Respirar acompañada/o hoy?')+'</strong>'+
+      '<span style="font-size:11.5px;color:var(--muted)">'+(S.openSync?'Tu círculo puede sumarse contigo.':'Activa tu señal para tu círculo.')+'</span>'+
     '</div>'+
-    '<button type="button" class="open-sync-pill"><i></i><span>'+(S.openSync?'Sintonía abierta':'Abrir sintonía')+'</span></button>';
+    '<button type="button" class="open-sync-pill" style="flex-shrink:0"><i></i><span>'+(S.openSync?'Abierta':'Abrir sintonía')+'</span></button>';
   b.querySelector('.open-sync-pill').onclick=()=>{
     if(!S.openSync){
       openCoBreathEthicsModal(S.following[0]);
@@ -6142,15 +6123,14 @@ function updateCoastLabels(aVal){
   if(pct===lastCoastPct)return;
   lastCoastPct=pct;
   if($('rpm'))$('rpm').textContent=pct+'%';
-  const sol=getSolarPeriod();
-  let st='Paz profunda · '+sol.name,sky=sol.badge+' · Agua serena';
-  if(pct>75){st='Tormenta intensa · Respira conmigo';sky='Olas agitadas y lluvia fina · Exhala largo'}
-  else if(pct>45){st='Oleaje moderado · Inquietud';sky='Viento sobre el agua · '+sol.name}
-  else if(pct>20){st='Brisa suave · Calma activa';sky=sol.badge+' · Ondas suaves'}
-  else if(S.skyClearedBy){sky='Cielo despejado por '+S.skyClearedBy+' · '+sol.name}
-  $('state').textContent=st;
-  $('skyStatus').textContent=sky;
-  $('rs').setAttribute('aria-valuetext',pct+'% - '+st);
+  let st='En calma',sky='Despejado';
+  if(pct>75){st='Tensión alta';sky='Lluvia'}
+  else if(pct>45){st='Oleaje medio';sky='Viento'}
+  else if(pct>20){st='Brisa suave';sky='Brisa'}
+  else if(S.skyClearedBy){sky='Despejado por '+S.skyClearedBy}
+  if($('state'))$('state').textContent=st;
+  if($('skyStatus'))$('skyStatus').textContent=sky;
+  if($('rs'))$('rs').setAttribute('aria-valuetext',pct+'% - '+st);
 }
 
 /* La respiración nunca sale de su recuadro: sin pantalla completa, sin saltos.
@@ -6550,9 +6530,9 @@ const vib=n=>{try{navigator.vibrate && navigator.vibrate(n)}catch(e){}};
 
 function updateBreathHint(){
   if(br.on)return;
-  $('bt').textContent=S.bmode==='auto'
-    ?'Modo Automático: toca el botón inferior, cierra los ojos y déjate guiar por los cuencos y el oleaje.'
-    :'Modo Táctil: mantén presionado el círculo central para inhalar; suelta para exhalar.';
+  $('bt').textContent=(S.bmode||'auto')==='auto'
+    ?'Toca abajo para iniciar tu sesión.'
+    :'Mantén presionado el centro al inhalar; suelta al exhalar.';
 }
 
 $('bmode').addEventListener('click',e=>{
@@ -6670,8 +6650,8 @@ $('bb').onclick=()=>{
   vib(15);
   if($('bbTxt'))$('bbTxt').textContent='Pausar sesión';
   $('bt').textContent=S.bmode==='auto'
-    ?'Cierra los ojos · Escucha el cuenco tibetano al inhalar y exhalar'
-    :'Modo Táctil activo · Mantén presionado el círculo mientras inhalas';
+    ?'Inhala y exhala al ritmo del círculo.'
+    :'Mantén presionado el centro mientras inhalas.';
 };
 $('bbFinishEarly').onclick=()=>endBreath(false);
 /* Duración de la respiración: 2, 5 o 10 min (lo que la ciencia respalda

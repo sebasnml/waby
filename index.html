@@ -2138,7 +2138,6 @@ summary::-webkit-details-marker{display:none}
         </div>
       </div>
 
-      <button id="exportIcsBtn" hidden></button>
     </section>
 
     <!-- SUB-PANEL 1B: DIARIO BIOPSICOSOCIAL Y CICLO -->
@@ -2186,7 +2185,15 @@ summary::-webkit-details-marker{display:none}
       </div>
       <div hidden><div id="ffuerza"></div><div id="ffuerzaExtra"></div><div id="fcuerpo"></div><div id="fcuerpoExtra"></div><div id="fsl"></div><div id="fslExtra"></div><div id="fsoc"></div><div id="fsocExtra"></div></div>
 
-      <div class="bio-sec" id="femaleBioBlock">
+      <div class="bio-sec" id="bioModulesOptSec" style="margin-top:16px">
+        <div class="bio-sec-hd"><span>Módulos opcionales</span><span>Actívalos si los usas</span></div>
+        <div class="chips" id="bioModulesChips">
+          <button type="button" class="chip" data-mod="cycle">+ Seguimiento de ciclo</button>
+          <button type="button" class="chip" data-mod="training">+ Movimiento antiansiedad</button>
+        </div>
+      </div>
+
+      <div class="bio-sec" id="femaleBioBlock" hidden>
         <div class="bio-sec-hd">
           <span>Ciclo, energía y calma</span>
           <button type="button" class="mode-link" id="clueGoalToggle">Conocer mi ciclo ▾</button>
@@ -2355,7 +2362,7 @@ summary::-webkit-details-marker{display:none}
   <div class="vpage" id="v-breathe">
     <section class="card">
       <div class="hd">
-        <span>Tu mar en vivo <button type="button" class="help-q" data-help="helpCoast" aria-label="Ayuda sobre Respirar">?</button></span>
+        <span>Costa · Respirar <button type="button" class="help-q" data-help="helpCoast" aria-label="Ayuda sobre Respirar">?</button></span>
         <span id="clk">--:--</span>
       </div>
       <div class="help-tip" id="helpCoast" hidden>Activa el sonido para escuchar el oleaje real y los cuencos armónicos en cada inhalación y exhalación. Así puedes respirar con los ojos cerrados.</div>
@@ -2399,7 +2406,8 @@ summary::-webkit-details-marker{display:none}
           <button class="btn" id="applyCustomPat" style="width:100%">Aplicar mi ritmo personalizado</button>
         </div>
       </div>
-      <p class="note" id="bt" style="margin:0 0 10px">Toca abajo para iniciar tu sesión.</p>
+      <p class="note" id="bt" style="margin:0 0 8px">Toca abajo para iniciar tu sesión.</p>
+      <p id="coastAdaptiveTip" hidden style="font-size:12px;color:var(--ok);font-family:var(--serif);font-style:italic;line-height:1.45;margin:0 0 10px"></p>
       <div style="margin-bottom:10px">
         <div class="row" style="grid-template-columns:1fr auto">
           <button class="btn" id="bb" style="width:100%">
@@ -2409,11 +2417,11 @@ summary::-webkit-details-marker{display:none}
           <button type="button" class="btn" id="bbDurBtn" aria-label="Elegir duración de la respiración" style="min-width:86px">5 min ▾</button>
         </div>
         <div id="bbDurMenu" hidden style="margin-top:8px;padding:10px;border-radius:14px;background:var(--card);border:1px solid var(--glass-border);display:grid;gap:6px">
-          <div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600">Duración · lo que la ciencia respalda</div>
-          <button type="button" class="chip bb-dur-opt" data-min="2" style="justify-content:flex-start;text-align:left">2 min · Reset rápido — baja la ansiedad aguda</button>
-          <button type="button" class="chip bb-dur-opt on" data-min="5" style="justify-content:flex-start;text-align:left">5 min · Dosis estándar — el protocolo más estudiado</button>
-          <button type="button" class="chip bb-dur-opt" data-min="10" style="justify-content:flex-start;text-align:left">10 min · Sesión profunda — cubre la ola del impulso</button>
-          <button type="button" class="chip bb-dur-custom" style="justify-content:flex-start;text-align:left">Personalizado · Pro — elige tus minutos</button>
+          <div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600">Duración de tu pausa</div>
+          <button type="button" class="chip bb-dur-opt" data-min="2" style="justify-content:flex-start;text-align:left">2 min · Reset rápido — pausa breve para centrarte</button>
+          <button type="button" class="chip bb-dur-opt on" data-min="5" style="justify-content:flex-start;text-align:left">5 min · Pausa estándar — ritmo equilibrado</button>
+          <button type="button" class="chip bb-dur-opt" data-min="10" style="justify-content:flex-start;text-align:left">10 min · Sesión profunda — da espacio a que baje la ola</button>
+          <button type="button" class="chip bb-dur-custom" style="justify-content:flex-start;text-align:left">Personalizado — elige tus minutos</button>
           <div id="bbDurCustomBox" hidden style="display:flex;gap:8px;align-items:center">
             <input type="number" id="bbDurCustomInput" min="1" max="30" value="15" class="line" style="width:80px;font-style:normal" aria-label="Minutos personalizados">
             <span style="font-size:12px;color:var(--muted)">min</span>
@@ -2464,7 +2472,6 @@ summary::-webkit-details-marker{display:none}
         <label><span>¿Con cuánta tensión llegas?</span><b id="rv">10%</b></label>
         <input type="range" id="rs" min="0" max="100" value="10" aria-label="Nivel de marea o activación interna">
         <div class="tide-ticks"><span>0% Calma</span><span>50% Medio</span><span>100% Alto</span></div>
-        <button id="rset" hidden></button>
       </div>
     </section>
   </div>
@@ -2505,7 +2512,6 @@ summary::-webkit-details-marker{display:none}
       <span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600">Presencia en sintonía contigo</span>
     </div>
     <div id="circleFeedList" style="padding-bottom:96px"></div>
-    <div id="pl" hidden></div>
 
     <!-- Barra Flotante Sticky estilo WhatsApp: limpia, sin zoom y conectada a música -->
     <div class="circle-sticky-wrap">
@@ -2564,9 +2570,10 @@ summary::-webkit-details-marker{display:none}
   <div class="vpage" id="v-clinic">
     <div class="card">
       <div class="hd">
-        <span>Tu pulso</span>
+        <span>Pulso · Tu avance</span>
         <span style="color:var(--ok)">Equilibrio diario</span>
       </div>
+      <p id="pulsoAdaptiveTip" hidden style="font-size:12.5px;color:var(--ok);font-family:var(--serif);font-style:italic;line-height:1.45;margin:-2px 0 12px"></p>
 
       <!-- HERO DE BALANCE PERSONAL -->
       <div class="cmd-hero">
@@ -2614,7 +2621,7 @@ summary::-webkit-details-marker{display:none}
           <span>6 pm</span>
           <span>10 pm</span>
         </div>
-        <button type="button" class="cmd-action-btn" id="pulsoScheduleReminderBtn">Recordarme mi pausa de la tarde</button><div id="chours" hidden></div>
+        <button type="button" class="cmd-action-btn" id="pulsoScheduleReminderBtn">Recordarme mi pausa de la tarde</button>
       </div>
 
       <!-- NOTA PERSONAL DE EQUILIBRIO -->
@@ -2688,19 +2695,7 @@ summary::-webkit-details-marker{display:none}
        ========================================================= -->
   <div class="vpage" id="v-profile">
     <div class="card">
-      <div class="hd">
-        <span>Tu Suscripción y Acceso</span>
-        <span id="profilePlanBadge" style="color:var(--gold);font-weight:700">Plan Básico</span>
-      </div>
-      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;background:transparent;padding:4px 0 16px;border-radius:0;border:none;border-bottom:1px solid var(--rule);margin-bottom:16px">
-        <div>
-          <strong id="subCardTitle" style="font-family:var(--serif);font-size:19px;display:block">Wavy Básico (Gratuito)</strong>
-          <span id="subCardDesc" style="font-size:12.5px;color:var(--muted)">Desbloquea los 10 hábitos, todos los ritmos con audio, 19 emociones, 11 paletas y exportación clínica con Wavy Pro.</span>
-        </div>
-        <button type="button" class="btn gold" id="openPaywallBtn">Ver Planes Wavy Pro</button>
-      </div>
-
-      <div class="sl" style="margin-top:0;padding-top:0;border-top:none;margin-bottom:16px">
+      <div class="sl" style="margin-top:0;padding-top:0;border-top:none;margin-bottom:14px">
         <label><span>Acabado visual</span><span>elige tu atmósfera</span></label>
         <div class="chips" id="themePick">
           <button type="button" class="chip" data-th="white">Cristal Blanco</button>
@@ -2711,10 +2706,20 @@ summary::-webkit-details-marker{display:none}
         </div>
       </div>
 
-      <div class="hd">
-        <span>Tarjeta de Presencia</span>
-        <span>Instagram &amp; Pinterest</span>
-      </div>
+      <details style="margin-bottom:12px">
+        <summary><span>Tu Suscripción y Acceso</span><span id="profilePlanBadge" style="color:var(--gold);font-weight:700">Plan Básico</span></summary>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 0 8px">
+          <div>
+            <strong id="subCardTitle" style="font-family:var(--serif);font-size:18px;display:block">Wavy Básico (Gratuito)</strong>
+            <span id="subCardDesc" style="font-size:12.5px;color:var(--muted)">Desbloquea los 10 hábitos, todos los ritmos con audio, 19 emociones, 11 paletas y exportación clínica con Wavy Pro.</span>
+          </div>
+          <button type="button" class="btn gold" id="openPaywallBtn">Ver Planes Wavy Pro</button>
+        </div>
+      </details>
+
+      <details style="margin-bottom:12px">
+        <summary><span>Tarjeta de Presencia</span><span>Instagram &amp; Pinterest ▾</span></summary>
+        <div style="padding-top:12px">
 
       <div class="seal-carousel-nav" id="sealCarouselNav">
         <button type="button" class="seal-dot-btn on" data-slide="0">I · Sello Editorial</button>
@@ -2776,10 +2781,12 @@ summary::-webkit-details-marker{display:none}
         <button class="btn" id="shareIgStoriesBtn">Exportar Stories (9:16)</button>
         <button class="btn ghost" id="shareIgFeedBtn">Exportar Post (4:5)</button>
       </div>
-      <div class="row" style="grid-template-columns:1fr 1fr;margin-bottom:18px">
+      <div class="row" style="grid-template-columns:1fr 1fr;margin-bottom:12px">
         <button class="btn ghost" id="previewMyPublicBtn">Ver mi perfil público</button>
         <button class="btn ghost" id="repeatOnbBtn">Pantalla de bienvenida</button>
       </div>
+        </div>
+      </details>
 
       <!-- MÓDULO 7: CÁPSULAS SONORAS EN EL PERFIL (10 PREGUNTAS EMOCIONALES CURADAS) -->
       <div class="hd" style="margin-top:8px">
@@ -2842,6 +2849,14 @@ summary::-webkit-details-marker{display:none}
       </div>
 
       <div class="sl">
+        <label><span>Módulos opcionales en Bienestar</span><span>tú decides qué ver</span></label>
+        <div class="chips" id="profModulesChips">
+          <button type="button" class="chip" data-mod="cycle">Seguimiento de ciclo</button>
+          <button type="button" class="chip" data-mod="training">Movimiento antiansiedad</button>
+        </div>
+      </div>
+
+      <div class="sl">
         <label><span>Tu enfoque de bienestar</span><span>personalizado</span></label>
         <div class="chips" id="profileBioPick">
           <button type="button" class="chip" data-pbm="female">Mujer · Ciclo, energía y calma</button>
@@ -2873,7 +2888,8 @@ summary::-webkit-details-marker{display:none}
           <button type="button" class="mode-link" id="openPrivacyModalBtn">Aviso de Privacidad (LFPDPPP)</button>
           <span id="retentionMetricLbl" style="font-size:11px;color:var(--muted)">Aperturas registradas: 1 día</span>
         </div>
-        <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--rule)">
+        <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--rule);display:grid;gap:8px">
+          <button class="btn ghost" id="clearLearnedBtn" style="width:100%">Borrar sugerencias aprendidas de mis pausas</button>
           <button class="btn ghost" id="reset" style="width:100%;color:var(--crimson)">Reiniciar racha actual</button>
         </div>
       </div>
@@ -2902,8 +2918,14 @@ summary::-webkit-details-marker{display:none}
       <h2 class="cover-title" id="onbTitle">Wavy</h2>
       <p class="cover-sub">Donde tu calma se encuentra con los tuyos</p>
 
-      <!-- PASO 1: BIENVENIDA DIRECTA Y CLARA -->
-      <div id="onbStep1">
+      <div id="onbStep0">
+        <p style="font-family:var(--serif);font-size:17px;line-height:1.5;color:var(--ink);margin:14px 0 22px">Respira con el mar. Hazlo con los tuyos.</p>
+        <button type="button" class="btn" id="onbStartFirstBreathBtn" style="width:100%;margin-bottom:10px">Empezar a respirar →</button>
+        <button type="button" class="btn ghost" id="onbShowIdentityBtn" style="width:100%;font-size:11px">Ya tengo usuario o guardar mi nombre</button>
+      </div>
+
+      <!-- PASO 1: IDENTIDAD DESPUÉS DEL PRIMER LOGRO -->
+      <div id="onbStep1" hidden>
 
         <div class="cover-form">
           <div class="cover-field">
@@ -2917,11 +2939,10 @@ summary::-webkit-details-marker{display:none}
             <div id="obError" role="alert" style="color:var(--crimson,#9E4738);font-size:11px;min-height:16px;margin-top:4px;"></div>
           </div>
 
-          <div class="cover-field">
-            <label><span>Personaliza tu bienestar</span><span>Tu espacio</span></label>
-            <div class="chips" id="obBioChoice" style="justify-content:center;display:grid;grid-template-columns:1fr;gap:8px">
-              <button type="button" class="chip" data-obm="female" style="width:100%;justify-content:center">Mujer · Ciclo, energía y calma</button>
-              <button type="button" class="chip on" data-obm="male" style="width:100%;justify-content:center">Hombre · Ritmo, fuerza y calma</button>
+          <div class="cover-field" hidden>
+            <div class="chips" id="obBioChoice">
+              <button type="button" class="chip" data-obm="female">Mujer</button>
+              <button type="button" class="chip on" data-obm="male">Hombre</button>
             </div>
           </div>
         </div>
@@ -2931,7 +2952,7 @@ summary::-webkit-details-marker{display:none}
           <span>Tus registros viven de forma privada en tu dispositivo (LFPDPPP). Sin anuncios ni algoritmos de ruido.</span>
         </label>
 
-        <button type="button" class="btn" id="onbNext1" style="width:100%">Entrar a Wavy →</button>
+        <button type="button" class="btn" id="onbNext1" style="width:100%">Guardar mi avance →</button>
       </div>
 
       <!-- PASO 2: HÁBITO Y RAZÓN DE CUIDADO -->
@@ -2954,7 +2975,7 @@ summary::-webkit-details-marker{display:none}
       </div>
       <!-- Versión de la app: sube una por ronda (v18, v19, v20…) para saber
            de un vistazo si la versión publicada ya trae los últimos cambios. -->
-      <div class="cover-version">v27</div>
+      <div class="cover-version">v28</div>
     </div>
   </div>
 </div>
@@ -3249,9 +3270,16 @@ summary::-webkit-details-marker{display:none}
       <span class="blank-sheet-date" id="blankSheetDate">12 · 11 · ’26</span>
       <input class="blank-sheet-title" id="blankSheetTitle" placeholder="Título" maxlength="60">
       <textarea class="blank-sheet-body" id="blankSheetBody" placeholder="Escritura libre"></textarea>
+      <div id="blankSheetErrataBox" hidden style="margin-top:16px;padding-top:12px;border-top:1px solid var(--rule)">
+        <div id="blankSheetErrataDisplay" hidden style="font-family:var(--serif);font-style:italic;font-size:14px;color:var(--muted);line-height:1.5;margin-bottom:10px"></div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <input class="line" id="blankSheetErrataInput" maxlength="240" placeholder="Agregar nota de corrección debajo (sin alterar el original)…" style="font-size:13px">
+          <button type="button" class="chip" id="saveErrataBtn" style="min-height:32px;padding:4px 12px;font-size:11px;flex-shrink:0">Aclarar</button>
+        </div>
+      </div>
       <div class="blank-sheet-foot">
         <span id="blankSheetCharCount">0 caracteres</span>
-        <span style="font-family:var(--serif);font-style:italic;color:var(--muted)">Diario íntimo · Espacio seguro en tu equipo</span>
+        <span style="font-family:var(--serif);font-style:italic;color:var(--muted)">Escritos · Público en tu perfil o solo para mí</span>
       </div>
     </div>
   </div>
@@ -3846,6 +3874,8 @@ function createDefaultStateForUser(uAlias){
     caliDates:{},
     caliWeek:[0,2,4],
     caliDone:{},
+    modules:{cycle:false,training:false},
+    breathSessions:[],
     loss:[],
     qDate:today(),
     quests:{},
@@ -4340,6 +4370,12 @@ function load(){
   if(!S.caliDone||typeof S.caliDone!=='object')S.caliDone={};
   if(!Array.isArray(S.caliWeek))S.caliWeek=[0,2,4];
   if(!S.caliDates||typeof S.caliDates!=='object')S.caliDates={};
+  if(!Array.isArray(S.breathSessions))S.breathSessions=[];
+  if(!S.modules||typeof S.modules!=='object'){
+    const hadCycle=Boolean(S.clue&&((S.clue.cycles&&S.clue.cycles.length)||(S.clue.periodDays&&S.clue.periodDays.length)));
+    const hadTrain=Boolean(S.caliDone&&Object.keys(S.caliDone).length);
+    S.modules={cycle:hadCycle,training:hadTrain};
+  }
   S.spikes=S.spikes.filter(x=>x&&typeof x==='object');
   if(!S.quests||typeof S.quests!=='object')S.quests={};
   if(S.qDate!==today()){S.quests={};S.qDate=today()}
@@ -4726,11 +4762,36 @@ function initOnboarding(forceShow){
   const needsOnboarding=(!S.onb || !S.onb.done);
   if(!forceShow && !urlLogin && !needsOnboarding)return;
   $('onboardingModal').hidden=false;
+  const s0=$('onbStep0'),s1=$('onbStep1'),s2=$('onbStep2'),s3=$('onbStep3');
+  if(s0 && s1){
+    const showStep1=Boolean(urlLogin);
+    s0.hidden=showStep1;
+    s1.hidden=!showStep1;
+    if(s2)s2.hidden=true;
+    if(s3)s3.hidden=true;
+  }
   if($('obNameInput'))$('obNameInput').value=S.me.name||'';
   if($('obAliasInput'))$('obAliasInput').value=(S.me.username && S.me.username!=='invitado')?'@'+S.me.username:'';
   obSelectedBio=S.bioMode||'male';
   document.querySelectorAll('#obBioChoice .chip').forEach(c=>c.classList.toggle('on',c.dataset.obm===obSelectedBio));
   renderObHabitGrid();
+}
+if($('onbStartFirstBreathBtn')){
+  $('onbStartFirstBreathBtn').onclick=()=>{
+    WavyAudio.unlockNow();
+    $('onboardingModal').hidden=true;
+    S.audioOn=true;S.bDurMin=2;
+    switchMainView('v-breathe');
+    const dur2=document.querySelector('.bb-dur-opt[data-min="2"]');
+    if(dur2)dur2.click();
+    if(typeof br!=='undefined' && !br.on && $('bb'))$('bb').click();
+  };
+}
+if($('onbShowIdentityBtn')){
+  $('onbShowIdentityBtn').onclick=()=>{
+    if($('onbStep0'))$('onbStep0').hidden=true;
+    if($('onbStep1'))$('onbStep1').hidden=false;
+  };
 }
 const HABIT_SVGS={
   scrolling:'<svg class="w-ico lg" viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="3" width="10" height="18" rx="2.5"/><path d="M10 7h4M12 17h.01"/><path d="M4 9c1.5-1.5 1.5-3 0-4.5M20 9c-1.5-1.5-1.5-3 0-4.5"/></svg>',
@@ -5781,7 +5842,7 @@ let rt;$('reset').onclick=function(){
 };
 
 /* Exportador de recordatorio .ICS para el calendario del celular */
-$('exportIcsBtn').onclick=()=>{
+function exportIcsReminder(){
   const hourCounts={};
   S.spikes.forEach(s=>{hourCounts[s.h]=(hourCounts[s.h]||0)+1});
   const topH=Object.entries(hourCounts).sort((a,b)=>b[1]-a[1])[0]?.[0] ?? 21;
@@ -5936,7 +5997,7 @@ function renderPulsoCommandCenter(){
   }
   const remBtn=$('pulsoScheduleReminderBtn');
   if(remBtn){
-    remBtn.onclick=()=>{if($('exportIcsBtn'))$('exportIcsBtn').click()};
+    remBtn.onclick=()=>exportIcsReminder();
   }
 
   const circSvg=$('circadianSplineSvg');
@@ -6368,30 +6429,64 @@ $('sosgo').onclick=()=>{
 };
 
 $('pbPostRange').oninput=e=>{$('pbPostScoreLbl').textContent=e.target.value+' / 10'};
+function computeAdaptiveBreathingAdvice(){
+  const sess=(S.breathSessions||[]).filter(x=>x&&typeof x.delta==='number');
+  if(sess.length<2)return '';
+  const byPat={};
+  sess.forEach(x=>{
+    const k=x.patLabel||'4 · 6';
+    if(!byPat[k])byPat[k]={sum:0,n:0,good:0};
+    byPat[k].sum+=x.delta;byPat[k].n++;if(x.delta>0)byPat[k].good++;
+  });
+  let best=null;
+  Object.entries(byPat).forEach(([k,v])=>{
+    const avg=v.sum/v.n;
+    if(!best || avg>best.avg)best={label:k,avg,n:v.n,good:v.good};
+  });
+  if(!best || best.avg<=0)return '';
+  return 'Te sugiero '+best.label+' porque te ha bajado la tensión '+best.avg.toFixed(1)+' pts en promedio ('+best.good+' de '+best.n+' sesiones).';
+}
+function renderAdaptiveAdvice(){
+  const msg=computeAdaptiveBreathingAdvice();
+  [$('coastAdaptiveTip'),$('pulsoAdaptiveTip')].forEach(el=>{
+    if(!el)return;
+    el.textContent=msg;
+    el.hidden=!msg;
+  });
+}
 $('savePostBreathBtn').onclick=()=>{
   const postScore=+$('pbPostRange').value;
+  const preScore=+$('pbPreScore').textContent||Math.max(2,Math.round((br&&br.a0||0.3)*10));
   if(pendingSosIndex===0 && S.trigLogs[0]){
     S.trigLogs[0].after=postScore;
   }else if(S.trigLogs[0] && S.trigLogs[0].after===null){
     S.trigLogs[0].after=postScore;
   }
+  if(!Array.isArray(S.breathSessions))S.breathSessions=[];
+  S.breathSessions.unshift({
+    ts:Date.now(),
+    hour:new Date().getHours(),
+    patId:S.patId||'46',
+    patLabel:(typeof activePattern==='function'?activePattern().label:'4 · 6'),
+    dur:S.bDurMin||5,
+    pre:preScore,
+    post:postScore,
+    delta:preScore-postScore
+  });
+  if(S.breathSessions.length>80)S.breathSessions.length=80;
   pendingSosIndex=-1;
-  save();stats();renderClinicalReport();
+  save();stats();renderClinicalReport();renderAdaptiveAdvice();
   $('postBreathModal').hidden=true;
   toast('Evolución guardada: tu tensión bajó a '+postScore+'/10','ok');
+  if(!S.onb || !S.onb.done){
+    $('onboardingModal').hidden=false;
+    if($('onbStep0'))$('onbStep0').hidden=true;
+    if($('onbStep1'))$('onbStep1').hidden=false;
+  }
 };
 
 const todaySpikes=()=>S.spikes.filter(s=>s.d===today());
-let lastRenderedHour=-1,lastSpikesKey='';
-function hours(force){
-  const h=new Date().getHours();
-  const sp=new Set(todaySpikes().map(s=>s.h));
-  const spKey=[...sp].join(',');
-  if(!force && h===lastRenderedHour && spKey===lastSpikesKey)return;
-  lastRenderedHour=h;lastSpikesKey=spKey;
-  const b=$('chours');if(!b)return;b.innerHTML='';
-  for(let i=0;i<24;i++){const c=document.createElement('div');c.className=(i===h?'cur ':'')+(sp.has(i)?'sp':'');b.appendChild(c)}
-}
+function hours(){return;}
 function clock(){if(document.hidden)return;const n=new Date();if($('clk'))$('clk').textContent=p2(n.getHours())+':'+p2(n.getMinutes())+' h';hours(false)}
 
 function activePattern(){
@@ -8024,11 +8119,29 @@ function renderCaliDetail(){
 $('caliCalPrev').onclick=()=>{caliCalViewDate=new Date(caliCalViewDate.getFullYear(),caliCalViewDate.getMonth()-1,1);renderCaliCalendar()};
 $('caliCalNext').onclick=()=>{caliCalViewDate=new Date(caliCalViewDate.getFullYear(),caliCalViewDate.getMonth()+1,1);renderCaliCalendar()};
 
+function syncModulesUI(){
+  if(!S.modules||typeof S.modules!=='object')S.modules={cycle:false,training:false};
+  if($('femaleBioBlock'))$('femaleBioBlock').hidden=!S.modules.cycle;
+  if($('maleBioBlock'))$('maleBioBlock').hidden=!S.modules.training;
+  document.querySelectorAll('#bioModulesChips .chip,#profModulesChips .chip').forEach(c=>{
+    const m=c.dataset.mod;
+    c.classList.toggle('on',Boolean(S.modules[m]));
+  });
+}
+function toggleOptionalModule(mod){
+  if(!S.modules||typeof S.modules!=='object')S.modules={cycle:false,training:false};
+  S.modules[mod]=!S.modules[mod];
+  syncModulesUI();
+  save(false);
+}
+if($('bioModulesChips'))$('bioModulesChips').addEventListener('click',e=>{const b=e.target.closest('.chip');if(b&&b.dataset.mod)toggleOptionalModule(b.dataset.mod);});
+if($('profModulesChips'))$('profModulesChips').addEventListener('click',e=>{const b=e.target.closest('.chip');if(b&&b.dataset.mod)toggleOptionalModule(b.dataset.mod);});
+if($('clearLearnedBtn'))$('clearLearnedBtn').onclick=()=>{S.breathSessions=[];save(false);renderAdaptiveAdvice();toast('Sugerencias de pausa reiniciadas','ok');};
+
 function applyBioTrackMode(mode){
   S.bioMode=(mode==='male')?'male':'female';
   document.querySelectorAll('#bioTrackMode .chip').forEach(c=>c.classList.toggle('on',c.dataset.bm===S.bioMode));
-  $('femaleBioBlock').hidden=(S.bioMode==='male');
-  $('maleBioBlock').hidden=(S.bioMode==='female');
+  syncModulesUI();
   const bioTab=document.querySelector('#todaySubTabs .tab[data-sub="sub-journal"]');
   if(bioTab)bioTab.innerHTML='<b>Bienestar</b>'+(S.bioMode==='male'?'Ritmo y ánimo':'Ciclo y ánimo');
   if(!PEB_VESSELS[S.pebVessel] || PEB_VESSELS[S.pebVessel].mode!==S.bioMode){
@@ -8469,7 +8582,7 @@ function renderPublicArticle(username,postId){
         '<button type="button" id="pubSaveBtn" aria-label="Guardar"><svg viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4.5L6 21V3Z"/></svg><span>Guardar</span></button>'+
         '<button type="button" id="pubShareBtn" aria-label="Compartir"><svg viewBox="0 0 24 24"><path d="M12 3v13M7 8l5-5 5 5M5 13v7a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-7"/></svg><span>Compartir</span></button>'+
       '</div>'+
-      '<div class="pub-body">'+bodyHtml+'</div>'+
+      '<div class="pub-body">'+bodyHtml+(n.errata&&n.errata.text?'<p style="margin-top:18px;padding-top:12px;border-top:1px solid var(--rule);font-size:13.5px;color:var(--muted);font-style:italic"><b>Nota de corrección ('+esc(formatPublicDate(n.errata.d||n.d))+'):</b> '+esc(n.errata.text)+'</p>':'')+'</div>'+
       '<div class="pub-author-foot"><div class="av">'+getAv(me.av)+'</div><div><div style="font-family:var(--serif);font-size:18px;font-weight:600">'+name+'</div>'+(me.bio?'<div style="font-family:var(--serif);font-style:italic;font-size:14px;color:var(--muted);line-height:1.5;margin-top:4px">“'+esc(me.bio)+'”</div>':'')+'<div style="margin-top:10px"><a href="#/'+encodeURIComponent(me.username||'')+'" style="color:var(--gold);text-decoration:none;font-weight:600;font-size:13.5px">Más de @'+esc(me.username||'')+' →</a></div></div></div>';
     const gb=$('pubGestoBtn');
     if(gb)gb.onclick=()=>{gb.classList.toggle('on');toast(gb.classList.contains('on')?'Gesto enviado a @'+(me.username||''):'Gesto retirado','ok');};
@@ -8537,6 +8650,28 @@ function openBlankEntry(id){
   if($('saveBlankSheetBtn'))$('saveBlankSheetBtn').hidden=!isDraft;
   if($('deleteBlankSheetBtn'))$('deleteBlankSheetBtn').hidden=false;
   if($('blankSheetCharCount'))$('blankSheetCharCount').textContent=(String(n.texto||'').length)+' caracteres';
+  if($('blankSheetErrataBox'))$('blankSheetErrataBox').hidden=isDraft;
+  if($('blankSheetErrataInput'))$('blankSheetErrataInput').value=(n.errata&&n.errata.text)||'';
+  if($('blankSheetErrataDisplay')){
+    const hasE=Boolean(n.errata&&n.errata.text);
+    $('blankSheetErrataDisplay').hidden=!hasE;
+    if(hasE)$('blankSheetErrataDisplay').textContent='Nota de corrección ('+formatDiaryDate(n.errata.d||today())+'): '+n.errata.text;
+  }
+}
+if($('saveErrataBtn')){
+  $('saveErrataBtn').onclick=()=>{
+    if(editingBlankId==null)return;
+    const existing=(S.notes||[]).find(x=>x&&x.id===editingBlankId);
+    if(!existing||existing.draft)return;
+    const txt=($('blankSheetErrataInput')?$('blankSheetErrataInput').value.trim():'')||'';
+    if(!txt){delete existing.errata;}else{existing.errata={text:txt,d:today()};}
+    save(false);
+    if($('blankSheetErrataDisplay')){
+      $('blankSheetErrataDisplay').hidden=!txt;
+      if(txt)$('blankSheetErrataDisplay').textContent='Nota de corrección ('+formatDiaryDate(today())+'): '+txt;
+    }
+    toast(txt?'Nota de corrección guardada':'Nota de corrección quitada','ok');
+  };
 }
 
 function submitJournalEntry(){
@@ -8561,7 +8696,15 @@ function submitJournalEntry(){
     estado:nm && v?nm+' — '+a.e:(nm||a.e),
     teoria:a.t
   });
-  if(S.notes.length>100)S.notes.pop();
+  if(S.notes){
+    let shortCount=0;
+    S.notes=S.notes.filter(x=>{
+      const isLong=Boolean(x&&(x.blank===true||(x.texto&&String(x.texto).length>140)));
+      if(isLong)return true;
+      shortCount++;
+      return shortCount<=120;
+    });
+  }
   markVerifiedPractice('Entrada guardada en tu Diario');
   if(v)toast(a.e+': '+a.t,'ok');
   nshow=4;save();notes();stats();
@@ -9699,6 +9842,8 @@ function renderAll(){
   clock();
   flameView();
   stats();
+  syncModulesUI();
+  renderAdaptiveAdvice();
 }
 
 /* Inicialización Principal Multi-Cuenta + Sincronización en Vivo */
@@ -9813,6 +9958,7 @@ if($('openBlankSheetBtn')){
     }
     if($('saveBlankSheetBtn'))$('saveBlankSheetBtn').hidden=false;
     if($('deleteBlankSheetBtn'))$('deleteBlankSheetBtn').hidden=true;
+    if($('blankSheetErrataBox'))$('blankSheetErrataBox').hidden=true;
     if($('blankSheetCharCount'))$('blankSheetCharCount').textContent=($('blankSheetBody')?$('blankSheetBody').value.length:0)+' caracteres';
   };
 }
@@ -9931,7 +10077,6 @@ if($('saveBlankSheetBtn')){
         soc:bioState.soc||''
       });
     }
-    if(S.notes.length>120)S.notes.pop();
     editingBlankId=null;
     markVerifiedPractice('Entrada de diario libre registrada');
     save();notes();renderDiaryList();renderClinicalReport();

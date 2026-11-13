@@ -140,6 +140,7 @@ body{
 /* Encabezado centrado estilo Instagram: Wavy grande al centro con pitch
    sutil debajo; tocar Wavy abre tu Perfil (sin foto en la esquina derecha) */
 .masthead{
+  position:relative;
   border-bottom:none;
   padding:10px 0 8px;
   margin-bottom:10px;
@@ -148,6 +149,70 @@ body{
   align-items:center;
   justify-content:center;
 }
+.masthead-menu-btn{
+  position:absolute;
+  right:0;
+  top:50%;
+  transform:translateY(-50%);
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  border:none;
+  background:transparent;
+  color:var(--ink);
+  opacity:0.62;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  transition:opacity .2s ease, transform .2s ease;
+  -webkit-tap-highlight-color:transparent;
+}
+.masthead-menu-btn:hover,.masthead-menu-btn:active{opacity:1;transform:translateY(-50%) scale(0.95)}
+.first-day-guide{
+  margin:4px 0 14px;
+  padding:12px 0 14px;
+  border-bottom:1px solid var(--rule);
+}
+.first-day-guide-hd{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:8px;
+}
+.first-day-guide-hd span{
+  font-size:11px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--ok);
+  font-weight:600;
+}
+.first-day-guide-close{
+  border:none;
+  background:transparent;
+  color:var(--muted);
+  font-size:12px;
+  cursor:pointer;
+  padding:2px 6px;
+}
+.first-day-steps{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:8px;
+}
+.first-day-step{
+  border:1px solid var(--rule);
+  border-radius:12px;
+  background:transparent;
+  padding:9px 10px;
+  text-align:left;
+  cursor:pointer;
+  color:var(--ink);
+  transition:border-color .2s ease, opacity .2s ease;
+}
+.first-day-step:hover{border-color:var(--ink)}
+.first-day-step small{display:block;font-size:10px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-bottom:2px}
+.first-day-step b{display:block;font-family:var(--serif);font-size:13.5px;font-weight:500;line-height:1.2}
 .masthead-left{
   text-align:center;
   display:flex;
@@ -1992,6 +2057,9 @@ summary::-webkit-details-marker{display:none}
       <h1>Wavy</h1>
       <div class="tagline">Donde tu calma se encuentra con los tuyos</div>
     </div>
+    <button type="button" class="masthead-menu-btn" id="mastheadMenuBtn" aria-label="Mi perfil y ajustes" title="Perfil y ajustes">
+      <svg class="w-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8.5" r="3.5"/><path d="M5 19.5c1.4-3.2 4-4.5 7-4.5s5.6 1.3 7 4.5"/></svg>
+    </button>
   </header>
 
   <!-- =========================================================
@@ -2015,11 +2083,20 @@ summary::-webkit-details-marker{display:none}
 
       <div class="habit-grid" id="habitGrid"></div>
 
+      <div class="first-day-guide" id="firstDayGuide" hidden>
+        <div class="first-day-guide-hd">
+          <span>Empieza en 1 minuto</span>
+          <button type="button" class="first-day-guide-close" id="dismissGuideBtn" aria-label="Ocultar guía">Entendido ×</button>
+        </div>
+        <div class="first-day-steps">
+          <button type="button" class="first-day-step" id="guideStep1"><small>1 · Elige</small><b>Qué regulas hoy</b></button>
+          <button type="button" class="first-day-step" id="guideStep2"><small>2 · Respira</small><b>2 min en Costa</b></button>
+          <button type="button" class="first-day-step" id="guideStep3"><small>3 · Registra</small><b>Cómo te sientes</b></button>
+        </div>
+      </div>
+
       <div class="read">
         <div class="big"><span id="pct">0.0</span><small>%</small></div>
-        <button type="button" class="heart-socket" id="heartSocket" aria-label="Siento un impulso ahora · Acompañarme">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.3a4.3 4.3 0 0 1 7.5-2.8 4.3 4.3 0 0 1 7.5 2.8c0 5.7-7.5 10.3-7.5 10.3Z"/></svg>
-        </button>
         <div class="sub"><strong>Día <span id="days">0</span> / 90</strong></div>
       </div>
       <div class="bar"><div class="fill" id="fill"></div></div>
@@ -2061,10 +2138,7 @@ summary::-webkit-details-marker{display:none}
         </div>
       </div>
 
-      <div class="row" style="margin-top:12px;grid-template-columns:1fr">
-        <button class="btn ghost" id="reset">Reiniciar racha</button>
-        <button id="exportIcsBtn" hidden></button>
-      </div>
+      <button id="exportIcsBtn" hidden></button>
     </section>
 
     <!-- SUB-PANEL 1B: DIARIO BIOPSICOSOCIAL Y CICLO -->
@@ -2095,8 +2169,8 @@ summary::-webkit-details-marker{display:none}
         </div>
       </div>
 
-      <textarea id="ni" class="echo-input" placeholder="Escribe una línea sobre tu día"></textarea>
-      <button class="btn" style="width:100%" id="na">Guardar registro del día</button>
+      <textarea id="ni" class="echo-input" placeholder="Nota breve de tu check-in (opcional)"></textarea>
+      <button class="btn" style="width:100%" id="na">Guardar check-in del día</button>
       <p class="ins" id="ins"></p>
       <div id="nb"></div>
       <button class="btn ghost" id="more" style="width:100%;margin-top:10px" hidden>Ver registros anteriores</button>
@@ -2387,7 +2461,7 @@ summary::-webkit-details-marker{display:none}
       </div>
 
       <div class="rate" style="margin-top:18px">
-        <label><span>Nivel de tensión</span><b id="rv">10%</b></label>
+        <label><span>¿Con cuánta tensión llegas?</span><b id="rv">10%</b></label>
         <input type="range" id="rs" min="0" max="100" value="10" aria-label="Nivel de marea o activación interna">
         <div class="tide-ticks"><span>0% Calma</span><span>50% Medio</span><span>100% Alto</span></div>
         <button id="rset" hidden></button>
@@ -2401,7 +2475,7 @@ summary::-webkit-details-marker{display:none}
   <div class="vpage" id="v-circle">
     <div class="circle-tabs" style="display:flex;gap:8px;margin-bottom:12px">
       <button type="button" class="chip on" id="circleTabFeedBtn" style="flex:1;justify-content:center;min-height:38px">Círculo</button>
-      <button type="button" class="chip" id="circleTabDiaryBtn" style="flex:1;justify-content:center;min-height:38px">Diario</button>
+      <button type="button" class="chip" id="circleTabDiaryBtn" style="flex:1;justify-content:center;min-height:38px">Escritos</button>
     </div>
     <div id="circleFeedPane">
     <div class="stories-bar" id="storiesBar"></div>
@@ -2472,14 +2546,14 @@ summary::-webkit-details-marker{display:none}
     <div id="circleDiaryPane" hidden>
       <section class="panel card on" id="sub-diary">
       <div class="bio-sec" style="margin-top:0;padding-bottom:96px">
-        <div class="bio-sec-hd"><span>Tus escritos</span><span style="display:flex;align-items:center;gap:8px"><span id="diaryCountLbl" style="font-family:var(--serif);font-style:italic;text-transform:none;letter-spacing:0"></span><button type="button" class="chip" id="shareProfileBtn" style="min-height:28px;padding:4px 11px;font-size:11px">Compartir mi perfil</button></span></div>
+        <div class="bio-sec-hd"><span>Tus escritos · Estilo Medium</span><span style="display:flex;align-items:center;gap:8px"><span id="diaryCountLbl" style="font-family:var(--serif);font-style:italic;text-transform:none;letter-spacing:0"></span><button type="button" class="chip" id="shareProfileBtn" style="min-height:28px;padding:4px 11px;font-size:11px">Compartir escritos</button></span></div>
         <div id="diaryList"></div>
       </div>
       </section>
     </div>
     <div class="circle-sticky-wrap" id="diaryStickyBar" hidden>
       <div class="circle-composer" style="padding:0 16px">
-        <button type="button" class="diary-sticky-trigger" id="openBlankSheetBtn">Abrir hoja en blanco</button>
+        <button type="button" class="diary-sticky-trigger" id="openBlankSheetBtn">Escribir un artículo…</button>
       </div>
     </div>
   </div>
@@ -2604,17 +2678,6 @@ summary::-webkit-details-marker{display:none}
             </div>
             <div class="rep" id="therReport" hidden></div>
           </div>
-
-          <details>
-            <summary><span>Portal para Especialistas</span><span>SEP ▾</span></summary>
-            <div style="margin-top:10px;line-height:1.55">
-              <p style="margin-bottom:8px">La cédula profesional se valida ante el Registro Nacional de Profesionistas (SEP) antes de activar un código.</p>
-              <input class="line" id="proName" placeholder="Nombre completo y especialidad" style="margin-bottom:8px">
-              <input class="line" id="proCed" placeholder="Número de Cédula Profesional SEP" style="margin-bottom:8px">
-              <button class="btn ghost" id="proBtn" style="width:100%">Registrar solicitud profesional</button>
-              <p id="proOut" style="margin-top:8px;color:var(--ok);font-family:var(--serif);font-size:15.5px"></p>
-            </div>
-          </details>
         </div>
       </details>
     </div>
@@ -2797,34 +2860,34 @@ summary::-webkit-details-marker{display:none}
       <button class="btn" id="saveProfileBtn" style="width:100%;margin-top:10px">Guardar cambios de perfil</button>
 
       <div class="sl">
-        <label><span>Respaldo y Privacidad</span><span>Local</span></label>
+        <label><span>Cuenta, Respaldo y Privacidad</span><span>Local</span></label>
+        <p style="font-size:11.5px;color:var(--muted);line-height:1.45;margin-bottom:10px">Tus registros viven localmente en tu dispositivo. Guarda una copia periódica si cambias de teléfono.</p>
         <div class="row" style="grid-template-columns:1fr 1fr">
-          <button type="button" class="btn ghost" id="exFileBtn">Descargar respaldo .JSON</button>
+          <button type="button" class="btn ghost" id="exFileBtn">Descargar respaldo</button>
           <label class="btn ghost" style="margin:0;cursor:pointer">
-            Restaurar archivo .JSON
+            Restaurar respaldo
             <input type="file" id="imFileInput" accept=".json,application/json" hidden>
           </label>
         </div>
-        <div style="margin-top:8px;display:flex;justify-content:space-between;align-items:center">
-          <button type="button" class="mode-link" id="openPrivacyModalBtn">Leer Aviso de Privacidad (LFPDPPP)</button>
+        <div style="margin-top:10px;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap">
+          <button type="button" class="mode-link" id="openPrivacyModalBtn">Aviso de Privacidad (LFPDPPP)</button>
           <span id="retentionMetricLbl" style="font-size:11px;color:var(--muted)">Aperturas registradas: 1 día</span>
+        </div>
+        <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--rule)">
+          <button class="btn ghost" id="reset" style="width:100%;color:var(--crimson)">Reiniciar racha actual</button>
         </div>
       </div>
 
-      <!-- COPIA DE SEGURIDAD (LOCAL-FIRST) -->
-      <div style="background:transparent;border:none;border-bottom:1px solid var(--rule);border-radius:0;padding:12px 0 16px;margin-bottom:14px;box-shadow:none">
-        <div style="margin-bottom:10px">
-          <strong style="font-family:var(--serif);font-size:16px;font-weight:500;display:block">Copia de seguridad</strong>
-          <span style="font-size:11px;color:var(--muted);line-height:1.45;display:block;margin-top:2px">Tus registros se guardan localmente en este dispositivo en texto plano. Si borras los datos del navegador o pierdes el teléfono, solo esta copia los recupera.</span>
+      <details style="margin-top:10px">
+        <summary><span>Portal para Especialistas (SEP)</span><span>Terapeutas ▾</span></summary>
+        <div style="margin-top:10px;line-height:1.55">
+          <p style="margin-bottom:8px;font-size:12.5px;color:var(--muted)">La cédula profesional se valida ante el Registro Nacional de Profesionistas (SEP) antes de activar un código.</p>
+          <input class="line" id="proName" placeholder="Nombre completo y especialidad" style="margin-bottom:8px">
+          <input class="line" id="proCed" placeholder="Número de Cédula Profesional SEP" style="margin-bottom:8px">
+          <button class="btn ghost" id="proBtn" style="width:100%">Registrar solicitud profesional</button>
+          <p id="proOut" style="margin-top:8px;color:var(--ok);font-family:var(--serif);font-size:15.5px"></p>
         </div>
-        <div class="row" style="grid-template-columns:1fr 1fr;gap:8px;padding-top:8px">
-          <button type="button" class="btn ghost" id="exportBackupJsonBtn" style="font-size:11px;padding:8px 10px">Descargar copia</button>
-          <label class="btn ghost" style="font-size:11px;padding:8px 10px;text-align:center;cursor:pointer;display:inline-flex;align-items:center;justify-content:center">
-            Importar copia
-            <input type="file" id="importBackupFileInput" accept="application/json" style="display:none">
-          </label>
-        </div>
-      </div>
+      </details>
 
   <p class="note">Wavy es una herramienta de autoobservación y hábitos; no sustituye atención médica ni psicológica profesional.<br>En crisis en México: Línea de la Vida 800 911 2000.</p>
 </main>
@@ -6160,7 +6223,6 @@ window.addEventListener('scroll',()=>{
   requestComposerYield();
 },{passive:true});
 window.addEventListener('resize',()=>{updateCircleComposerYield();updateMastheadFade();});
-if($('heartSocket'))$('heartSocket').onclick=()=>{const b=$('sosb');if(b)b.click();};
 
 /* =========================================================
    BARRA INFERIOR (#bnav) Y COMPOSITOR DE CÍRCULO (.circle-sticky-wrap)
@@ -8202,10 +8264,10 @@ let editingBlankId=null;
    puede leer; Privado solo lo ve su autor, en su Diario. */
 const VIS_PRIV_SVG='<svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>';
 const VIS_PUB_SVG='<svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 0 1 0 18a14 14 0 0 1 0-18Z"/></svg>';
-let blankSheetPublic=false;
+let blankSheetPublic=true;
 function syncBlankSheetVisBtn(){
   const b=$('blankSheetVisBtn');if(!b)return;
-  b.innerHTML=(blankSheetPublic?VIS_PUB_SVG+'<span>Público</span>':VIS_PRIV_SVG+'<span>Privado</span>');
+  b.innerHTML=(blankSheetPublic?VIS_PUB_SVG+'<span>Público</span>':VIS_PRIV_SVG+'<span>Solo para mí</span>');
   b.style.borderColor=blankSheetPublic?'var(--gold)':'var(--rule)';
   b.style.color='var(--ink)';
 }
@@ -8930,6 +8992,22 @@ if($('mastheadProfileTrigger')){
   $('mastheadProfileTrigger').onclick=()=>switchMainView('v-profile');
   $('mastheadProfileTrigger').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();switchMainView('v-profile');}};
 }
+if($('mastheadMenuBtn'))$('mastheadMenuBtn').onclick=()=>switchMainView('v-profile');
+(function initFirstDayGuide(){
+  const g=$('firstDayGuide');if(!g)return;
+  if(localStorage.getItem('wavy_guide_done')==='1'){g.hidden=true;return;}
+  g.hidden=false;
+  if($('dismissGuideBtn'))$('dismissGuideBtn').onclick=()=>{localStorage.setItem('wavy_guide_done','1');g.hidden=true;};
+  if($('guideStep1'))$('guideStep1').onclick=()=>{
+    const sh=$('sub-habit');if(sh){sh.classList.remove('habits-hidden','habits-collapsed');}
+    const hg=$('habitGrid');if(hg)hg.scrollIntoView({behavior:'smooth',block:'center'});
+  };
+  if($('guideStep2'))$('guideStep2').onclick=()=>{switchMainView('v-breathe');};
+  if($('guideStep3'))$('guideStep3').onclick=()=>{
+    const b=document.querySelector('#todaySubTabs .tab[data-sub="sub-journal"]');
+    if(b)b.click();
+  };
+})();
 $('previewMyPublicBtn').onclick=()=>openExternalProfile('ME');
 
 document.addEventListener('keydown',e=>{
@@ -9722,7 +9800,7 @@ if($('openBlankSheetBtn')){
     bs.hidden=false;
     const dateStr=formatDiaryDate(today());
     if($('blankSheetDate'))$('blankSheetDate').textContent=dateStr;
-    blankSheetPublic=false;syncBlankSheetVisBtn();
+    blankSheetPublic=true;syncBlankSheetVisBtn();
     if($('blankSheetTitle')){
       $('blankSheetTitle').readOnly=false;
       $('blankSheetTitle').value='';

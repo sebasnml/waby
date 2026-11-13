@@ -7358,20 +7358,6 @@ $('rs').oninput=e=>{
   },280);
 };
 
-$('rset').onclick=()=>{
-  const v=+$('rs').value;if(br.on)endBreath(false);target=v/100;arousal=target;S.arousal=target;
-  const h=new Date().getHours();
-  if(v>=60){
-    if(!S.spikes.some(s=>s.d===today() && s.h===h)){
-      S.spikes.push({d:today(),h});if(S.spikes.length>200)S.spikes.shift();
-    }
-    toast('Marea alta ('+v+'%) sincronizada en vivo · Respira 2 min','er');
-  }else{
-    toast('Estado de marea ('+v+'%) sincronizado en vivo con tu aliado','ok');
-  }
-  save(true);hours(true);stats();
-};
-
 let last=0;
 function loop(ts){
   if(document.hidden || !$('v-breathe').classList.contains('on')){rafId=0;return}
@@ -10142,59 +10128,6 @@ try{
   localStorage.removeItem('wavy_supabase_url');
   localStorage.removeItem('wavy_supabase_key');
 }catch(_){}
-
-if($('exportBackupJsonBtn')){
-  $('exportBackupJsonBtn').onclick=()=>{
-    try{
-      const blob=new Blob([JSON.stringify(S,null,2)],{type:'application/json'});
-      const url=URL.createObjectURL(blob);
-      const a=document.createElement('a');
-      a.href=url;
-      a.download='wavy_respaldo_'+activeUser+'_'+today()+'.json';
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      setTimeout(()=>URL.revokeObjectURL(url),1500);
-      toast('Copia de respaldo descargada con éxito','ok');
-    }catch(e){
-      toast('No se pudo generar la copia','er');
-    }
-  };
-}
-
-if($('importBackupFileInput')){
-  $('importBackupFileInput').onchange=e=>{
-    const file=e.target.files&&e.target.files[0];
-    if(!file)return;
-    if(file.size>2*1024*1024){
-      toast('El archivo supera el límite de 2 MB','er');
-      e.target.value='';
-      return;
-    }
-    const reader=new FileReader();
-    reader.onload=ev=>{
-      try{
-        const data=JSON.parse(ev.target.result);
-        if(!data || typeof data!=='object' || typeof data.schema!=='number'){
-          toast('Archivo de respaldo no válido','er');
-          return;
-        }
-        if(!confirm('Esto reemplazará tus datos actuales. ¿Deseas continuar?')){
-          e.target.value='';
-          return;
-        }
-        mergeSafe(S,data);
-        save(false);
-        renderAll();
-        toast('Copia restaurada con éxito','ok');
-      }catch(err){
-        toast('Error al leer el archivo JSON','er');
-      }
-      e.target.value='';
-    };
-    reader.readAsText(file);
-  };
-}
 
 initOnboarding();
 </script>

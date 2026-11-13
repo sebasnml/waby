@@ -335,7 +335,7 @@ h1{font-family:var(--serif);font-weight:500;font-size:clamp(28px,7vw,36px);line-
 .sig .m{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;display:flex;justify-content:space-between;font-weight:600}
 .sig q{display:block;font-family:var(--serif);font-size:19.5px;line-height:1.3;font-style:normal;quotes:none;margin-bottom:8px;color:var(--ink)}
 .sig p{font-size:13.5px;line-height:1.52;color:var(--muted)}
-.sig .s{margin-top:8px;font-size:11px;color:var(--muted);letter-spacing:.04em}
+.sig .s{margin-top:10px;font-size:11px;color:var(--muted);letter-spacing:.04em;display:flex;align-items:center;justify-content:space-between;gap:10px}
 
 /* Botones y Controles Táctiles (Mínimo 44px) */
 .row{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center}
@@ -588,6 +588,34 @@ input[type=range]{width:100%;accent-color:var(--crimson);cursor:pointer;min-heig
   font-size:38px;font-weight:400;color:#fff;line-height:1;text-shadow:0 1px 14px rgba(40,50,62,0.32);pointer-events:none;
 }
 .sea .gauge small{display:block;font-family:var(--serif);font-style:italic;font-size:15px;letter-spacing:.01em;text-transform:none;opacity:.94;margin-top:5px}
+.sea-fs-btn{
+  position:absolute;top:12px;right:12px;z-index:5;
+  width:34px;height:34px;border-radius:50%;
+  background:rgba(15,23,36,0.34);border:1px solid rgba(255,255,255,0.28);
+  color:#fff;display:grid;place-items:center;cursor:pointer;
+  transition:transform .2s ease, background .2s ease;
+}
+.sea-fs-btn:hover{background:rgba(15,23,36,0.58);transform:scale(1.06)}
+.sea-fs-btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+body.coast-fullscreen{overflow:hidden !important}
+body.coast-fullscreen .masthead,
+body.coast-fullscreen #bnav,
+body.coast-fullscreen #v-breathe .hd,
+body.coast-fullscreen #v-breathe .help-tip,
+body.coast-fullscreen #v-breathe .bmode,
+body.coast-fullscreen #v-breathe .pat-drawer,
+body.coast-fullscreen #v-breathe #bt,
+body.coast-fullscreen #v-breathe #coastSyncBanner,
+body.coast-fullscreen #v-breathe .rate,
+body.coast-fullscreen #v-breathe .tide-ticks,
+body.coast-fullscreen #v-breathe .row{display:none !important}
+body.coast-fullscreen .book{padding:0 !important;max-width:none !important}
+body.coast-fullscreen .sea{
+  position:fixed !important;inset:0 !important;z-index:200 !important;
+  border-radius:0 !important;margin:0 !important;width:100vw !important;height:100dvh !important;
+}
+body.coast-fullscreen #sea{width:100vw !important;height:100dvh !important}
+body.coast-fullscreen .sea-fs-btn{top:max(14px, env(safe-area-inset-top, 14px));right:max(14px, env(safe-area-inset-right, 14px))}
 .bmode{
   display:grid;grid-template-columns:repeat(4,1fr);gap:6px;align-items:center;
   margin-bottom:10px;background:transparent;padding:4px 0 10px;border-radius:0;
@@ -885,26 +913,32 @@ textarea::placeholder{font-style:normal;color:var(--muted);opacity:.68}
 /* =========================================================
    DIARIO & PERFIL PÚBLICO · ESTÉTICA Y PROPORCIONES MEDIUM
    ========================================================= */
-.wavy-card,
-.diary-entry{cursor:pointer;transition:transform .18s ease}
-.diary-entry:active{transform:scale(.99)}
+.diary-entry{cursor:pointer;transition:opacity .18s ease}
+.diary-entry:active{opacity:.78}
 .med-card{
-  padding:20px 0;
+  padding:18px 0;
   border-bottom:1px solid var(--rule);
   cursor:pointer;
 }
 .med-author-row{
-  display:flex;align-items:center;gap:7px;margin-bottom:8px;
-  font-family:var(--sans);font-size:13px;line-height:1.2;color:var(--ink);
+  display:flex;align-items:center;gap:6px;margin-bottom:7px;
+  font-family:var(--sans);font-size:12.5px;line-height:1.2;color:var(--ink);
 }
 .med-av{
-  width:20px;height:20px;border-radius:50%;overflow:hidden;flex-shrink:0;
+  width:19px;height:19px;border-radius:50%;overflow:hidden;flex-shrink:0;
   border:1px solid var(--rule);display:grid;place-items:center;
 }
 .med-av svg{width:100%;height:100%;display:block}
-.med-author-name{font-weight:400;color:var(--ink)}
+.med-author-name{font-weight:500;color:var(--ink);white-space:nowrap}
 .med-dot{color:var(--muted)}
-.med-date{color:var(--muted);font-variant-numeric:tabular-nums}
+.med-date{color:var(--muted);font-size:12px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.med-vis-inline{
+  margin-left:auto;border:none;background:transparent;color:var(--muted);
+  display:inline-flex;align-items:center;justify-content:center;
+  padding:4px;cursor:pointer;flex-shrink:0;transition:color .18s ease;
+}
+.med-vis-inline[data-vis="pub"]{color:var(--gold)}
+.med-vis-inline svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round}
 .med-title{
   font-family:var(--sans);
   font-size:18.5px;
@@ -912,7 +946,7 @@ textarea::placeholder{font-style:normal;color:var(--muted);opacity:.68}
   line-height:1.24;
   letter-spacing:-.02em;
   color:var(--ink);
-  margin:0 0 6px;
+  margin:0 0 5px;
 }
 .med-excerpt{
   font-family:var(--sans);
@@ -920,14 +954,14 @@ textarea::placeholder{font-style:normal;color:var(--muted);opacity:.68}
   font-weight:400;
   line-height:1.44;
   color:var(--muted);
-  margin:0 0 14px;
+  margin:0;
   display:-webkit-box;
   -webkit-line-clamp:2;
   -webkit-box-orient:vertical;
   overflow:hidden;
 }
 .med-foot{
-  display:flex;justify-content:space-between;align-items:center;gap:10px;
+  display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:12px;
 }
 .med-pill{
   display:inline-flex;align-items:center;gap:5px;
@@ -955,12 +989,11 @@ textarea::placeholder{font-style:normal;color:var(--muted);opacity:.68}
   margin-bottom:-1px;
 }
 .pub-tab.on{color:var(--ink);font-weight:500;border-bottom-color:var(--ink)}
-
-/* La fecha del escrito, alineada a la derecha, en negro y discreta, como en las cartas antiguas. */
-.diary-date{font-size:11.5px;letter-spacing:.04em;text-transform:none;color:var(--ink);font-weight:500;margin-bottom:6px;text-align:right;font-variant-numeric:tabular-nums}
-.diary-vis-btn{border:1px solid var(--rule);background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:11px;font-weight:500;padding:5px 11px;border-radius:999px;cursor:pointer;flex-shrink:0;display:inline-flex;align-items:center;gap:5px}
-.diary-vis-btn svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
-.diary-vis-btn[data-vis="pub"]{border-color:var(--gold);color:var(--ink)}
+.diary-sticky-trigger{
+  display:flex;align-items:center;width:100%;min-height:46px;padding:0 12px;
+  background:transparent;border:none;text-align:left;cursor:pointer;
+  font-family:var(--serif);font-size:16px;color:var(--muted);opacity:.78;
+}
 /* =========================================================
    VISTAS PÚBLICAS (perfil waby/sebas + lectura de un post).
    Son páginas APARTE de la app: sin barra inferior, sin Hoy/Costa/
@@ -1362,27 +1395,26 @@ body.public-view .pub-view.on{display:block}
 .plan-card b{font-family:var(--serif);font-size:24px;color:var(--crimson);font-weight:600}
 .plan-card small{font-size:12px;color:var(--muted);display:block;margin-top:3px}
 
-/* Barra Inferior: píldora traslúcida estilo WhatsApp iOS + encogimiento GPU 60fps estilo Instagram sin reflujo */
+/* Barra Inferior: píldora traslúcida estilo WhatsApp iOS + interpolación continua GPU 60fps estilo Instagram */
 .bnav{
   position:fixed;left:18px;right:18px;bottom:calc(env(safe-area-inset-bottom,0px) + 10px);z-index:85;
-  background:color-mix(in srgb, var(--paper) 54%, transparent);
-  backdrop-filter:blur(2.5px) saturate(115%);
-  -webkit-backdrop-filter:blur(2.5px) saturate(115%);
-  border:1px solid var(--rule);
   border-radius:999px;
-  box-shadow:0 4px 18px -8px rgba(0,0,0,0.08);
   padding:4px 6px;
   display:flex;justify-content:center;
   transform-origin:center bottom;
-  transform:translate3d(0,0,0) scale3d(1,1,1);
+  --nav-p: 0;
+  transform:translate3d(0, calc(var(--nav-p) * 7px), 0) scale3d(calc(1 - var(--nav-p) * 0.08), calc(1 - var(--nav-p) * 0.08), 1);
   will-change:transform;
   backface-visibility:hidden;
   -webkit-backface-visibility:hidden;
-  transition:transform .52s cubic-bezier(.22,1,.36,1), box-shadow .52s cubic-bezier(.22,1,.36,1);
 }
-.bnav.bnav-compact{
-  transform:translate3d(0,6px,0) scale3d(0.90,0.90,1);
-  box-shadow:0 2px 10px -6px rgba(0,0,0,0.06);
+.bnav::before{
+  content:"";position:absolute;inset:0;border-radius:999px;z-index:-1;pointer-events:none;
+  background:color-mix(in srgb, var(--paper) 64%, transparent);
+  backdrop-filter:blur(6px) saturate(135%);
+  -webkit-backdrop-filter:blur(6px) saturate(135%);
+  border:1px solid var(--rule);
+  box-shadow:0 4px 18px -8px rgba(0,0,0,0.08);
 }
 .bnav-inner{width:100%;max-width:600px;display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
 /* Todas las letras e ilustraciones siempre en negro (o blanco en modo nocturno) para que nunca se pierdan.
@@ -1629,8 +1661,7 @@ summary::-webkit-details-marker{display:none}
   }
 }
 
-/* La respiración vive dentro de su recuadro: sin expansión a pantalla completa */
-#fullScreenGlassVeil{display:none !important}
+/* La respiración vive dentro de su recuadro por defecto (expandible vía .coast-fullscreen) */
 .sea.breathing #sea{
   filter:none !important;
   transform:none !important;
@@ -1752,12 +1783,18 @@ summary::-webkit-details-marker{display:none}
     0 0 0 2px var(--card-solid),0 0 0 3.5px var(--gold),
     0 10px 20px -6px color-mix(in srgb, var(--g3,#5C7A4E) 70%, transparent);
 }
-[data-vessel="fuente"] .v-gem{--g1:#F2FAF8;--g2:#8AB8B0;--g3:#5A8A80}
-[data-vessel="musa"] .v-gem{--g1:#FFFDF5;--g2:#D8B878;--g3:#B89048}
-[data-vessel="nido"] .v-gem{--g1:#FDF2DC;--g2:#C8A85A;--g3:#5A3A18}
-[data-vessel="piedra"] .v-gem{--g1:#F2F0EC;--g2:#A8A49A;--g3:#5A554E}
-[data-vessel="horizonte"] .v-gem{--g1:#E8ECF2;--g2:#8A9AB8;--g3:#2A3A58}
-[data-vessel="brasa"] .v-gem{--g1:#FFE8B8;--g2:#E07828;--g3:#6A2410}
+/* Lienzo de Fuego Vivo (Mi Llama) */
+#flameCanvas{
+  display:block;width:220px;height:220px;margin:0 auto;
+  pointer-events:none;
+}
+/* Colores de gema para cada estilo de Llama */
+[data-vessel="cuarzo"] .v-gem{--g1:#FFF5F7;--g2:#E8A8B8;--g3:#B85A72}
+[data-vessel="lavanda"] .v-gem{--g1:#F7F2FF;--g2:#B89CE8;--g3:#6E4AA8}
+[data-vessel="ororosa"] .v-gem{--g1:#FFF8F0;--g2:#F0B896;--g3:#C8725A}
+[data-vessel="ambar"] .v-gem{--g1:#FFF8E2;--g2:#F2A848;--g3:#C85818}
+[data-vessel="cobalto"] .v-gem{--g1:#EDF6FF;--g2:#68B2FF;--g3:#1A58C8}
+[data-vessel="aurora"] .v-gem{--g1:#FFF0F8;--g2:#D86CE8;--g3:#7818A8}
 @keyframes gemShine{to{transform:rotate(360deg)}}
 @media(prefers-reduced-motion:reduce){.v-gem::after{animation:none}}
 .peb-decay-pill{
@@ -1947,7 +1984,6 @@ summary::-webkit-details-marker{display:none}
 <body>
 <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
 <canvas id="coFirefliesOverlay" aria-hidden="true"></canvas>
-<div id="fullScreenGlassVeil" aria-hidden="true"></div>
 <div id="printClinicalSheet" aria-hidden="true"></div>
 
 <main class="book">
@@ -1955,15 +1991,6 @@ summary::-webkit-details-marker{display:none}
     <div class="masthead-left" id="mastheadProfileTrigger" role="button" tabindex="0" aria-label="Abrir mi perfil y ajustes">
       <h1>Wavy</h1>
       <div class="tagline">Donde tu calma se encuentra con los tuyos</div>
-    </div>
-    <div class="masthead-right" hidden>
-      <button class="me-pill" id="topProfileBtn" aria-label="Abrir mi perfil">
-        <div class="mini-av" id="topMeAv"></div>
-        <div>
-          <b id="topMeUser" style="text-transform:lowercase">@sebastian</b>
-          <small id="topVipTag">mi espacio</small>
-        </div>
-      </button>
     </div>
   </header>
 
@@ -1973,9 +2000,9 @@ summary::-webkit-details-marker{display:none}
   <div class="vpage on" id="v-today">
 
     <nav class="tabs" id="todaySubTabs" role="tablist" aria-label="Instrumentos de hoy">
-      <button class="tab on" data-sub="sub-habit" role="tab" aria-selected="true"><b>Hábito</b>Mi Racha</button>
-      <button class="tab" data-sub="sub-journal" role="tab" aria-selected="false"><b>Bienestar</b>Ciclo y Ánimo</button>
-      <button class="tab" data-sub="sub-flame" role="tab" aria-selected="false"><b>Pebetero</b>Mi Llama</button>
+      <button class="tab on" data-sub="sub-habit" role="tab" aria-selected="true"><b>Constancia</b>Mi racha</button>
+      <button class="tab" data-sub="sub-journal" role="tab" aria-selected="false"><b>Bienestar</b>Ciclo y ánimo</button>
+      <button class="tab" data-sub="sub-flame" role="tab" aria-selected="false"><b>Presencia</b>Mi llama</button>
     </nav>
 
     <!-- SUB-PANEL 1A: HÁBITO Y BATERÍA + FLUJO SOS -->
@@ -1999,8 +2026,8 @@ summary::-webkit-details-marker{display:none}
       <div class="marks" id="marks"></div>
       <div class="clock" id="dayClockBox"><b id="cd">--:--:--</b><span>Falta hoy</span><i id="cdb"></i></div>
       <div class="sig" id="sigbox">
-        <div class="m"><span style="display:flex;align-items:center;gap:8px"><button type="button" class="sig-spirit-btn" id="spiritBtn" aria-label="Elegir línea espiritual o filosófica">✦</button><span id="sm"></span></span><span id="sback" style="color:var(--muted)"></span></div>
-        <q id="sq"></q><p id="st"></p><div class="s" id="ss"></div>
+        <div class="m"><span id="sm"></span><span id="sback" style="color:var(--muted)"></span></div>
+        <q id="sq"></q><p id="st"></p><div class="s"><span id="ss"></span><button type="button" class="sig-spirit-btn" id="spiritBtn" aria-label="Elegir línea espiritual o filosófica">✦</button></div>
       </div>
 
       <div class="sl">
@@ -2206,17 +2233,17 @@ summary::-webkit-details-marker{display:none}
 
     </section>
 
-    <!-- SUB-PANEL 1C: PEBETERO Y PRÁCTICAS VERIFICADAS CON TEMPORIZADOR -->
+    <!-- SUB-PANEL 1C: MI LLAMA Y PRÁCTICAS VERIFICADAS CON TEMPORIZADOR -->
     <section class="panel card" id="sub-flame">
       <div class="hd">
-        <span>Tu pebetero de constancia <button type="button" class="help-q" data-help="helpPeb" aria-label="Ayuda sobre el pebetero">?</button></span>
+        <span>Tu llama de presencia <button type="button" class="help-q" data-help="helpPeb" aria-label="Ayuda sobre tu llama">?</button></span>
         <span>Llama diaria</span>
       </div>
-      <div class="help-tip" id="helpPeb" hidden>Tu vela de travertino representa tu presencia diaria. Se enciende automáticamente al completar una respiración, guardar un registro del día o realizar una práctica de 60 segundos.</div>
+      <div class="help-tip" id="helpPeb" hidden>Tu llama representa tu presencia diaria y nunca se apaga del todo (su mínimo es 5% porque tu capacidad de volver siempre sigue viva). Se aviva al completar una respiración, guardar un registro del día o realizar una práctica de 60 segundos.</div>
 
       <div style="margin-bottom:8px">
         <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:5px">
-          <span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0">Elige tu reliquia</span>
+          <span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0">Elige tu llama</span>
           <span id="pebEvolutionBadge" style="font-size:11px;color:var(--gold);font-weight:600;white-space:nowrap;flex-shrink:0">Nivel II · Doble Halo</span>
         </div>
         <div class="peb-vessels" id="pebVesselBar"></div>
@@ -2224,36 +2251,15 @@ summary::-webkit-details-marker{display:none}
 
       <div class="pd" id="pd">
         <div class="peb-top">
-          <span id="pebVesselTitle">Piedra</span>
+          <span id="pebVesselTitle">Ámbar Vivo</span>
           <span class="peb-chip"><i></i><span id="as">Vínculos · 0</span></span>
         </div>
-                <svg id="pebSvgArt" viewBox="0 0 120 150" aria-hidden="true">
-<defs>
-        <radialGradient id="gPiedra" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#E8E6E0" stop-opacity=".95"/><stop offset=".55" stop-color="#A8A49A" stop-opacity=".45"/><stop offset="1" stop-color="#4A4640" stop-opacity="0"/></radialGradient>
-        <radialGradient id="bPiedra" cx="40%" cy="28%" r="80%"><stop offset="0" stop-color="#F2F0EC"/><stop offset=".4" stop-color="#C8C4BA"/><stop offset=".75" stop-color="#8A8578"/><stop offset="1" stop-color="#5A554E"/></radialGradient>
-        <linearGradient id="fPiedraO" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF8E0"/><stop offset="1" stop-color="#C87828"/></linearGradient>
-        <linearGradient id="fPiedraM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFE8A8"/></linearGradient>
-        <linearGradient id="fPiedraC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFF8E0"/></linearGradient>
-      </defs>
-      <circle class="gl" cx="60" cy="68" r="58" fill="url(#gPiedra)"/>
-      <ellipse cx="60" cy="144" rx="36" ry="3.5" fill="#2A2622" opacity=".35"/>
-      <!-- Piedra: un canto rodado pulido, el cimiento que no se mueve -->
-      <path d="M32 132 C28 118 36 104 52 100 C66 97 84 102 88 114 C91 125 84 138 70 141 C54 144 36 141 32 132Z" fill="url(#bPiedra)" stroke="#4A4640" stroke-width=".8"/>
-      <path d="M40 124 C48 118 62 116 74 120 M42 132 C52 128 66 128 76 132" fill="none" stroke="#FFFFFF" stroke-width="1" stroke-linecap="round" opacity=".35"/>
-      <ellipse cx="50" cy="110" rx="10" ry="5" fill="#FFFFFF" opacity=".5" transform="rotate(-18 50 110)"/>
-      <ellipse cx="68" cy="134" rx="6" ry="3" fill="#6A655C" opacity=".4"/>
-      <ellipse class="emb" cx="60" cy="98" rx="7" ry="1.8" fill="#A8A49A"/>
-      <g id="fl">
-        <path class="f1" d="M60 94 C44 86 47 58 60 26 C73 58 76 86 60 94Z" fill="url(#fPiedraO)" opacity=".95"/>
-        <path class="f2" d="M60 94 C52 88 53 68 60 42 C67 68 68 88 60 94Z" fill="url(#fPiedraM)"/>
-        <path class="f3" d="M60 94 C56 91 56 83 60 70 C64 83 64 91 60 94Z" fill="url(#fPiedraC)"/>
-      </g>
-        </svg>
+        <canvas id="flameCanvas" width="440" height="440" aria-label="Tu llama viva"></canvas>
         <div class="peb-read">
           <b><span id="fp">65</span><small>%</small></b>
           <span id="fv">Tu llama está tenue</span>
-          <div><span class="peb-decay-pill" id="pebDecayCountdown">-2% / h · Se apaga en 18 h si no registras hoy</span></div>
-          <p id="pebHint" style="margin-top:6px">Tu llama se mantiene viva cuando cumples una práctica verificada hoy.</p>
+          <div><span class="peb-decay-pill" id="pebDecayCountdown">-2% / h · Mínimo 5% (nunca se apaga)</span></div>
+          <p id="pebHint" style="margin-top:6px">Tu llama se aviva cuando cumples una práctica verificada hoy.</p>
         </div>
         <div class="peb-bar"><i id="pebFill"></i></div>
         <div class="peb-actions">
@@ -2288,6 +2294,9 @@ summary::-webkit-details-marker{display:none}
       <div class="sea" id="seab">
         <canvas id="sea" role="img" aria-label="Simulación interactiva del mar y guía de respiración"></canvas>
         <canvas id="breathLayer" aria-hidden="true"></canvas>
+        <button type="button" class="sea-fs-btn" id="coastFsBtn" aria-label="Pantalla completa del mar" title="Pantalla completa">
+          <svg class="w-ico sm" viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+        </button>
         <div class="gauge"><span id="rpm">10%</span><small id="state">En calma</small></div>
       </div>
 
@@ -2462,31 +2471,16 @@ summary::-webkit-details-marker{display:none}
     </div>
     <div id="circleDiaryPane" hidden>
       <section class="panel card on" id="sub-diary">
-      <div class="hd">
-        <span>Mi Diario <button type="button" class="help-q" data-help="helpBio" aria-label="Ayuda sobre el diario">?</button></span>
-      </div>
-      <div class="help-tip" id="helpBio" hidden>Observa cómo se conectan tus emociones, tu descanso y tu ritmo biológico. Todo lo que escribas aquí es privado.</div>
-
-      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px;padding:4px 0 16px;border:none;border-bottom:1px solid var(--rule);border-radius:0;background:transparent;box-shadow:none;flex-wrap:wrap">
-        <div>
-          <strong style="font-family:var(--serif);font-size:16px;font-weight:500;display:block">Reflexión libre del día</strong>
-          <span style="font-size:11.5px;color:var(--muted)">Lienzo a pantalla completa sin distracciones.</span>
-        </div>
-        <button type="button" class="btn" id="openBlankSheetBtn" style="min-height:34px;padding:6px 14px;font-size:11px;border-radius:20px;width:100%;justify-content:center;margin-top:4px">
-          <svg class="w-ico sm" viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-          <span>Abrir hoja en blanco</span>
-        </button>
-      </div>
-
-      <!-- TUS ESCRITOS · lista estilo Substack/Medium: lo que guardas en
-           la hoja en blanco se ve AQUÍ MISMO, en el Diario (no en Hoy).
-           Título, fecha y un pedacito del texto; al tocarlo se abre
-           para leerlo (y editarlo). -->
-      <div class="bio-sec">
+      <div class="bio-sec" style="margin-top:0;padding-bottom:96px">
         <div class="bio-sec-hd"><span>Tus escritos</span><span style="display:flex;align-items:center;gap:8px"><span id="diaryCountLbl" style="font-family:var(--serif);font-style:italic;text-transform:none;letter-spacing:0"></span><button type="button" class="chip" id="shareProfileBtn" style="min-height:28px;padding:4px 11px;font-size:11px">Compartir mi perfil</button></span></div>
         <div id="diaryList"></div>
       </div>
       </section>
+    </div>
+    <div class="circle-sticky-wrap" id="diaryStickyBar" hidden>
+      <div class="circle-composer" style="padding:0 16px">
+        <button type="button" class="diary-sticky-trigger" id="openBlankSheetBtn">Abrir hoja en blanco</button>
+      </div>
     </div>
   </div>
 
@@ -2897,7 +2891,7 @@ summary::-webkit-details-marker{display:none}
       </div>
       <!-- Versión de la app: sube una por ronda (v18, v19, v20…) para saber
            de un vistazo si la versión publicada ya trae los últimos cambios. -->
-      <div class="cover-version">v26</div>
+      <div class="cover-version">v27</div>
     </div>
   </div>
 </div>
@@ -3301,6 +3295,28 @@ const WavyAudio=(()=>{
   let ctx=null,unlocked=false,running=false,stopTimer=null;
   let oceanGain=null,oceanFilter=null,oceanSource=null;
   let rainGain=null,rainFilter=null,rainSource=null;
+  let keepAliveEl=null;
+
+  function ensureKeepAliveAudio(){
+    if(keepAliveEl)return keepAliveEl;
+    try{
+      const sr=8000,numSamples=800,buf=new ArrayBuffer(44+numSamples*2),v=new DataView(buf);
+      const ws=(o,s)=>{for(let i=0;i<s.length;i++)v.setUint8(o+i,s.charCodeAt(i))};
+      ws(0,'RIFF');v.setUint32(4,36+numSamples*2,true);ws(8,'WAVE');ws(12,'fmt ');
+      v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,1,true);
+      v.setUint32(24,sr,true);v.setUint32(28,sr*2,true);v.setUint16(32,2,true);v.setUint16(34,16,true);
+      ws(36,'data');v.setUint32(40,numSamples*2,true);
+      const url=URL.createObjectURL(new Blob([buf],{type:'audio/wav'}));
+      const a=document.createElement('audio');
+      a.setAttribute('playsinline','');
+      a.setAttribute('webkit-playsinline','');
+      a.loop=true;
+      a.volume=0.01;
+      a.src=url;
+      keepAliveEl=a;
+    }catch(e){}
+    return keepAliveEl;
+  }
 
   function init(){
     if(!ctx){
@@ -3311,12 +3327,16 @@ const WavyAudio=(()=>{
     return ctx;
   }
 
-  /* Desbloqueo síncrono inmediato en eventos de usuario (pointerdown / click / touchstart) */
+  /* Desbloqueo síncrono inmediato en eventos de usuario (Safari iOS altavoz sin audífonos + Chrome) */
   function unlockNow(){
     const c=init();
     if(!c)return null;
     if(c.state==='suspended'){
       try{c.resume()}catch(e){}
+    }
+    const ka=ensureKeepAliveAudio();
+    if(ka && ka.paused){
+      try{const p=ka.play();if(p&&p.catch)p.catch(()=>{})}catch(e){}
     }
     if(!unlocked){
       try{
@@ -3763,6 +3783,7 @@ function createDefaultStateForUser(uAlias){
     caliDates:{},
     caliWeek:[0,2,4],
     caliDone:{},
+    loss:[],
     qDate:today(),
     quests:{},
     vis:[today()],
@@ -4788,8 +4809,8 @@ function markVerifiedPractice(msg){
 
 function renderStoriesBar(){
   const bar=$('storiesBar');if(!bar)return;bar.innerHTML='';
-  $('topMeAv').innerHTML=getAv(S.me.av);
-  $('topMeUser').textContent='@'+S.me.username;
+  if($('topMeAv'))$('topMeAv').innerHTML=getAv(S.me.av);
+  if($('topMeUser'))$('topMeUser').textContent='@'+S.me.username;
   renderAccountSwitcherUI();
   syncProWifiSwitchUI();
 
@@ -6036,7 +6057,7 @@ function stats(){
 
 const CARE_OPTS=['Claridad mental','Tranquilidad','Energía','Autoestima','Concentración','Tiempo','Descanso','Cuerpo en paz'];
 function lossView(){
-  const el=$('loss');if(!el)return;el.innerHTML='';if(!Array.isArray(S.loss))S.loss=['Tranquilidad','Claridad mental'];
+  const el=$('loss');if(!el)return;el.innerHTML='';if(!Array.isArray(S.loss))S.loss=[];
   /* Migración: las opciones perdieron el "Mi" (ahora "Claridad mental",
      no "Mi claridad mental"). Los valores guardados viejos se normalizan
      quitando el "Mi " inicial, para que el chip siga marcado. */
@@ -6151,13 +6172,30 @@ if($('heartSocket'))$('heartSocket').onclick=()=>{const b=$('sosb');if(b)b.click
      dejar leer el feed sin distracciones; al scrollear hacia arriba (o
      tocar para escribir) se desliza hacia arriba.
    ========================================================= */
-let lastWinScrollY=window.scrollY||0;
+let lastWinScrollY=window.scrollY||0,navP=0,navTarget=0,navLerpRaf=0;
+function tickNavLerp(){
+  const bnav=$('bnav');
+  if(!bnav){navLerpRaf=0;return;}
+  navP+=(navTarget-navP)*0.18;
+  if(Math.abs(navTarget-navP)<0.002)navP=navTarget;
+  bnav.style.setProperty('--nav-p',navP.toFixed(4));
+  if(navP!==navTarget){
+    navLerpRaf=requestAnimationFrame(tickNavLerp);
+  }else{
+    navLerpRaf=0;
+  }
+}
+function setNavTarget(t){
+  navTarget=Math.max(0,Math.min(1,t));
+  if(!navLerpRaf)navLerpRaf=requestAnimationFrame(tickNavLerp);
+}
 function updateCircleComposerYield(){
   const y=Math.max(0,window.scrollY||0);
   const dy=y-lastWinScrollY;
-  const bnav=$('bnav');
-  const wrap=document.querySelector('#v-circle .circle-sticky-wrap');
+  const wrap=document.querySelector('#circleFeedPane .circle-sticky-wrap');
+  const diaryBar=$('diaryStickyBar');
   const feedPane=$('circleFeedPane');
+  const diaryPane=$('circleDiaryPane');
   const vc=$('v-circle');
   const dr=$('circleComposerDrawer');
   const composerActive=(dr && !dr.hidden) || (document.activeElement && wrap && wrap.contains(document.activeElement));
@@ -6169,21 +6207,52 @@ function updateCircleComposerYield(){
       wrap.classList.remove('composer-hidden');
     }else if(composerActive || y<=18){
       wrap.classList.remove('composer-hidden');
-    }else if(dy>5 && y>28){
+    }else if(dy>4 && y>28){
       wrap.classList.add('composer-hidden');
-    }else if(dy<-4){
+    }else if(dy<-3){
       wrap.classList.remove('composer-hidden');
     }
   }
 
-  if(bnav){
-    if(y<=18 || dy<-4){
-      bnav.classList.remove('bnav-compact');
-    }else if(dy>5 && y>32){
-      bnav.classList.add('bnav-compact');
+  if(diaryBar){
+    const inDiary=Boolean(vc && vc.classList.contains('on') && diaryPane && !diaryPane.hidden);
+    diaryBar.hidden=!inDiary;
+    if(!inDiary || y<=18){
+      diaryBar.classList.remove('composer-hidden');
+    }else if(dy>4 && y>28){
+      diaryBar.classList.add('composer-hidden');
+    }else if(dy<-3){
+      diaryBar.classList.remove('composer-hidden');
     }
   }
+
+  if(y<=16 || dy<-3){
+    setNavTarget(0);
+  }else if(dy>4 && y>28){
+    setNavTarget(1);
+  }
   lastWinScrollY=y;
+}
+
+if($('coastFsBtn')){
+  $('coastFsBtn').onclick=()=>{
+    const on=!document.body.classList.contains('coast-fullscreen');
+    document.body.classList.toggle('coast-fullscreen',on);
+    const btn=$('coastFsBtn');
+    btn.setAttribute('aria-label',on?'Salir de pantalla completa':'Pantalla completa del mar');
+    btn.innerHTML=on
+      ?'<svg class="w-ico sm" viewBox="0 0 24 24"><path d="M4 14h6v6M20 10h-6V4M14 10l7-7M10 14l-7 7"/></svg>'
+      :'<svg class="w-ico sm" viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>';
+    if(on){
+      const el=document.documentElement;
+      if(el.requestFullscreen){el.requestFullscreen().catch(()=>{});}
+      if(screen.orientation&&screen.orientation.lock){screen.orientation.lock('landscape').catch(()=>{});}
+    }else{
+      if(document.fullscreenElement&&document.exitFullscreen){document.exitFullscreen().catch(()=>{});}
+      if(screen.orientation&&screen.orientation.unlock){try{screen.orientation.unlock()}catch(e){}}
+    }
+    if(typeof resize==='function')setTimeout(resize,60);
+  };
 }
 
 /* El encabezado se difumina conforme el usuario scrollea para abajo */
@@ -7898,8 +7967,8 @@ function applyBioTrackMode(mode){
   document.querySelectorAll('#bioTrackMode .chip').forEach(c=>c.classList.toggle('on',c.dataset.bm===S.bioMode));
   $('femaleBioBlock').hidden=(S.bioMode==='male');
   $('maleBioBlock').hidden=(S.bioMode==='female');
-  /* Al cambiar de modo, la reliquia pasa a la libre de ese modo si la
-     actual no pertenece a él (cada modo tiene sus 3 reliquias). */
+  const bioTab=document.querySelector('#todaySubTabs .tab[data-sub="sub-journal"]');
+  if(bioTab)bioTab.innerHTML='<b>Bienestar</b>'+(S.bioMode==='male'?'Ritmo y ánimo':'Ciclo y ánimo');
   if(!PEB_VESSELS[S.pebVessel] || PEB_VESSELS[S.pebVessel].mode!==S.bioMode){
     S.pebVessel=pebDefaultVessel();
     pebBarMode='';
@@ -8180,14 +8249,11 @@ function renderDiaryList(){
         '<span class="med-author-name">'+myName+'</span>'+
         '<span class="med-dot">·</span>'+
         '<span class="med-date">'+esc(formatDiaryDate(n.d))+'</span>'+
+        '<button type="button" class="med-vis-inline" data-vis="'+(n.public?'pub':'priv')+'" title="'+(n.public?'Público':'Privado')+'" aria-label="Visibilidad: '+(n.public?'Público':'Privado')+'">'+(n.public?VIS_PUB_SVG:VIS_PRIV_SVG)+'</button>'+
       '</div>'+
       '<h3 class="med-title">'+esc(n.estado||(isDraft?'Borrador sin título':'Reflexión del día'))+'</h3>'+
-      (ex?'<p class="med-excerpt">'+esc(ex)+'</p>':'')+
-      '<div class="med-foot">'+
-        '<span class="med-pill'+(isDraft?' draft':'')+'">'+(isDraft?'Borrador':'Escrito')+'</span>'+
-        '<button type="button" class="med-icon-btn" data-vis="'+(n.public?'pub':'priv')+'" aria-label="Cambiar visibilidad">'+(n.public?VIS_PUB_SVG+'<span>Público</span>':VIS_PRIV_SVG+'<span>Privado</span>')+'</button>'+
-      '</div>';
-    card.querySelector('.med-icon-btn').onclick=e=>{
+      (ex?'<p class="med-excerpt">'+esc(ex)+'</p>':'');
+    card.querySelector('.med-vis-inline').onclick=e=>{
       e.stopPropagation();
       n.public=!n.public;
       save(false);renderDiaryList();
@@ -8372,12 +8438,17 @@ window.addEventListener('hashchange',publicRouter);
 document.querySelectorAll('[data-pub-home]').forEach(a=>{
   a.addEventListener('click',e=>{e.preventDefault();location.hash='';showAppView();switchMainView('v-today');window.scrollTo(0,0);});
 });
-/* Compartir mi perfil (desde el Diario): copia el enlace waby/sebas. */
+/* Compartir mi perfil (desde el Diario): abre el sheet nativo o la vista pública del perfil. */
 if($('shareProfileBtn')){
   $('shareProfileBtn').onclick=async()=>{
-    const url=publicProfileUrl(S.me.username);
-    try{await navigator.clipboard.writeText(url);toast('Enlace de tu perfil copiado: '+url,'ok')}
-    catch(e){toast(url,'ok')}
+    const uname=(S.me&&S.me.username)||'';
+    const url=publicProfileUrl(uname);
+    if(navigator.share){
+      try{await navigator.share({title:(S.me&&S.me.name)||'Mi perfil en Wavy',text:'Mis escritos públicos en Wavy',url});return;}
+      catch(e){if(e&&e.name==='AbortError')return;}
+    }
+    try{await navigator.clipboard.writeText(url);}catch(e){}
+    location.hash='#/'+encodeURIComponent(uname);
   };
 }
 /* Abrir un escrito: si ya fue publicado (!n.draft) se abre en modo SOLO LECTURA
@@ -8442,180 +8513,43 @@ $('na').onclick=submitJournalEntry;
 $('ni').addEventListener('keydown',e=>{if(e.key==='Enter' && !e.shiftKey){e.preventDefault();submitJournalEntry()}});
 
 /* =========================================================
-   PEBETERO (TASA 0.8% / 2.4%) + CRONÓMETRO ANTI-TRAMPA 60S
+   MI LLAMA (MÍNIMO 5% · NUNCA SE APAGA) + MOTOR CANVAS VIVA
    ========================================================= */
 const fuel=()=>{
   const f=S.fuel||{v:65,t:Date.now()};
   const rate=isPebeteroMaintained()?0.8:2.4;
-  return Math.max(8,Math.min(100,f.v-(Date.now()-f.t)/36e5*rate));
+  return Math.max(5,Math.min(100,f.v-(Date.now()-f.t)/36e5*rate));
 };
 function addFuel(n){S.fuel={v:Math.min(100,fuel()+n),t:Date.now()};save();flameView()}
+const PEB_LEGACY_MAP={fuente:'cuarzo',musa:'lavanda',nido:'ororosa',piedra:'ambar',horizonte:'cobalto',brasa:'aurora'};
 const PEB_VESSELS={
-  fuente:{
-    title:'Fuente',mode:'female',short:'Fuente',pro:false,relic:'#7AA8A0',
-    svg:()=>`
-      <defs>
-        <radialGradient id="gFuente" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#E8F2F0" stop-opacity=".95"/><stop offset=".55" stop-color="#8AB8B0" stop-opacity=".45"/><stop offset="1" stop-color="#3A6A60" stop-opacity="0"/></radialGradient>
-        <radialGradient id="bFuente" cx="42%" cy="30%" r="78%"><stop offset="0" stop-color="#F2FAF8"/><stop offset=".4" stop-color="#C8E0DC"/><stop offset=".75" stop-color="#8AB8B0"/><stop offset="1" stop-color="#5A8A80"/></radialGradient>
-        <linearGradient id="bFuenteRim" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#D8E8E4"/><stop offset=".5" stop-color="#8AB8B0"/><stop offset="1" stop-color="#D8E8E4"/></linearGradient>
-        <linearGradient id="fFuenteO" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#7AB8AC"/></linearGradient>
-        <linearGradient id="fFuenteM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#D8F0EC"/></linearGradient>
-        <linearGradient id="fFuenteC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#F2FAF8"/></linearGradient>
-      </defs>
-      <circle class="gl" cx="60" cy="70" r="56" fill="url(#gFuente)"/>
-      <ellipse cx="60" cy="143" rx="34" ry="3.2" fill="#2A4A44" opacity=".18"/>
-      <!-- Fuente: un manantial sereno, la gota que brota de adentro -->
-      <ellipse cx="60" cy="138" rx="36" ry="5" fill="url(#bFuente)" stroke="#5A8A80" stroke-width=".8"/>
-      <ellipse cx="60" cy="134" rx="30" ry="4" fill="none" stroke="#FFFFFF" stroke-width="1" opacity=".55"/>
-      <ellipse cx="60" cy="130" rx="22" ry="3" fill="none" stroke="#FFFFFF" stroke-width=".8" opacity=".4"/>
-      <ellipse cx="60" cy="126" rx="14" ry="2.2" fill="none" stroke="#FFFFFF" stroke-width=".7" opacity=".3"/>
-      <path d="M60 128 C56 120 56 112 60 104 C64 112 64 120 60 128Z" fill="url(#bFuente)" stroke="#5A8A80" stroke-width=".7"/>
-      <ellipse cx="57" cy="112" rx="2.2" ry="3.5" fill="#FFFFFF" opacity=".8"/>
-      <ellipse cx="48" cy="136" rx="8" ry="2.5" fill="#FFFFFF" opacity=".35" transform="rotate(-12 48 136)"/>
-      <ellipse class="emb" cx="60" cy="100" rx="6" ry="1.6" fill="#8AB8B0"/>
-      <g id="fl">
-        <path class="f1" d="M60 94 C44 86 47 58 60 26 C73 58 76 86 60 94Z" fill="url(#fFuenteO)" opacity=".95"/>
-        <path class="f2" d="M60 94 C52 88 53 68 60 42 C67 68 68 88 60 94Z" fill="url(#fFuenteM)"/>
-        <path class="f3" d="M60 94 C56 91 56 83 60 70 C64 83 64 91 60 94Z" fill="url(#fFuenteC)"/>
-      </g>`
+  cuarzo:{
+    title:'Rosa Cuarzo',mode:'female',short:'Rosa Cuarzo',pro:false,relic:'#C87A88',
+    pal:{glow:'rgba(244,172,188,',outerTop:'#FFF3F6',outerBot:'#D86B82',midTop:'#FFFFFF',midBot:'#FFD6E0',core:'#FFFFFF',spark:'#FFE2EA',ember:'#E88FA0'}
   },
-  musa:{
-    title:'Musa',mode:'female',short:'Musa',pro:true,relic:'#C8A85A',
-    svg:()=>`
-      <defs>
-        <radialGradient id="gMusa" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#FDF6E0" stop-opacity=".95"/><stop offset=".55" stop-color="#E8C878" stop-opacity=".45"/><stop offset="1" stop-color="#8A6A28" stop-opacity="0"/></radialGradient>
-        <radialGradient id="bMusa" cx="42%" cy="32%" r="75%"><stop offset="0" stop-color="#FFFDF5"/><stop offset=".45" stop-color="#F2D8A0"/><stop offset=".8" stop-color="#D8B878"/><stop offset="1" stop-color="#B89048"/></radialGradient>
-        <linearGradient id="bMusaRing" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#E8C878"/><stop offset=".5" stop-color="#F2D8A0"/><stop offset="1" stop-color="#E8C878"/></linearGradient>
-        <linearGradient id="fMusaO" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF8E0"/><stop offset="1" stop-color="#D8A838"/></linearGradient>
-        <linearGradient id="fMusaM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFE8A8"/></linearGradient>
-        <linearGradient id="fMusaC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFF8E0"/></linearGradient>
-      </defs>
-      <circle class="gl" cx="60" cy="70" r="56" fill="url(#gMusa)"/>
-      <ellipse cx="60" cy="143" rx="32" ry="3.2" fill="#6A4A18" opacity=".18"/>
-      <!-- Musa: un orbe luminoso con su halo, la presencia que inspira -->
-      <ellipse cx="60" cy="140" rx="26" ry="4" fill="#8A6A28" opacity=".18"/>
-      <circle cx="60" cy="120" r="26" fill="none" stroke="url(#bMusaRing)" stroke-width="1.2" opacity=".85"/>
-      <circle cx="60" cy="120" r="20" fill="url(#bMusa)" stroke="#B89048" stroke-width=".7"/>
-      <ellipse cx="53" cy="112" rx="7" ry="4.5" fill="#FFFFFF" opacity=".8" transform="rotate(-25 53 112)"/>
-      <ellipse cx="66" cy="128" rx="4.5" ry="2.8" fill="#F2D8A0" opacity=".5"/>
-      <circle cx="60" cy="120" r="2" fill="#FFFFFF" opacity=".9"/>
-      <circle cx="38" cy="96" r="1.2" fill="#E8C878"/><circle cx="82" cy="100" r="1" fill="#E8C878"/><circle cx="60" cy="88" r="1.3" fill="#F2D8A0"/>
-      <ellipse class="emb" cx="60" cy="94" rx="7" ry="1.8" fill="#D8B878"/>
-      <g id="fl">
-        <path class="f1" d="M60 94 C44 86 47 58 60 26 C73 58 76 86 60 94Z" fill="url(#fMusaO)" opacity=".95"/>
-        <path class="f2" d="M60 94 C52 88 53 68 60 42 C67 68 68 88 60 94Z" fill="url(#fMusaM)"/>
-        <path class="f3" d="M60 94 C56 91 56 83 60 70 C64 83 64 91 60 94Z" fill="url(#fMusaC)"/>
-      </g>`
+  lavanda:{
+    title:'Lavanda Solar',mode:'female',short:'Lavanda Solar',pro:true,relic:'#9F82D6',
+    pal:{glow:'rgba(186,154,244,',outerTop:'#FFF6FF',outerBot:'#916AD8',midTop:'#FFFFFF',midBot:'#E4D4FF',core:'#FFFFFF',spark:'#F2D8FF',ember:'#B596EA'}
   },
-  nido:{
-    title:'Nido',mode:'female',short:'Nido',pro:true,relic:'#B89048',
-    svg:()=>`
-      <defs>
-        <radialGradient id="gNido" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#FDF2DC" stop-opacity=".95"/><stop offset=".55" stop-color="#D8B878" stop-opacity=".45"/><stop offset="1" stop-color="#6A4A28" stop-opacity="0"/></radialGradient>
-        <linearGradient id="bNido" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#C8A85A"/><stop offset=".5" stop-color="#8A6A28"/><stop offset="1" stop-color="#5A3A18"/></linearGradient>
-        <radialGradient id="bNidoEgg" cx="42%" cy="30%" r="75%"><stop offset="0" stop-color="#FFFDF5"/><stop offset=".5" stop-color="#F2E8D0"/><stop offset="1" stop-color="#D8C8A8"/></radialGradient>
-        <linearGradient id="fNidoO" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF8E0"/><stop offset="1" stop-color="#C87828"/></linearGradient>
-        <linearGradient id="fNidoM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFE8A8"/></linearGradient>
-        <linearGradient id="fNidoC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFF8E0"/></linearGradient>
-      </defs>
-      <circle class="gl" cx="60" cy="70" r="56" fill="url(#gNido)"/>
-      <ellipse cx="60" cy="144" rx="34" ry="3.5" fill="#4A2A10" opacity=".22"/>
-      <!-- Nido: un nido tejido que guarda un huevo, el espacio seguro -->
-      <path d="M30 118 C30 132 44 142 60 142 C76 142 90 132 90 118 C90 114 86 112 82 112 L38 112 C34 112 30 114 30 118Z" fill="url(#bNido)" stroke="#4A2A10" stroke-width=".8"/>
-      <path d="M34 122 C44 126 76 126 86 122 M36 128 C46 132 74 132 84 128 M40 134 C50 137 70 137 80 134" fill="none" stroke="#E8C878" stroke-width="1" stroke-linecap="round" opacity=".55"/>
-      <path d="M38 116 C48 120 72 120 82 116" fill="none" stroke="#F2D8A0" stroke-width="1" stroke-linecap="round" opacity=".5"/>
-      <ellipse cx="60" cy="112" rx="13" ry="16" fill="url(#bNidoEgg)" stroke="#B89878" stroke-width=".7"/>
-      <ellipse cx="55" cy="104" rx="4" ry="6" fill="#FFFFFF" opacity=".75" transform="rotate(-18 55 104)"/>
-      <ellipse cx="64" cy="120" rx="3" ry="2" fill="#E8D8B8" opacity=".5"/>
-      <ellipse class="emb" cx="60" cy="94" rx="7" ry="1.8" fill="#D8B878"/>
-      <g id="fl">
-        <path class="f1" d="M60 94 C44 86 47 58 60 26 C73 58 76 86 60 94Z" fill="url(#fNidoO)" opacity=".95"/>
-        <path class="f2" d="M60 94 C52 88 53 68 60 42 C67 68 68 88 60 94Z" fill="url(#fNidoM)"/>
-        <path class="f3" d="M60 94 C56 91 56 83 60 70 C64 83 64 91 60 94Z" fill="url(#fNidoC)"/>
-      </g>`
+  ororosa:{
+    title:'Oro Rosa',mode:'female',short:'Oro Rosa',pro:true,relic:'#D49474',
+    pal:{glow:'rgba(246,188,154,',outerTop:'#FFF8EE',outerBot:'#D67E5C',midTop:'#FFFFFF',midBot:'#FFE0CC',core:'#FFFFFF',spark:'#FFF0DC',ember:'#E4A07E'}
   },
-  piedra:{
-    title:'Piedra',mode:'male',short:'Piedra',pro:false,relic:'#8A8578',
-    svg:()=>`
-      <defs>
-        <radialGradient id="gPiedra" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#E8E6E0" stop-opacity=".95"/><stop offset=".55" stop-color="#A8A49A" stop-opacity=".45"/><stop offset="1" stop-color="#4A4640" stop-opacity="0"/></radialGradient>
-        <radialGradient id="bPiedra" cx="40%" cy="28%" r="80%"><stop offset="0" stop-color="#F2F0EC"/><stop offset=".4" stop-color="#C8C4BA"/><stop offset=".75" stop-color="#8A8578"/><stop offset="1" stop-color="#5A554E"/></radialGradient>
-        <linearGradient id="fPiedraO" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF8E0"/><stop offset="1" stop-color="#C87828"/></linearGradient>
-        <linearGradient id="fPiedraM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFE8A8"/></linearGradient>
-        <linearGradient id="fPiedraC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFF8E0"/></linearGradient>
-      </defs>
-      <circle class="gl" cx="60" cy="68" r="58" fill="url(#gPiedra)"/>
-      <ellipse cx="60" cy="144" rx="36" ry="3.5" fill="#2A2622" opacity=".35"/>
-      <!-- Piedra: un canto rodado pulido, el cimiento que no se mueve -->
-      <path d="M32 132 C28 118 36 104 52 100 C66 97 84 102 88 114 C91 125 84 138 70 141 C54 144 36 141 32 132Z" fill="url(#bPiedra)" stroke="#4A4640" stroke-width=".8"/>
-      <path d="M40 124 C48 118 62 116 74 120 M42 132 C52 128 66 128 76 132" fill="none" stroke="#FFFFFF" stroke-width="1" stroke-linecap="round" opacity=".35"/>
-      <ellipse cx="50" cy="110" rx="10" ry="5" fill="#FFFFFF" opacity=".5" transform="rotate(-18 50 110)"/>
-      <ellipse cx="68" cy="134" rx="6" ry="3" fill="#6A655C" opacity=".4"/>
-      <ellipse class="emb" cx="60" cy="98" rx="7" ry="1.8" fill="#A8A49A"/>
-      <g id="fl">
-        <path class="f1" d="M60 94 C44 86 47 58 60 26 C73 58 76 86 60 94Z" fill="url(#fPiedraO)" opacity=".95"/>
-        <path class="f2" d="M60 94 C52 88 53 68 60 42 C67 68 68 88 60 94Z" fill="url(#fPiedraM)"/>
-        <path class="f3" d="M60 94 C56 91 56 83 60 70 C64 83 64 91 60 94Z" fill="url(#fPiedraC)"/>
-      </g>`
+  ambar:{
+    title:'Ámbar Vivo',mode:'male',short:'Ámbar Vivo',pro:false,relic:'#D68232',
+    pal:{glow:'rgba(244,158,64,',outerTop:'#FFF7DC',outerBot:'#D86018',midTop:'#FFFFFF',midBot:'#FFD584',core:'#FFFFFF',spark:'#FFEAB4',ember:'#EA9038'}
   },
-  horizonte:{
-    title:'Horizonte',mode:'male',short:'Horizonte',pro:true,relic:'#5A6A8A',
-    svg:()=>`
-      <defs>
-        <radialGradient id="gHorizonte" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#E8ECF2" stop-opacity=".95"/><stop offset=".55" stop-color="#8A9AB8" stop-opacity=".45"/><stop offset="1" stop-color="#2A3A58" stop-opacity="0"/></radialGradient>
-        <linearGradient id="bHorizonte" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3A4A68"/><stop offset=".6" stop-color="#2A3A58"/><stop offset="1" stop-color="#1A2438"/></linearGradient>
-        <radialGradient id="bHorizonteSun" cx="50%" cy="42%" r="65%"><stop offset="0" stop-color="#FFF8E0"/><stop offset=".55" stop-color="#F2C878"/><stop offset="1" stop-color="#D8A838"/></radialGradient>
-        <linearGradient id="fHorizonteO" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF8E0"/><stop offset="1" stop-color="#C87828"/></linearGradient>
-        <linearGradient id="fHorizonteM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFE8A8"/></linearGradient>
-        <linearGradient id="fHorizonteC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFF8E0"/></linearGradient>
-      </defs>
-      <circle class="gl" cx="60" cy="68" r="58" fill="url(#gHorizonte)"/>
-      <ellipse cx="60" cy="144" rx="36" ry="3.5" fill="#141A28" opacity=".4"/>
-      <!-- Horizonte: la línea donde la tierra se encuentra con la luz -->
-      <path d="M28 142 C28 124 42 112 60 112 C78 112 92 124 92 142 Z" fill="url(#bHorizonte)" stroke="#141A28" stroke-width=".8"/>
-      <path d="M28 142 C40 132 80 132 92 142" fill="none" stroke="#F2C878" stroke-width="1.2" opacity=".8"/>
-      <circle cx="60" cy="118" r="12" fill="url(#bHorizonteSun)" stroke="#B89048" stroke-width=".7"/>
-      <ellipse cx="56" cy="114" rx="4" ry="2.5" fill="#FFFFFF" opacity=".8"/>
-      <circle cx="38" cy="104" r="1" fill="#F2C878"/><circle cx="82" cy="100" r="1.1" fill="#F2C878"/><circle cx="60" cy="96" r="1.2" fill="#FFF8E0"/>
-      <ellipse class="emb" cx="60" cy="96" rx="7" ry="1.8" fill="#D8B878"/>
-      <g id="fl">
-        <path class="f1" d="M60 94 C44 86 47 58 60 26 C73 58 76 86 60 94Z" fill="url(#fHorizonteO)" opacity=".95"/>
-        <path class="f2" d="M60 94 C52 88 53 68 60 42 C67 68 68 88 60 94Z" fill="url(#fHorizonteM)"/>
-        <path class="f3" d="M60 94 C56 91 56 83 60 70 C64 83 64 91 60 94Z" fill="url(#fHorizonteC)"/>
-      </g>`
+  cobalto:{
+    title:'Cobalto Celestial',mode:'male',short:'Cobalto Celestial',pro:true,relic:'#4D7FD6',
+    pal:{glow:'rgba(104,162,248,',outerTop:'#F0FAFF',outerBot:'#2F66D0',midTop:'#FFFFFF',midBot:'#B8DCFF',core:'#FFFFFF',spark:'#DCF0FF',ember:'#689AE8'}
   },
-  brasa:{
-    title:'Brasa',mode:'male',short:'Brasa',pro:true,relic:'#C85828',
-    svg:()=>`
-      <defs>
-        <radialGradient id="gBrasa" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#FDE8D0" stop-opacity=".95"/><stop offset=".55" stop-color="#E07828" stop-opacity=".5"/><stop offset="1" stop-color="#5A1A08" stop-opacity="0"/></radialGradient>
-        <radialGradient id="bBrasa" cx="50%" cy="42%" r="68%"><stop offset="0" stop-color="#FFE8B8"/><stop offset=".35" stop-color="#F2A838"/><stop offset=".7" stop-color="#C85828"/><stop offset="1" stop-color="#6A2410"/></radialGradient>
-        <linearGradient id="fBrasaO" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF0C9"/><stop offset="1" stop-color="#E05818"/></linearGradient>
-        <linearGradient id="fBrasaM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFB878"/></linearGradient>
-        <linearGradient id="fBrasaC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFE8C8"/></linearGradient>
-      </defs>
-      <circle class="gl" cx="60" cy="68" r="58" fill="url(#gBrasa)"/>
-      <ellipse cx="60" cy="144" rx="36" ry="3.5" fill="#2A0E04" opacity=".45"/>
-      <!-- Brasa: el carbón que arde por dentro, la fuerza que no necesita gritar -->
-      <path d="M34 130 C30 116 38 102 54 99 C68 96 84 102 88 114 C91 126 84 138 70 141 C54 144 38 141 34 130Z" fill="url(#bBrasa)" stroke="#4A1808" stroke-width=".8"/>
-      <path d="M48 112 C52 120 52 128 48 134 M62 108 C66 118 66 128 62 136 M72 116 C74 122 74 128 72 132" fill="none" stroke="#FFE8B8" stroke-width="1.1" stroke-linecap="round" opacity=".75"/>
-      <ellipse cx="52" cy="110" rx="8" ry="4" fill="#FFFFFF" opacity=".55" transform="rotate(-18 52 110)"/>
-      <ellipse cx="68" cy="134" rx="5" ry="2.5" fill="#8A3018" opacity=".5"/>
-      <ellipse class="emb" cx="60" cy="98" rx="7" ry="1.8" fill="#F2A838"/>
-      <g id="fl">
-        <path class="f1" d="M60 94 C39 88 41 62 60 30 C79 62 81 88 60 94Z" fill="url(#fBrasaO)" opacity=".95"/>
-        <path class="f2" d="M48 92 C42 82 45 68 52 52 C54 70 54 84 48 92Z" fill="url(#fBrasaO)" opacity=".8"/>
-        <path class="f2" d="M72 92 C78 82 75 68 68 52 C66 70 66 84 72 92Z" fill="url(#fBrasaO)" opacity=".8"/>
-        <path class="f3" d="M60 94 C50 90 50 72 60 46 C70 72 70 90 60 94Z" fill="url(#fBrasaM)"/>
-        <circle cx="49" cy="42" r="1.4" fill="#FFF2C2"/><circle cx="71" cy="37" r="1.2" fill="#FFF2C2"/><circle cx="60" cy="23" r="1.5" fill="#FFFFFF"/>
-      </g>`
+  aurora:{
+    title:'Aurora Carmesí',mode:'male',short:'Aurora Carmesí',pro:true,relic:'#C43A4E',
+    pal:{glow:'rgba(232,86,104,',outerTop:'#FFF2EC',outerBot:'#B8283E',midTop:'#FFFFFF',midBot:'#FFC2AE',core:'#FFFFFF',spark:'#FFE0C8',ember:'#DE5A6A'}
   }
 };
 
-/* La reliquia libre por defecto según el modo (mujer / hombre). */
-function pebDefaultVessel(){return S.bioMode==='female'?'fuente':'piedra';}
-/* La barra de reliquias muestra solo las 3 del modo actual; se reconstruye
-   solo cuando cambia el modo (si no, solo se actualiza el estado .on). */
+function pebDefaultVessel(){return S.bioMode==='female'?'cuarzo':'ambar';}
 let pebBarMode='';
 function renderPebVesselBar(){
   const bar=$('pebVesselBar');if(!bar)return;
@@ -8632,17 +8566,131 @@ function renderPebVesselBar(){
   });
 }
 
-function renderPebVesselArt(){
-  let vKey=S.pebVessel;
+let activeFlamePal=PEB_VESSELS.ambar.pal,flameSparks=[],flameRaf=0,flamePctSmooth=65;
+function resolveFlameVesselKey(){
+  let vKey=PEB_LEGACY_MAP[S.pebVessel]||S.pebVessel;
   if(!PEB_VESSELS[vKey] || PEB_VESSELS[vKey].mode!==S.bioMode)vKey=pebDefaultVessel();
+  return vKey;
+}
+function renderPebVesselArt(){
+  const vKey=resolveFlameVesselKey();
+  S.pebVessel=vKey;
   const cfg=PEB_VESSELS[vKey];
+  activeFlamePal=cfg.pal;
   renderPebVesselBar();
-  if($('pebSvgArt'))$('pebSvgArt').innerHTML=cfg.svg();
-  if($('pd'))$('pd').style.setProperty('--relic',cfg.relic||'#8A8578');
+  if($('pd'))$('pd').style.setProperty('--relic',cfg.relic||'#D68232');
   if($('pebVesselTitle'))$('pebVesselTitle').textContent=cfg.title;
   document.querySelectorAll('#pebVesselBar .peb-vessel-btn').forEach(b=>{
     b.classList.toggle('on',b.dataset.vessel===vKey);
   });
+}
+
+function drawLivingFlame(ts){
+  flameRaf=0;
+  const cv=$('flameCanvas');
+  const sub=$('sub-flame');
+  if(!cv || document.hidden || (sub && !sub.classList.contains('on')))return;
+  const ctx=cv.getContext('2d');if(!ctx)return;
+  const w=cv.width,h=cv.height,cx=w*0.5,baseY=h*0.80;
+  const targetPct=fuel();
+  flamePctSmooth+=(targetPct-flamePctSmooth)*0.08;
+  const p=Math.max(0.05,Math.min(1,flamePctSmooth/100));
+  const t=(ts||0)*0.001;
+  const pal=activeFlamePal;
+
+  ctx.clearRect(0,0,w,h);
+
+  // 1. Halo atmosférico cálido
+  const haloR=70+135*p+Math.sin(t*2.6)*5;
+  const haloY=baseY-36-46*p;
+  const hg=ctx.createRadialGradient(cx,haloY,8,cx,haloY,haloR);
+  hg.addColorStop(0,pal.glow+(0.34+0.34*p).toFixed(2)+')');
+  hg.addColorStop(0.5,pal.glow+(0.12+0.14*p).toFixed(2)+')');
+  hg.addColorStop(1,pal.glow+'0)');
+  ctx.fillStyle=hg;
+  ctx.beginPath();ctx.arc(cx,haloY,haloR,0,Math.PI*2);ctx.fill();
+
+  // 2. Brasa base viva (nunca desaparece)
+  const embW=28+22*p;
+  const eg=ctx.createRadialGradient(cx,baseY+4,2,cx,baseY+4,embW);
+  eg.addColorStop(0,'#FFFFFF');
+  eg.addColorStop(0.4,pal.ember);
+  eg.addColorStop(1,'rgba(0,0,0,0)');
+  ctx.save();ctx.globalAlpha=0.55+0.35*p;ctx.fillStyle=eg;
+  ctx.beginPath();ctx.ellipse(cx,baseY+4,embW,9+4*p,0,0,Math.PI*2);ctx.fill();ctx.restore();
+
+  // 3. Lenguas orgánicas estilo Miyazaki / Calcifer
+  const flameH=48+180*p;
+  const flameW=20+44*p;
+  const sway1=Math.sin(t*2.4)*7*p + Math.sin(t*5.1)*2.8*p;
+  const sway2=Math.cos(t*3.1)*5*p + Math.sin(t*6.3)*2*p;
+  const breath=1+Math.sin(t*3.4)*0.035;
+
+  function drawTongue(scaleW,scaleH,sway,topCol,botCol,alpha){
+    const fh=flameH*scaleH*breath,fw=flameW*scaleW;
+    const tipX=cx+sway,tipY=baseY-fh;
+    const g=ctx.createLinearGradient(cx,tipY,cx,baseY);
+    g.addColorStop(0,topCol);g.addColorStop(1,botCol);
+    ctx.save();
+    ctx.globalAlpha=alpha;
+    ctx.fillStyle=g;
+    ctx.beginPath();
+    ctx.moveTo(cx,baseY+2);
+    ctx.bezierCurveTo(cx-fw*1.08,baseY-fh*0.14, cx-fw*0.72+sway*0.45,baseY-fh*0.64, tipX,tipY);
+    ctx.bezierCurveTo(cx+fw*0.72+sway*0.45,baseY-fh*0.64, cx+fw*1.08,baseY-fh*0.14, cx,baseY+2);
+    ctx.closePath();
+    ctx.fill();
+    ctx.restore();
+  }
+
+  // Lenguas laterales juguetonas (visibles conforme crece)
+  if(p>0.22){
+    const sideA=Math.min(0.75,(p-0.22)*1.1);
+    const ls=Math.sin(t*4.2)*8*p;
+    drawTongue(0.62,0.68, -14*p+ls, pal.outerTop, pal.outerBot, sideA*0.6);
+    drawTongue(0.62,0.64, 14*p-ls*0.8, pal.outerTop, pal.outerBot, sideA*0.6);
+  }
+  drawTongue(1.0,1.0,sway1,pal.outerTop,pal.outerBot,0.92);
+  drawTongue(0.68,0.78,sway2*0.75,pal.midTop,pal.midBot,0.96);
+  drawTongue(0.38,0.48,sway1*0.35,pal.core,pal.midBot,0.98);
+
+  // 4. Chispas ascendentes
+  const maxSparks=Math.round(2+20*p);
+  while(flameSparks.length<maxSparks){
+    flameSparks.push({
+      x:cx+(Math.random()-0.5)*flameW*0.9,
+      y:baseY-Math.random()*flameH*0.5,
+      vy:0.6+Math.random()*(1.1+1.5*p),
+      vx:(Math.random()-0.5)*0.45,
+      r:1.3+Math.random()*2.3,
+      life:Math.random()
+    });
+  }
+  if(flameSparks.length>maxSparks)flameSparks.length=maxSparks;
+  flameSparks.forEach(sp=>{
+    sp.y-=sp.vy;
+    sp.x+=sp.vx+Math.sin(t*4+sp.y*0.04)*0.35;
+    sp.life-=0.008+0.006*(1-p);
+    if(sp.life<=0 || sp.y<baseY-flameH-58){
+      sp.x=cx+(Math.random()-0.5)*flameW*0.75;
+      sp.y=baseY-flameH*(0.2+Math.random()*0.55);
+      sp.vy=0.6+Math.random()*(1.1+1.5*p);
+      sp.vx=(Math.random()-0.5)*0.45;
+      sp.life=0.85+Math.random()*0.15;
+    }
+    ctx.save();
+    ctx.globalAlpha=Math.max(0,sp.life*(0.45+0.55*p));
+    ctx.fillStyle=pal.spark;
+    ctx.beginPath();ctx.arc(sp.x,sp.y,sp.r,0,Math.PI*2);ctx.fill();
+    ctx.restore();
+  });
+
+  flameRaf=requestAnimationFrame(drawLivingFlame);
+}
+function startFlameAnim(){
+  if(!flameRaf && $('flameCanvas') && !document.hidden){
+    flameRaf=requestAnimationFrame(drawLivingFlame);
+  }
 }
 
 if($('pebVesselBar')){
@@ -8651,7 +8699,7 @@ if($('pebVesselBar')){
     const vk=b.dataset.vessel;
     const cfg=PEB_VESSELS[vk];
     if(cfg && cfg.pro && !isPro()){
-      openPaywall('Desbloquea las reliquias exclusivas del Pebetero (Musa, Nido, Horizonte y Brasa) con Wavy Pro.');
+      openPaywall('Desbloquea las llamas exclusivas (Lavanda Solar, Oro Rosa, Cobalto Celestial y Aurora Carmesí) con Wavy Pro.');
       return;
     }
     S.pebVessel=vk;
@@ -8664,36 +8712,29 @@ if($('pebVesselBar')){
 function flameView(){
   if(document.hidden)return;
   const v=fuel(),p=$('pd'),kept=isPebeteroMaintained();if(!p)return;
-  if($('pebSvgArt') && !$('pebSvgArt').dataset.loadedVessel){
-    $('pebSvgArt').dataset.loadedVessel='1';
-    renderPebVesselArt();
-  }
+  renderPebVesselArt();
+  startFlameAnim();
   p.classList.toggle('kept',kept);
   p.classList.toggle('low',!kept && v<35);
-  p.style.setProperty('--s',(.32+v/100*.78).toFixed(2));
-  p.style.setProperty('--g',(0.25+v/135).toFixed(2));
-  p.style.setProperty('--e',v<35?.85:.45);
-  $('fv').textContent=v<=2?'Ceniza fría · Tu racha está en riesgo':(kept?'Llama encendida y en calma hoy':(v>35?'Llama cálida y estable':'Brasa en riesgo · Necesita tu presencia'));
+  $('fv').textContent=v<=8?'Brasa viva (mínimo 5%) · Tu capacidad de volver sigue intacta':(kept?'Llama encendida y vibrante hoy':(v>35?'Llama cálida y estable':'Brasa suave · Avívala con tu presencia'));
   $('fp').textContent=Math.round(v);
   if($('pebFill'))$('pebFill').style.width=Math.round(v)+'%';
 
-  /* Cuenta regresiva viva de extinción (-2% por hora) y Evolución por días de racha */
-  const hrsLeft=Math.max(0,Math.ceil(v/2));
   const decayEl=$('pebDecayCountdown');
   if(decayEl){
     decayEl.classList.toggle('risk',v<35);
-    if(v<=0){
-      decayEl.textContent='Llama extinguida (0%) · Completa 1 min en Costa para reencender tu racha';
+    if(v<=8){
+      decayEl.textContent='Mínimo 5% · Nunca se apaga del todo';
     }else if(v<35){
-      decayEl.textContent='Brasa crítica (-2%/h) · Se apaga en '+hrsLeft+' h y perderás tu racha de '+(S.days||1)+' días';
+      decayEl.textContent='Brasa baja (-2%/h) · Mínimo 5% (nunca se apaga)';
     }else{
-      decayEl.textContent='Entropía activa: -2% / h · Se apaga en '+hrsLeft+' h si hoy la abandonas';
+      decayEl.textContent='-2% / h · Mínimo 5% (nunca se apaga)';
     }
   }
   const evoEl=$('pebEvolutionBadge');
   if(evoEl){
     const dCount=S.days||1;
-    evoEl.textContent=dCount>=21?'Nivel III · Corona ('+dCount+'d)':(dCount>=7?'Nivel II · Doble Halo ('+dCount+'d)':'Nivel I · Chispa ('+dCount+'d)');
+    evoEl.textContent=dCount>=21?'Nivel III · Corona ('+dCount+'d)':(dCount>=7?'Nivel II · Doble Halo ('+dCount+'d)':'Nivel I · Chispa ('+dCount+'d)');
   }
 
   if($('pebHint')){
@@ -8885,7 +8926,6 @@ function closeExtModal(){
 }
 $('extClose').onclick=closeExtModal;
 $('extModal').addEventListener('click',e=>{if(e.target===$('extModal'))closeExtModal()});
-if($('topProfileBtn'))$('topProfileBtn').onclick=()=>switchMainView('v-profile');
 if($('mastheadProfileTrigger')){
   $('mastheadProfileTrigger').onclick=()=>switchMainView('v-profile');
   $('mastheadProfileTrigger').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();switchMainView('v-profile');}};

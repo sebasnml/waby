@@ -253,9 +253,9 @@ h1{font-family:var(--serif);font-weight:500;font-size:clamp(28px,7vw,36px);line-
   100%{background-position:0% 50%}
 }
 .tabs{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:4px;
-  background:var(--card);border:1px solid var(--glass-border);
-  border-radius:12px;padding:4px;margin-bottom:14px;box-shadow:var(--glass-spec);
+  display:grid;grid-template-columns:repeat(3,1fr);gap:6px;
+  background:transparent;border:none;border-bottom:1px solid var(--rule);
+  border-radius:0;padding:0 0 10px;margin-bottom:16px;box-shadow:none;
 }
 .tab{
   background:none;border:1.5px solid transparent;min-height:44px;padding:6px 4px;
@@ -333,7 +333,7 @@ h1{font-family:var(--serif);font-weight:500;font-size:clamp(28px,7vw,36px);line-
 .spirit-opt.on{border-color:var(--ink)}
 .spirit-opt.on .ck{background:var(--ink);border-color:var(--ink)}
 .spirit-opt small{display:block;font-family:var(--sans);font-size:11.5px;color:var(--muted);margin-top:2px}
-.sig{background:var(--paper);border:1px solid var(--rule);padding:16px 18px;border-radius:20px;margin-bottom:14px;min-height:118px;cursor:pointer}
+.sig{background:transparent;border:none;border-bottom:1px solid var(--rule);padding:14px 2px 16px;border-radius:0;margin-bottom:14px;min-height:96px;cursor:pointer;box-shadow:none}
 .sig .m{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;display:flex;justify-content:space-between;font-weight:600}
 .sig q{display:block;font-family:var(--serif);font-size:19.5px;line-height:1.3;font-style:normal;quotes:none;margin-bottom:8px;color:var(--ink)}
 .sig p{font-size:13.5px;line-height:1.52;color:var(--muted)}
@@ -534,12 +534,12 @@ input[type=range]{width:100%;accent-color:var(--crimson);cursor:pointer;min-heig
 .stats{display:grid;grid-template-columns:repeat(3,1fr);margin-top:12px;padding-top:8px;border-top:none;text-align:center}
 .stats b{display:block;font-family:var(--serif);font-size:28px;font-weight:500}
 .stats span{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-.clock{border:1px solid var(--rule);background:var(--paper);padding:12px 16px;border-radius:18px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);position:relative;overflow:hidden}
-.clock.urgent{border-color:var(--crimson);animation:pulseUrgent 2s infinite}
+.clock{border:none;border-bottom:1px solid var(--rule);background:transparent;padding:12px 2px;border-radius:0;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);position:relative;overflow:hidden;box-shadow:none}
+.clock.urgent{border-bottom-color:var(--crimson)}
 .clock.urgent b{color:var(--crimson)}
 @keyframes pulseUrgent{0%,100%{box-shadow:0 0 0 0 rgba(158,27,50,0.25)}50%{box-shadow:0 0 0 6px rgba(158,27,50,0)}}
 .clock b{font-family:var(--serif);font-size:26px;letter-spacing:.03em;color:var(--ink);font-weight:500;font-variant-numeric:tabular-nums}
-.clock i{position:absolute;left:0;bottom:0;height:2px;background:var(--crimson);width:0}
+.clock i{position:absolute;left:0;bottom:0;height:1.5px;background:var(--crimson);width:0}
 .line{width:100%;border:1px solid var(--rule);border-radius:14px;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:17px;font-style:normal;padding:9px 13px;outline:none;transition:border-color .2s;min-height:44px}
 .line:focus{border-color:var(--ink)}
 
@@ -592,8 +592,8 @@ input[type=range]{width:100%;accent-color:var(--crimson);cursor:pointer;min-heig
 .sea .gauge small{display:block;font-family:var(--serif);font-style:italic;font-size:15px;letter-spacing:.01em;text-transform:none;opacity:.94;margin-top:5px}
 .bmode{
   display:grid;grid-template-columns:repeat(4,1fr);gap:6px;align-items:center;
-  margin-bottom:10px;background:var(--wash);padding:5px;border-radius:12px;
-  border:1px solid var(--rule);
+  margin-bottom:10px;background:transparent;padding:4px 0 10px;border-radius:0;
+  border:none;border-bottom:1px solid var(--rule);
 }
 .bmode button{
   background:transparent;border:1px solid transparent;min-height:40px;height:40px;
@@ -636,13 +636,13 @@ input[type=range]{width:100%;accent-color:var(--crimson);cursor:pointer;min-heig
    DIARIO BIOPSICOSOCIAL Y CICLO HORMONAL (CLUE BAYESIANO)
    ========================================================= */
 .retract-toggle{
-  width:100%;min-height:46px;display:flex;justify-content:space-between;align-items:center;
-  background:var(--card);border:1px solid var(--glass-border);border-radius:14px;
-  padding:12px 14px;margin-bottom:10px;cursor:pointer;color:var(--ink);
+  width:100%;min-height:42px;display:flex;justify-content:space-between;align-items:center;
+  background:transparent;border:none;border-bottom:1px solid var(--rule);border-radius:0;
+  padding:10px 2px;margin-bottom:10px;cursor:pointer;color:var(--ink);
   font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;
-  box-shadow:var(--glass-spec);transition:border-color .2s;text-align:left;gap:10px;
+  box-shadow:none;transition:border-color .2s;text-align:left;gap:10px;
 }
-.retract-toggle:hover{border-color:var(--ink)}
+.retract-toggle:hover{border-bottom-color:var(--ink)}
 .retract-toggle b{font-family:var(--serif);font-style:normal;font-size:15px;letter-spacing:0;text-transform:none;font-weight:400;color:var(--crimson);white-space:nowrap}
 .retract-body{overflow:hidden;transition:all .25s ease;margin-bottom:12px}
 .retract-body[hidden]{display:none}
@@ -652,8 +652,8 @@ input[type=range]{width:100%;accent-color:var(--crimson);cursor:pointer;min-heig
 .mode-sheet{display:flex;flex-wrap:wrap;gap:6px;margin:-2px 0 10px;animation:fadeUp .2s ease}
 .mode-sheet[hidden]{display:none}
 .cycle-card{
-  background:var(--card);border:1px solid var(--rule);border-radius:16px;
-  padding:16px;margin-bottom:12px;
+  background:transparent;border:none;border-bottom:1px solid var(--rule);border-radius:0;
+  padding:12px 2px 16px;margin-bottom:12px;
   box-shadow:none;
 }
 .cycle-hero{display:flex;align-items:center;gap:14px;margin-bottom:14px}
@@ -669,7 +669,7 @@ input[type=range]{width:100%;accent-color:var(--crimson);cursor:pointer;min-heig
 .cycle-hero-txt strong{display:block;font-family:var(--serif);font-size:21px;font-weight:500;line-height:1.15;color:var(--ink)}
 .cycle-hero-txt p{font-size:13px;line-height:1.5;color:var(--muted);margin-top:5px}
 .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
-.info-box{background:var(--paper);border:1px solid var(--rule);border-radius:12px;padding:10px 12px;min-width:0}
+.info-box{background:transparent;border:none;border-bottom:1px solid var(--rule);border-radius:0;padding:8px 2px 10px;min-width:0}
 .info-box small,.info-item small{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:4px;line-height:1.3}
 .info-box b,.info-item b{display:block;font-family:var(--serif);font-size:17.5px;font-weight:500;line-height:1.2;color:var(--ink)}
 .info-box em,.info-item em{display:block;font-style:normal;font-size:12px;line-height:1.4;color:var(--muted);margin-top:3px}
@@ -685,7 +685,7 @@ input[type=range]{width:100%;accent-color:var(--crimson);cursor:pointer;min-heig
 .male-top b{display:block;font-family:var(--serif);font-size:20px;font-weight:500;line-height:1.2}
 .fine{font-family:var(--serif);font-style:normal;font-size:12.5px;color:var(--muted);line-height:1.45;margin-top:10px}
 
-.cal{background:var(--card);border:1px solid var(--rule);border-radius:16px;padding:14px 12px 12px;box-shadow:none}
+.cal{background:transparent;border:none;border-bottom:1px solid var(--rule);border-radius:0;padding:10px 2px 14px;box-shadow:none}
 .cal-intro{font-family:var(--serif);font-size:15px;line-height:1.45;color:var(--ink);margin:0 2px 10px}
 .cal-head{display:flex;justify-content:space-between;align-items:center;margin:0 2px 10px}
 .cal-head strong{font-family:var(--serif);font-weight:500;font-size:18px;text-transform:capitalize}
@@ -809,7 +809,7 @@ input[type=range]{width:100%;accent-color:var(--crimson);cursor:pointer;min-heig
 }
 .chip.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
 .chip.plus-chip{border-style:dashed;color:var(--crimson);font-weight:600;background:var(--wash)}
-.extra-box{margin-top:8px;padding:12px;background:var(--paper);border:1px solid var(--rule);border-radius:18px;animation:fadeUp .2s ease}
+.extra-box{margin-top:8px;padding:12px 2px;background:transparent;border:none;border-bottom:1px solid var(--rule);border-radius:0;animation:fadeUp .2s ease}
 .extra-box[hidden]{display:none}
 
 textarea{
@@ -836,7 +836,7 @@ textarea::placeholder{font-style:normal;color:var(--muted);opacity:.68}
 .jtag{font-size:12px;font-family:var(--serif);background:var(--paper);border:1px solid var(--rule);padding:3px 10px;border-radius:12px;color:var(--ink)}
 .journal-theory{font-size:12.5px;line-height:1.5;color:var(--muted);border-top:none;padding-top:4px;margin-top:2px}
 
-.wk{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center;margin-bottom:8px;font-size:11px;letter-spacing:.12em;color:var(--muted);background:var(--paper);padding:10px 6px;border-radius:18px;border:1px solid var(--rule)}
+.wk{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center;margin-bottom:8px;font-size:11px;letter-spacing:.12em;color:var(--muted);background:transparent;padding:10px 2px;border-radius:0;border:none;border-bottom:1px solid var(--rule)}
 .wk b{display:block;font-family:var(--serif);font-size:22px;color:var(--crimson);font-weight:400;height:28px}
 .wk .td b{border-bottom:2px solid var(--crimson)}.wk .fu{opacity:.35}
 .ins{font-family:var(--serif);font-style:italic;color:var(--muted);font-size:14.5px;text-align:center;margin:12px 0;line-height:1.45}
@@ -846,10 +846,10 @@ textarea::placeholder{font-style:normal;color:var(--muted);opacity:.68}
    VISTA 3: CÍRCULO Y PEBETERO (CO-REGULACIÓN Y BLUR BeReal)
    ========================================================= */
 .stories-bar{
-  display:flex;gap:13px;overflow-x:auto;padding:12px 14px;margin-bottom:12px;
-  background:var(--card);border:1px solid var(--rule);
+  display:flex;gap:13px;overflow-x:auto;padding:8px 2px 14px;margin-bottom:12px;
+  background:transparent;border:none;border-bottom:1px solid var(--rule);
   box-shadow:none;
-  border-radius:14px;scrollbar-width:none;align-items:center;
+  border-radius:0;scrollbar-width:none;align-items:center;
 }
 .stories-bar::-webkit-scrollbar{display:none}
 .story{
@@ -939,31 +939,32 @@ body.public-view .pub-view.on{display:block}
 .diary-entry .journal-quote{font-size:14.5px}
 .diary-read{font-family:var(--serif);font-style:italic;font-size:12.5px;color:var(--gold);margin-top:6px}
 .journal-card{
-  background:var(--paper);
-  border:1px solid var(--rule);
-  border-radius:20px;
-  padding:16px 18px;
-  margin-bottom:12px;
-  box-shadow:0 8px 24px -18px rgba(35,31,29,0.05);
+  background:transparent;
+  border:none;
+  border-bottom:1px solid var(--rule);
+  border-radius:0;
+  padding:16px 2px;
+  margin-bottom:4px;
+  box-shadow:none;
   transition:transform .2s ease, border-color .2s ease;
   position:relative;
   animation:fadeUp .25s ease;
 }
-/* Cada publicación del Círculo en una tarjeta blanca limpia, sin líneas horizontales encimadas */
+/* Cada publicación del Círculo sin recuadro de 4 lados: flujo limpio con 1 sola línea divisoria como X / Twitter */
 .wavy-card{
   cursor:pointer;
-  background:var(--paper);
-  border:1px solid var(--rule);
-  border-radius:20px;
-  padding:16px 18px;
-  margin-bottom:12px;
-  box-shadow:0 8px 24px -18px rgba(35,31,29,0.05);
+  background:transparent;
+  border:none;
+  border-bottom:1px solid var(--rule);
+  border-radius:0;
+  padding:16px 2px;
+  margin-bottom:4px;
+  box-shadow:none;
 }
 @media(hover:hover){
   .wavy-card:hover,
   .journal-card:hover{
-    transform:translateY(-1px);
-    border-color:rgba(35,31,29,0.18);
+    border-bottom-color:rgba(35,31,29,0.22);
   }
 }
 
@@ -1082,12 +1083,12 @@ body.public-view .pub-view.on{display:block}
 
 /* Vela (Pebetero) */
 .pd{
-  position:relative;overflow:hidden;border-radius:20px;margin-bottom:14px;
-  padding:16px 18px 18px;text-align:center;color:var(--ink);
+  position:relative;overflow:hidden;border-radius:0;margin-bottom:14px;
+  padding:16px 4px 18px;text-align:center;color:var(--ink);
+  border:none;border-bottom:1px solid var(--rule);
   background:
-    radial-gradient(90% 60% at 50% 36%,color-mix(in srgb, var(--relic,#8A8578) 42%, transparent) 0%,transparent 64%),
-    linear-gradient(180deg,var(--card-solid) 0%,var(--wash) 100%);
-  box-shadow:var(--glass-spec),0 22px 44px -28px color-mix(in srgb, var(--relic,#8A8578) 45%, transparent);
+    radial-gradient(90% 60% at 50% 36%,color-mix(in srgb, var(--relic,#8A8578) 32%, transparent) 0%,transparent 64%);
+  box-shadow:none;
 }
 .peb-top{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600}
 .peb-chip{display:inline-flex;align-items:center;gap:7px;padding:5px 11px;border-radius:30px;background:var(--card);border:1px solid var(--glass-border);letter-spacing:.10em;white-space:nowrap}
@@ -1117,7 +1118,7 @@ body.public-view .pub-view.on{display:block}
 .peb-actions .btn.soft:hover{border-color:var(--ink)}
 .pl{max-height:100px;overflow:auto;font-size:12px;color:var(--muted);margin-bottom:14px}
 .pl div{padding:5px 0;border-bottom:1px dashed var(--rule)}
-.q{display:flex;justify-content:space-between;gap:10px;align-items:center;min-height:58px;padding:12px 14px;border:1px solid var(--rule);border-radius:12px;margin-bottom:8px;cursor:pointer;background:var(--card);width:100%;text-align:left;color:var(--ink);font-family:var(--sans)}
+.q{display:flex;justify-content:space-between;gap:10px;align-items:center;min-height:54px;padding:12px 2px;border:none;border-bottom:1px solid var(--rule);border-radius:0;margin-bottom:4px;cursor:pointer;background:transparent;width:100%;text-align:left;color:var(--ink);font-family:var(--sans)}
 .q.done{background:var(--wash);color:var(--muted)}.q.done strong{text-decoration:line-through}
 .q strong{font-family:var(--serif);font-size:17px;font-weight:600}.q small{display:block;font-size:12.5px;color:var(--muted);margin-top:2px}
 .q span{font-size:11px;letter-spacing:.10em;color:var(--ok);font-weight:600;white-space:nowrap;padding:5px 10px;border-radius:20px;background:rgba(157,181,154,.18)}
@@ -1214,11 +1215,11 @@ body.public-view .pub-view.on{display:block}
   color:var(--ink);font-weight:600;
 }
 
-.prem{border:1px solid var(--rule);background:var(--paper);padding:18px 16px;border-radius:22px;margin:14px 0;box-shadow:0 10px 28px -18px rgba(35,31,29,0.05)}
+.prem{border:none;border-bottom:1px solid var(--rule);background:transparent;padding:16px 2px;border-radius:0;margin:14px 0;box-shadow:none}
 .prem .tag{display:inline-block;background:rgba(122,154,130,0.12);color:var(--ok);font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:999px;font-weight:600;margin-bottom:6px}
 .prem h3{font-family:var(--serif);font-size:20px;font-weight:500;margin-bottom:4px;color:var(--ink)}
 .prem p{font-size:12.5px;color:var(--muted);line-height:1.5;margin-bottom:10px}
-.rep{background:var(--paper);border:1px solid var(--rule);padding:12px 14px;border-radius:16px;margin-top:10px;font-size:12.5px}
+.rep{background:transparent;border:none;border-top:1px solid var(--rule);padding:12px 2px;border-radius:0;margin-top:10px;font-size:12.5px}
 .rep[hidden]{display:none}
 .rep div{padding:6px 0;border-bottom:none;display:flex;justify-content:space-between;gap:8px;align-items:center}
 .rep div:last-child{border:none}
@@ -1226,9 +1227,9 @@ body.public-view .pub-view.on{display:block}
 /* Switch iOS para Desarrollador / Demo */
 .dev-card{
   display:flex;justify-content:space-between;align-items:center;gap:14px;
-  background:var(--paper);
-  border:1px solid var(--rule);
-  padding:14px 16px;border-radius:18px;margin-top:18px;
+  background:transparent;
+  border:none;border-bottom:1px solid var(--rule);
+  padding:14px 2px;border-radius:0;margin-top:18px;
 }
 .dev-card strong{font-family:var(--serif);font-size:17.5px;font-weight:600;display:flex;align-items:center;gap:8px}
 .dev-card span{font-size:12px;color:var(--muted);display:block;margin-top:3px;line-height:1.4}
@@ -1296,8 +1297,7 @@ body.public-view .pub-view.on{display:block}
 .plan-card b{font-family:var(--serif);font-size:24px;color:var(--crimson);font-weight:600}
 .plan-card small{font-size:12px;color:var(--muted);display:block;margin-top:3px}
 
-/* Barra Inferior: píldora traslúcida estilo WhatsApp iOS — permite leer con claridad
-   el texto e imágenes que pasan por detrás sin empañarlos en un bloque opaco. */
+/* Barra Inferior: píldora traslúcida estilo WhatsApp iOS + encogimiento dinámico estilo Instagram al scrollear */
 .bnav{
   position:fixed;left:18px;right:18px;bottom:calc(env(safe-area-inset-bottom,0px) + 10px);z-index:85;
   background:color-mix(in srgb, var(--paper) 54%, transparent);
@@ -1308,17 +1308,57 @@ body.public-view .pub-view.on{display:block}
   box-shadow:0 4px 18px -8px rgba(0,0,0,0.08);
   padding:4px 6px;
   display:flex;justify-content:center;
+  transform-origin:center bottom;
+  transition:transform .32s cubic-bezier(.22,1,.36,1), padding .32s cubic-bezier(.22,1,.36,1), opacity .28s ease;
+}
+.bnav.bnav-compact{
+  transform:translateY(4px) scale(0.86);
+  padding:2px 5px;
+  opacity:0.88;
 }
 .bnav-inner{width:100%;max-width:600px;display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
+/* Todas las letras e ilustraciones siempre en negro (o blanco en modo nocturno) para que nunca se pierdan.
+   Lo único que indica en qué pestaña estás es el color en la ilustración activa. */
 .bnav-btn{
-  background:none;border:none;min-height:48px;padding:6px 4px;cursor:pointer;color:var(--muted);
+  background:none;border:none;min-height:48px;padding:6px 4px;cursor:pointer;color:var(--ink);
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-size:11px;
-  letter-spacing:.10em;text-transform:uppercase;font-family:var(--sans);
-  transition:color .18s,transform .18s;border-radius:10px;
+  letter-spacing:.10em;text-transform:uppercase;font-family:var(--sans);font-weight:500;
+  transition:transform .2s cubic-bezier(.22,1,.36,1), min-height .28s ease, padding .28s ease;border-radius:10px;
 }
-.bnav-btn svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s}
-.bnav-btn.on{color:var(--ink);font-weight:600}
-.bnav-btn.on svg{stroke:var(--crimson);stroke-width:2;transform:translateY(-1px)}
+.bnav.bnav-compact .bnav-btn{
+  min-height:38px;padding:3px 2px;gap:2px;font-size:9.5px;
+}
+.bnav-btn svg{
+  width:21px;height:21px;stroke:var(--ink);fill:none;stroke-width:1.65;
+  stroke-linecap:round;stroke-linejoin:round;
+  transition:transform .28s cubic-bezier(.22,1,.36,1), stroke .2s ease, width .28s ease, height .28s ease;
+  transform-origin:center center;
+}
+.bnav.bnav-compact .bnav-btn svg{width:18px;height:18px}
+.bnav-btn.on{color:var(--ink);font-weight:500}
+.bnav-btn.on svg{stroke:var(--crimson);stroke-width:1.95}
+@keyframes bnavLeafSway{
+  0%,100%{transform:translateY(-1px) rotate(0deg)}
+  35%{transform:translateY(-2px) rotate(-5deg)}
+  70%{transform:translateY(-1.5px) rotate(4deg)}
+}
+@keyframes bnavWaveFloat{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-2.2px)}
+}
+@keyframes bnavPulseWave{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.09)}
+}
+@keyframes bnavCompassTilt{
+  0%,100%{transform:rotate(0deg)}
+  35%{transform:rotate(8deg)}
+  70%{transform:rotate(-6deg)}
+}
+.bnav-btn[data-v="v-today"].on svg{animation:bnavLeafSway 3.6s ease-in-out infinite}
+.bnav-btn[data-v="v-breathe"].on svg{animation:bnavWaveFloat 3.2s ease-in-out infinite}
+.bnav-btn[data-v="v-circle"].on svg{animation:bnavPulseWave 3s ease-in-out infinite}
+.bnav-btn[data-v="v-clinic"].on svg{animation:bnavCompassTilt 3.8s ease-in-out infinite}
 
 .search-bar{display:flex;align-items:center;gap:8px;background:var(--paper);border:1px solid var(--ink);padding:8px 12px;border-radius:12px;margin-bottom:12px;min-height:46px}
 .search-bar span{font-family:var(--serif);font-style:italic;font-size:18px;color:var(--muted)}
@@ -1326,7 +1366,7 @@ body.public-view .pub-view.on{display:block}
 .user-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px 4px;border-bottom:1px solid var(--rule);cursor:pointer}
 .user-row:hover{background:var(--wash)}
 
-details{margin-top:12px;font-size:12.5px;color:var(--muted);border:1px solid var(--rule);background:var(--paper);border-radius:20px;padding:12px 16px}
+details{margin-top:12px;font-size:12.5px;color:var(--muted);border:none;border-bottom:1px solid var(--rule);background:transparent;border-radius:0;padding:10px 2px}
 summary{cursor:pointer;letter-spacing:.08em;text-transform:uppercase;font-size:11px;font-weight:600;color:var(--ink);min-height:32px;display:flex;align-items:center;justify-content:space-between;list-style:none}
 summary::-webkit-details-marker{display:none}
 .note{margin-top:16px;text-align:center;font-family:var(--serif);font-style:italic;font-size:13.5px;color:var(--muted);line-height:1.5}
@@ -1338,8 +1378,8 @@ summary::-webkit-details-marker{display:none}
    ========================================================= */
 .cmd-hero{
   display:grid;grid-template-columns:118px 1fr;gap:18px;align-items:center;
-  background:var(--paper);border:1px solid var(--rule);border-radius:24px;padding:20px 18px;
-  box-shadow:0 12px 32px -18px rgba(35,31,29,0.06);margin-bottom:16px;
+  background:transparent;border:none;border-bottom:1px solid var(--rule);border-radius:0;padding:14px 2px 18px;
+  box-shadow:none;margin-bottom:16px;
 }
 @media(max-width:420px){.cmd-hero{grid-template-columns:1fr;text-align:center}.cmd-ring-wrap{margin:0 auto}}
 .cmd-ring-wrap{width:clamp(104px,30vw,118px);height:auto;aspect-ratio:1/1;position:relative;flex-shrink:0;max-width:100%}
@@ -1348,12 +1388,12 @@ summary::-webkit-details-marker{display:none}
 .cmd-ring-ctr b{font-family:var(--serif);font-size:clamp(32px,9.5vw,38px);font-weight:400;line-height:1;color:var(--ink)}
 .cmd-ring-ctr small{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ok);font-weight:600;margin-top:3px}
 .cmd-kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:12px}
-.cmd-kpi{background:var(--wash);border:1px solid transparent;border-radius:14px;padding:10px 12px;text-align:left}
+.cmd-kpi{background:transparent;border:none;border-bottom:1px solid var(--rule);border-radius:0;padding:8px 2px;text-align:left}
 .cmd-kpi small{display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:500}
 .cmd-kpi b{font-family:var(--serif);font-size:19px;font-weight:500;color:var(--ink);display:block;margin-top:2px}
 .cmd-chart-box{
-  background:var(--paper);border:1px solid var(--rule);border-radius:22px;
-  padding:18px 16px 14px;margin-bottom:16px;box-shadow:0 10px 28px -18px rgba(35,31,29,0.05);
+  background:transparent;border:none;border-bottom:1px solid var(--rule);border-radius:0;
+  padding:14px 2px 16px;margin-bottom:16px;box-shadow:none;
 }
 .cmd-chart-hd{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:10px;flex-wrap:wrap}
 .cmd-chart-hd strong{font-family:var(--serif);font-size:20px;font-weight:500;color:var(--ink);letter-spacing:-.01em}
@@ -1363,9 +1403,9 @@ summary::-webkit-details-marker{display:none}
 .cmd-matrix{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
 @media(max-width:440px){.cmd-matrix{grid-template-columns:1fr}}
 .cmd-cell{
-  background:var(--paper);border:1px solid var(--rule);border-radius:20px;
-  padding:16px;box-shadow:0 8px 24px -16px rgba(35,31,29,0.05);position:relative;overflow:hidden;
-  display:flex;flex-direction:column;justify-content:space-between;height:100%;min-height:156px;
+  background:transparent;border:none;border-bottom:1px solid var(--rule);border-radius:0;
+  padding:12px 2px 14px;box-shadow:none;position:relative;overflow:hidden;
+  display:flex;flex-direction:column;justify-content:space-between;height:100%;min-height:136px;
 }
 .cmd-cell small{display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ok);font-weight:600;margin-bottom:5px}
 .cmd-cell b{display:block;font-family:var(--serif);font-size:20px;font-weight:500;color:var(--ink);line-height:1.18}
@@ -1505,8 +1545,8 @@ summary::-webkit-details-marker{display:none}
 .bento-val{font-size:11.5px;color:var(--muted);font-family:var(--serif);font-style:italic;display:block;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .bento-card.has .bento-val{color:var(--ok);font-weight:500}
 .bento-drawer{
-  background:var(--wash);border:1px solid var(--glass-border);border-radius:14px;
-  padding:12px 14px;margin-bottom:14px;animation:fadeUp .2s ease;box-shadow:var(--glass-spec);
+  background:transparent;border:none;border-bottom:1px solid var(--rule);border-radius:0;
+  padding:12px 2px 14px;margin-bottom:14px;animation:fadeUp .2s ease;box-shadow:none;
   grid-column: 1 / -1;
 }
 .bento-drawer[hidden]{display:none}
@@ -1668,8 +1708,8 @@ summary::-webkit-details-marker{display:none}
 /* Barra externa limpia para Controles de Costa (Fuera de la ilustración) */
 .coast-controls-bar{
   display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;
-  margin-bottom:12px;padding:8px 12px;border-radius:14px;
-  background:var(--wash);border:1px solid var(--glass-border);box-shadow:var(--glass-spec);
+  margin-bottom:12px;padding:8px 2px 12px;border-radius:0;
+  background:transparent;border:none;border-bottom:1px solid var(--rule);box-shadow:none;
 }
 .coast-ctrl-btn{
   display:inline-flex;align-items:center;gap:6px;
@@ -1694,18 +1734,31 @@ summary::-webkit-details-marker{display:none}
 /* Círculo + Vincular anclado al extremo derecho de la barra de historias */
 .story.add-right{margin-left:auto}
 
-/* Barra Flotante Sticky para Publicar en Círculo (Blanco Pulcritud estilo WhatsApp / X) */
+/* Barra de escribir en Círculo SIEMPRE anclada encima de la barra inferior #bnav,
+   deslizándose hacia abajo al scrollear abajo y subiendo al scrollear arriba */
 .circle-sticky-wrap{
-  position:sticky;bottom:76px;z-index:35;width:100%;margin-top:14px;
+  position:fixed;
+  left:18px;right:18px;
+  bottom:calc(env(safe-area-inset-bottom,0px) + 70px);
+  max-width:600px;margin:0 auto;
+  z-index:80;
+  transition:transform .34s cubic-bezier(.22,1,.36,1), opacity .26s ease;
 }
-#v-circle:has(#circleComposerDrawer:not([hidden])) .circle-sticky-wrap{z-index:45}
+.circle-sticky-wrap.composer-hidden{
+  transform:translateY(calc(100% + 26px));
+  opacity:0;
+  pointer-events:none;
+}
+#v-circle:has(#circleComposerDrawer:not([hidden])) .circle-sticky-wrap{z-index:84}
 .circle-composer{
   width:100%;
-  background:var(--paper);
+  background:color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter:blur(8px) saturate(130%);
+  -webkit-backdrop-filter:blur(8px) saturate(130%);
   border:1px solid var(--rule);
   border-radius:24px;
-  padding:8px 10px;
-  box-shadow:0 12px 32px -12px rgba(24,20,17,0.12);
+  padding:6px 8px;
+  box-shadow:0 8px 24px -12px rgba(24,20,17,0.10);
 }
 .daily-prompt-line{display:none}
 .circle-composer-row{display:flex;align-items:center;gap:6px}
@@ -1947,7 +2000,7 @@ summary::-webkit-details-marker{display:none}
         </div>
       </div>
 
-      <textarea id="ni" class="echo-input" placeholder="Escribe una línea sobre tu día…"></textarea>
+      <textarea id="ni" class="echo-input" placeholder="Escribe una línea sobre tu día"></textarea>
       <button class="btn" style="width:100%" id="na">Guardar registro del día</button>
       <p class="ins" id="ins"></p>
       <div id="nb"></div>
@@ -2308,22 +2361,22 @@ summary::-webkit-details-marker{display:none}
       <div class="circle-composer" id="circleComposer">
         <div class="daily-prompt-line" id="dailyPromptLine"></div>
         <div class="circle-composer-row">
-          <textarea class="echo-input" id="echoInput" maxlength="200" rows="1" placeholder="Escribe una nota…"></textarea>
+          <textarea class="echo-input" id="echoInput" maxlength="200" rows="1" placeholder="Escribe una nota"></textarea>
           <button type="button" class="echo-music-btn" id="toggleInlineSongBtn" aria-label="Buscar canción" title="Adjuntar canción">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 17.5V6.2c0-.7.5-1.3 1.2-1.4l7.4-1.3c.8-.1 1.4.5 1.4 1.3v10.7"/><circle cx="6.5" cy="17.5" r="2.5"/><circle cx="16.5" cy="15.5" r="2.5"/><path d="M9 9.5l10-1.7"/></svg>
           </button>
           <button type="button" class="echo-send-btn" id="postEchoBtn" aria-label="Publicar nota">↑</button>
         </div>
-        <div id="inlineSongSelected" hidden style="display:flex;align-items:center;gap:10px;background:var(--paper);border:1px solid var(--rule);border-radius:14px;padding:7px 10px;margin-top:8px">
+        <div id="inlineSongSelected" hidden style="display:flex;align-items:center;gap:10px;background:transparent;border:none;border-top:1px solid var(--rule);border-radius:0;padding:8px 2px 2px;margin-top:8px">
           <img id="inlineSongArt" src="" alt="" style="width:36px;height:36px;border-radius:8px;object-fit:cover;flex-shrink:0">
           <span style="flex:1;min-width:0"><strong id="inlineSongTitle" style="font-family:var(--serif);font-size:14.5px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"></strong><small id="inlineSongArtist" style="font-size:11.5px;color:var(--muted)"></small></span>
           <button type="button" id="inlineSongClear" aria-label="Quitar canción" style="border:none;background:none;font-size:18px;color:var(--muted);cursor:pointer;padding:4px">×</button>
         </div>
         <div class="circle-composer-drawer" id="circleComposerDrawer" hidden>
           <div id="inlineSongBox" hidden style="margin-bottom:8px;display:grid;grid-template-columns:minmax(0,1fr);gap:6px">
-            <div style="display:flex;align-items:center;gap:8px;background:var(--paper);border:1px solid var(--rule);border-radius:14px;padding:6px 12px">
+            <div style="display:flex;align-items:center;gap:8px;background:transparent;border:none;border-bottom:1px solid var(--rule);border-radius:0;padding:4px 2px">
               <span style="font-size:14px;color:var(--ok)">♪</span>
-              <input class="line" id="inlineSongSearch" maxlength="80" placeholder="Busca canción o artista (ej. John Mayer)…" autocomplete="off" style="border:none;background:transparent;padding:4px 0;min-height:32px;font-size:16px">
+              <input class="line" id="inlineSongSearch" maxlength="80" placeholder="Busca canción o artista (ej. John Mayer)" autocomplete="off" style="border:none;background:transparent;padding:4px 0;min-height:32px;font-size:16px">
             </div>
             <div id="inlineSongResults" style="display:grid;grid-template-columns:minmax(0,1fr);gap:6px;max-height:210px;overflow-y:auto"></div>
           </div>
@@ -2346,7 +2399,7 @@ summary::-webkit-details-marker{display:none}
       </div>
       <div class="help-tip" id="helpBio" hidden>Observa cómo se conectan tus emociones, tu descanso y tu ritmo biológico. Todo lo que escribas aquí es privado.</div>
 
-      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px;padding:11px 14px;border-radius:14px;background:var(--wash);box-shadow:var(--glass-spec);flex-wrap:wrap">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px;padding:4px 0 16px;border:none;border-bottom:1px solid var(--rule);border-radius:0;background:transparent;box-shadow:none;flex-wrap:wrap">
         <div>
           <strong style="font-family:var(--serif);font-size:16px;font-weight:500;display:block">Reflexión libre del día</strong>
           <span style="font-size:11.5px;color:var(--muted)">Lienzo a pantalla completa sin distracciones.</span>
@@ -2429,7 +2482,7 @@ summary::-webkit-details-marker{display:none}
       </div>
 
       <!-- NOTA PERSONAL DE EQUILIBRIO -->
-      <div style="margin-top:14px;padding:18px 16px;background:var(--paper);border:1px solid var(--rule);border-radius:22px;box-shadow:0 10px 28px -18px rgba(35,31,29,0.05)">
+      <div style="margin-top:14px;padding:14px 0 16px;background:transparent;border:none;border-bottom:1px solid var(--rule);border-radius:0;box-shadow:none">
         <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px">
           <span style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ok);font-weight:600">Tu nota de equilibrio</span>
           <button type="button" class="btn ghost" id="magicSummaryBtn" style="min-height:34px;padding:5px 12px;font-size:11px;border-radius:20px">Copiar nota</button>
@@ -2514,7 +2567,7 @@ summary::-webkit-details-marker{display:none}
         <span>Tu Suscripción y Acceso</span>
         <span id="profilePlanBadge" style="color:var(--gold);font-weight:700">Plan Básico</span>
       </div>
-      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;background:var(--wash);padding:14px 16px;border-radius:14px;border:1px solid var(--rule);margin-bottom:16px">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;background:transparent;padding:4px 0 16px;border-radius:0;border:none;border-bottom:1px solid var(--rule);margin-bottom:16px">
         <div>
           <strong id="subCardTitle" style="font-family:var(--serif);font-size:19px;display:block">Wavy Básico (Gratuito)</strong>
           <span id="subCardDesc" style="font-size:12.5px;color:var(--muted)">Desbloquea los 10 hábitos, todos los ritmos con audio, 19 emociones, 11 paletas y exportación clínica con Wavy Pro.</span>
@@ -2535,12 +2588,12 @@ summary::-webkit-details-marker{display:none}
 
       <div class="hd">
         <span>Tarjeta de Presencia</span>
-        <span>Estilos editoriales</span>
+        <span>Instagram &amp; Pinterest</span>
       </div>
 
       <div class="seal-carousel-nav" id="sealCarouselNav">
-        <button type="button" class="seal-dot-btn on" data-slide="0">I · Tarjeta Editorial Clásica</button>
-        <button type="button" class="seal-dot-btn" data-slide="1">II · Pase Tipográfico Minimalista</button>
+        <button type="button" class="seal-dot-btn on" data-slide="0">I · Sello Editorial</button>
+        <button type="button" class="seal-dot-btn" data-slide="1">II · Story Lyrics</button>
       </div>
 
       <div class="tilt-stage" id="tiltStage">
@@ -2583,7 +2636,7 @@ summary::-webkit-details-marker{display:none}
           <span>Frase en tu sello</span>
           <span id="sealCharCounter">0 / 90 caracteres</span>
         </label>
-        <input class="line" id="myBio" maxlength="90" placeholder="Escribe tu frase personal para el sello (máx. 90 caracteres)…">
+        <input class="line" id="myBio" maxlength="90" placeholder="Escribe tu frase personal para el sello (máx. 90 caracteres)">
       </div>
 
       <div class="sl">
@@ -2616,7 +2669,7 @@ summary::-webkit-details-marker{display:none}
         <small style="color:var(--muted)">Buscar canción o artista</small>
       </button>
 
-      <div id="scConfigBox" hidden style="background:var(--paper);border:1px solid var(--rule);border-radius:18px;padding:14px;margin-bottom:14px;animation:fadeUp .2s ease">
+      <div id="scConfigBox" hidden style="background:transparent;border:none;border-bottom:1px solid var(--rule);border-radius:0;padding:8px 0 14px;margin-bottom:14px;animation:fadeUp .2s ease">
         <label style="display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:6px">1. Pregunta emocional</label>
         <select id="scQuestionSelect" class="sc-select" aria-label="Pregunta emocional para tu cápsula sonora">
           <option value="Qué me motiva hoy">1. Qué me motiva hoy</option>
@@ -2636,9 +2689,9 @@ summary::-webkit-details-marker{display:none}
         <label style="display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:6px">
           2. Busca tu canción o artista
         </label>
-        <div style="display:flex;align-items:center;gap:8px;background:var(--paper);border:1px solid var(--rule);border-radius:14px;padding:6px 12px;margin-bottom:8px">
+        <div style="display:flex;align-items:center;gap:8px;background:transparent;border:none;border-bottom:1px solid var(--rule);border-radius:0;padding:6px 2px;margin-bottom:8px">
           <svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:var(--ink);fill:none;stroke-width:1.6;flex-shrink:0"><path d="M9 17.5V6.2c0-.7.5-1.3 1.2-1.4l7.4-1.3c.8-.1 1.4.5 1.4 1.3v10.7"/><circle cx="6.5" cy="17.5" r="2.5"/><circle cx="16.5" cy="15.5" r="2.5"/><path d="M9 9.5l10-1.7"/></svg>
-          <input class="line" id="profSongSearch" maxlength="80" placeholder="Busca canción o artista (ej. John Mayer)…" autocomplete="off" style="border:none;background:transparent;padding:4px 0;min-height:32px;font-size:16px">
+          <input class="line" id="profSongSearch" maxlength="80" placeholder="Busca canción o artista (ej. John Mayer)" autocomplete="off" style="border:none;background:transparent;padding:4px 0;min-height:32px;font-size:16px">
         </div>
         <div id="profSongResults" style="display:grid;grid-template-columns:minmax(0,1fr);gap:6px;max-height:210px;overflow-y:auto;margin-bottom:8px"></div>
         <div style="display:flex;justify-content:flex-end">
@@ -2697,12 +2750,12 @@ summary::-webkit-details-marker{display:none}
       </div>
 
       <!-- COPIA DE SEGURIDAD (LOCAL-FIRST) -->
-      <div style="background:var(--wash);border:1px solid var(--glass-border);border-radius:14px;padding:14px;margin-bottom:14px;box-shadow:var(--glass-spec)">
+      <div style="background:transparent;border:none;border-bottom:1px solid var(--rule);border-radius:0;padding:12px 0 16px;margin-bottom:14px;box-shadow:none">
         <div style="margin-bottom:10px">
           <strong style="font-family:var(--serif);font-size:16px;font-weight:500;display:block">Copia de seguridad</strong>
           <span style="font-size:11px;color:var(--muted);line-height:1.45;display:block;margin-top:2px">Tus registros se guardan localmente en este dispositivo en texto plano. Si borras los datos del navegador o pierdes el teléfono, solo esta copia los recupera.</span>
         </div>
-        <div class="row" style="grid-template-columns:1fr 1fr;gap:8px;padding-top:8px;border-top:1px solid var(--rule)">
+        <div class="row" style="grid-template-columns:1fr 1fr;gap:8px;padding-top:8px">
           <button type="button" class="btn ghost" id="exportBackupJsonBtn" style="font-size:11px;padding:8px 10px">Descargar copia</button>
           <label class="btn ghost" style="font-size:11px;padding:8px 10px;text-align:center;cursor:pointer;display:inline-flex;align-items:center;justify-content:center">
             Importar copia
@@ -2776,7 +2829,7 @@ summary::-webkit-details-marker{display:none}
       </div>
       <!-- Versión de la app: sube una por ronda (v18, v19, v20…) para saber
            de un vistazo si la versión publicada ya trae los últimos cambios. -->
-      <div class="cover-version">v24</div>
+      <div class="cover-version">v25</div>
     </div>
   </div>
 </div>
@@ -2862,10 +2915,10 @@ summary::-webkit-details-marker{display:none}
     <div class="eyebrow">CONECTAR SIN SEGUIDORES PÚBLICOS</div>
     <h2 id="dirTitle" style="font-family:var(--serif);font-size:24px;font-weight:500;margin:4px 0 10px">Vincular a mi círculo cercano</h2>
 
-    <div style="padding:12px;border-radius:14px;background:var(--wash);border:1px solid var(--glass-border);margin-bottom:12px">
+    <div style="padding:4px 0 14px;border-radius:0;background:transparent;border:none;border-bottom:1px solid var(--rule);margin-bottom:12px">
       <small style="display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px">Agregar directo por @usuario</small>
       <div class="row" style="grid-template-columns:1fr auto">
-        <input class="line" id="connectAllyInput" maxlength="24" placeholder="Escribe @usuario (ej. natalia)…">
+        <input class="line" id="connectAllyInput" maxlength="24" placeholder="Escribe @usuario (ej. natalia)">
         <button type="button" class="btn" id="connectAllyDirectBtn">Vincular</button>
       </div>
     </div>
@@ -2883,7 +2936,7 @@ summary::-webkit-details-marker{display:none}
 
     <div class="search-bar">
       <span>@</span>
-      <input id="userSearchInput" placeholder="Buscar en tu círculo o especialistas…">
+      <input id="userSearchInput" placeholder="Buscar en tu círculo o especialistas">
     </div>
     <div class="chips" id="searchFilter" style="margin-bottom:12px">
       <button type="button" class="chip on" data-f="all">Todos</button>
@@ -3024,7 +3077,7 @@ summary::-webkit-details-marker{display:none}
     <p style="font-size:13px;color:var(--muted);line-height:1.45;margin-bottom:14px">
       Han concluido su ciclo de respiración mutua. Como gesto de reciprocidad, puedes encender gratuitamente una Vela de Vigilia al 100% en el Pebetero de tu acompañante con un mensaje de gratitud:
     </p>
-    <input class="line" id="coVigilMsgInput" maxlength="90" value="Gracias por sostener este espacio de calma y respirar conmigo hoy." placeholder="Escribe tu mensaje de agradecimiento…" style="margin-bottom:14px;text-align:center">
+    <input class="line" id="coVigilMsgInput" maxlength="90" value="Gracias por sostener este espacio de calma y respirar conmigo hoy." placeholder="Escribe tu mensaje de agradecimiento" style="margin-bottom:14px;text-align:center">
     <button type="button" class="btn gold" id="sendFreeVigilBtn" style="width:100%;border-radius:30px">
       Encender Vela de Vigilia gratuita y agradecer
     </button>
@@ -3065,12 +3118,12 @@ summary::-webkit-details-marker{display:none}
         <div style="display:flex;align-items:center;gap:8px;margin-left:auto">
           <button type="button" class="chip" id="blankSheetVisBtn" style="min-height:34px;padding:6px 12px;font-size:11.5px;display:inline-flex;align-items:center;gap:5px">Privado</button>
           <button type="button" class="chip" id="deleteBlankSheetBtn" hidden style="min-height:34px;padding:6px 12px;font-size:11.5px;color:var(--crimson);border-color:var(--rule)">Eliminar</button>
-          <button type="button" class="btn" id="saveBlankSheetBtn" style="min-height:34px;padding:6px 14px;font-size:11px">Guardar entrada</button>
+          <button type="button" class="btn" id="saveBlankSheetBtn" style="min-height:34px;padding:6px 14px;font-size:11px">Publicar</button>
         </div>
       </div>
-      <span class="blank-sheet-date" id="blankSheetDate">12 - 11 - '26</span>
-      <input class="blank-sheet-title" id="blankSheetTitle" placeholder="Asunto…" maxlength="60">
-      <textarea class="blank-sheet-body" id="blankSheetBody" placeholder="Escritura libre…"></textarea>
+      <span class="blank-sheet-date" id="blankSheetDate">12 · 11 · ’26</span>
+      <input class="blank-sheet-title" id="blankSheetTitle" placeholder="Título" maxlength="60">
+      <textarea class="blank-sheet-body" id="blankSheetBody" placeholder="Escritura libre"></textarea>
       <div class="blank-sheet-foot">
         <span id="blankSheetCharCount">0 caracteres</span>
         <span style="font-family:var(--serif);font-style:italic;color:var(--muted)">Diario íntimo · Espacio seguro en tu equipo</span>
@@ -5054,10 +5107,10 @@ function getDailyCircleQuestion(){
   return DAILY_CIRCLE_QUESTIONS[dayIdx];
 }
 
-/* El recuadro de "Abrir sintonía": el mismo en Círculo y en Costa */
+/* El recuadro de "Abrir sintonía": el mismo en Círculo y en Costa (1 sola línea divisoria inferior) */
 function buildOpenSyncBanner(){
   const b=document.createElement('div');
-  b.style.cssText='display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 13px;margin-bottom:11px;border-radius:14px;background:var(--paper);border:1px solid var(--rule);box-shadow:0 8px 22px -16px rgba(35,31,29,0.05)';
+  b.style.cssText='display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 2px 12px;margin-bottom:11px;border:none;border-bottom:1px solid var(--rule);border-radius:0;background:transparent;box-shadow:none';
   b.innerHTML=
     '<div style="min-width:0;flex:1">'+
       '<strong style="font-family:var(--serif);font-size:15px;font-weight:500;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+(S.openSync?'Tu sintonía está abierta':'¿Respirar en compañía?')+'</strong>'+
@@ -6030,59 +6083,48 @@ window.addEventListener('resize',()=>{updateCircleComposerYield();updateMasthead
 if($('heartSocket'))$('heartSocket').onclick=()=>{const b=$('sosb');if(b)b.click();};
 
 /* =========================================================
-   CÍRCULO · EL COMPOSITOR CEDE EL PASO
-   El recuadro "Dejar una nota o canción en mi círculo" sube
-   flotando (sticky) — eso está perfecto. Pero cuando choca con
-   el último recuadro de arriba (hoy, el de aliados), se BAJA
-   lo que haga falta para no taparlo, dándole prioridad a los
-   textos de aliados. Al scrollear de vuelta, sube a su sitio.
+   BARRA INFERIOR (#bnav) Y COMPOSITOR DE CÍRCULO (.circle-sticky-wrap)
+   - #bnav se encoge sutilmente al scrollear hacia abajo (estilo Instagram)
+     y vuelve a su tamaño natural al scrollear hacia arriba.
+   - El cuadro de texto de Círculo (.circle-sticky-wrap) SIEMPRE está
+     anclado justo encima de #bnav (nunca flotando a media pantalla).
+     Al scrollear hacia abajo se desliza hacia abajo detrás de #bnav para
+     dejar leer el feed sin distracciones; al scrollear hacia arriba (o
+     tocar para escribir) se desliza hacia arriba.
    ========================================================= */
-let circleYieldCur=0;
+let lastWinScrollY=window.scrollY||0;
 function updateCircleComposerYield(){
+  const y=Math.max(0,window.scrollY||0);
+  const dy=y-lastWinScrollY;
+  const bnav=$('bnav');
   const wrap=document.querySelector('#v-circle .circle-sticky-wrap');
-  if(!wrap)return;
-  /* En la pestaña Diario el compositor está escondido (el feed no se ve):
-     no hay nada que ceder, el transform se resetea. */
   const feedPane=$('circleFeedPane');
-  if(feedPane && feedPane.hidden){
-    if(circleYieldCur){wrap.style.transform='';circleYieldCur=0;}
-    return;
-  }
   const vc=$('v-circle');
-  const list=$('circleFeedList');
-  const last=list && list.lastElementChild;
-  if(!vc || !vc.classList.contains('on') || !last){
-    if(circleYieldCur){wrap.style.transform='';circleYieldCur=0;}
-    return;
-  }
-  const wr=wrap.getBoundingClientRect();
-  const lr=last.getBoundingClientRect();
-  const natTop=wr.top-circleYieldCur;
-  /* SIN LÍMITE: el compositor cede hacia abajo lo que haga falta, incluso
-     por DEBAJO de la barra horizontal de iconos (desaparece debajo de
-     ella). La barra nunca se empuja: está fija, arriba de todo (z-index
-     85), y al seguir scrolleando hacia arriba queda arriba del cuadro de
-     aliados. El compositor solo vuelve a aparecer scrolleando hasta abajo,
-     pasando el último cuadro de texto. El último recuadro del feed pinta
-     por encima del compositor (ver CSS), así que sus textos y el botón
-     VINCULAR siempre quedan legibles y nunca los tapa. */
-  const push0=Math.max(0,(lr.bottom+10)-natTop);
-  /* Con el cajón ABIERTO el usuario está escribiendo: el compositor nunca
-     puede quedar escondido debajo de la barra. Se topa el empuje para que
-     el fondo del compositor quede siempre arriba de la barra (con 6 px de
-     aire). Con el cajón cerrado se mantiene el comportamiento sin límite. */
-  let push=push0;
   const dr=$('circleComposerDrawer');
-  if(dr && !dr.hidden){
-    const nav=document.querySelector('.bnav');
-    const navTop=nav?nav.getBoundingClientRect().top:window.innerHeight;
-    const wrapH=wr.bottom-wr.top;
-    const natBottom=natTop+wrapH;
-    const maxPush=Math.max(0,navTop-6-natBottom);
-    push=Math.min(push,maxPush);
+  const composerActive=(dr && !dr.hidden) || (document.activeElement && wrap && wrap.contains(document.activeElement));
+
+  if(wrap){
+    const inCircleFeed=Boolean(vc && vc.classList.contains('on') && (!feedPane || !feedPane.hidden));
+    wrap.hidden=!inCircleFeed;
+    if(!inCircleFeed){
+      wrap.classList.remove('composer-hidden');
+    }else if(composerActive || y<=18){
+      wrap.classList.remove('composer-hidden');
+    }else if(dy>5 && y>28){
+      wrap.classList.add('composer-hidden');
+    }else if(dy<-4){
+      wrap.classList.remove('composer-hidden');
+    }
   }
-  circleYieldCur=push;
-  wrap.style.transform=push>0?('translateY('+push.toFixed(1)+'px)'):'';
+
+  if(bnav){
+    if(y<=18 || dy<-4){
+      bnav.classList.remove('bnav-compact');
+    }else if(dy>5 && y>32){
+      bnav.classList.add('bnav-compact');
+    }
+  }
+  lastWinScrollY=y;
 }
 
 /* El encabezado se difumina conforme el usuario scrollea para abajo */
@@ -8050,12 +8092,12 @@ if($('blankSheetVisBtn')){
     syncBlankSheetVisBtn();
   };
 }
-/* Fecha minimalista tipo carta antigua: DD - MM - 'YY (ej. 12 - 11 - '26),
-   en negro, discreta y alineada a la derecha. */
+/* Fecha minimalista tipo carta antigua: DD · MM · ’YY (ej. 12 · 11 · ’26),
+   sin guiones, en negro, discreta y alineada a la derecha. */
 function formatDiaryDate(dstr){
   const m=String(dstr||'').match(/^(\d{4})-(\d{2})-(\d{2})$/);
   if(!m)return String(dstr||'');
-  return m[3]+' - '+m[2]+" - '"+m[1].slice(-2);
+  return m[3]+' · '+m[2]+' · ’'+m[1].slice(-2);
 }
 function renderDiaryList(){
   const b=$('diaryList');if(!b)return;
@@ -8067,13 +8109,14 @@ function renderDiaryList(){
     return;
   }
   list.slice(0,20).forEach(n=>{
+    const isDraft=Boolean(n.draft);
     const card=document.createElement('div');
     card.className='journal-card diary-entry';
     card.innerHTML=
-      '<div class="diary-date">'+esc(formatDiaryDate(n.d))+'</div>'+
-      '<div class="journal-title">'+esc(n.estado||'Reflexión del día')+'</div>'+
+      '<div class="diary-date">'+(isDraft?'<span style="color:var(--gold);font-family:var(--sans);font-style:normal;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;margin-right:8px">Borrador</span>':'')+esc(formatDiaryDate(n.d))+'</div>'+
+      '<div class="journal-title">'+esc(n.estado||(isDraft?'Borrador sin título':'Reflexión del día'))+'</div>'+
       '<div style="display:flex;justify-content:space-between;align-items:center;gap:8px">'+
-        '<div class="diary-read">Leer →</div>'+
+        '<div class="diary-read">'+(isDraft?'Continuar escribiendo →':'Leer →')+'</div>'+
         '<button type="button" class="diary-vis-btn" data-vis="'+(n.public?'pub':'priv')+'">'+(n.public?VIS_PUB_SVG+'<span>Público</span>':VIS_PRIV_SVG+'<span>Privado</span>')+'</button>'+
       '</div>';
     card.querySelector('.diary-vis-btn').onclick=e=>{
@@ -8108,7 +8151,7 @@ const PUB_MONTHS=['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','N
 function formatPublicDate(dstr){
   const m=String(dstr||'').match(/^(\d{4})-(\d{2})-(\d{2})$/);
   if(!m)return String(dstr||'');
-  return m[3]+' - '+m[2]+" - '"+m[1].slice(-2);
+  return m[3]+' · '+m[2]+' · ’'+m[1].slice(-2);
 }
 /* Busca los datos de un usuario por su nombre, en este dispositivo
    (localStorage), sin importar quién sea el usuario activo. Así el
@@ -8129,7 +8172,7 @@ function publicUserState(username){
   return null;
 }
 function publicPostsOf(st){
-  return ((st&&st.notes)||[]).filter(n=>n && n.public===true && ((n.blank===true)||(n.texto && String(n.texto).length>140)));
+  return ((st&&st.notes)||[]).filter(n=>n && !n.draft && n.public===true && ((n.blank===true)||(n.texto && String(n.texto).length>140)));
 }
 function publicPosts(){
   return publicPostsOf(S);
@@ -8257,24 +8300,28 @@ if($('shareProfileBtn')){
     catch(e){toast(url,'ok')}
   };
 }
-/* Abrir un escrito ya publicado en modo SOLO LECTURA (como en Medium):
-   una vez publicado se queda tal cual o se elimina; no se edita. */
+/* Abrir un escrito: si ya fue publicado (!n.draft) se abre en modo SOLO LECTURA
+   (como en Medium: se queda tal cual o se elimina); si es un Borrador (n.draft===true)
+   se abre editable para poder terminarlo y darle en Publicar. */
 function openBlankEntry(id){
   const n=(S.notes||[]).find(x=>x&&(x.id===id));if(!n)return;
   editingBlankId=n.id;
+  const isDraft=Boolean(n.draft);
   blankSheetPublic=!!n.public;syncBlankSheetVisBtn();
   const bs=$('blankSheetModal');if(!bs)return;
   bs.hidden=false;
   if($('blankSheetDate'))$('blankSheetDate').textContent=formatDiaryDate(n.d||today());
   if($('blankSheetTitle')){
-    $('blankSheetTitle').value=n.estado&&n.estado!=='Registro del día'?n.estado:'';
-    $('blankSheetTitle').readOnly=true;
+    const rawTitle=(n.estado&&n.estado!=='Registro del día'&&n.estado!=='Borrador sin título')?n.estado:'';
+    $('blankSheetTitle').value=rawTitle;
+    $('blankSheetTitle').readOnly=!isDraft;
+    $('blankSheetTitle').classList.remove('pulse-alert');
   }
   if($('blankSheetBody')){
     $('blankSheetBody').value=n.texto||'';
-    $('blankSheetBody').readOnly=true;
+    $('blankSheetBody').readOnly=!isDraft;
   }
-  if($('saveBlankSheetBtn'))$('saveBlankSheetBtn').hidden=true;
+  if($('saveBlankSheetBtn'))$('saveBlankSheetBtn').hidden=!isDraft;
   if($('deleteBlankSheetBtn'))$('deleteBlankSheetBtn').hidden=false;
   if($('blankSheetCharCount'))$('blankSheetCharCount').textContent=(String(n.texto||'').length)+' caracteres';
 }
@@ -9569,6 +9616,45 @@ if($('openBlankSheetBtn')){
 }
 if($('closeBlankSheetBtn')){
   $('closeBlankSheetBtn').onclick=()=>{
+    /* Si la hoja es editable (nueva o borrador) y tiene más de 2 letras escritas
+       (aunque no tenga Título), se guarda automáticamente en Borradores */
+    const tEl=$('blankSheetTitle');
+    const bEl=$('blankSheetBody');
+    const isEditable=Boolean(bEl && !bEl.readOnly);
+    if(isEditable){
+      const title=(tEl?tEl.value.trim():'')||'';
+      const txt=(bEl?bEl.value.trim():'')||'';
+      if((title.length+txt.length)>2){
+        const n=new Date();
+        const timeStr=p2(n.getHours())+':'+p2(n.getMinutes());
+        if(editingBlankId!=null){
+          const existing=(S.notes||[]).find(x=>x && x.id===editingBlankId);
+          if(existing && existing.draft){
+            existing.estado=title||'Borrador sin título';
+            existing.texto=txt;
+            existing.public=blankSheetPublic;
+            existing.d=today();
+            existing.hora=timeStr;
+          }
+        }else{
+          S.notes.unshift({
+            id:Date.now(),
+            blank:true,
+            draft:true,
+            public:blankSheetPublic,
+            d:today(),
+            hora:timeStr,
+            estado:title||'Borrador sin título',
+            teoria:'Borrador guardado en tu diario.',
+            texto:txt,
+            moods:[],
+            moodNames:[]
+          });
+        }
+        save(false);renderDiaryList();
+      }
+    }
+    editingBlankId=null;
     if($('blankSheetModal'))$('blankSheetModal').hidden=true;
   };
 }
@@ -9589,10 +9675,11 @@ if($('blankSheetBody')){
 }
 if($('saveBlankSheetBtn')){
   $('saveBlankSheetBtn').onclick=()=>{
-    if(editingBlankId!=null)return; /* Los escritos ya publicados son inmutables (solo lectura o eliminar) */
+    const existing=editingBlankId!=null?(S.notes||[]).find(x=>x && x.id===editingBlankId):null;
+    if(editingBlankId!=null && (!existing || !existing.draft))return; /* Los escritos ya publicados son inmutables */
     const txt=($('blankSheetBody')?$('blankSheetBody').value.trim():'')||'';
     const title=($('blankSheetTitle')?$('blankSheetTitle').value.trim():'')||'';
-    /* Si falta el asunto, el campo de asunto palpita 2 veces sutilmente */
+    /* Si falta el título al publicar, el campo palpita 2 veces sutilmente */
     if(!title){
       const tEl=$('blankSheetTitle');
       if(tEl){
@@ -9613,23 +9700,35 @@ if($('saveBlankSheetBtn')){
     const clueSum=summarizeTodayClueForNote();
     const finalState=title;
     const finalTheory=txt?analyze(txt).t:'Reconocer cómo está tu cuerpo y tu ánimo ordena tu experiencia del día.';
-    S.notes.unshift({
-      id:Date.now(),
-      blank:true,
-      public:blankSheetPublic,
-      d:today(),
-      hora:timeStr,
-      estado:finalState,
-      teoria:finalTheory,
-      texto:txt,
-      moods:[],
-      moodNames:[],
-      ciclo:S.bioMode==='male'?'Fuerza y recuperación':(clueSum||''),
-      fuerza:S.bioMode==='male'?(getPlannedRoutineForDate(today())?.short||'Calistenia'):'',
-      cuerpo:bioState.cuerpo||'',
-      sl:bioState.sl||'',
-      soc:bioState.soc||''
-    });
+    if(existing && existing.draft){
+      existing.draft=false;
+      existing.blank=true;
+      existing.public=blankSheetPublic;
+      existing.d=today();
+      existing.hora=timeStr;
+      existing.estado=finalState;
+      existing.teoria=finalTheory;
+      existing.texto=txt;
+    }else{
+      S.notes.unshift({
+        id:Date.now(),
+        blank:true,
+        draft:false,
+        public:blankSheetPublic,
+        d:today(),
+        hora:timeStr,
+        estado:finalState,
+        teoria:finalTheory,
+        texto:txt,
+        moods:[],
+        moodNames:[],
+        ciclo:S.bioMode==='male'?'Fuerza y recuperación':(clueSum||''),
+        fuerza:S.bioMode==='male'?(getPlannedRoutineForDate(today())?.short||'Calistenia'):'',
+        cuerpo:bioState.cuerpo||'',
+        sl:bioState.sl||'',
+        soc:bioState.soc||''
+      });
+    }
     if(S.notes.length>120)S.notes.pop();
     editingBlankId=null;
     markVerifiedPractice('Entrada de diario libre registrada');

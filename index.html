@@ -142,9 +142,9 @@ body{
 /* Encabezado centrado estilo Instagram: Wavy grande al centro con pitch
    sutil debajo, y avatar de perfil alineado a la derecha */
 .masthead{
-  border-bottom:1px solid var(--rule);
-  padding:8px 0 12px;
-  margin-bottom:14px;
+  border-bottom:none;
+  padding:10px 0 8px;
+  margin-bottom:10px;
   display:grid;
   grid-template-columns:40px 1fr 40px;
   align-items:center;
@@ -228,7 +228,7 @@ h1{font-family:var(--serif);font-weight:500;font-size:clamp(28px,7vw,36px);line-
 .hd{
   display:flex;justify-content:space-between;align-items:center;gap:8px;
   font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
-  border-bottom:1px solid var(--rule);padding-bottom:9px;margin-bottom:15px;font-weight:600;
+  border-bottom:none;padding-bottom:2px;margin-bottom:12px;font-weight:600;
 }
 /* Los rótulos de los .hd nunca se parten en dos renglones: el de la
    derecha queda fijo en una línea y el de la izquierda recorta con … */
@@ -313,14 +313,15 @@ h1{font-family:var(--serif);font-weight:500;font-size:clamp(28px,7vw,36px);line-
 .mk.got span{background:var(--ink);color:var(--paper);border-color:var(--ink)}
 .mk.cur span{background:var(--crimson);border-color:var(--crimson);color:#fff;transform:scale(1.14)}
 .sig-spirit-btn{width:28px;height:28px;border-radius:50%;border:1px solid var(--glass-border);background:var(--card);color:var(--gold);font-size:14px;cursor:pointer;display:grid;place-items:center;flex-shrink:0;line-height:1}
-.spirit-opt{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:var(--wash);border:1px solid var(--glass-border);border-radius:12px;padding:12px 14px;cursor:pointer;font-family:var(--serif);font-size:16px;color:var(--ink)}
-.spirit-opt .ck{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--gold);display:grid;place-items:center;font-size:13px;color:#fff;flex-shrink:0;background:transparent}
-.spirit-opt.on .ck{background:var(--gold);border-color:var(--gold)}
+.spirit-opt{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:var(--paper);border:1px solid var(--rule);border-radius:16px;padding:12px 14px;cursor:pointer;font-family:var(--serif);font-size:16px;color:var(--ink)}
+.spirit-opt .ck{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--rule);display:grid;place-items:center;font-size:13px;color:var(--paper);flex-shrink:0;background:transparent}
+.spirit-opt.on{border-color:var(--ink)}
+.spirit-opt.on .ck{background:var(--ink);border-color:var(--ink)}
 .spirit-opt small{display:block;font-family:var(--sans);font-size:11.5px;color:var(--muted);margin-top:2px}
-.sig{border-left:3px solid var(--crimson);padding:14px 16px;border-radius:0 12px 12px 0;margin-bottom:16px;min-height:132px;cursor:pointer}
-.sig .m{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--crimson);margin-bottom:6px;display:flex;justify-content:space-between;font-weight:600}
-.sig q{display:block;font-family:var(--serif);font-size:20px;line-height:1.25;font-style:italic;quotes:none;margin-bottom:8px}
-.sig p{font-size:13.5px;line-height:1.55;color:var(--ink);opacity:.9}
+.sig{background:var(--paper);border:1px solid var(--rule);padding:16px 18px;border-radius:20px;margin-bottom:14px;min-height:118px;cursor:pointer}
+.sig .m{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;display:flex;justify-content:space-between;font-weight:600}
+.sig q{display:block;font-family:var(--serif);font-size:19.5px;line-height:1.3;font-style:normal;quotes:none;margin-bottom:8px;color:var(--ink)}
+.sig p{font-size:13.5px;line-height:1.52;color:var(--muted)}
 .sig .s{margin-top:8px;font-size:11px;color:var(--muted);letter-spacing:.04em}
 
 /* Botones y Controles Táctiles (Mínimo 44px) */
@@ -328,17 +329,17 @@ h1{font-family:var(--serif);font-weight:500;font-size:clamp(28px,7vw,36px);line-
 .btn{
   background:var(--ink);color:var(--paper);border:1px solid var(--ink);
   min-height:44px;padding:11px 16px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;
-  cursor:pointer;border-radius:12px;font-family:var(--sans);font-weight:600;
-  transition:all .18s ease;box-shadow:var(--glass-spec);
+  cursor:pointer;border-radius:999px;font-family:var(--sans);font-weight:600;
+  transition:all .18s ease;box-shadow:none;
   display:inline-flex;align-items:center;justify-content:center;gap:6px;
 }
 .btn:active{transform:scale(.99)}
 .btn:disabled{opacity:.45;cursor:not-allowed}
-.btn.ghost{background:transparent;color:var(--ink);border-color:var(--rule)}
+.btn.ghost{background:var(--paper);color:var(--ink);border-color:var(--rule)}
 .btn.ghost:hover{border-color:var(--ink)}
 .btn.red{background:var(--crimson);color:#fff;border-color:var(--crimson)}
-.btn.red-outline{background:transparent;color:var(--crimson);border-color:var(--crimson)}
-.btn.gold{background:var(--gold);color:#fff;border-color:var(--gold)}
+.btn.red-outline{background:var(--paper);color:var(--crimson);border-color:var(--rule)}
+.btn.gold{background:var(--ink);color:var(--paper);border-color:var(--ink)}
 /* La barra SOS flota sobre la barra inferior. Estilo Instagram: se
    esconde al bajar y aparece al subir, con solo `translate` y `opacity`
    (propiedades del compositor). Nada de morph ni clip-path. */
@@ -489,24 +490,24 @@ body.co-sync-screen #coFirefliesOverlay{opacity:1}
   box-shadow:var(--glass-spec);margin-bottom:10px;
 }
 
-.sl{margin-top:16px;padding-top:12px;border-top:1px solid var(--rule)}
+.sl{margin-top:14px;padding-top:4px;border-top:none}
 .sl label{display:flex;justify-content:space-between;align-items:center;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;font-weight:600}
 .sl label > span{white-space:nowrap}
 .sl label > span:last-child{flex-shrink:0}
 .sl label > span:first-child{min-width:0;overflow:hidden;text-overflow:ellipsis}
 input[type=range]{width:100%;accent-color:var(--crimson);cursor:pointer;min-height:32px}
 .spark{width:100%;height:48px;display:block;margin-top:10px}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);margin-top:12px;padding-top:12px;border-top:1px solid var(--rule);text-align:center}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);margin-top:12px;padding-top:8px;border-top:none;text-align:center}
 .stats b{display:block;font-family:var(--serif);font-size:28px;font-weight:500}
 .stats span{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-.clock{border:1px solid var(--rule);background:var(--wash);padding:10px 14px;border-radius:10px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);position:relative;overflow:hidden}
+.clock{border:1px solid var(--rule);background:var(--paper);padding:12px 16px;border-radius:18px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);position:relative;overflow:hidden}
 .clock.urgent{border-color:var(--crimson);animation:pulseUrgent 2s infinite}
 .clock.urgent b{color:var(--crimson)}
 @keyframes pulseUrgent{0%,100%{box-shadow:0 0 0 0 rgba(158,27,50,0.25)}50%{box-shadow:0 0 0 6px rgba(158,27,50,0)}}
-.clock b{font-family:var(--serif);font-size:28px;letter-spacing:.04em;color:var(--ink);font-weight:500;font-variant-numeric:tabular-nums}
-.clock i{position:absolute;left:0;bottom:0;height:2.5px;background:var(--crimson);width:0}
-.line{width:100%;border:none;border-bottom:1px solid var(--rule);background:transparent;color:var(--ink);font-family:var(--serif);font-size:18px;font-style:normal;padding:8px 0;outline:none;transition:border-color .2s;min-height:44px}
-.line:focus{border-bottom-color:var(--ink)}
+.clock b{font-family:var(--serif);font-size:26px;letter-spacing:.03em;color:var(--ink);font-weight:500;font-variant-numeric:tabular-nums}
+.clock i{position:absolute;left:0;bottom:0;height:2px;background:var(--crimson);width:0}
+.line{width:100%;border:1px solid var(--rule);border-radius:14px;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:17px;font-style:normal;padding:9px 13px;outline:none;transition:border-color .2s;min-height:44px}
+.line:focus{border-color:var(--ink)}
 
 /* Panel SOS con Línea de la Vida y Pre-Ansiedad */
 .sos{margin-top:12px;border:1.5px solid var(--crimson);border-left-width:4px;border-radius:12px;background:var(--wash);padding:16px}.sos[hidden]{display:none}
@@ -765,36 +766,34 @@ input[type=range]{width:100%;accent-color:var(--crimson);cursor:pointer;min-heig
 }
 .chip.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
 .chip.plus-chip{border-style:dashed;color:var(--crimson);font-weight:600;background:var(--wash)}
-.extra-box{margin-top:8px;padding:10px 12px;background:var(--wash);border:1px dashed var(--gold);border-radius:10px;animation:fadeUp .2s ease}
+.extra-box{margin-top:8px;padding:12px;background:var(--paper);border:1px solid var(--rule);border-radius:18px;animation:fadeUp .2s ease}
 .extra-box[hidden]{display:none}
 
 textarea{
-  width:100%;min-height:90px;padding:12px 4px;border:none;
-  border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
-  border-radius:0;background:transparent;color:var(--ink);
-  font-family:var(--serif);font-style:normal;font-size:19px;line-height:1.52;
+  width:100%;min-height:76px;padding:12px 14px;border:1px solid var(--rule);
+  border-radius:18px;background:var(--paper);color:var(--ink);
+  font-family:var(--serif);font-style:normal;font-size:17px;line-height:1.48;
   resize:none;outline:none;transition:border-color .22s ease;margin-bottom:10px;
 }
-textarea:focus{border-color:var(--gold)}
-textarea::placeholder{font-style:italic;color:var(--muted);opacity:.65}
+textarea:focus{border-color:var(--ink)}
+textarea::placeholder{font-style:normal;color:var(--muted);opacity:.68}
 
 .echo-input{
-  width:100%;min-height:76px;padding:10px 4px;border:none;
-  border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
-  border-radius:0;background:transparent;color:var(--ink);
-  font-family:var(--serif);font-style:normal;font-size:18.5px;line-height:1.5;
+  width:100%;min-height:68px;padding:12px 14px;border:1px solid var(--rule);
+  border-radius:18px;background:var(--paper);color:var(--ink);
+  font-family:var(--serif);font-style:normal;font-size:17px;line-height:1.48;
   resize:none;outline:none;transition:border-color .22s ease;
 }
-.echo-input:focus{border-color:var(--gold)}
-.echo-input::placeholder{font-style:italic;color:var(--muted);opacity:.65}
+.echo-input:focus{border-color:var(--ink)}
+.echo-input::placeholder{font-style:normal;color:var(--muted);opacity:.68}
 
 .journal-glyphs{font-family:var(--serif);font-size:20px;color:var(--crimson);letter-spacing:3px}
 .journal-title{font-family:var(--serif);font-size:18px;font-weight:600;color:var(--ink);margin-bottom:6px}
 .journal-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px}
-.jtag{font-size:12px;font-family:var(--serif);background:var(--wash);border:1px solid var(--rule);padding:3px 10px;border-radius:12px;color:var(--ink)}
-.journal-theory{font-size:12.5px;line-height:1.5;color:var(--muted);border-top:1px solid var(--rule);padding-top:9px;margin-top:4px}
+.jtag{font-size:12px;font-family:var(--serif);background:var(--paper);border:1px solid var(--rule);padding:3px 10px;border-radius:12px;color:var(--ink)}
+.journal-theory{font-size:12.5px;line-height:1.5;color:var(--muted);border-top:none;padding-top:4px;margin-top:2px}
 
-.wk{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center;margin-bottom:4px;font-size:11px;letter-spacing:.12em;color:var(--muted);background:var(--wash);padding:10px 6px;border-radius:12px;border:1px solid var(--rule)}
+.wk{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center;margin-bottom:8px;font-size:11px;letter-spacing:.12em;color:var(--muted);background:var(--paper);padding:10px 6px;border-radius:18px;border:1px solid var(--rule)}
 .wk b{display:block;font-family:var(--serif);font-size:22px;color:var(--crimson);font-weight:400;height:28px}
 .wk .td b{border-bottom:2px solid var(--crimson)}.wk .fu{opacity:.35}
 .ins{font-family:var(--serif);font-style:italic;color:var(--muted);font-size:14.5px;text-align:center;margin:12px 0;line-height:1.45}
@@ -896,54 +895,61 @@ body.public-view .pub-view.on{display:block}
 .diary-entry .journal-quote{font-size:14.5px}
 .diary-read{font-family:var(--serif);font-style:italic;font-size:12.5px;color:var(--gold);margin-top:6px}
 .journal-card{
-  background:var(--card);
+  background:var(--paper);
   border:1px solid var(--rule);
-  border-radius:16px;
-  padding:14px 16px 13px;
+  border-radius:20px;
+  padding:16px 18px;
   margin-bottom:12px;
-  box-shadow:none;
+  box-shadow:0 8px 24px -18px rgba(35,31,29,0.05);
   transition:transform .2s ease, border-color .2s ease;
   position:relative;
   animation:fadeUp .25s ease;
 }
-/* Cada tuit respira: separación clara entre una publicación y la
-   siguiente (estilo Twitter), con una rayita finísima como divisor. */
-.wavy-card{cursor:pointer;margin-bottom:22px;padding-bottom:18px;border-bottom:1px solid var(--rule)}
+/* Cada publicación del Círculo en una tarjeta blanca limpia, sin líneas horizontales encimadas */
+.wavy-card{
+  cursor:pointer;
+  background:var(--paper);
+  border:1px solid var(--rule);
+  border-radius:20px;
+  padding:16px 18px;
+  margin-bottom:12px;
+  box-shadow:0 8px 24px -18px rgba(35,31,29,0.05);
+}
 @media(hover:hover){
   .wavy-card:hover,
   .journal-card:hover{
     transform:translateY(-1px);
-    border-color:rgba(194,160,104,0.45);
+    border-color:rgba(35,31,29,0.18);
   }
 }
 
-/* Cabecera limpia en un solo renglón editorial */
+/* Cabecera limpia en un solo renglón editorial, centrada con el avatar y sin línea abajo */
 .wavy-top,
 .journal-top{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  gap:8px;
+  gap:10px;
   flex-wrap:wrap;
-  padding-bottom:8px;
-  margin-bottom:8px;
-  border-bottom:1px solid var(--rule);
+  padding-bottom:0;
+  margin-bottom:10px;
+  border-bottom:none;
 }
-.wavy-user{display:flex;align-items:center;gap:9px;min-width:0;flex:1}
+.wavy-user{display:flex;align-items:center;gap:10px;min-width:0;flex:1}
 .wavy-av{
-  width:32px;height:32px;border-radius:50%;overflow:hidden;
-  border:1px solid var(--glass-border);flex-shrink:0;
+  width:36px;height:36px;border-radius:50%;overflow:hidden;
+  border:1px solid var(--rule);flex-shrink:0;
 }
 .wavy-info{
-  display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;min-width:0;line-height:1.2;
+  display:flex;align-items:center;gap:7px;flex-wrap:wrap;min-width:0;line-height:1.2;
 }
 .wavy-info strong{
-  font-family:var(--serif);font-size:16px;font-weight:600;
+  font-family:var(--serif);font-size:17px;font-weight:500;
   color:var(--ink);white-space:nowrap;
 }
 .wavy-info span,
 .journal-date{
-  font-size:11.5px;letter-spacing:.02em;color:var(--muted);
+  font-size:12px;letter-spacing:.01em;color:var(--muted);
   font-variant-numeric:tabular-nums;
 }
 .journal-date{text-transform:uppercase;font-weight:600;letter-spacing:.08em}
@@ -954,13 +960,13 @@ body.public-view .pub-view.on{display:block}
   font-family:var(--serif);
   font-style:normal;
   font-weight:400;
-  font-size:clamp(18px, 4.4vw, 20.5px);
+  font-size:clamp(17.5px, 4.3vw, 19.5px);
   line-height:1.5;
-  letter-spacing:-.006em;
+  letter-spacing:-.005em;
   color:var(--ink);
   background:transparent;
   border:none;
-  padding:4px 2px 8px;
+  padding:2px 0 8px;
   margin:0;
   border-radius:0;
   white-space:pre-line;
@@ -978,7 +984,7 @@ body.public-view .pub-view.on{display:block}
   font-size:1.32em;font-weight:500;color:var(--ink);line-height:1;margin-right:1px;
 }
 
-/* Colofón de telemetría (Sin cajas grises, solo líneas finas tipo periódico) */
+/* Colofón de estado sin rayas horizontales */
 .wavy-stats{
   display:flex;
   justify-content:space-between;
@@ -987,11 +993,9 @@ body.public-view .pub-view.on{display:block}
   gap:8px;
   background:transparent;
   border:none;
-  border-top:1px solid var(--rule);
-  border-bottom:1px solid var(--rule);
   border-radius:0;
-  padding:7px 2px;
-  margin:0 0 10px;
+  padding:4px 0;
+  margin:0 0 8px;
 }
 .wavy-stats > div{
   display:inline-flex;align-items:baseline;gap:5px;
@@ -1150,21 +1154,21 @@ body.public-view .pub-view.on{display:block}
 .avopt svg{width:44px;height:44px;border-radius:50%;display:block;margin:0 auto 5px;border:1px solid var(--rule)}
 .avopt.on{border-color:var(--crimson);color:var(--ink);font-weight:600;background:var(--card-solid)}
 
-.prem{border:1px solid var(--gold);background:linear-gradient(180deg,var(--card),var(--wash));padding:16px;border-radius:14px;margin:14px 0}
-.prem .tag{display:inline-block;background:var(--gold);color:#fff;font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;border-radius:5px;font-weight:600;margin-bottom:6px}
-.prem h3{font-family:var(--serif);font-size:21px;font-weight:500;margin-bottom:4px}
-.prem p{font-size:13px;color:var(--muted);line-height:1.5;margin-bottom:10px}
-.rep{background:var(--card);border:1px solid var(--rule);padding:12px 14px;border-radius:10px;margin-top:10px;font-size:12.5px}
+.prem{border:1px solid var(--rule);background:var(--paper);padding:18px 16px;border-radius:22px;margin:14px 0;box-shadow:0 10px 28px -18px rgba(35,31,29,0.05)}
+.prem .tag{display:inline-block;background:rgba(122,154,130,0.12);color:var(--ok);font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:999px;font-weight:600;margin-bottom:6px}
+.prem h3{font-family:var(--serif);font-size:20px;font-weight:500;margin-bottom:4px;color:var(--ink)}
+.prem p{font-size:12.5px;color:var(--muted);line-height:1.5;margin-bottom:10px}
+.rep{background:var(--paper);border:1px solid var(--rule);padding:12px 14px;border-radius:16px;margin-top:10px;font-size:12.5px}
 .rep[hidden]{display:none}
-.rep div{padding:6px 0;border-bottom:1px dashed var(--rule);display:flex;justify-content:space-between;gap:8px;align-items:center}
+.rep div{padding:6px 0;border-bottom:none;display:flex;justify-content:space-between;gap:8px;align-items:center}
 .rep div:last-child{border:none}
 
 /* Switch iOS para Desarrollador / Demo */
 .dev-card{
   display:flex;justify-content:space-between;align-items:center;gap:14px;
-  background:linear-gradient(135deg,var(--card),var(--wash));
-  border:1.5px dashed var(--gold);
-  padding:14px 16px;border-radius:14px;margin-top:18px;
+  background:var(--paper);
+  border:1px solid var(--rule);
+  padding:14px 16px;border-radius:18px;margin-top:18px;
 }
 .dev-card strong{font-family:var(--serif);font-size:17.5px;font-weight:600;display:flex;align-items:center;gap:8px}
 .dev-card span{font-size:12px;color:var(--muted);display:block;margin-top:3px;line-height:1.4}
@@ -1183,18 +1187,18 @@ body.public-view .pub-view.on{display:block}
 .ios-switch.on{background:#30D158;border-color:rgba(255,255,255,0.25)}
 .ios-switch.on::after{transform:translateX(22px)}
 
-/* Modales Globales (Onboarding, Paywall, Perfil Externo, Directorio, Post-SOS) */
+/* Modales Globales (Onboarding, Línea Espiritual, Paywall, Perfil Externo, Directorio, Post-SOS) en Blanco Pulcritud */
 .modal-backdrop{
-  position:fixed;inset:0;background:rgba(6,11,18,0.72);
-  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-  z-index:100;display:flex;align-items:center;justify-content:center;padding:14px;
+  position:fixed;inset:0;background:var(--paper);
+  backdrop-filter:none;-webkit-backdrop-filter:none;
+  z-index:100;display:flex;align-items:center;justify-content:center;padding:20px;
   overflow-y:auto;
 }
 .modal-backdrop[hidden]{display:none}
 .ext-card{
-  background:var(--card-solid);border:1px solid var(--glass-border);border-radius:18px;
-  width:100%;max-width:460px;padding:22px 18px 20px;position:relative;
-  box-shadow:var(--glass-spec),0 28px 65px rgba(0,0,0,0.5);animation:fadeUp .22s ease;max-height:92dvh;overflow-y:auto;
+  background:var(--paper);border:1px solid var(--rule);border-radius:24px;
+  width:100%;max-width:440px;padding:24px 20px 22px;position:relative;
+  box-shadow:0 16px 40px -24px rgba(24,20,17,0.08);animation:fadeUp .22s ease;max-height:92dvh;overflow-y:auto;
 }
 .ext-close{position:absolute;top:10px;right:12px;width:40px;height:40px;border-radius:50%;background:var(--wash);border:1px solid var(--rule);font-size:22px;color:var(--ink);cursor:pointer;line-height:1;font-family:var(--serif);display:grid;place-items:center}
 .ext-head{display:flex;align-items:center;gap:14px;margin-bottom:12px}
@@ -1264,8 +1268,9 @@ body.public-view .pub-view.on{display:block}
 .user-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px 4px;border-bottom:1px solid var(--rule);cursor:pointer}
 .user-row:hover{background:var(--wash)}
 
-details{margin-top:14px;font-size:12.5px;color:var(--muted);border-top:1px solid var(--rule);padding-top:12px}
-summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11px;font-weight:600;color:var(--ink);min-height:36px;display:flex;align-items:center}
+details{margin-top:12px;font-size:12.5px;color:var(--muted);border:1px solid var(--rule);background:var(--paper);border-radius:20px;padding:12px 16px}
+summary{cursor:pointer;letter-spacing:.08em;text-transform:uppercase;font-size:11px;font-weight:600;color:var(--ink);min-height:32px;display:flex;align-items:center;justify-content:space-between;list-style:none}
+summary::-webkit-details-marker{display:none}
 .note{margin-top:16px;text-align:center;font-family:var(--serif);font-style:italic;font-size:13.5px;color:var(--muted);line-height:1.5}
 .toasts{position:fixed;top:calc(env(safe-area-inset-top,0px) + 12px);left:50%;transform:translateX(-50%);z-index:160;display:flex;flex-direction:column;gap:6px;pointer-events:none;width:max-content;max-width:92vw}
 .toast{
@@ -1646,18 +1651,18 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
   border-radius:16px;
   background:transparent;
   box-shadow:none;
-  padding:8px 8px;
+  padding:8px 10px;
   min-height:38px;height:38px;
   font-family:var(--sans);
-  font-size:14.5px;line-height:22px;font-style:normal;color:var(--ink);
+  font-size:16px;line-height:22px;font-style:normal;color:var(--ink);
   overflow:hidden;cursor:text;resize:none;margin:0;
 }
 #circleComposer #echoInput::placeholder{
-  color:var(--muted);font-style:normal;font-family:var(--sans);
+  color:var(--muted);font-style:normal;font-family:var(--sans);font-size:15px;
 }
 .circle-composer-drawer{
-  padding:12px 6px 4px;margin-top:8px;
-  border-top:1px solid var(--rule);
+  padding:10px 4px 2px;margin-top:6px;
+  border-top:none;
   background:var(--paper);
   animation:fadeUp .18s ease;
 }
@@ -1888,12 +1893,6 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
               <p id="cluePhaseHint">Muchas personas reportan mayor energía e iniciativa en estos días.</p>
             </div>
           </div>
-          <div class="info-grid">
-            <div class="info-box"><small id="clueNextLbl">Próximo periodo</small><b id="clueNextTxt">—</b><em id="clueNextSub">—</em></div>
-            <div class="info-box"><small id="clueFertLbl">Ventana estimada</small><b id="clueFertTxt">—</b><em id="clueFertSub">—</em></div>
-            <div class="info-box"><small id="clueOvulLbl">Mitad de ciclo</small><b id="clueOvulTxt">—</b><em id="clueOvulSub">—</em></div>
-            <div class="info-box"><small id="clueLenLbl">Promedio de ciclo</small><b id="clueSummaryTxt">—</b><em id="clueSummarySub">—</em></div>
-          </div>
           <div class="cycle-actions">
             <button type="button" class="btn" id="logPeriodStartBtn">Inició mi periodo</button>
             <button type="button" class="btn ghost" id="logPeriodEndBtn">Terminó mi periodo</button>
@@ -1901,10 +1900,16 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
         </div>
 
         <button type="button" class="retract-toggle" id="clueCalToggleBtn">
-          <span>Calendario del ciclo</span>
+          <span>Calendario y detalles del ciclo</span>
           <b id="clueCalToggleIcon">Abrir ▾</b>
         </button>
         <div class="retract-body" id="clueCalBody" hidden>
+          <div class="info-grid" style="margin-bottom:10px">
+            <div class="info-box"><small id="clueNextLbl">Próximo periodo</small><b id="clueNextTxt">—</b><em id="clueNextSub">—</em></div>
+            <div class="info-box"><small id="clueFertLbl">Ventana estimada</small><b id="clueFertTxt">—</b><em id="clueFertSub">—</em></div>
+            <div class="info-box"><small id="clueOvulLbl">Mitad de ciclo</small><b id="clueOvulTxt">—</b><em id="clueOvulSub">—</em></div>
+            <div class="info-box"><small id="clueLenLbl">Promedio de ciclo</small><b id="clueSummaryTxt">—</b><em id="clueSummarySub">—</em></div>
+          </div>
           <div class="cal">
             <div class="cal-head">
               <button type="button" class="cal-nav" id="clueCalPrev" aria-label="Mes anterior">‹</button>
@@ -1944,12 +1949,6 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
               <p id="maleTestoHint">—</p>
             </div>
           </div>
-          <div class="info-grid">
-            <div class="info-box"><small>Movimiento de hoy</small><b id="maleSummaryTxt">—</b><em id="maleSummarySub">Calistenia antiansiedad</em></div>
-            <div class="info-box"><small>Enfoque sugerido</small><b id="maleFocusWindow">—</b><em id="maleFocusHint">—</em></div>
-            <div class="info-box"><small>Rutina sugerida hoy</small><b id="maleSplitName">—</b><em id="maleSplitSub">—</em></div>
-            <div class="info-box"><small>Impacto en calma</small><b id="maleCalmStatTxt">-34% estrés</b><em id="maleCalmStatSub">Regulación y respiración activa</em></div>
-          </div>
           <div class="cycle-actions">
             <button type="button" class="btn" id="openCaliPlannerBtn">Ver rutina</button>
             <button type="button" class="btn ghost" id="logWorkoutDoneBtn">Ya entrené hoy</button>
@@ -1957,10 +1956,16 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
         </div>
 
         <button type="button" class="retract-toggle" id="caliToggleBtn">
-          <span>Calendario y calistenia</span>
+          <span>Calendario, rutina y detalles</span>
           <b id="caliToggleIcon">Abrir ▾</b>
         </button>
         <div class="retract-body" id="caliRetractBody" hidden>
+          <div class="info-grid" style="margin-bottom:10px">
+            <div class="info-box"><small>Movimiento de hoy</small><b id="maleSummaryTxt">—</b><em id="maleSummarySub">Calistenia antiansiedad</em></div>
+            <div class="info-box"><small>Enfoque sugerido</small><b id="maleFocusWindow">—</b><em id="maleFocusHint">—</em></div>
+            <div class="info-box"><small>Rutina sugerida hoy</small><b id="maleSplitName">—</b><em id="maleSplitSub">—</em></div>
+            <div class="info-box"><small>Impacto en calma</small><b id="maleCalmStatTxt">-34% estrés</b><em id="maleCalmStatSub">Regulación y respiración activa</em></div>
+          </div>
           <div class="cal">
             <p class="cal-intro">Genera tu calendario semanal en casa (cada ejercicio libera tensión muscular y baja la ansiedad) o elige «Solo ritmo por hora» si no deseas rutina.</p>
             <div class="chips" id="caliPresets" style="margin-bottom:12px">
@@ -2202,15 +2207,13 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
       </div>
     </div>
 
-    <div class="feed-editorial-header" style="display:flex;justify-content:space-between;align-items:center;padding:8px 4px 10px;margin-bottom:8px;border-bottom:1px solid var(--rule)">
+    <div class="feed-editorial-header" style="display:flex;justify-content:space-between;align-items:center;padding:4px 4px 8px;margin-bottom:4px;border-bottom:none">
       <span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600">Presencia en sintonía contigo</span>
     </div>
-    <div id="circleFeedList" style="padding-bottom:120px"></div>
+    <div id="circleFeedList" style="padding-bottom:96px"></div>
     <div id="pl" hidden></div>
 
-    <!-- Barra Flotante Sticky para Publicar Nota, Canción (Top 5) y Estado de Sintonía -->
-    <!-- El cuadro de texto ES la píldora: compacto y redondeado cuando está
-         cerrado, y se convierte en el editor al darle click (sin cajón aparte). -->
+    <!-- Barra Flotante Sticky estilo WhatsApp: limpia, sin zoom y conectada a música -->
     <div class="circle-sticky-wrap">
       <div class="circle-composer" id="circleComposer">
         <div class="daily-prompt-line" id="dailyPromptLine"></div>
@@ -2221,18 +2224,18 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
           </button>
           <button type="button" class="echo-send-btn" id="postEchoBtn" aria-label="Publicar nota">↑</button>
         </div>
-        <div id="inlineSongSelected" hidden style="display:flex;align-items:center;gap:10px;background:var(--wash);border:1px solid var(--rule);border-radius:14px;padding:7px 10px;margin-top:8px">
+        <div id="inlineSongSelected" hidden style="display:flex;align-items:center;gap:10px;background:var(--paper);border:1px solid var(--rule);border-radius:14px;padding:7px 10px;margin-top:8px">
           <img id="inlineSongArt" src="" alt="" style="width:36px;height:36px;border-radius:8px;object-fit:cover;flex-shrink:0">
           <span style="flex:1;min-width:0"><strong id="inlineSongTitle" style="font-family:var(--serif);font-size:14.5px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"></strong><small id="inlineSongArtist" style="font-size:11.5px;color:var(--muted)"></small></span>
           <button type="button" id="inlineSongClear" aria-label="Quitar canción" style="border:none;background:none;font-size:18px;color:var(--muted);cursor:pointer;padding:4px">×</button>
         </div>
         <div class="circle-composer-drawer" id="circleComposerDrawer" hidden>
-          <div id="inlineSongBox" hidden style="margin-bottom:10px;display:grid;gap:6px">
-            <div style="display:flex;align-items:center;gap:8px;background:var(--wash);border:1px solid var(--rule);border-radius:14px;padding:6px 12px">
-              <span style="font-size:13px;color:var(--ok)">♪</span>
-              <input class="line" id="inlineSongSearch" maxlength="80" placeholder="Busca canción o artista en Apple Music / iTunes…" autocomplete="off" style="border:none;background:transparent;padding:4px 0;min-height:28px;font-size:14px">
+          <div id="inlineSongBox" hidden style="margin-bottom:8px;display:grid;grid-template-columns:minmax(0,1fr);gap:6px">
+            <div style="display:flex;align-items:center;gap:8px;background:var(--paper);border:1px solid var(--rule);border-radius:14px;padding:6px 12px">
+              <span style="font-size:14px;color:var(--ok)">♪</span>
+              <input class="line" id="inlineSongSearch" maxlength="80" placeholder="Busca canción o artista (ej. John Mayer)…" autocomplete="off" style="border:none;background:transparent;padding:4px 0;min-height:32px;font-size:16px">
             </div>
-            <div id="inlineSongResults" style="display:grid;gap:4px;max-height:190px;overflow-y:auto"></div>
+            <div id="inlineSongResults" style="display:grid;grid-template-columns:minmax(0,1fr);gap:6px;max-height:210px;overflow-y:auto"></div>
           </div>
           <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap">
             <div class="chips" id="echoVibeChips">
@@ -2335,74 +2338,78 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
         <button type="button" class="cmd-action-btn" id="pulsoScheduleReminderBtn">Recordarme mi pausa de la tarde</button><div id="chours" hidden></div>
       </div>
 
-      <!-- GRÁFICA 2: EL EFECTO DE TUS PAUSAS -->
-      <div class="cmd-chart-box">
-        <div class="cmd-chart-hd">
-          <div>
-            <strong>El efecto de tus pausas</strong>
-            <p id="trigDiagnosisTxt" style="font-size:12.5px;color:var(--muted);margin-top:2px">Cómo cambia tu sensación antes y después de respirar unos minutos.</p>
-          </div>
-          <span id="pulsoDeltaBadge">Más calma</span>
-        </div>
-        <svg class="cmd-svg" id="deltaReliefSvg" viewBox="0 0 440 132" preserveAspectRatio="none" role="img" aria-label="Comparativa antes y después de respirar"></svg>
-        <div id="trigLogBox" class="rep" style="margin-top:8px"></div>
-      </div>
-
-      <!-- MATRIZ DE RITUALES -->
-      <div class="hd" style="margin-top:18px"><span>Lo que te hace sentir bien</span><span>Tus rituales</span></div>
-      <div class="cmd-matrix" id="pulsoCorrelationMatrix"></div>
-
-      <!-- GRÁFICA 3: TU CAMINO DE CONSTANCIA -->
-      <div class="cmd-chart-box">
-        <div class="cmd-chart-hd">
-          <div>
-            <strong>Tu camino de constancia</strong>
-            <p id="csparkSubtitle" style="font-size:12.5px;color:var(--muted);margin-top:2px">Paso a paso: cada día hace más natural tu calma</p>
-          </div>
-          <span id="csparkBadge">Día 1 de 90</span>
-        </div>
-        <svg class="spark" id="cspark" viewBox="0 0 440 96" preserveAspectRatio="none" style="height:96px;width:100%"></svg>
-        <div style="display:flex;justify-content:space-between;font-size:11px;letter-spacing:.06em;color:var(--muted);margin-top:6px;font-variant-numeric:tabular-nums;border-top:1px solid var(--rule);padding-top:6px">
-          <span>Día 1</span>
-          <span>Día 21</span>
-          <span>Día 45</span>
-          <span>Día 60</span>
-          <span>Día 90</span>
-        </div>
-      </div>
-
       <!-- NOTA PERSONAL DE EQUILIBRIO -->
-      <div style="margin-top:14px;padding:16px;background:var(--paper);border:1px solid var(--rule);border-radius:20px;box-shadow:0 8px 24px -16px rgba(35,31,29,0.05)">
+      <div style="margin-top:14px;padding:18px 16px;background:var(--paper);border:1px solid var(--rule);border-radius:22px;box-shadow:0 10px 28px -18px rgba(35,31,29,0.05)">
         <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px">
-          <span style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ok);font-weight:600"><svg class="w-ico sm gold" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.2 6.8L21 12l-6.8 2.2L12 21l-2.2-6.8L3 12l6.8-2.2L12 3Z"/></svg> Tu nota de equilibrio</span>
+          <span style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ok);font-weight:600">Tu nota de equilibrio</span>
           <button type="button" class="btn ghost" id="magicSummaryBtn" style="min-height:34px;padding:5px 12px;font-size:11px;border-radius:20px">Copiar nota</button>
         </div>
         <p id="magicSummaryTxt" style="font-family:var(--serif);font-size:16.5px;line-height:1.55;color:var(--ink)"></p>
       </div>
 
-      <div class="prem">
-        <span class="tag" id="premBadge">Reporte & Especialistas</span>
-        <h3 id="premTitle">Tu Reporte de Bienestar</h3>
-        <p id="premDesc">Descarga tu reporte de 1 página en PDF o vincula el código de tu psicóloga/o si llevas acompañamiento externo (ej. <b>GARCIATERAPEUTA</b>).</p>
-        <div class="row" style="margin-bottom:10px">
-          <input class="line" id="therCode" maxlength="30" placeholder="Código" style="text-transform:uppercase">
-          <button class="btn gold" id="applyCode">Vincular</button>
-        </div>
-        <div class="row" style="grid-template-columns:1fr 1fr;padding-top:10px;border-top:1px solid var(--rule)">
-          <button class="btn" id="exportClinicalPdfBtn">Descargar PDF</button>
-          <button class="btn ghost" id="toggleShare">Vista previa de tabla</button>
-        </div>
-        <div class="rep" id="therReport" hidden></div>
-      </div>
+      <!-- SECCIÓN EXPANDIBLE: EFECTO DE PAUSAS, RITUALES, CAMINO DE 90 DÍAS Y REPORTE -->
+      <details style="margin-top:14px">
+        <summary><span>Más gráficas, rituales y reporte PDF</span><span style="white-space:nowrap;flex-shrink:0">Abrir ▾</span></summary>
+        <div style="margin-top:14px">
+          <!-- GRÁFICA 2: EL EFECTO DE TUS PAUSAS -->
+          <div class="cmd-chart-box">
+            <div class="cmd-chart-hd">
+              <div>
+                <strong>El efecto de tus pausas</strong>
+                <p id="trigDiagnosisTxt" style="font-size:12.5px;color:var(--muted);margin-top:2px">Cómo cambia tu sensación antes y después de respirar unos minutos.</p>
+              </div>
+              <span id="pulsoDeltaBadge">Más calma</span>
+            </div>
+            <svg class="cmd-svg" id="deltaReliefSvg" viewBox="0 0 440 132" preserveAspectRatio="none" role="img" aria-label="Comparativa antes y después de respirar"></svg>
+            <div id="trigLogBox" class="rep" style="margin-top:8px"></div>
+          </div>
 
-      <details>
-        <summary>Portal para Especialistas</summary>
-        <div style="margin-top:10px;line-height:1.55">
-          <p style="margin-bottom:8px">La cédula profesional se valida ante el Registro Nacional de Profesionistas (SEP) antes de activar un código.</p>
-          <input class="line" id="proName" placeholder="Nombre completo y especialidad" style="margin-bottom:8px">
-          <input class="line" id="proCed" placeholder="Número de Cédula Profesional SEP" style="margin-bottom:8px">
-          <button class="btn ghost" id="proBtn" style="width:100%">Registrar solicitud profesional</button>
-          <p id="proOut" style="margin-top:8px;color:var(--ok);font-family:var(--serif);font-size:15.5px"></p>
+          <div class="hd" style="margin-top:4px"><span>Lo que te hace sentir bien</span><span>Tus rituales</span></div>
+          <div class="cmd-matrix" id="pulsoCorrelationMatrix"></div>
+
+          <div class="cmd-chart-box">
+            <div class="cmd-chart-hd">
+              <div>
+                <strong>Tu camino de constancia</strong>
+                <p id="csparkSubtitle" style="font-size:12.5px;color:var(--muted);margin-top:2px">Paso a paso: cada día hace más natural tu calma</p>
+              </div>
+              <span id="csparkBadge">Día 1 de 90</span>
+            </div>
+            <svg class="spark" id="cspark" viewBox="0 0 440 96" preserveAspectRatio="none" style="height:96px;width:100%"></svg>
+            <div style="display:flex;justify-content:space-between;font-size:11px;letter-spacing:.06em;color:var(--muted);margin-top:6px;font-variant-numeric:tabular-nums;padding-top:4px">
+              <span>Día 1</span>
+              <span>Día 21</span>
+              <span>Día 45</span>
+              <span>Día 60</span>
+              <span>Día 90</span>
+            </div>
+          </div>
+
+          <div class="prem">
+            <span class="tag" id="premBadge">Reporte & Especialistas</span>
+            <h3 id="premTitle">Tu Reporte de Bienestar</h3>
+            <p id="premDesc">Descarga tu reporte de 1 página en PDF o vincula el código de tu psicóloga/o si llevas acompañamiento externo (ej. <b>GARCIATERAPEUTA</b>).</p>
+            <div class="row" style="margin-bottom:10px">
+              <input class="line" id="therCode" maxlength="30" placeholder="Código" style="text-transform:uppercase">
+              <button class="btn" id="applyCode">Vincular</button>
+            </div>
+            <div class="row" style="grid-template-columns:1fr 1fr;padding-top:4px">
+              <button class="btn" id="exportClinicalPdfBtn">Descargar PDF</button>
+              <button class="btn ghost" id="toggleShare">Ver vista previa</button>
+            </div>
+            <div class="rep" id="therReport" hidden></div>
+          </div>
+
+          <details>
+            <summary><span>Portal para Especialistas</span><span>SEP ▾</span></summary>
+            <div style="margin-top:10px;line-height:1.55">
+              <p style="margin-bottom:8px">La cédula profesional se valida ante el Registro Nacional de Profesionistas (SEP) antes de activar un código.</p>
+              <input class="line" id="proName" placeholder="Nombre completo y especialidad" style="margin-bottom:8px">
+              <input class="line" id="proCed" placeholder="Número de Cédula Profesional SEP" style="margin-bottom:8px">
+              <button class="btn ghost" id="proBtn" style="width:100%">Registrar solicitud profesional</button>
+              <p id="proOut" style="margin-top:8px;color:var(--ok);font-family:var(--serif);font-size:15.5px"></p>
+            </div>
+          </details>
         </div>
       </details>
     </div>
@@ -2674,7 +2681,7 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
       </div>
       <!-- Versión de la app: sube una por ronda (v18, v19, v20…) para saber
            de un vistazo si la versión publicada ya trae los últimos cambios. -->
-      <div class="cover-version">v22</div>
+      <div class="cover-version">v23</div>
     </div>
   </div>
 </div>
@@ -2943,8 +2950,8 @@ summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:11
       <span>Costa</span>
     </button>
     <button class="bnav-btn" data-v="v-circle" role="tab" aria-selected="false">
-      <!-- Símbolo de Autor 3: Dos Órbitas Entrelazadas (Vínculo Consciente) -->
-      <svg viewBox="0 0 24 24"><circle cx="9.2" cy="12" r="5.8"/><circle cx="14.8" cy="12" r="5.8"/></svg>
+      <!-- Símbolo de Autor 3: Onda de Sintonía Compartida (Centro y Resonancia en Calma) -->
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="2.6"/><path d="M7.2 15a5.8 5.8 0 1 1 9.6 0"/><path d="M4.2 17.6a9.4 9.4 0 1 1 15.6 0"/></svg>
       <span>Círculo</span>
     </button>
     <button class="bnav-btn" data-v="v-clinic" role="tab" aria-selected="false">
@@ -4177,6 +4184,7 @@ function renderSoundCapsuleHTML(sc,compact=false){
   const titleTxt=sc.title||'Melodía compartida';
   const artistTxt=sc.artist||'Paisaje sonoro';
   const urlTxt=String(sc.url||'').trim();
+  const artUrl=String(sc.artwork||'').trim();
   const spTrackId=extractSpotifyTrackId(urlTxt);
   const platName=detectMusicPlatformName(urlTxt);
   const platId=detectMusicPlatformId(urlTxt);
@@ -4186,14 +4194,18 @@ function renderSoundCapsuleHTML(sc,compact=false){
     : '';
 
   const linkBtn=urlTxt
-    ? '<a href="'+esc(urlTxt)+'" target="_blank" rel="noopener" class="btn ghost" style="min-height:34px;padding:6px 11px;font-size:11px;border-radius:20px;text-decoration:none;white-space:nowrap">Abrir en '+esc(platName)+'</a>'
+    ? '<a href="'+esc(urlTxt)+'" target="_blank" rel="noopener" class="btn ghost" style="min-height:34px;padding:6px 11px;font-size:11px;border-radius:20px;text-decoration:none;white-space:nowrap">Escuchar</a>'
     : '';
+
+  const vinylHtml=artUrl
+    ? '<img src="'+esc(artUrl)+'" alt="" style="width:42px;height:42px;border-radius:10px;object-fit:cover;flex-shrink:0">'
+    : '<div class="sc-vinyl" aria-hidden="true">'+(STREAMING_SVGS[platId]||WavyIcons.music)+'</div>';
 
   return '<div class="sound-capsule-card" onclick="event.stopPropagation()">'+
     '<div class="sc-head">'+
-      '<div class="sc-vinyl" aria-hidden="true">'+(STREAMING_SVGS[platId]||WavyIcons.music)+'</div>'+
+      vinylHtml+
       '<div class="sc-meta">'+
-        '<span class="sc-q">'+esc(qTxt)+' · '+esc(platName)+'</span>'+
+        '<span class="sc-q">'+esc(platName)+'</span>'+
         '<strong class="sc-title">'+esc(titleTxt)+'</strong>'+
         '<span class="sc-artist">'+esc(artistTxt)+'</span>'+
       '</div>'+
@@ -4448,18 +4460,12 @@ $('obBioChoice').addEventListener('click',e=>{
   obSelectedBio=b.dataset.obm;
   document.querySelectorAll('#obBioChoice .chip').forEach(c=>c.classList.toggle('on',c===b));
 });
+/* Tu nombre y Tu @usuario son independientes: escribir el nombre arriba no sobreescribe el @usuario de abajo */
 let obAliasCustom=false;
 if($('obAliasInput')){
   $('obAliasInput').addEventListener('input',e=>{
     const v=e.target.value.trim().replace(/^@/,'');
     obAliasCustom=v.length>0;
-  });
-}
-if($('obNameInput') && $('obAliasInput')){
-  $('obNameInput').addEventListener('input',e=>{
-    if(obAliasCustom)return;
-    const slug=cleanAlias(e.target.value);
-    $('obAliasInput').value=slug?('@'+slug):'';
   });
 }
 $('onbNext1').onclick=()=>{
@@ -4610,46 +4616,33 @@ function syncPebeteroRing(){
 }
 
 let selectedEchoVibe='';
-/* El cuadro de texto ES la píldora: al darle click (focus) se convierte en
-   el editor (aparecen los controles abajo) y la pantalla baja hasta abajo
-   para que el cuadro se vea completo. No hay un cajón aparte arriba. */
-if($('echoInput')){
-  $('echoInput').addEventListener('focus',()=>{
-    const dr=$('circleComposerDrawer');
-    if(dr && dr.hidden){
-      dr.hidden=false;
-      /* Publicar es simple: el compositor es sticky y ya está visible,
-         así que NO se scrollea la página ni se empuja con yield al abrir.
-         Ese scroll + yield con el teclado abierto era lo que desconfiguraba
-         todo (el cajón terminaba arriba, cortado). */
-    }
-  });
-}
-/* El cuadro crece solo si escribes más de una línea (hasta 120 px); en
-   reposo mide una sola línea (44 px). La flecha de publicar solo se
-   activa cuando hay algo que publicar (texto o canción). */
+/* Estilo WhatsApp: al tocar el cuadro de texto NO se abre ningún cajón extra
+   ni se hace zoom (font-size: 16px). Solo escribes y tocas ↑ para publicar.
+   El cajón de canciones y matices solo se despliega al tocar el icono 🎵. */
 function syncEchoSendBtn(){
   const b=$('postEchoBtn');if(!b)return;
   const hasTxt=!!($('echoInput') && $('echoInput').value.trim());
-  const hasSong=!!(resolvedInlineSong && resolvedInlineSong.url);
-  b.disabled=!(hasTxt||hasSong);
+  const hasSong=!!(resolvedInlineSong && (resolvedInlineSong.url||resolvedInlineSong.title));
+  const hasPendingSearch=!!($('inlineSongSearch') && $('inlineSongSearch').value.trim().length>=2);
+  b.disabled=!(hasTxt||hasSong||hasPendingSearch);
   const mb=$('toggleInlineSongBtn');
   if(mb)mb.classList.toggle('has-song',hasSong);
 }
 function autogrowEchoInput(){
   const ta=$('echoInput');if(!ta)return;
   ta.style.height='38px';
-  ta.style.height=Math.min(ta.scrollHeight,110)+'px';
+  ta.style.height=Math.min(ta.scrollHeight,100)+'px';
   syncEchoSendBtn();
 }
 if($('toggleInlineSongBtn')){
   $('toggleInlineSongBtn').onclick=()=>{
     const dr=$('circleComposerDrawer');
     const box=$('inlineSongBox');
-    if(dr && dr.hidden)dr.hidden=false;
+    const opening=!!(dr && dr.hidden) || !!(box && box.hidden);
+    if(dr)dr.hidden=!opening;
     if(box){
-      box.hidden=!box.hidden;
-      if(!box.hidden && $('inlineSongSearch')){
+      box.hidden=!opening;
+      if(opening && $('inlineSongSearch')){
         setTimeout(()=>$('inlineSongSearch').focus(),40);
       }
     }
@@ -4672,8 +4665,9 @@ $('echoInput').oninput=e=>{
   }
   autogrowEchoInput();
 };
-/* Resolución automática de título y artista desde los metadatos del enlace de streaming (oEmbed + URL parser) */
+/* Resolución automática de título y artista desde los metadatos del enlace de streaming */
 let resolvedInlineSong={title:'',artist:'',url:''};
+let lastSongSearchResults=[];
 function parseSongFallbackFromUrl(url){
   const plat=detectMusicPlatformName(url);
   try{
@@ -4704,67 +4698,172 @@ function resolveStreamingMetadata(url){
   return resolvedInlineSong;
 }
 
-/* Búsqueda de canciones DENTRO de la app conectada a Apple Music / iTunes
-   (con fetch + respaldo JSONP para que jamás falle en iPhone Safari). */
+/* Catálogo curado de respaldo instantáneo (Apple Music / iTunes) por si el navegador
+   móvil bloquea peticiones externas o no hay red en el momento de buscar. */
+const CURATED_MUSIC_CATALOG=[
+  {trackName:'Slow Dancing in a Burning Room',artistName:'John Mayer',trackViewUrl:'https://music.apple.com/mx/album/slow-dancing-in-a-burning-room/184335550?i=184335702',artworkUrl100:'https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/78/42/c0/7842c017-62a0-0118-9929-7f483fd7b85e/0886443927087.jpg/100x100bb.jpg'},
+  {trackName:'Gravity',artistName:'John Mayer',trackViewUrl:'https://music.apple.com/mx/album/gravity/184335550?i=184335645',artworkUrl100:'https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/78/42/c0/7842c017-62a0-0118-9929-7f483fd7b85e/0886443927087.jpg/100x100bb.jpg'},
+  {trackName:'New Light',artistName:'John Mayer',trackViewUrl:'https://music.apple.com/mx/album/new-light/1568819304?i=1568819697',artworkUrl100:'https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/44/73/b5/4473b530-9f12-0d5e-248c-83b5d694b457/886449139224.jpg/100x100bb.jpg'},
+  {trackName:'Waiting on the World to Change',artistName:'John Mayer',trackViewUrl:'https://music.apple.com/mx/album/waiting-on-the-world-to-change/184335550?i=184335555',artworkUrl100:'https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/78/42/c0/7842c017-62a0-0118-9929-7f483fd7b85e/0886443927087.jpg/100x100bb.jpg'},
+  {trackName:'Your Body Is a Wonderland',artistName:'John Mayer',trackViewUrl:'https://music.apple.com/mx/album/your-body-is-a-wonderland/193065645?i=193065744',artworkUrl100:'https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/88/0d/3a/880d3a54-8364-a35e-4287-4361e80b2a84/mzi.xuvvpxts.jpg/100x100bb.jpg'},
+  {trackName:'Stop This Train',artistName:'John Mayer',trackViewUrl:'https://music.apple.com/mx/album/stop-this-train/184335550?i=184335733',artworkUrl100:'https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/78/42/c0/7842c017-62a0-0118-9929-7f483fd7b85e/0886443927087.jpg/100x100bb.jpg'},
+  {trackName:'Free Fallin\' (Live at the Nokia Theatre)',artistName:'John Mayer',trackViewUrl:'https://music.apple.com/mx/album/free-fallin-live/284732993?i=284733006',artworkUrl100:'https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/78/42/c0/7842c017-62a0-0118-9929-7f483fd7b85e/0886443927087.jpg/100x100bb.jpg'},
+  {trackName:'Sparks',artistName:'Coldplay',trackViewUrl:'https://music.apple.com/mx/search?term=Sparks+Coldplay',artworkUrl100:''},
+  {trackName:'Yellow',artistName:'Coldplay',trackViewUrl:'https://music.apple.com/mx/search?term=Yellow+Coldplay',artworkUrl100:''},
+  {trackName:'Holocene',artistName:'Bon Iver',trackViewUrl:'https://music.apple.com/mx/search?term=Holocene+Bon+Iver',artworkUrl100:''},
+  {trackName:'Birds of a Feather',artistName:'Billie Eilish',trackViewUrl:'https://music.apple.com/mx/search?term=Birds+of+a+Feather+Billie+Eilish',artworkUrl100:''},
+  {trackName:'Hasta la Raíz',artistName:'Natalia Lafourcade',trackViewUrl:'https://music.apple.com/mx/search?term=Hasta+la+Raiz+Natalia+Lafourcade',artworkUrl100:''},
+  {trackName:'Puente',artistName:'Gustavo Cerati',trackViewUrl:'https://music.apple.com/mx/search?term=Puente+Gustavo+Cerati',artworkUrl100:''},
+  {trackName:'Pink + White',artistName:'Frank Ocean',trackViewUrl:'https://music.apple.com/mx/search?term=Pink+White+Frank+Ocean',artworkUrl100:''},
+  {trackName:'Good News',artistName:'Mac Miller',trackViewUrl:'https://music.apple.com/mx/search?term=Good+News+Mac+Miller',artworkUrl100:''},
+  {trackName:'Apocalypse',artistName:'Cigarettes After Sex',trackViewUrl:'https://music.apple.com/mx/search?term=Apocalypse+Cigarettes+After+Sex',artworkUrl100:''},
+  {trackName:'Anchor',artistName:'Novo Amor',trackViewUrl:'https://music.apple.com/mx/search?term=Anchor+Novo+Amor',artworkUrl100:''},
+  {trackName:'Nuvole Bianche',artistName:'Ludovico Einaudi',trackViewUrl:'https://music.apple.com/mx/search?term=Nuvole+Bianche+Ludovico+Einaudi',artworkUrl100:''}
+];
+
+function searchLocalCatalogFallback(q){
+  const norm=String(q||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim();
+  if(!norm)return [];
+  const matches=CURATED_MUSIC_CATALOG.filter(item=>{
+    const hay=(item.trackName+' '+item.artistName).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+    return hay.includes(norm) || norm.split(/\s+/).every(w=>hay.includes(w));
+  });
+  if(matches.length)return matches.slice(0,6);
+  const cleanQ=String(q||'').trim().replace(/\b\w/g,c=>c.toUpperCase());
+  return [{
+    trackName:cleanQ,
+    artistName:'Apple Music · Toca para adjuntar',
+    trackViewUrl:'https://music.apple.com/mx/search?term='+encodeURIComponent(q),
+    artworkUrl100:''
+  }];
+}
+
+/* Búsqueda de canciones DENTRO de la app conectada a Apple Music / iTunes + Deezer JSONP + Catálogo */
 let inlineSongSearchTimer=null;
-function fetchItunesSongs(q){
-  const url='https://itunes.apple.com/search?term='+encodeURIComponent(q)+'&media=music&entity=song&limit=6&country=MX';
-  return fetch(url).then(r=>{if(!r.ok)throw new Error('http');return r.json()}).then(d=>Array.isArray(d.results)?d.results:[]).catch(()=>new Promise(resolve=>{
-    const cbName='__wavyItunesCb_'+Date.now()+'_'+Math.floor(Math.random()*1e4);
+function fetchJsonpUrl(baseUrl,timeoutMs=2600){
+  return new Promise(resolve=>{
+    const cbName='__wavyMusicCb_'+Date.now()+'_'+Math.floor(Math.random()*1e5);
     const sc=document.createElement('script');
     let done=false;
     const cleanup=()=>{
       try{delete window[cbName]}catch(e){window[cbName]=undefined}
       if(sc.parentNode)sc.parentNode.removeChild(sc);
     };
-    const timer=setTimeout(()=>{if(!done){done=true;cleanup();resolve([])}},4500);
+    const timer=setTimeout(()=>{if(!done){done=true;cleanup();resolve(null)}},timeoutMs);
     window[cbName]=data=>{
       if(done)return;
       done=true;clearTimeout(timer);cleanup();
-      resolve(data && Array.isArray(data.results)?data.results:[]);
+      resolve(data);
     };
-    sc.onerror=()=>{if(!done){done=true;clearTimeout(timer);cleanup();resolve([])}};
-    sc.src=url+'&callback='+cbName;
+    sc.onerror=()=>{if(!done){done=true;clearTimeout(timer);cleanup();resolve(null)}};
+    sc.src=baseUrl+(baseUrl.includes('?')?'&':'?')+'callback='+cbName;
     document.head.appendChild(sc);
-  }));
+  });
 }
+
+async function fetchItunesSongs(q){
+  const term=encodeURIComponent(q);
+  const itunesUrl='https://itunes.apple.com/search?term='+term+'&media=music&entity=song&limit=6&country=MX';
+  /* 1. Intentar iTunes JSONP + Fetch en paralelo */
+  try{
+    const fetchProm=fetch(itunesUrl,{mode:'cors'}).then(r=>{
+      if(!r.ok)throw new Error('http');
+      const ct=r.headers.get('content-type')||'';
+      if(ct.includes('text/html'))throw new Error('sw-html');
+      return r.json();
+    }).then(d=>Array.isArray(d&&d.results)?d.results:[]).catch(()=>[]);
+    const jsonpProm=fetchJsonpUrl(itunesUrl,2600).then(d=>Array.isArray(d&&d.results)?d.results:[]);
+    const first=await Promise.race([
+      fetchProm.then(r=>r.length?r:jsonpProm),
+      jsonpProm.then(r=>r.length?r:fetchProm)
+    ]);
+    if(Array.isArray(first) && first.length)return first;
+  }catch(e){}
+  /* 2. Respaldo Deezer JSONP */
+  try{
+    const dzUrl='https://api.deezer.com/search?q='+term+'&limit=6&output=jsonp';
+    const dz=await fetchJsonpUrl(dzUrl,2400);
+    if(dz && Array.isArray(dz.data) && dz.data.length){
+      return dz.data.map(t=>({
+        trackName:t.title||'',
+        artistName:(t.artist&&t.artist.name)||'',
+        trackViewUrl:t.link||('https://music.apple.com/mx/search?term='+term),
+        previewUrl:t.preview||'',
+        artworkUrl100:(t.album&&(t.album.cover_medium||t.album.cover))||''
+      }));
+    }
+  }catch(e){}
+  /* 3. Catálogo curado instantáneo (incluye John Mayer y cualquier búsqueda) */
+  return searchLocalCatalogFallback(q);
+}
+
+function selectInlineSongItem(s){
+  if(!s)return;
+  resolvedInlineSong={
+    title:s.trackName||'',
+    artist:s.artistName||'',
+    url:s.trackViewUrl||('https://music.apple.com/mx/search?term='+encodeURIComponent((s.trackName||'')+' '+(s.artistName||''))),
+    previewUrl:s.previewUrl||'',
+    artwork:s.artworkUrl100||''
+  };
+  const sel=$('inlineSongSelected');
+  if(sel){
+    sel.hidden=false;
+    const art=$('inlineSongArt');
+    if(art){
+      if(s.artworkUrl100){art.src=s.artworkUrl100;art.hidden=false;}
+      else{art.hidden=true;}
+    }
+    if($('inlineSongTitle'))$('inlineSongTitle').textContent=s.trackName||'';
+    if($('inlineSongArtist'))$('inlineSongArtist').textContent=s.artistName||'';
+  }
+  const box=$('inlineSongResults');
+  if(box)box.innerHTML='';
+  if($('inlineSongSearch'))$('inlineSongSearch').value='';
+  if($('inlineSongBox'))$('inlineSongBox').hidden=true;
+  syncEchoSendBtn();
+}
+
 async function searchInlineSong(q){
   const box=$('inlineSongResults');if(!box)return;
   q=String(q||'').trim();
-  if(q.length<2){box.innerHTML='';return}
+  if(q.length<2){box.innerHTML='';lastSongSearchResults=[];syncEchoSendBtn();return}
+  /* Mostrar sugerencias inmediatas del catálogo local mientras responde Apple Music */
+  const instant=searchLocalCatalogFallback(q);
   box.innerHTML='<small style="font-size:11.5px;color:var(--muted);padding:4px 2px">Buscando en Apple Music…</small>';
   const list=await fetchItunesSongs(q);
-  if(!list.length){
-    box.innerHTML='<small style="font-size:11.5px;color:var(--muted);padding:4px 2px">Sin resultados. Prueba con otro título o artista.</small>';
-    return;
-  }
+  const finalList=(Array.isArray(list)&&list.length)?list:instant;
+  lastSongSearchResults=finalList;
   box.innerHTML='';
-  list.forEach(s=>{
+  finalList.forEach(s=>{
     const b=document.createElement('button');
     b.type='button';
     b.style.cssText='display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:var(--paper);border:1px solid var(--rule);border-radius:12px;padding:7px 10px;cursor:pointer';
-    b.innerHTML='<img src="'+esc(s.artworkUrl100||'')+'" alt="" style="width:38px;height:38px;border-radius:8px;object-fit:cover;flex-shrink:0"><span style="flex:1;min-width:0"><strong style="font-family:var(--serif);font-size:14.5px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--ink)">'+esc(s.trackName||'')+'</strong><small style="font-size:11.5px;color:var(--muted);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+esc(s.artistName||'')+'</small></span>';
-    b.onclick=()=>{
-      resolvedInlineSong={title:s.trackName||'',artist:s.artistName||'',url:s.trackViewUrl||'',previewUrl:s.previewUrl||'',artwork:s.artworkUrl100||''};
-      const sel=$('inlineSongSelected');
-      if(sel){
-        sel.hidden=false;
-        if($('inlineSongArt'))$('inlineSongArt').src=s.artworkUrl100||'';
-        if($('inlineSongTitle'))$('inlineSongTitle').textContent=s.trackName||'';
-        if($('inlineSongArtist'))$('inlineSongArtist').textContent=s.artistName||'';
-      }
-      box.innerHTML='';
-      if($('inlineSongSearch'))$('inlineSongSearch').value='';
-      if($('inlineSongBox'))$('inlineSongBox').hidden=true;
-      syncEchoSendBtn();
-    };
+    const artHtml=s.artworkUrl100
+      ? '<img src="'+esc(s.artworkUrl100)+'" alt="" style="width:38px;height:38px;border-radius:8px;object-fit:cover;flex-shrink:0">'
+      : '<span style="width:38px;height:38px;border-radius:8px;background:rgba(99,130,100,0.10);color:var(--ok);display:inline-flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">♪</span>';
+    b.innerHTML=artHtml+'<span style="flex:1;min-width:0"><strong style="font-family:var(--serif);font-size:14.5px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--ink)">'+esc(s.trackName||'')+'</strong><small style="font-size:11.5px;color:var(--muted);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+esc(s.artistName||'')+'</small></span><span style="font-size:11px;color:var(--ok);font-weight:600;flex-shrink:0">Elegir</span>';
+    b.onclick=()=>selectInlineSongItem(s);
     box.appendChild(b);
   });
+  syncEchoSendBtn();
 }
 if($('inlineSongSearch')){
   $('inlineSongSearch').addEventListener('input',e=>{
     clearTimeout(inlineSongSearchTimer);
-    inlineSongSearchTimer=setTimeout(()=>searchInlineSong(e.target.value),350);
+    syncEchoSendBtn();
+    inlineSongSearchTimer=setTimeout(()=>searchInlineSong(e.target.value),220);
+  });
+  $('inlineSongSearch').addEventListener('keydown',e=>{
+    if(e.key==='Enter'){
+      e.preventDefault();
+      if(lastSongSearchResults.length){
+        selectInlineSongItem(lastSongSearchResults[0]);
+      }else if(e.target.value.trim().length>=2){
+        const fb=searchLocalCatalogFallback(e.target.value.trim());
+        if(fb.length)selectInlineSongItem(fb[0]);
+      }
+    }
   });
 }
 if($('inlineSongClear')){
@@ -4777,11 +4876,18 @@ if($('inlineSongClear')){
 
 $('postEchoBtn').onclick=async()=>{
   const txt=$('echoInput').value.trim();
+  /* Si el usuario escribió una canción en el buscador (ej. "John Mayer") y presionó ↑ directo, adjuntar el primer resultado automáticamente */
+  if(!(resolvedInlineSong && resolvedInlineSong.url) && $('inlineSongSearch') && $('inlineSongSearch').value.trim().length>=2){
+    const qPending=$('inlineSongSearch').value.trim();
+    const pick=(lastSongSearchResults && lastSongSearchResults[0]) || searchLocalCatalogFallback(qPending)[0];
+    if(pick)selectInlineSongItem(pick);
+  }
   const inUrl=(resolvedInlineSong && resolvedInlineSong.url)?resolvedInlineSong.url:'';
   if(!txt && !inUrl){toast('Escribe una nota o busca una canción para tu círculo','er');return}
+  let attachedSong=null;
   if(inUrl){
     const meta=resolvedInlineSong;
-    S.soundCapsule={
+    attachedSong={
       question:S.soundCapsule?.question||SOUND_QUESTIONS[0],
       title:meta.title,
       artist:meta.artist,
@@ -4790,23 +4896,26 @@ $('postEchoBtn').onclick=async()=>{
       artwork:meta.artwork||'',
       updatedAt:Date.now()
     };
+    S.soundCapsule=attachedSong;
   }
   if(selectedEchoVibe==='Sintonía abierta'){
     S.openSync=true;
   }
-  const finalTxt=txt || ('Compartió una melodía en '+(inUrl?detectMusicPlatformName(inUrl):'su cápsula sonora'));
+  const finalTxt=txt || (attachedSong?('♪ '+attachedSong.title+' · '+attachedSong.artist):'Compartió una melodía en su cápsula sonora');
   S.echoes.unshift({
     user:S.me.username,
     name:S.me.name,
     av:S.me.av,
     text:finalTxt,
     vibe:selectedEchoVibe,
+    song:attachedSong,
     ts:Date.now()
   });
   $('echoInput').value='';
   autogrowEchoInput();
   if($('echoCount'))$('echoCount').textContent='0 / 200';
   resolvedInlineSong={title:'',artist:'',url:''};
+  lastSongSearchResults=[];
   if($('inlineSongSearch'))$('inlineSongSearch').value='';
   if($('inlineSongResults'))$('inlineSongResults').innerHTML='';
   if($('inlineSongSelected'))$('inlineSongSelected').hidden=true;
@@ -4848,14 +4957,10 @@ function getDailyCircleQuestion(){
   return DAILY_CIRCLE_QUESTIONS[dayIdx];
 }
 
-/* El recuadro de "Abrir sintonía": el mismo en Círculo y en Costa, con el
-   mismo diseño, las mismas dimensiones y el mismo botón. Se construye con
-   una función compartida para que los dos queden idénticos y en sintonía.
-   El botón se busca por clase dentro del recuadro, no por id, para no
-   duplicar ids al tener el recuadro en dos vistas. */
+/* El recuadro de "Abrir sintonía": el mismo en Círculo y en Costa */
 function buildOpenSyncBanner(){
   const b=document.createElement('div');
-  b.style.cssText='display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 13px;margin-bottom:11px;border-radius:14px;background:var(--wash);border:1px solid var(--glass-border);box-shadow:var(--glass-spec)';
+  b.style.cssText='display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 13px;margin-bottom:11px;border-radius:14px;background:var(--paper);border:1px solid var(--rule);box-shadow:0 8px 22px -16px rgba(35,31,29,0.05)';
   b.innerHTML=
     '<div style="min-width:0;flex:1">'+
       '<strong style="font-family:var(--serif);font-size:15px;font-weight:500;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+(S.openSync?'Tu sintonía está abierta':'¿Respirar en compañía?')+'</strong>'+
@@ -4873,7 +4978,6 @@ function buildOpenSyncBanner(){
   };
   return b;
 }
-/* La copia del recuadro en Costa: idéntica a la de Círculo. */
 function renderCoastSyncBanner(){
   const c=$('coastSyncBanner');if(!c)return;
   c.innerHTML='';
@@ -4882,15 +4986,9 @@ function renderCoastSyncBanner(){
 
 function renderCircleFeed(){
   const box=$('circleFeedList');if(!box)return;box.innerHTML='';
-  /* La copia del recuadro en Costa se mantiene en sintonía con Círculo
-     (se llama aquí arriba para que corra aunque el feed esté vacío). */
   renderCoastSyncBanner();
   const maintained=isPebeteroMaintained();
 
-  /* 1. Pregunta Editorial del Día para el Círculo (Novedad Diaria y Conversación Profunda) */
-  /* La pregunta del día ya no es un banner aparte que ocupa espacio: vive
-     DENTRO del compositor, como una línea sutil pegada al cuadro de texto
-     (#dailyPromptLine). Parte del ecosistema. Tocarla enfoca el cuadro. */
   const dailyQ=getDailyCircleQuestion();
   const dpl=$('dailyPromptLine');
   if(dpl){
@@ -4899,13 +4997,14 @@ function renderCircleFeed(){
   }
 
   const hasMySong=!!(S.soundCapsule && (S.soundCapsule.title||S.soundCapsule.url));
-  const myPlatId=hasMySong?detectMusicPlatformId(S.soundCapsule.url):'spotify';
-  const myPlatName=hasMySong?detectMusicPlatformName(S.soundCapsule.url):'Música';
   S.echoes.slice(0,2).forEach((ec,idx)=>{
     const myCard=document.createElement('div');
     myCard.className='wavy-card';
     const drawerId='myScDrawer_'+idx;
     const cleanMyTxt=String(ec.text||'').replace(/^[“"«]+|[”"»]+$/g,'');
+    const ecSong=ec.song || (idx===0 && hasMySong ? S.soundCapsule : null);
+    const ecPlatId=ecSong?detectMusicPlatformId(ecSong.url):'apple';
+    const ecPlatName=ecSong?detectMusicPlatformName(ecSong.url):'Apple Music';
     myCard.innerHTML=
       '<div class="wavy-top">'+
         '<div class="wavy-user">'+
@@ -4913,13 +5012,13 @@ function renderCircleFeed(){
           '<div class="wavy-info"><strong>'+esc(S.me.name)+' (Tú)</strong><span>@'+esc(S.me.username)+(ec.vibe?' · '+esc(ec.vibe):' · Nota personal')+'</span></div>'+
         '</div>'+
         '<div class="wavy-actions-right">'+
-          (hasMySong?'<button type="button" class="sp-icon-btn active" data-plat="'+myPlatId+'" data-toggle-sc="'+drawerId+'" title="Escuchar en '+myPlatName+': '+esc(S.soundCapsule.title)+'">'+getStreamingIcon(S.soundCapsule)+'</button>':'')+
+          (ecSong?'<button type="button" class="sp-icon-btn active" data-plat="'+ecPlatId+'" data-toggle-sc="'+drawerId+'" title="Escuchar en '+ecPlatName+': '+esc(ecSong.title)+'">'+getStreamingIcon(ecSong)+'</button>':'')+
         '</div>'+
       '</div>'+
       '<div class="wavy-echo">'+esc(cleanMyTxt)+'</div>'+
-      (hasMySong?'<div id="'+drawerId+'" hidden style="margin-top:8px;animation:fadeUp .22s ease">'+renderSoundCapsuleHTML(S.soundCapsule,true)+'</div>':'');
+      (ecSong?'<div id="'+drawerId+'" style="margin-top:8px;animation:fadeUp .22s ease">'+renderSoundCapsuleHTML(ecSong,true)+'</div>':'');
     const spBtn=myCard.querySelector('[data-toggle-sc]');
-    if(spBtn && hasMySong){
+    if(spBtn && ecSong){
       spBtn.onclick=e=>{
         e.stopPropagation();
         const dr=myCard.querySelector('#'+drawerId);
@@ -6940,13 +7039,9 @@ function getTodayClueLog(){
 }
 
 let openClueCatId=''; /* Nada se abre solo: solo los clicks activan o desactivan los menús */
+let clueShowAllCats=false; /* Por defecto: solo 1 renglón por dimensión (Cuerpo, Mente, Vínculo) y el último cuadro dice "Más" para expandir */
 function renderClueTrackList(){
   const list=$('clueTrackList');if(!list)return;
-  /* El cajón vive como HERMANO de la lista (hijo de .bio-sec), nunca
-     DENTRO de ella: si queda dentro de un grupo, list.innerHTML=''
-     lo desprende del DOM y $('bentoActiveDrawer') devuelve null en el
-     siguiente render — por eso el primer click abría y después ninguno.
-     Se saca siempre antes de limpiar, y si falta se recrea. */
   let drawer=$('bentoActiveDrawer');
   if(!drawer){
     drawer=document.createElement('div');
@@ -6966,12 +7061,19 @@ function renderClueTrackList(){
     return true;
   });
 
+  visibleCats.forEach(cat=>{
+    const cur=log[cat.id];
+    const arr=Array.isArray(cur)?cur:(cur?[cur]:[]);
+    totalCount+=arr.length;
+  });
+
   if(openClueCatId && !visibleCats.some(c=>c.id===openClueCatId)){
     openClueCatId=visibleCats[0]?visibleCats[0].id:'';
   }
 
-  /* Agrupar por dimensión (Cuerpo, Mente, Vínculo): un renglón por
-     dimensión y abajo las tarjetas de ese aspecto. */
+  /* Agrupar por dimensión (Cuerpo, Mente, Vínculo): en vista compacta solo
+     aparece 1 renglón (2 cuadros) de cada dimensión y el último cuadro de
+     Vínculo dice "Más" para expandir todas las opciones. */
   const dimOrder=['Cuerpo','Mente','Vínculo'];
   const groups={};
   visibleCats.forEach(cat=>{
@@ -6983,45 +7085,113 @@ function renderClueTrackList(){
     const ia=dimOrder.indexOf(a),ib=dimOrder.indexOf(b);
     return (ia<0?99:ia)-(ib<0?99:ib);
   });
-  dims.forEach(dim=>{
-    const cats=groups[dim];
-    const group=document.createElement('div');
-    group.className='bento-dim-group';
-    if(dim){
-      const hd=document.createElement('div');
-      hd.className='bento-dim-hd';
-      hd.textContent=dim.toUpperCase();
-      group.appendChild(hd);
-    }
+
+  if(!clueShowAllCats){
+    /* Vista compacta: 1 cuadro de Cuerpo, 1 de Mente, 1 de Vínculo y el último cuadro dice "Más" para expandirse */
     const grid=document.createElement('div');
     grid.className='bento-track-grid';
-    cats.forEach(cat=>{
-    const cur=log[cat.id];
-    const arr=Array.isArray(cur)?cur:(cur?[cur]:[]);
-    const count=arr.length;
-    totalCount+=count;
-
-    const card=document.createElement('button');
-    card.type='button';
-    const isOpen=(openClueCatId===cat.id);
-    card.className='bento-card'+(isOpen?' active':'')+(count>0?' has':'');
-    const selTxt=arr.length?arr.join(' · '):cat.sub;
-    card.innerHTML=
+    dims.forEach(dim=>{
+      const allDimCats=groups[dim]||[];
+      const cat=allDimCats[0];
+      if(!cat)return;
+      const cur=log[cat.id];
+      const arr=Array.isArray(cur)?cur:(cur?[cur]:[]);
+      const count=arr.length;
+      const card=document.createElement('button');
+      card.type='button';
+      const isOpen=(openClueCatId===cat.id);
+      card.className='bento-card'+(isOpen?' active':'')+(count>0?' has':'');
+      const selTxt=arr.length?arr.join(' · '):cat.sub;
+      card.innerHTML=
+        '<div class="bento-card-top">'+
+          '<span class="bento-ic">'+cat.icon+'</span>'+
+          '<span class="bento-badge">'+esc(dim.toUpperCase())+(count>0?(' · '+count+' ✓'):'')+'</span>'+
+        '</div>'+
+        '<strong>'+esc(cat.name)+'</strong>'+
+        '<small>'+esc(selTxt)+'</small>';
+      card.onclick=()=>{
+        openClueCatId=(openClueCatId===cat.id)?'':cat.id;
+        renderClueTrackList();
+      };
+      grid.appendChild(card);
+    });
+    const hiddenCount=Math.max(0, visibleCats.length - dims.length);
+    const moreCard=document.createElement('button');
+    moreCard.type='button';
+    moreCard.className='bento-card';
+    moreCard.id='clueMoreToggleCard';
+    moreCard.innerHTML=
       '<div class="bento-card-top">'+
-        '<span class="bento-ic">'+cat.icon+'</span>'+
-        '<span class="bento-badge">'+(count>0?(count+' ✓'):'+')+'</span>'+
+        '<span class="bento-ic"><svg class="w-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v8M8 12h8"/></svg></span>'+
+        '<span class="bento-badge">+'+hiddenCount+'</span>'+
       '</div>'+
-      '<strong>'+esc(cat.name)+'</strong>'+
-      '<small>'+esc(selTxt)+'</small>';
-    card.onclick=()=>{
-      openClueCatId=(openClueCatId===cat.id)?'':cat.id;
+      '<strong>Más</strong>'+
+      '<small>Expandir '+hiddenCount+' opciones más</small>';
+    moreCard.onclick=()=>{
+      clueShowAllCats=true;
       renderClueTrackList();
     };
-    grid.appendChild(card);
+    grid.appendChild(moreCard);
+    list.appendChild(grid);
+  }else{
+    dims.forEach((dim,dimIdx)=>{
+      const cats=groups[dim]||[];
+      const isLastDim=(dimIdx===dims.length-1);
+      const group=document.createElement('div');
+      group.className='bento-dim-group';
+      if(dim){
+        const hd=document.createElement('div');
+        hd.className='bento-dim-hd';
+        hd.textContent=dim.toUpperCase();
+        group.appendChild(hd);
+      }
+      const grid=document.createElement('div');
+      grid.className='bento-track-grid';
+      cats.forEach(cat=>{
+        const cur=log[cat.id];
+        const arr=Array.isArray(cur)?cur:(cur?[cur]:[]);
+        const count=arr.length;
+
+        const card=document.createElement('button');
+        card.type='button';
+        const isOpen=(openClueCatId===cat.id);
+        card.className='bento-card'+(isOpen?' active':'')+(count>0?' has':'');
+        const selTxt=arr.length?arr.join(' · '):cat.sub;
+        card.innerHTML=
+          '<div class="bento-card-top">'+
+            '<span class="bento-ic">'+cat.icon+'</span>'+
+            '<span class="bento-badge">'+(count>0?(count+' ✓'):'+')+'</span>'+
+          '</div>'+
+          '<strong>'+esc(cat.name)+'</strong>'+
+          '<small>'+esc(selTxt)+'</small>';
+        card.onclick=()=>{
+          openClueCatId=(openClueCatId===cat.id)?'':cat.id;
+          renderClueTrackList();
+        };
+        grid.appendChild(card);
+      });
+      if(isLastDim){
+        const lessCard=document.createElement('button');
+        lessCard.type='button';
+        lessCard.className='bento-card';
+        lessCard.id='clueMoreToggleCard';
+        lessCard.innerHTML=
+          '<div class="bento-card-top">'+
+            '<span class="bento-ic"><svg class="w-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M8 12h8"/></svg></span>'+
+            '<span class="bento-badge">▴</span>'+
+          '</div>'+
+          '<strong>Ver menos</strong>'+
+          '<small>Compactar vista</small>';
+        lessCard.onclick=()=>{
+          clueShowAllCats=false;
+          renderClueTrackList();
+        };
+        grid.appendChild(lessCard);
+      }
+      group.appendChild(grid);
+      list.appendChild(group);
     });
-    group.appendChild(grid);
-    list.appendChild(group);
-  });
+  }
 
   if(drawer){
     const activeCat=visibleCats.find(c=>c.id===openClueCatId);
@@ -7733,7 +7903,7 @@ function initAllBioCategories(){
   );
 }
 
-let nshow=4;
+let nshow=1;
 function week(){
   const el=$('wk');if(!el)return;el.innerHTML='';const now=new Date(),mon=new Date(now);mon.setHours(12);mon.setDate(now.getDate()-((now.getDay()+6)%7));
   for(let i=0;i<7;i++){
@@ -7751,7 +7921,10 @@ function insight(){
   const withAct=S.notes.filter(n=>n.moods && n.moods.length && (n.fuerza||n.ciclo));
   const calmRatio=withAct.length>=2?Math.round(withAct.filter(n=>n.moods.some(m=>P.includes(m[0]))).length/withAct.length*100):null;
   const txt=calmRatio!==null?'En tus registros recientes, el '+calmRatio+'% de los días con cuidado físico muestran calma, enfoque o plenitud.':'Registra tu ánimo y tu descanso unos días para descubrir tus patrones personales.';
-  if($('ins'))$('ins').textContent=txt;
+  if($('ins')){
+    $('ins').textContent=calmRatio!==null?txt:'';
+    $('ins').hidden=(calmRatio===null);
+  }
   if($('cins'))$('cins').textContent=txt;
 }
 
@@ -7770,13 +7943,8 @@ function summarizeTodayClueForNote(){
 
 function notes(){
   const b=$('nb');if(!b)return;b.innerHTML='';week();insight();renderClinicalReport();
-  /* Los posts del Diario (hoja en blanco) se quedan en el Diario y NO
-     aparecen aquí en Hoy: esta lista es solo el registro corto del día
-     (línea + emociones). Nada salta de página innecesariamente. Un
-     escrito es del Diario si es de hoja en blanco (blank:true) o si su
-     texto es largo (>140 caracteres), igual que en renderDiaryList. */
   const shorts=(S.notes||[]).filter(n=>n&&!(n.blank===true)&&!(n.texto&&String(n.texto).length>140));
-  if(!shorts.length){b.innerHTML='<p class="empty">Aún no hay entradas. Elige tus emociones o escribe una línea sobre tu día.</p>';$('more').hidden=true;return}
+  if(!shorts.length){b.innerHTML='';$('more').hidden=true;return}
   shorts.slice(0,nshow).forEach(n=>{
     const card=document.createElement('div');
     card.className='journal-card';
@@ -9273,7 +9441,7 @@ document.addEventListener('pointerdown',e=>{
     }
   }
   if($('inlineSongBox') && !$('inlineSongBox').hidden){
-    if(!e.target.closest('#inlineSongBox') && !e.target.closest('#openInlineSongBtn')){
+    if(!e.target.closest('#inlineSongBox') && !e.target.closest('#toggleInlineSongBtn') && !e.target.closest('#circleComposer')){
       $('inlineSongBox').hidden=true;
     }
   }
@@ -9390,7 +9558,7 @@ if($('scToggleBtn')){
    ========================================================= */
 if('serviceWorker' in navigator && (window.location.protocol==='https:' || window.location.hostname==='localhost' || window.location.hostname==='127.0.0.1')){
   window.addEventListener('load',()=>{
-    navigator.serviceWorker.register('./sw.js').catch(()=>{});
+    navigator.serviceWorker.register('./sw.js').then(r=>{try{r.update()}catch(e){}}).catch(()=>{});
   });
 }
 
@@ -9401,14 +9569,13 @@ function setupAutoGrow(el){
   if(!el)return;
   const resize=()=>{
     el.style.height='auto';
-    el.style.height=Math.max(el.id==='echoInput'?44:90,el.scrollHeight)+'px';
+    el.style.height=Math.max(el.id==='ni'?62:90,el.scrollHeight)+'px';
   };
   el.addEventListener('input',resize);
   el.addEventListener('focus',resize);
   setTimeout(resize,100);
 }
 setupAutoGrow($('ni'));
-setupAutoGrow($('echoInput'));
 setupAutoGrow($('blankSheetBody'));
 
 /* =========================================================

@@ -3,10 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0D110F" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#FFFFFF" id="themeColorMeta">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="format-detection" content="telephone=no">
 <title>Wavy — Ritual de Paz Mental, Salud Emocional y Co-regulación en Vivo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,9 +15,9 @@
 <style>
 :root{
   --paper:#FAF7F2;
-  --paper-grad:radial-gradient(circle at 15% -8%,#FFFFFF 0%,#FAF6F0 48%,#EFE8DC 100%);
-  --card:rgba(255,253,250,0.76);
-  --card-solid:#FFFDF9;
+  --paper-grad:none;
+  --card:#FAF7F2;
+  --card-solid:#FAF7F2;
   --glass-border:rgba(35,31,29,0.08);
   --glass-spec:inset 0 1.5px 0 rgba(255,255,255,0.88),inset 0 -1px 0 rgba(35,31,29,0.03);
   --ink:#231F1D;
@@ -29,7 +28,7 @@
   --ok:#638264;
   --spotify:#1DB954;
   --wash:rgba(243,237,228,0.78);
-  --shadow:0 24px 52px -22px rgba(56,46,38,0.10),0 2px 8px rgba(56,46,38,0.03);
+  --shadow:none;
   color-scheme:light;
   --serif:'EB Garamond',Georgia,'Times New Roman',serif;
   --sans:-apple-system,BlinkMacSystemFont,'SF Pro Display','Inter','Segoe UI',sans-serif;
@@ -39,9 +38,9 @@
 }
 :root[data-theme="light"]{
   --paper:#F4EFE6;
-  --paper-grad:radial-gradient(circle at 18% 0%,#FBF8F3 0%,#F2EAE0 52%,#E6DDD0 100%);
-  --card:rgba(255,252,247,0.78);
-  --card-solid:#FFFDF9;
+  --paper-grad:none;
+  --card:#F4EFE6;
+  --card-solid:#F4EFE6;
   --glass-border:rgba(36,33,30,0.09);
   --glass-spec:inset 0 1.5px 0 rgba(255,255,255,0.90),inset 0 -1px 0 rgba(36,33,30,0.04);
   --ink:#24201D;
@@ -52,7 +51,7 @@
   --ok:#5B7A5C;
   --spotify:#1DB954;
   --wash:rgba(236,228,216,0.74);
-  --shadow:0 22px 48px -20px rgba(48,39,31,0.12),0 2px 6px rgba(48,39,31,0.04);
+  --shadow:none;
   color-scheme:light;
 }
 /* Blanco Pulcritud: blanco total, neutro, como Apple Music / Instagram /
@@ -77,12 +76,12 @@
 }
 @media(prefers-color-scheme:dark){
   :root:not([data-theme="light"]):not([data-theme="white"]):not([data-theme="pulcritud"]){
-    --paper:#0D110F;
-    --paper-grad:radial-gradient(circle at 20% -10%,#1C2621 0%,#101512 54%,#080B09 100%);
-    --card:rgba(22,29,25,0.75);
-    --card-solid:#151C18;
+    --paper:#121614;
+    --paper-grad:none;
+    --card:#121614;
+    --card-solid:#121614;
     --glass-border:rgba(244,239,230,0.13);
-    --glass-spec:inset 0 1.5px 0 rgba(255,255,255,0.18),inset 0 -1px 0 rgba(0,0,0,0.38);
+    --glass-spec:inset 0 1px 0 rgba(255,255,255,0.14);
     --ink:#F4EFE6;
     --muted:#A39E95;
     --rule:rgba(244,239,230,0.10);
@@ -90,18 +89,18 @@
     --gold:#D6B77C;
     --ok:#88AB89;
     --spotify:#1ED760;
-    --wash:rgba(31,40,35,0.72);
-    --shadow:0 24px 55px -20px rgba(0,0,0,0.72),0 1px 3px rgba(0,0,0,0.42);
+    --wash:#1A201D;
+    --shadow:none;
     color-scheme:dark;
   }
 }
 :root[data-theme="dark"]{
-  --paper:#0D110F;
-  --paper-grad:radial-gradient(circle at 20% -10%,#1C2621 0%,#101512 54%,#080B09 100%);
-  --card:rgba(22,29,25,0.75);
-  --card-solid:#151C18;
+  --paper:#121614;
+  --paper-grad:none;
+  --card:#121614;
+  --card-solid:#121614;
   --glass-border:rgba(244,239,230,0.13);
-  --glass-spec:inset 0 1.5px 0 rgba(255,255,255,0.18),inset 0 -1px 0 rgba(0,0,0,0.38);
+  --glass-spec:inset 0 1px 0 rgba(255,255,255,0.14);
   --ink:#F4EFE6;
   --muted:#A39E95;
   --rule:rgba(244,239,230,0.10);
@@ -109,22 +108,21 @@
   --gold:#D6B77C;
   --ok:#88AB89;
   --spotify:#1ED760;
-  --wash:rgba(31,40,35,0.72);
-  --shadow:0 24px 55px -20px rgba(0,0,0,0.72),0 1px 3px rgba(0,0,0,0.42);
+  --wash:#1A201D;
+  --shadow:none;
   color-scheme:dark;
 }
 @media(prefers-reduced-transparency:reduce){
   :root{--card:var(--card-solid)}
 }
-html{scroll-padding-top:env(safe-area-inset-top,0px)}
+html{background:var(--paper);scroll-padding-top:env(safe-area-inset-top,0px)}
 *{box-sizing:border-box;margin:0;padding:0}
 [hidden]{display:none !important}
 button,input,select,textarea,label,.chip,.react-btn,.story,.wavy-card{touch-action:manipulation}
 :focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 body{
   background:var(--paper);
-  background-image:var(--paper-grad);
-  background-attachment:fixed;
+  background-image:none;
   color:var(--ink);
   font-family:var(--sans);
   -webkit-font-smoothing:antialiased;
@@ -207,14 +205,11 @@ h1{font-family:var(--serif);font-weight:500;font-size:clamp(28px,7vw,36px);line-
   margin-bottom:14px;
 }
 @media(max-width:480px){
-  .card,.stories-bar,.me-pill,.bnav{
+  .card,.stories-bar,.me-pill{
     backdrop-filter:blur(16px) saturate(160%);
     -webkit-backdrop-filter:blur(16px) saturate(160%);
   }
-  /* iPhone (390 px): los rótulos caben en un renglón sin partirse.
-     Ronda 20: el encabezado de hábitos se cortaba con … porque título +
-     3 botones + «3 Libres · 7 Pro» no cabían en 330 px. Se baja la letra
-     a 9 px y los botones a 20 px para que todo quepa sin recortar. */
+  /* iPhone (390 px): los rótulos caben en un renglón sin partirse. */
   .hd{font-size:11px;letter-spacing:.04em;gap:5px}
   .hd .help-q{width:20px;height:20px;font-size:12px;margin-left:3px}
   .hd .eye-q,.hd .arrow-q{width:20px;height:20px;margin-left:3px}
@@ -251,20 +246,32 @@ h1{font-family:var(--serif);font-weight:500;font-size:clamp(28px,7vw,36px);line-
 }
 .help-tip[hidden]{display:none}
 
-/* Sub-navegación rápida de instrumentos en HOY */
+/* Sub-navegación rápida de instrumentos en HOY con borde Liquid Glass en movimiento */
+@keyframes liquidBorderFlow{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
 .tabs{
   display:grid;grid-template-columns:repeat(3,1fr);gap:4px;
   background:var(--card);border:1px solid var(--glass-border);
   border-radius:12px;padding:4px;margin-bottom:14px;box-shadow:var(--glass-spec);
 }
 .tab{
-  background:none;border:none;min-height:44px;padding:6px 4px;
+  background:none;border:1.5px solid transparent;min-height:44px;padding:6px 4px;
   font-family:var(--serif);font-size:15px;color:var(--muted);
   cursor:pointer;border-radius:9px;transition:all .2s;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
 }
 .tab b{display:block;font-family:var(--sans);font-size:11px;letter-spacing:.12em;font-weight:600;color:var(--gold);text-transform:uppercase}
-.tab.on{background:var(--wash);color:var(--ink);font-weight:600;box-shadow:inset 0 -2px 0 var(--crimson)}
+.tab.on{
+  color:var(--ink);font-weight:600;
+  border:1.5px solid transparent;
+  background:linear-gradient(var(--paper),var(--paper)) padding-box,linear-gradient(120deg,color-mix(in srgb,var(--ink) 12%,var(--paper)),color-mix(in srgb,var(--ink) 45%,var(--paper)),rgba(255,255,255,0.96),color-mix(in srgb,var(--ink) 12%,var(--paper))) border-box;
+  background-size:100% 100%,240% 240%;
+  animation:liquidBorderFlow 4.2s ease infinite;
+  box-shadow:0 4px 14px -8px rgba(0,0,0,0.12),inset 0 1px 0 rgba(255,255,255,0.85);
+}
 .panel{display:none;animation:fadeUp .24s ease}.panel.on{display:block}
 
 /* Check-in rápido en Hoy (sin animación giratoria en Pebetero) */
@@ -273,19 +280,27 @@ h1{font-family:var(--serif);font-weight:500;font-size:clamp(28px,7vw,36px);line-
 /* Cuadrícula 3x3 Hábitos */
 .habit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
 .habit-item{
-  background:var(--paper);border:1px solid var(--rule);border-radius:12px;
+  background:var(--paper);border:1.5px solid var(--rule);border-radius:12px;
   min-height:64px;padding:10px 6px 8px;text-align:center;cursor:pointer;position:relative;
   transition:all .16s ease;color:var(--muted);font-family:var(--serif);
   box-shadow:var(--glass-spec);
 }
 .habit-item i{display:block;font-style:normal;font-size:21px;color:var(--ink);margin-bottom:3px;line-height:1}
 .habit-item span{font-size:12.5px;display:block;line-height:1.15}
-.habit-item.on{border-color:var(--crimson);background:var(--card-solid);color:var(--ink);font-weight:600;box-shadow:inset 0 -2px 0 var(--crimson)}
-.habit-item.on i{color:var(--crimson)}
-.habit-item .pro-tag{
-  position:absolute;top:4px;right:6px;font-size:11px;letter-spacing:.06em;
-  text-transform:uppercase;color:var(--gold);font-family:var(--sans);font-weight:700;
+.habit-item.on{
+  color:var(--ink);font-weight:600;
+  border:1.5px solid transparent;
+  background:linear-gradient(var(--paper),var(--paper)) padding-box,linear-gradient(120deg,color-mix(in srgb,var(--ink) 14%,var(--paper)),color-mix(in srgb,var(--ink) 50%,var(--paper)),rgba(255,255,255,0.96),color-mix(in srgb,var(--ink) 14%,var(--paper))) border-box;
+  background-size:100% 100%,240% 240%;
+  animation:liquidBorderFlow 4.2s ease infinite;
+  box-shadow:0 6px 18px -10px rgba(0,0,0,0.14),inset 0 1px 0 rgba(255,255,255,0.88);
 }
+.habit-item.on i{color:var(--ink)}
+.habit-item.pro-glow,.mo.pro-glow,.pal-btn.pro-glow{
+  border-color:rgba(194,160,104,0.68);
+  box-shadow:0 0 12px rgba(194,160,104,0.28),inset 0 0 6px rgba(194,160,104,0.10);
+}
+.habit-item .pro-tag,.mo .vip-dot,.pal-btn .vip-dot{display:none !important}
 /* Privacidad de hábitos: el ojo inicia cerrado y las opciones borrosas.
    Solo un click en el ojo las revela; otro click las vuelve a borrar. */
 .eye-q,.arrow-q{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;border:1px solid var(--rule);background:var(--card-solid);color:var(--muted);cursor:pointer;vertical-align:middle;margin-left:4px}
@@ -463,31 +478,50 @@ body.co-sync-screen #v-breathe .bmode{
   opacity:0;transition:opacity .55s ease;
 }
 body.co-sync-screen #coFirefliesOverlay{opacity:1}
-/* Cápsula Sonora Liquid Glass */
+/* Cápsula Sonora Minimalista · Sin recuadro, flujo orgánico tipo X / Instagram */
 .sound-capsule-card{
-  background:linear-gradient(135deg,var(--card-solid) 0%,var(--wash) 100%);
-  backdrop-filter:blur(28px) saturate(190%);-webkit-backdrop-filter:blur(28px) saturate(190%);box-shadow:var(--glass-spec),0 14px 30px -18px rgba(15,23,42,0.16);
-  border-radius:14px;padding:13px 14px;margin:10px 0;position:relative;overflow:hidden;
+  background:transparent;
+  border:none;
+  box-shadow:none;
+  border-radius:0;
+  padding:4px 0;
+  margin:4px 0 6px;
+  position:relative;
 }
-.sc-head{display:flex;align-items:center;gap:12px}
+.sc-head{display:flex;align-items:center;gap:10px;width:100%}
 .sc-vinyl{
-  width:46px;height:46px;border-radius:50%;flex-shrink:0;
-  background:radial-gradient(circle,#FAF6F0 0%,#FAF6F0 16%,#B5892E 17%,#1A2230 29%,#0D131D 62%,#263244 64%,#0D131D 100%);
-  border:1px solid rgba(255,255,255,0.35);
-  box-shadow:0 6px 16px rgba(0,0,0,0.22);
-  animation:spinVinyl 9s linear infinite;
-  display:grid;place-items:center;
+  width:38px;height:38px;border-radius:8px;flex-shrink:0;
+  background:var(--wash);
+  border:1px solid var(--rule);
+  display:grid;place-items:center;overflow:hidden;
 }
-@keyframes spinVinyl{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 .sc-meta{min-width:0;flex:1;text-align:left}
-.sc-q{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--gold);font-weight:600;display:block;margin-bottom:2px}
-.sc-title{font-family:var(--serif);font-size:17px;font-weight:500;color:var(--ink);display:block;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.sc-artist{font-size:12px;color:var(--muted);display:block;margin-top:2px}
-.sc-embed{margin-top:10px;border-radius:12px;overflow:hidden;border:1px solid var(--glass-border)}
+.sc-q{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:600;display:block;margin-bottom:1px}
+.sc-title{font-family:var(--serif);font-size:16px;font-weight:500;color:var(--ink);display:block;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sc-artist{font-size:12px;color:var(--muted);display:block;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sc-note-btn{
+  width:34px;height:34px;border-radius:50%;border:1px solid var(--rule);background:var(--paper);
+  color:var(--ink);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;
+  flex-shrink:0;transition:all .18s ease;padding:0;
+}
+.sc-note-btn:hover{border-color:var(--ink);transform:scale(1.04)}
+.sc-plat-picker{
+  display:none;flex-wrap:wrap;gap:6px;margin-top:8px;padding:6px 0 2px;
+  animation:fadeUp .18s ease;
+}
+.sc-plat-picker.open{display:flex}
+.sc-plat-link{
+  font-family:var(--sans);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--ink);background:var(--paper);border:1px solid var(--rule);
+  border-radius:999px;padding:5px 10px;text-decoration:none;font-weight:600;
+  transition:border-color .16s ease,background .16s ease;
+}
+.sc-plat-link:hover{border-color:var(--ink);background:var(--wash)}
+.sc-embed{margin-top:8px;border-radius:12px;overflow:hidden;border:1px solid var(--rule)}
 .sc-select{
-  width:100%;border:1px solid var(--glass-border);background:var(--paper);color:var(--ink);
+  width:100%;border:1px solid var(--rule);background:var(--paper);color:var(--ink);
   font-family:var(--serif);font-size:16px;padding:10px 12px;border-radius:12px;outline:none;
-  box-shadow:var(--glass-spec);margin-bottom:10px;
+  margin-bottom:10px;
 }
 
 .sl{margin-top:14px;padding-top:4px;border-top:none}
@@ -747,11 +781,20 @@ input[type=range]{width:100%;accent-color:var(--crimson);cursor:pointer;min-heig
 }
 .mo i{display:block;font-style:normal;font-size:24px;line-height:1.1;color:var(--ink)}
 .mo span{font-size:11px;display:block;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 2px}
-.mo.on{border-color:var(--crimson);background:var(--card-solid);box-shadow:inset 0 -2px 0 var(--crimson);color:var(--crimson);font-weight:600}
-.mo.on i{color:var(--crimson)}
+.mo.on{
+  border:1.5px solid transparent;
+  background:
+    linear-gradient(var(--card-solid), var(--card-solid)) padding-box,
+    linear-gradient(120deg, color-mix(in srgb, var(--ink) 26%, var(--paper)) 0%, var(--gold) 50%, color-mix(in srgb, var(--ink) 26%, var(--paper)) 100%) border-box;
+  background-size:100% 100%, 220% 220%;
+  animation:liquidBorderFlow 4.2s ease infinite;
+  box-shadow:0 6px 16px -8px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.65);
+  color:var(--ink);font-weight:600;
+}
+.mo.on i{color:var(--ink)}
 .mo.plus-btn{border-style:dashed;color:var(--ink);background:var(--wash)}
-.mo.plus-btn i{color:var(--crimson);font-weight:400}
-.mo .vip-dot{position:absolute;top:2px;right:4px;font-size:11px;transform:scale(0.77);transform-origin:top right;line-height:1;opacity:0.85;letter-spacing:.05em;color:var(--gold);font-family:var(--sans);font-weight:700;text-transform:uppercase}
+.mo.plus-btn i{color:var(--ink);font-weight:400}
+.mo .vip-dot{display:none!important}
 #moodsVip{grid-template-columns:repeat(5,minmax(0,1fr))}
 
 .chips{display:flex;flex-wrap:wrap;gap:6px}
@@ -848,10 +891,11 @@ textarea::placeholder{font-style:normal;color:var(--muted);opacity:.68}
 .wavy-card,
 .diary-entry{cursor:pointer;transition:transform .18s ease, box-shadow .18s ease}
 .diary-entry:active{transform:scale(.985)}
-/* La fecha del escrito, en su propio renglón, como en una carta. */
-.diary-date{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:6px}
-.diary-vis-btn{border:1px solid var(--rule);background:var(--paper);color:var(--muted);font-family:var(--sans);font-size:11px;font-weight:600;padding:4px 10px;border-radius:999px;cursor:pointer;flex-shrink:0}
-.diary-vis-btn[data-vis="pub"]{border-color:var(--gold);color:var(--gold)}
+/* La fecha del escrito, alineada a la derecha, en negro y discreta, como en las cartas antiguas. */
+.diary-date{font-size:11.5px;letter-spacing:.04em;text-transform:none;color:var(--ink);font-weight:500;margin-bottom:6px;text-align:right;font-variant-numeric:tabular-nums}
+.diary-vis-btn{border:1px solid var(--rule);background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:11px;font-weight:500;padding:5px 11px;border-radius:999px;cursor:pointer;flex-shrink:0;display:inline-flex;align-items:center;gap:5px}
+.diary-vis-btn svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.diary-vis-btn[data-vis="pub"]{border-color:var(--gold);color:var(--ink)}
 /* =========================================================
    VISTAS PÚBLICAS (perfil waby/sebas + lectura de un post).
    Son páginas APARTE de la app: sin barra inferior, sin Hoy/Costa/
@@ -941,16 +985,16 @@ body.public-view .pub-view.on{display:block}
   border:1px solid var(--rule);flex-shrink:0;
 }
 .wavy-info{
-  display:flex;align-items:center;gap:7px;flex-wrap:wrap;min-width:0;line-height:1.2;
+  display:flex;align-items:baseline;gap:6px;flex-wrap:nowrap;min-width:0;line-height:1.2;overflow:hidden;
 }
 .wavy-info strong{
-  font-family:var(--serif);font-size:17px;font-weight:500;
-  color:var(--ink);white-space:nowrap;
+  font-family:var(--serif);font-size:17px;font-weight:600;
+  color:var(--ink);white-space:nowrap;flex-shrink:0;
 }
 .wavy-info span,
 .journal-date{
-  font-size:12px;letter-spacing:.01em;color:var(--muted);
-  font-variant-numeric:tabular-nums;
+  font-size:12.5px;letter-spacing:.01em;color:var(--muted);
+  font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
 .journal-date{text-transform:uppercase;font-weight:600;letter-spacing:.08em}
 
@@ -1146,13 +1190,29 @@ body.public-view .pub-view.on{display:block}
   color:var(--ink);position:relative;transition:transform .15s,border-color .15s;
 }
 .pal-btn .swatch{width:22px;height:22px;border-radius:50%;margin:0 auto 4px;border:1px solid rgba(128,128,128,0.35)}
-.pal-btn.on{border-color:var(--crimson);font-weight:600;transform:translateY(-1px);background:var(--card-solid)}
-.pal-btn .vip-dot{position:absolute;top:3px;right:4px;font-size:11px;color:var(--gold);font-family:var(--sans);font-weight:700;text-transform:uppercase}
+.pal-btn.on{
+  border:1.5px solid transparent;
+  background:
+    linear-gradient(var(--card-solid), var(--card-solid)) padding-box,
+    linear-gradient(120deg, color-mix(in srgb, var(--ink) 26%, var(--paper)) 0%, var(--gold) 50%, color-mix(in srgb, var(--ink) 26%, var(--paper)) 100%) border-box;
+  background-size:100% 100%, 220% 220%;
+  animation:liquidBorderFlow 4.2s ease infinite;
+  font-weight:600;transform:translateY(-1px);
+}
+.pal-btn .vip-dot{display:none!important}
 
 .avpick{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:10px 0}
 .avopt{background:var(--paper);border:1.5px solid var(--rule);border-radius:10px;padding:8px 4px;cursor:pointer;text-align:center;font-size:12px;font-family:var(--serif);color:var(--muted)}
 .avopt svg{width:44px;height:44px;border-radius:50%;display:block;margin:0 auto 5px;border:1px solid var(--rule)}
-.avopt.on{border-color:var(--crimson);color:var(--ink);font-weight:600;background:var(--card-solid)}
+.avopt.on{
+  border:1.5px solid transparent;
+  background:
+    linear-gradient(var(--card-solid), var(--card-solid)) padding-box,
+    linear-gradient(120deg, color-mix(in srgb, var(--ink) 26%, var(--paper)) 0%, var(--gold) 50%, color-mix(in srgb, var(--ink) 26%, var(--paper)) 100%) border-box;
+  background-size:100% 100%, 220% 220%;
+  animation:liquidBorderFlow 4.2s ease infinite;
+  color:var(--ink);font-weight:600;
+}
 
 .prem{border:1px solid var(--rule);background:var(--paper);padding:18px 16px;border-radius:22px;margin:14px 0;box-shadow:0 10px 28px -18px rgba(35,31,29,0.05)}
 .prem .tag{display:inline-block;background:rgba(122,154,130,0.12);color:var(--ok);font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:999px;font-weight:600;margin-bottom:6px}
@@ -1236,18 +1296,16 @@ body.public-view .pub-view.on{display:block}
 .plan-card b{font-family:var(--serif);font-size:24px;color:var(--crimson);font-weight:600}
 .plan-card small{font-size:12px;color:var(--muted);display:block;margin-top:3px}
 
-/* Barra Inferior: píldora flotante de vidrio, como Instagram — se ve el
-   contenido detrás y se lee (no un blanco sólido). Fondo apenas 12% y
-   desenfoque suave de 10px: sobre fondo claro ya no se lee blanca, y
-   sobre contenido oscuro se lee lo de atrás. */
+/* Barra Inferior: píldora traslúcida estilo WhatsApp iOS — permite leer con claridad
+   el texto e imágenes que pasan por detrás sin empañarlos en un bloque opaco. */
 .bnav{
   position:fixed;left:18px;right:18px;bottom:calc(env(safe-area-inset-bottom,0px) + 10px);z-index:85;
-  background:color-mix(in srgb, var(--card-solid) 12%, transparent);
-  backdrop-filter:blur(10px) saturate(180%);
-  -webkit-backdrop-filter:blur(10px) saturate(180%);
-  border:1px solid var(--glass-border);
+  background:color-mix(in srgb, var(--paper) 54%, transparent);
+  backdrop-filter:blur(2.5px) saturate(115%);
+  -webkit-backdrop-filter:blur(2.5px) saturate(115%);
+  border:1px solid var(--rule);
   border-radius:999px;
-  box-shadow:var(--glass-spec),0 12px 32px -12px rgba(0,0,0,0.18);
+  box-shadow:0 4px 18px -8px rgba(0,0,0,0.08);
   padding:4px 6px;
   display:flex;justify-content:center;
 }
@@ -1272,13 +1330,7 @@ details{margin-top:12px;font-size:12.5px;color:var(--muted);border:1px solid var
 summary{cursor:pointer;letter-spacing:.08em;text-transform:uppercase;font-size:11px;font-weight:600;color:var(--ink);min-height:32px;display:flex;align-items:center;justify-content:space-between;list-style:none}
 summary::-webkit-details-marker{display:none}
 .note{margin-top:16px;text-align:center;font-family:var(--serif);font-style:italic;font-size:13.5px;color:var(--muted);line-height:1.5}
-.toasts{position:fixed;top:calc(env(safe-area-inset-top,0px) + 12px);left:50%;transform:translateX(-50%);z-index:160;display:flex;flex-direction:column;gap:6px;pointer-events:none;width:max-content;max-width:92vw}
-.toast{
-  background:var(--ink);color:var(--paper);padding:11px 16px;border-radius:12px;
-  font-size:12.5px;letter-spacing:.03em;animation:fadeUp .22s ease;
-  box-shadow:0 10px 25px rgba(0,0,0,0.28);
-}
-.toast.ok{background:var(--ok);color:#fff}.toast.er{background:var(--crimson);color:#fff}
+.toasts{display:none!important}
 
 
 /* =========================================================
@@ -1392,25 +1444,52 @@ summary::-webkit-details-marker{display:none}
 }
 .cmd-action-btn:hover{border-color:var(--ok);color:var(--ok);transform:translateY(-1px)}
 
-/* Cuadrícula Bento Horizontal Perfecta para Hábitos Diarios (Agua, Nutrición, Sueño, Cuerpo, Entorno) */
+/* Cuadrícula Bento Horizontal para Hábitos de Cuidado: 2 cuadros + [+] por renglón */
 .bento-track-grid{
-  display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:10px;
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:10px;
 }
-@media(min-width:520px){.bento-track-grid{grid-template-columns:repeat(3,1fr)}}
+.bento-row-3col{
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) 54px;gap:8px;margin-bottom:8px;align-items:stretch;
+}
+.bento-extra-grid{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:10px;animation:fadeUp .18s ease;
+}
+.bento-extra-grid[hidden]{display:none}
 /* Grupo de tarjetas por dimensión: un renglón con el nombre de la
    dimensión y abajo las tarjetas de ese aspecto. */
 .bento-dim-group{margin-bottom:14px}
 .bento-dim-group:last-child{margin-bottom:0}
-.bento-dim-hd{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:700;margin:2px 0 8px}
+.bento-dim-hd{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:700;margin:4px 0 8px}
 .bento-card{
   background:var(--paper);border:1px solid var(--rule);border-radius:14px;
   padding:11px 12px;text-align:left;cursor:pointer;transition:all .18s ease;
   box-shadow:var(--glass-spec);display:flex;flex-direction:column;justify-content:space-between;min-height:78px;
-  color:var(--ink);-webkit-appearance:none;appearance:none;
+  color:var(--ink);-webkit-appearance:none;appearance:none;min-width:0;
 }
 .bento-card:hover{border-color:var(--ink)}
-.bento-card.open{border-color:var(--ok);background:var(--card-solid);box-shadow:inset 0 -2px 0 var(--ok)}
+.bento-card.open,.bento-card.active{
+  border:1.5px solid transparent;
+  background:
+    linear-gradient(var(--card-solid), var(--card-solid)) padding-box,
+    linear-gradient(120deg, color-mix(in srgb, var(--ink) 26%, var(--paper)) 0%, var(--gold) 50%, color-mix(in srgb, var(--ink) 26%, var(--paper)) 100%) border-box;
+  background-size:100% 100%, 220% 220%;
+  animation:liquidBorderFlow 4.2s ease infinite;
+  box-shadow:0 6px 16px -8px rgba(0,0,0,0.12);
+}
 .bento-card.has{border-color:rgba(99,130,100,0.45);background:linear-gradient(135deg,rgba(99,130,100,0.08),var(--card-solid))}
+.bento-plus-card{
+  background:var(--paper);border:1px dashed var(--rule);border-radius:14px;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  font-family:var(--serif);font-size:24px;font-weight:400;color:var(--ink);
+  min-height:78px;padding:0;transition:all .18s ease;-webkit-appearance:none;appearance:none;
+}
+.bento-plus-card:hover,.bento-plus-card.on{border-style:solid;border-color:var(--ink);background:var(--wash)}
+#bentoDrawerChips{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;
+}
+#bentoDrawerChips .chip{
+  width:100%;text-align:center;justify-content:center;font-size:13.5px;padding:8px 10px;min-height:42px;
+}
 .bento-card-top{display:flex;justify-content:space-between;align-items:center;gap:6px;margin-bottom:6px}
 .bento-ic{
   width:28px;height:28px;border-radius:50%;background:var(--wash);color:var(--ink);
@@ -1683,7 +1762,7 @@ summary::-webkit-details-marker{display:none}
    MODO HOJA EN BLANCO (DISTRACTION-FREE FULL-SCREEN DIARY)
    ========================================================= */
 .blank-sheet-modal{
-  position:fixed;inset:0;background:var(--paper);background-image:var(--paper-grad);
+  position:fixed;inset:0;background:var(--paper);background-image:none;
   z-index:99999;display:flex;justify-content:center;
   animation:fadeUp .22s ease;
 }
@@ -1696,18 +1775,29 @@ summary::-webkit-details-marker{display:none}
 }
 .blank-sheet-top{
   display:flex;justify-content:space-between;align-items:center;gap:12px;
-  padding-bottom:12px;margin-bottom:12px;border-bottom:1px solid var(--rule);
+  padding-bottom:12px;margin-bottom:8px;border-bottom:1px solid var(--rule);
 }
 .blank-sheet-date{
-  font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
-  font-weight:600;font-variant-numeric:tabular-nums;
+  font-size:11.5px;letter-spacing:.04em;text-transform:none;color:var(--ink);
+  font-weight:500;font-variant-numeric:tabular-nums;text-align:right;
+  margin:4px 0 8px;display:block;width:100%;
+}
+@keyframes titlePulseAlert{
+  0%,100%{transform:scale(1);border-bottom-color:var(--rule)}
+  25%,75%{transform:scale(1.015);border-bottom-color:var(--ink)}
+  50%{transform:scale(1);border-bottom-color:var(--gold)}
 }
 .blank-sheet-title{
   width:100%;border:none;background:transparent;outline:none;
   font-family:var(--serif);font-size:clamp(22px, 5vw, 26px);font-weight:500;
   color:var(--ink);padding:6px 0 10px;border-bottom:1px solid var(--rule);margin-bottom:12px;
+  transition:border-color .2s ease;
+}
+.blank-sheet-title.pulse-alert{
+  animation:titlePulseAlert .65s ease 2;
 }
 .blank-sheet-title::placeholder{color:var(--muted);opacity:.5;font-style:italic}
+.blank-sheet-title[readonly],.blank-sheet-body[readonly]{cursor:default}
 .blank-sheet-body{
   flex:1;width:100%;border:none;background:transparent;outline:none;resize:none;
   font-family:var(--serif);font-size:clamp(19px, 4.5vw, 21.5px);line-height:1.6;
@@ -1864,7 +1954,7 @@ summary::-webkit-details-marker{display:none}
       <button class="btn ghost" id="more" style="width:100%;margin-top:10px" hidden>Ver registros anteriores</button>
 
       <!-- HÁBITOS DE CUIDADO AGRUPADOS POR DIMENSIÓN (CUERPO, MENTE, VÍNCULO) -->
-      <div class="bio-sec">
+      <div class="bio-sec" style="margin-top:24px">
         <div class="bio-sec-hd">
           <span>Hábitos de cuidado</span>
           <span id="clueTrackCount">Toca una tarjeta</span>
@@ -2219,8 +2309,8 @@ summary::-webkit-details-marker{display:none}
         <div class="daily-prompt-line" id="dailyPromptLine"></div>
         <div class="circle-composer-row">
           <textarea class="echo-input" id="echoInput" maxlength="200" rows="1" placeholder="Escribe una nota…"></textarea>
-          <button type="button" class="echo-music-btn" id="toggleInlineSongBtn" aria-label="Buscar canción en Apple Music e iTunes" title="Adjuntar canción">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+          <button type="button" class="echo-music-btn" id="toggleInlineSongBtn" aria-label="Buscar canción" title="Adjuntar canción">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 17.5V6.2c0-.7.5-1.3 1.2-1.4l7.4-1.3c.8-.1 1.4.5 1.4 1.3v10.7"/><circle cx="6.5" cy="17.5" r="2.5"/><circle cx="16.5" cy="15.5" r="2.5"/><path d="M9 9.5l10-1.7"/></svg>
           </button>
           <button type="button" class="echo-send-btn" id="postEchoBtn" aria-label="Publicar nota">↑</button>
         </div>
@@ -2444,7 +2534,7 @@ summary::-webkit-details-marker{display:none}
       </div>
 
       <div class="hd">
-        <span>Tarjeta de Presencia Personal</span>
+        <span>Tarjeta de Presencia</span>
         <span>Estilos editoriales</span>
       </div>
 
@@ -2515,19 +2605,19 @@ summary::-webkit-details-marker{display:none}
 
       <!-- MÓDULO 7: CÁPSULAS SONORAS EN EL PERFIL (10 PREGUNTAS EMOCIONALES CURADAS) -->
       <div class="hd" style="margin-top:8px">
-        <span>Mi Paisaje Sonoro (Ritual Musical)</span>
-        <span style="color:var(--gold)">10 preguntas curadas</span>
+        <span>Mi Paisaje Sonoro</span>
+        <span style="color:var(--gold)">Ritual musical</span>
       </div>
       <p style="font-size:13px;color:var(--muted);line-height:1.45;margin-bottom:10px">
-        Comparte una canción con sentido emocional para tu red de apoyo. Elige primero a cuál de las 10 preguntas responde hoy tu melodía:
+        Comparte una canción en tu perfil. Elige la pregunta a la que responde hoy tu melodía y búscala por nombre o artista:
       </p>
       <button type="button" class="btn ghost" id="scToggleBtn" style="width:100%;margin-bottom:10px;justify-content:space-between;padding:10px 14px;border-radius:12px;font-size:12px">
-        <span>+ Vincular canción en mi perfil (opcional)</span>
-        <small style="color:var(--muted)">Spotify, Apple Music, Deezer…</small>
+        <span>+ Vincular canción en mi perfil</span>
+        <small style="color:var(--muted)">Buscar canción o artista</small>
       </button>
 
-      <div id="scConfigBox" hidden style="background:var(--wash);border:1px solid var(--glass-border);border-radius:14px;padding:14px;margin-bottom:14px;box-shadow:var(--glass-spec);animation:fadeUp .2s ease">
-        <label style="display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:6px">1. Pregunta emocional elegida</label>
+      <div id="scConfigBox" hidden style="background:var(--paper);border:1px solid var(--rule);border-radius:18px;padding:14px;margin-bottom:14px;animation:fadeUp .2s ease">
+        <label style="display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:6px">1. Pregunta emocional</label>
         <select id="scQuestionSelect" class="sc-select" aria-label="Pregunta emocional para tu cápsula sonora">
           <option value="Qué me motiva hoy">1. Qué me motiva hoy</option>
           <option value="Lo que escucho estando triste">2. Lo que escucho estando triste</option>
@@ -2542,14 +2632,19 @@ summary::-webkit-details-marker{display:none}
         </select>
         <input id="scTitleInput" hidden>
         <input id="scArtistInput" hidden>
-        <label style="display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:10px">
-          2. Enlace de Spotify / Apple Music / YouTube Music / Deezer / Amazon (Metadatos automáticos)
-          <input class="line" id="scUrlInput" maxlength="220" placeholder="Pega el enlace de tu canción…" style="font-style:normal;font-size:16px">
+        <input id="scUrlInput" hidden>
+        <label style="display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:6px">
+          2. Busca tu canción o artista
         </label>
-        <div class="row" style="grid-template-columns:1fr auto;gap:8px">
-          <button type="button" class="btn" id="saveSoundCapsuleBtn" style="width:100%">Activar y sincronizar canción</button>
-          <button type="button" class="btn ghost" id="clearSoundCapsuleBtn" title="Apagar canción">Sin canción</button>
+        <div style="display:flex;align-items:center;gap:8px;background:var(--paper);border:1px solid var(--rule);border-radius:14px;padding:6px 12px;margin-bottom:8px">
+          <svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:var(--ink);fill:none;stroke-width:1.6;flex-shrink:0"><path d="M9 17.5V6.2c0-.7.5-1.3 1.2-1.4l7.4-1.3c.8-.1 1.4.5 1.4 1.3v10.7"/><circle cx="6.5" cy="17.5" r="2.5"/><circle cx="16.5" cy="15.5" r="2.5"/><path d="M9 9.5l10-1.7"/></svg>
+          <input class="line" id="profSongSearch" maxlength="80" placeholder="Busca canción o artista (ej. John Mayer)…" autocomplete="off" style="border:none;background:transparent;padding:4px 0;min-height:32px;font-size:16px">
         </div>
+        <div id="profSongResults" style="display:grid;grid-template-columns:minmax(0,1fr);gap:6px;max-height:210px;overflow-y:auto;margin-bottom:8px"></div>
+        <div style="display:flex;justify-content:flex-end">
+          <button type="button" class="btn ghost" id="clearSoundCapsuleBtn" title="Quitar canción" style="font-size:11px;padding:6px 12px">Quitar canción</button>
+        </div>
+        <button type="button" id="saveSoundCapsuleBtn" hidden></button>
       </div>
       <div id="mySoundCapsulePreview" style="margin-bottom:18px"></div>
 
@@ -2587,7 +2682,7 @@ summary::-webkit-details-marker{display:none}
       <button class="btn" id="saveProfileBtn" style="width:100%;margin-top:10px">Guardar cambios de perfil</button>
 
       <div class="sl">
-        <label><span>Respaldo de Datos y Derechos ARCO (Archivo .JSON)</span><span>Local</span></label>
+        <label><span>Respaldo y Privacidad</span><span>Local</span></label>
         <div class="row" style="grid-template-columns:1fr 1fr">
           <button type="button" class="btn ghost" id="exFileBtn">Descargar respaldo .JSON</button>
           <label class="btn ghost" style="margin:0;cursor:pointer">
@@ -2681,7 +2776,7 @@ summary::-webkit-details-marker{display:none}
       </div>
       <!-- Versión de la app: sube una por ronda (v18, v19, v20…) para saber
            de un vistazo si la versión publicada ya trae los últimos cambios. -->
-      <div class="cover-version">v23</div>
+      <div class="cover-version">v24</div>
     </div>
   </div>
 </div>
@@ -2966,15 +3061,16 @@ summary::-webkit-details-marker{display:none}
   <div class="blank-sheet-modal" id="blankSheetModal" hidden>
     <div class="blank-sheet-inner">
       <div class="blank-sheet-top">
-        <span class="blank-sheet-date" id="blankSheetDate">REFLEXIÓN PERSONAL</span>
-        <div style="display:flex;align-items:center;gap:8px">
-          <button type="button" class="chip" id="blankSheetVisBtn" style="min-height:34px;padding:6px 12px;font-size:11.5px">🔒 Privado</button>
-          <button type="button" class="chip" id="closeBlankSheetBtn">Cerrar</button>
+        <button type="button" class="chip" id="closeBlankSheetBtn" style="min-height:34px;padding:6px 12px;font-size:11.5px">Cerrar</button>
+        <div style="display:flex;align-items:center;gap:8px;margin-left:auto">
+          <button type="button" class="chip" id="blankSheetVisBtn" style="min-height:34px;padding:6px 12px;font-size:11.5px;display:inline-flex;align-items:center;gap:5px">Privado</button>
+          <button type="button" class="chip" id="deleteBlankSheetBtn" hidden style="min-height:34px;padding:6px 12px;font-size:11.5px;color:var(--crimson);border-color:var(--rule)">Eliminar</button>
           <button type="button" class="btn" id="saveBlankSheetBtn" style="min-height:34px;padding:6px 14px;font-size:11px">Guardar entrada</button>
         </div>
       </div>
-      <input class="blank-sheet-title" id="blankSheetTitle" placeholder="Asunto de tu escrito (obligatorio)…" maxlength="60">
-      <textarea class="blank-sheet-body" id="blankSheetBody" placeholder="Escribe libremente cómo estás hoy, lo que sientes o lo que necesitas soltar…"></textarea>
+      <span class="blank-sheet-date" id="blankSheetDate">12 - 11 - '26</span>
+      <input class="blank-sheet-title" id="blankSheetTitle" placeholder="Asunto…" maxlength="60">
+      <textarea class="blank-sheet-body" id="blankSheetBody" placeholder="Escritura libre…"></textarea>
       <div class="blank-sheet-foot">
         <span id="blankSheetCharCount">0 caracteres</span>
         <span style="font-family:var(--serif);font-style:italic;color:var(--muted)">Diario íntimo · Espacio seguro en tu equipo</span>
@@ -3726,10 +3822,7 @@ function save(broadcast=true){
 }
 
 function toast(m,k){
-  const wrap=$('toasts');if(!wrap)return;
-  while(wrap.children.length>=2)wrap.firstElementChild.remove();
-  const e=document.createElement('div');e.className='toast '+(k||'');e.textContent=m;
-  wrap.appendChild(e);setTimeout(()=>e.remove(),3100);
+  /* Pop-ups superiores desactivados por diseño minimalista: nada tapa el encabezado de Wavy */
 }
 
 /* Estado en vivo de Respiración Mutua ("Respirar Juntos") */
@@ -4083,12 +4176,11 @@ function applyTheme(th){
   if(th==='light'||th==='dark'||th==='white'||th==='pulcritud')document.documentElement.setAttribute('data-theme',th);
   else document.documentElement.removeAttribute('data-theme');
   document.querySelectorAll('#themePick .chip').forEach(c=>c.classList.toggle('on',c.dataset.th===th));
-  const tc=document.querySelector('meta[name="theme-color"]');
-  if(tc){
-    if(th==='dark')tc.setAttribute('content','#0D110F');
-    else if(th==='light')tc.setAttribute('content','#F4EFE6');
-    else tc.setAttribute('content','#FFFFFF');
-  }
+  const bgMap={dark:'#121614',light:'#F4EFE6',white:'#FAF7F2',pulcritud:'#FFFFFF'};
+  const resolvedBg=bgMap[th]||'#FFFFFF';
+  document.documentElement.style.backgroundColor=resolvedBg;
+  if(document.body)document.body.style.backgroundColor=resolvedBg;
+  document.querySelectorAll('meta[name="theme-color"]').forEach(tc=>tc.setAttribute('content',resolvedBg));
 }
 
 /* Eventos del Selector Multi-Cuenta en el Header */
@@ -4178,40 +4270,45 @@ function getStreamingIcon(sc){
   return STREAMING_SVGS[id]||STREAMING_SVGS.spotify;
 }
 
+const WAVY_MUSIC_NOTE_SVG='<svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round" aria-hidden="true"><path d="M9 17.5V6.2c0-.7.5-1.3 1.2-1.4l7.4-1.3c.8-.1 1.4.5 1.4 1.3v10.7"/><circle cx="6.5" cy="17.5" r="2.5"/><circle cx="16.5" cy="15.5" r="2.5"/><path d="M9 9.5l10-1.7"/></svg>';
+
+function buildStreamingServiceLinks(title,artist,fallbackUrl){
+  const q=encodeURIComponent(((title||'')+' '+(artist||'')).trim()||'music');
+  return [
+    {id:'apple',name:'Apple Music',url:(fallbackUrl&&fallbackUrl.includes('apple.com'))?fallbackUrl:('https://music.apple.com/mx/search?term='+q)},
+    {id:'spotify',name:'Spotify',url:(fallbackUrl&&fallbackUrl.includes('spotify.com'))?fallbackUrl:('https://open.spotify.com/search/'+q)},
+    {id:'ytmusic',name:'YouTube Music',url:'https://music.youtube.com/search?q='+q},
+    {id:'deezer',name:'Deezer',url:'https://www.deezer.com/search/'+q},
+    {id:'amazon',name:'Amazon Music',url:'https://music.amazon.com.mx/search/'+q}
+  ];
+}
+
 function renderSoundCapsuleHTML(sc,compact=false){
   if(!sc || (!sc.title && !sc.url))return '';
-  const qTxt=sc.question||SOUND_QUESTIONS[0];
   const titleTxt=sc.title||'Melodía compartida';
   const artistTxt=sc.artist||'Paisaje sonoro';
   const urlTxt=String(sc.url||'').trim();
   const artUrl=String(sc.artwork||'').trim();
-  const spTrackId=extractSpotifyTrackId(urlTxt);
-  const platName=detectMusicPlatformName(urlTxt);
-  const platId=detectMusicPlatformId(urlTxt);
-
-  const embedBlock=spTrackId
-    ? '<div class="sc-embed"><iframe style="border-radius:12px;display:block" src="https://open.spotify.com/embed/track/'+esc(spTrackId)+'?utm_source=generator&theme=0" width="100%" height="'+(compact?'80':'152')+'" frameBorder="0" allow="autoplay; clipboard-write; fullscreen; picture-in-picture" loading="lazy" title="Reproductor Spotify"></iframe></div>'
-    : '';
-
-  const linkBtn=urlTxt
-    ? '<a href="'+esc(urlTxt)+'" target="_blank" rel="noopener" class="btn ghost" style="min-height:34px;padding:6px 11px;font-size:11px;border-radius:20px;text-decoration:none;white-space:nowrap">Escuchar</a>'
-    : '';
+  const services=buildStreamingServiceLinks(titleTxt,artistTxt,urlTxt);
 
   const vinylHtml=artUrl
-    ? '<img src="'+esc(artUrl)+'" alt="" style="width:42px;height:42px;border-radius:10px;object-fit:cover;flex-shrink:0">'
-    : '<div class="sc-vinyl" aria-hidden="true">'+(STREAMING_SVGS[platId]||WavyIcons.music)+'</div>';
+    ? '<img src="'+esc(artUrl)+'" alt="" style="width:36px;height:36px;border-radius:8px;object-fit:cover;flex-shrink:0">'
+    : '<div class="sc-vinyl" aria-hidden="true">'+WAVY_MUSIC_NOTE_SVG+'</div>';
 
-  return '<div class="sound-capsule-card" onclick="event.stopPropagation()">'+
-    '<div class="sc-head">'+
+  const pickerLinks=services.map(s=>
+    '<a href="'+esc(s.url)+'" target="_blank" rel="noopener" class="sc-plat-link" onclick="event.stopPropagation()">'+esc(s.name)+'</a>'
+  ).join('');
+
+  return '<div class="sound-capsule-card" onclick="event.stopPropagation();const p=this.querySelector(\'.sc-plat-picker\');if(p)p.classList.toggle(\'open\')">'+
+    '<div class="sc-head" style="cursor:pointer">'+
       vinylHtml+
       '<div class="sc-meta">'+
-        '<span class="sc-q">'+esc(platName)+'</span>'+
         '<strong class="sc-title">'+esc(titleTxt)+'</strong>'+
         '<span class="sc-artist">'+esc(artistTxt)+'</span>'+
       '</div>'+
-      linkBtn+
+      '<button type="button" class="sc-note-btn" aria-label="Elegir servicio de música" title="Elegir servicio de música">'+WAVY_MUSIC_NOTE_SVG+'</button>'+
     '</div>'+
-    embedBlock+
+    '<div class="sc-plat-picker">'+pickerLinks+'</div>'+
   '</div>';
 }
 
@@ -4787,7 +4884,7 @@ async function fetchItunesSongs(q){
       return dz.data.map(t=>({
         trackName:t.title||'',
         artistName:(t.artist&&t.artist.name)||'',
-        trackViewUrl:t.link||('https://music.apple.com/mx/search?term='+term),
+        trackViewUrl:'https://music.apple.com/mx/search?term='+encodeURIComponent((t.title||'')+' '+((t.artist&&t.artist.name)||'')),
         previewUrl:t.preview||'',
         artworkUrl100:(t.album&&(t.album.cover_medium||t.album.cover))||''
       }));
@@ -5003,28 +5100,15 @@ function renderCircleFeed(){
     const drawerId='myScDrawer_'+idx;
     const cleanMyTxt=String(ec.text||'').replace(/^[“"«]+|[”"»]+$/g,'');
     const ecSong=ec.song || (idx===0 && hasMySong ? S.soundCapsule : null);
-    const ecPlatId=ecSong?detectMusicPlatformId(ecSong.url):'apple';
-    const ecPlatName=ecSong?detectMusicPlatformName(ecSong.url):'Apple Music';
     myCard.innerHTML=
       '<div class="wavy-top">'+
         '<div class="wavy-user">'+
           '<div class="wavy-av">'+getAv(S.me.av)+'</div>'+
-          '<div class="wavy-info"><strong>'+esc(S.me.name)+' (Tú)</strong><span>@'+esc(S.me.username)+(ec.vibe?' · '+esc(ec.vibe):' · Nota personal')+'</span></div>'+
-        '</div>'+
-        '<div class="wavy-actions-right">'+
-          (ecSong?'<button type="button" class="sp-icon-btn active" data-plat="'+ecPlatId+'" data-toggle-sc="'+drawerId+'" title="Escuchar en '+ecPlatName+': '+esc(ecSong.title)+'">'+getStreamingIcon(ecSong)+'</button>':'')+
+          '<div class="wavy-info"><strong>'+esc(S.me.name)+'</strong><span>@'+esc(S.me.username)+(ec.vibe?' · '+esc(ec.vibe):'')+'</span></div>'+
         '</div>'+
       '</div>'+
       '<div class="wavy-echo">'+esc(cleanMyTxt)+'</div>'+
-      (ecSong?'<div id="'+drawerId+'" style="margin-top:8px;animation:fadeUp .22s ease">'+renderSoundCapsuleHTML(ecSong,true)+'</div>':'');
-    const spBtn=myCard.querySelector('[data-toggle-sc]');
-    if(spBtn && ecSong){
-      spBtn.onclick=e=>{
-        e.stopPropagation();
-        const dr=myCard.querySelector('#'+drawerId);
-        if(dr)dr.hidden=!dr.hidden;
-      };
-    }
+      (ecSong?'<div id="'+drawerId+'" style="margin-top:2px;animation:fadeUp .22s ease">'+renderSoundCapsuleHTML(ecSong,true)+'</div>':'');
     box.appendChild(myCard);
   });
 
@@ -5256,10 +5340,10 @@ function renderHabitGrid(){
   HABITS.forEach(h=>{
     const b=document.createElement('button');
     b.type='button';
-    b.className='habit-item'+(S.habit===h.id?' on':'');
     const locked=!isHabitUnlocked(h);
+    b.className='habit-item'+(S.habit===h.id?' on':'')+(locked?' pro-glow':'');
     const hSvg=HABIT_SVGS[h.id]||HABIT_SVGS.scrolling;
-    b.innerHTML=(locked?'<span class="pro-tag">Pro</span>':'')+'<i>'+hSvg+'</i><span>'+esc(h.name)+'</span>';
+    b.innerHTML='<i>'+hSvg+'</i><span>'+esc(h.name)+'</span>';
     b.onclick=()=>{
       if(locked){
         openPaywall('Desbloquea la batería de «'+h.name+'» y los 10 hábitos con Wavy Pro.');
@@ -7039,7 +7123,7 @@ function getTodayClueLog(){
 }
 
 let openClueCatId=''; /* Nada se abre solo: solo los clicks activan o desactivan los menús */
-let clueShowAllCats=false; /* Por defecto: solo 1 renglón por dimensión (Cuerpo, Mente, Vínculo) y el último cuadro dice "Más" para expandir */
+let clueExpandedDims={}; /* Estado expandido por dimensión: Cuerpo, Mente, Vínculo */
 function renderClueTrackList(){
   const list=$('clueTrackList');if(!list)return;
   let drawer=$('bentoActiveDrawer');
@@ -7068,12 +7152,14 @@ function renderClueTrackList(){
   });
 
   if(openClueCatId && !visibleCats.some(c=>c.id===openClueCatId)){
-    openClueCatId=visibleCats[0]?visibleCats[0].id:'';
+    openClueCatId='';
   }
 
-  /* Agrupar por dimensión (Cuerpo, Mente, Vínculo): en vista compacta solo
-     aparece 1 renglón (2 cuadros) de cada dimensión y el último cuadro de
-     Vínculo dice "Más" para expandir todas las opciones. */
+  /* Estructura exacta pedida:
+     Hábitos de cuidado ->
+     CUERPO: un renglón con 2 cuadros de Cuerpo y un último cuadro con el símbolo +
+     MENTE: un renglón con 2 cuadros de Mente y un último cuadro con el símbolo +
+     VÍNCULO: un renglón con 2 cuadros de Vínculo y un último cuadro con el símbolo + */
   const dimOrder=['Cuerpo','Mente','Vínculo'];
   const groups={};
   visibleCats.forEach(cat=>{
@@ -7086,112 +7172,73 @@ function renderClueTrackList(){
     return (ia<0?99:ia)-(ib<0?99:ib);
   });
 
-  if(!clueShowAllCats){
-    /* Vista compacta: 1 cuadro de Cuerpo, 1 de Mente, 1 de Vínculo y el último cuadro dice "Más" para expandirse */
-    const grid=document.createElement('div');
-    grid.className='bento-track-grid';
-    dims.forEach(dim=>{
-      const allDimCats=groups[dim]||[];
-      const cat=allDimCats[0];
-      if(!cat)return;
-      const cur=log[cat.id];
-      const arr=Array.isArray(cur)?cur:(cur?[cur]:[]);
-      const count=arr.length;
-      const card=document.createElement('button');
-      card.type='button';
-      const isOpen=(openClueCatId===cat.id);
-      card.className='bento-card'+(isOpen?' active':'')+(count>0?' has':'');
-      const selTxt=arr.length?arr.join(' · '):cat.sub;
-      card.innerHTML=
-        '<div class="bento-card-top">'+
-          '<span class="bento-ic">'+cat.icon+'</span>'+
-          '<span class="bento-badge">'+esc(dim.toUpperCase())+(count>0?(' · '+count+' ✓'):'')+'</span>'+
-        '</div>'+
-        '<strong>'+esc(cat.name)+'</strong>'+
-        '<small>'+esc(selTxt)+'</small>';
-      card.onclick=()=>{
-        openClueCatId=(openClueCatId===cat.id)?'':cat.id;
-        renderClueTrackList();
-      };
-      grid.appendChild(card);
-    });
-    const hiddenCount=Math.max(0, visibleCats.length - dims.length);
-    const moreCard=document.createElement('button');
-    moreCard.type='button';
-    moreCard.className='bento-card';
-    moreCard.id='clueMoreToggleCard';
-    moreCard.innerHTML=
+  const buildBentoCard=cat=>{
+    const cur=log[cat.id];
+    const arr=Array.isArray(cur)?cur:(cur?[cur]:[]);
+    const count=arr.length;
+    const card=document.createElement('button');
+    card.type='button';
+    const isOpen=(openClueCatId===cat.id);
+    card.className='bento-card'+(isOpen?' active':'')+(count>0?' has':'');
+    card.dataset.catId=cat.id;
+    const selTxt=arr.length?arr.join(' · '):cat.sub;
+    card.innerHTML=
       '<div class="bento-card-top">'+
-        '<span class="bento-ic"><svg class="w-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v8M8 12h8"/></svg></span>'+
-        '<span class="bento-badge">+'+hiddenCount+'</span>'+
+        '<span class="bento-ic">'+cat.icon+'</span>'+
+        '<span class="bento-badge">'+(count>0?(count+' ✓'):'')+'</span>'+
       '</div>'+
-      '<strong>Más</strong>'+
-      '<small>Expandir '+hiddenCount+' opciones más</small>';
-    moreCard.onclick=()=>{
-      clueShowAllCats=true;
+      '<strong>'+esc(cat.name)+'</strong>'+
+      '<small>'+esc(selTxt)+'</small>';
+    card.onclick=()=>{
+      openClueCatId=(openClueCatId===cat.id)?'':cat.id;
       renderClueTrackList();
     };
-    grid.appendChild(moreCard);
-    list.appendChild(grid);
-  }else{
-    dims.forEach((dim,dimIdx)=>{
-      const cats=groups[dim]||[];
-      const isLastDim=(dimIdx===dims.length-1);
-      const group=document.createElement('div');
-      group.className='bento-dim-group';
-      if(dim){
-        const hd=document.createElement('div');
-        hd.className='bento-dim-hd';
-        hd.textContent=dim.toUpperCase();
-        group.appendChild(hd);
-      }
-      const grid=document.createElement('div');
-      grid.className='bento-track-grid';
-      cats.forEach(cat=>{
-        const cur=log[cat.id];
-        const arr=Array.isArray(cur)?cur:(cur?[cur]:[]);
-        const count=arr.length;
+    return card;
+  };
 
-        const card=document.createElement('button');
-        card.type='button';
-        const isOpen=(openClueCatId===cat.id);
-        card.className='bento-card'+(isOpen?' active':'')+(count>0?' has':'');
-        const selTxt=arr.length?arr.join(' · '):cat.sub;
-        card.innerHTML=
-          '<div class="bento-card-top">'+
-            '<span class="bento-ic">'+cat.icon+'</span>'+
-            '<span class="bento-badge">'+(count>0?(count+' ✓'):'+')+'</span>'+
-          '</div>'+
-          '<strong>'+esc(cat.name)+'</strong>'+
-          '<small>'+esc(selTxt)+'</small>';
-        card.onclick=()=>{
-          openClueCatId=(openClueCatId===cat.id)?'':cat.id;
-          renderClueTrackList();
-        };
-        grid.appendChild(card);
-      });
-      if(isLastDim){
-        const lessCard=document.createElement('button');
-        lessCard.type='button';
-        lessCard.className='bento-card';
-        lessCard.id='clueMoreToggleCard';
-        lessCard.innerHTML=
-          '<div class="bento-card-top">'+
-            '<span class="bento-ic"><svg class="w-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M8 12h8"/></svg></span>'+
-            '<span class="bento-badge">▴</span>'+
-          '</div>'+
-          '<strong>Ver menos</strong>'+
-          '<small>Compactar vista</small>';
-        lessCard.onclick=()=>{
-          clueShowAllCats=false;
-          renderClueTrackList();
-        };
-        grid.appendChild(lessCard);
-      }
-      group.appendChild(grid);
-      list.appendChild(group);
-    });
-  }
+  dims.forEach(dim=>{
+    const cats=groups[dim]||[];
+    if(!cats.length)return;
+    const group=document.createElement('div');
+    group.className='bento-dim-group';
+    const hd=document.createElement('div');
+    hd.className='bento-dim-hd';
+    hd.textContent=dim.toUpperCase();
+    group.appendChild(hd);
+
+    const firstTwo=cats.slice(0,2);
+    const extraCats=cats.slice(2);
+    /* Si el usuario abrió una tarjeta que está en extraCats, mantener expandida esa dimensión */
+    if(extraCats.some(c=>c.id===openClueCatId)){
+      clueExpandedDims[dim]=true;
+    }
+    const isExp=!!clueExpandedDims[dim];
+
+    const row3=document.createElement('div');
+    row3.className='bento-row-3col';
+    firstTwo.forEach(cat=>row3.appendChild(buildBentoCard(cat)));
+
+    const plusBtn=document.createElement('button');
+    plusBtn.type='button';
+    plusBtn.className='bento-plus-card'+(isExp?' on':'');
+    plusBtn.setAttribute('aria-label', (isExp?'Contraer ':'Expandir ')+dim);
+    plusBtn.textContent=isExp?'−':'+';
+    plusBtn.onclick=()=>{
+      clueExpandedDims[dim]=!clueExpandedDims[dim];
+      renderClueTrackList();
+    };
+    row3.appendChild(plusBtn);
+    group.appendChild(row3);
+
+    if(isExp && extraCats.length){
+      const extraGrid=document.createElement('div');
+      extraGrid.className='bento-extra-grid';
+      extraCats.forEach(cat=>extraGrid.appendChild(buildBentoCard(cat)));
+      group.appendChild(extraGrid);
+    }
+
+    list.appendChild(group);
+  });
 
   if(drawer){
     const activeCat=visibleCats.find(c=>c.id===openClueCatId);
@@ -7208,10 +7255,11 @@ function renderClueTrackList(){
           '<strong>'+esc(activeCat.name)+' · <span style="font-weight:400;color:var(--muted);font-size:12.5px">'+esc(activeCat.sub)+'</span></strong>'+
           '<button type="button" class="chip" id="closeBentoDrawerBtn" style="min-height:28px;padding:3px 10px;font-size:11px">Listo</button>'+
         '</div>'+
-        '<div class="chips" id="bentoDrawerChips"></div>';
+        '<div id="bentoDrawerChips"></div>';
       const activeCard=list.querySelector('.bento-card.active');
-      if(activeCard){
-        activeCard.insertAdjacentElement('afterend', drawer);
+      const activeGroup=activeCard?activeCard.closest('.bento-dim-group'):null;
+      if(activeGroup){
+        activeGroup.appendChild(drawer);
       }else{
         list.appendChild(drawer);
       }
@@ -7821,11 +7869,11 @@ const MOOD_SVGS={
 
 function createMoodBtn(o,isVipItem){
   const b=document.createElement('button');
-  b.type='button';b.className='mo';
-  b.dataset.g=o[0]+'\uFE0E';b.dataset.n=o[1];
   const locked=isVipItem && !isPro();
+  b.type='button';b.className='mo'+(locked?' pro-glow':'');
+  b.dataset.g=o[0]+'\uFE0E';b.dataset.n=o[1];
   const mSvg=MOOD_SVGS[o[1]]||MOOD_SVGS['Plenitud'];
-  b.innerHTML=(locked?'<span class="vip-dot">Pro</span>':'')+'<i>'+mSvg+'</i><span>'+esc(o[1])+'</span>';
+  b.innerHTML='<i>'+mSvg+'</i><span>'+esc(o[1])+'</span>';
   b.onclick=()=>{
     if(locked){
       openPaywall('Desbloquea los 19 matices emocionales en tu Diario con Wavy Pro.');
@@ -7982,30 +8030,32 @@ let editingBlankId=null;
    nace PRIVADO: nada se hace público por accidente. Público significa que
    aparece en el perfil público (waby/sebas) y cualquiera con el link lo
    puede leer; Privado solo lo ve su autor, en su Diario. */
+const VIS_PRIV_SVG='<svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>';
+const VIS_PUB_SVG='<svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 0 1 0 18a14 14 0 0 1 0-18Z"/></svg>';
 let blankSheetPublic=false;
 function syncBlankSheetVisBtn(){
   const b=$('blankSheetVisBtn');if(!b)return;
-  b.textContent=blankSheetPublic?'🌐 Público':'🔒 Privado';
+  b.innerHTML=(blankSheetPublic?VIS_PUB_SVG+'<span>Público</span>':VIS_PRIV_SVG+'<span>Privado</span>');
   b.style.borderColor=blankSheetPublic?'var(--gold)':'var(--rule)';
-  b.style.color=blankSheetPublic?'var(--gold)':'var(--muted)';
+  b.style.color='var(--ink)';
 }
 if($('blankSheetVisBtn')){
   $('blankSheetVisBtn').onclick=()=>{
     blankSheetPublic=!blankSheetPublic;
+    /* Si estamos viendo un escrito ya publicado, actualizar su visibilidad al instante */
+    if(editingBlankId!=null){
+      const existing=(S.notes||[]).find(x=>x&&(x.id===editingBlankId));
+      if(existing){existing.public=blankSheetPublic;save(false);renderDiaryList();}
+    }
     syncBlankSheetVisBtn();
-    toast(blankSheetPublic?'Este escrito será público: aparecerá en tu perfil (waby/sebas)':'Este escrito será privado: solo tú lo verás','ok');
   };
 }
-/* Fecha de un escrito como en una carta: "Sábado, 7 de noviembre de 2026".
-   Nunca "Hoy": siempre la fecha, día y mes, aunque el escrito sea de hoy. */
-const DIARY_WEEKDAYS=['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
-const DIARY_MONTHS=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+/* Fecha minimalista tipo carta antigua: DD - MM - 'YY (ej. 12 - 11 - '26),
+   en negro, discreta y alineada a la derecha. */
 function formatDiaryDate(dstr){
   const m=String(dstr||'').match(/^(\d{4})-(\d{2})-(\d{2})$/);
   if(!m)return String(dstr||'');
-  const dt=new Date(+m[1],+m[2]-1,+m[3]);
-  if(isNaN(dt.getTime()))return String(dstr||'');
-  return DIARY_WEEKDAYS[dt.getDay()]+', '+dt.getDate()+' de '+DIARY_MONTHS[dt.getMonth()]+' de '+dt.getFullYear();
+  return m[3]+' - '+m[2]+" - '"+m[1].slice(-2);
 }
 function renderDiaryList(){
   const b=$('diaryList');if(!b)return;
@@ -8019,23 +8069,17 @@ function renderDiaryList(){
   list.slice(0,20).forEach(n=>{
     const card=document.createElement('div');
     card.className='journal-card diary-entry';
-    /* Formato carta / postal / epístola: la fecha tiene SU renglón y el
-       título tiene OTRO renglón. Nunca "Hoy": siempre la fecha, día y mes.
-       Solo el asunto (no la primera línea del texto). "Leer →" se mantiene.
-       La pastilla de la derecha es el interruptor Público / Privado de
-       este escrito (tocarla lo cambia sin abrirlo). */
     card.innerHTML=
       '<div class="diary-date">'+esc(formatDiaryDate(n.d))+'</div>'+
       '<div class="journal-title">'+esc(n.estado||'Reflexión del día')+'</div>'+
       '<div style="display:flex;justify-content:space-between;align-items:center;gap:8px">'+
         '<div class="diary-read">Leer →</div>'+
-        '<button type="button" class="diary-vis-btn" data-vis="'+(n.public?'pub':'priv')+'">'+(n.public?'🌐 Público':'🔒 Privado')+'</button>'+
+        '<button type="button" class="diary-vis-btn" data-vis="'+(n.public?'pub':'priv')+'">'+(n.public?VIS_PUB_SVG+'<span>Público</span>':VIS_PRIV_SVG+'<span>Privado</span>')+'</button>'+
       '</div>';
     card.querySelector('.diary-vis-btn').onclick=e=>{
       e.stopPropagation();
       n.public=!n.public;
       save(false);renderDiaryList();
-      toast(n.public?'Este escrito ahora es público':'Este escrito ahora es privado','ok');
     };
     card.onclick=()=>openBlankEntry(n.id);
     b.appendChild(card);
@@ -8064,7 +8108,7 @@ const PUB_MONTHS=['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','N
 function formatPublicDate(dstr){
   const m=String(dstr||'').match(/^(\d{4})-(\d{2})-(\d{2})$/);
   if(!m)return String(dstr||'');
-  return m[3]+'-'+(PUB_MONTHS[+m[2]-1]||'')+'-'+m[1];
+  return m[3]+' - '+m[2]+" - '"+m[1].slice(-2);
 }
 /* Busca los datos de un usuario por su nombre, en este dispositivo
    (localStorage), sin importar quién sea el usuario activo. Así el
@@ -8213,9 +8257,8 @@ if($('shareProfileBtn')){
     catch(e){toast(url,'ok')}
   };
 }
-/* Abrir un escrito guardado para leerlo (y editarlo): llena la hoja en
-   blanco con su título y texto, y al guardar se ACTUALIZA en su lugar
-   (no se crea un duplicado). */
+/* Abrir un escrito ya publicado en modo SOLO LECTURA (como en Medium):
+   una vez publicado se queda tal cual o se elimina; no se edita. */
 function openBlankEntry(id){
   const n=(S.notes||[]).find(x=>x&&(x.id===id));if(!n)return;
   editingBlankId=n.id;
@@ -8223,8 +8266,16 @@ function openBlankEntry(id){
   const bs=$('blankSheetModal');if(!bs)return;
   bs.hidden=false;
   if($('blankSheetDate'))$('blankSheetDate').textContent=formatDiaryDate(n.d||today());
-  if($('blankSheetTitle'))$('blankSheetTitle').value=n.estado&&n.estado!=='Registro del día'?n.estado:'';
-  if($('blankSheetBody')){$('blankSheetBody').value=n.texto||'';$('blankSheetBody').focus();}
+  if($('blankSheetTitle')){
+    $('blankSheetTitle').value=n.estado&&n.estado!=='Registro del día'?n.estado:'';
+    $('blankSheetTitle').readOnly=true;
+  }
+  if($('blankSheetBody')){
+    $('blankSheetBody').value=n.texto||'';
+    $('blankSheetBody').readOnly=true;
+  }
+  if($('saveBlankSheetBtn'))$('saveBlankSheetBtn').hidden=true;
+  if($('deleteBlankSheetBtn'))$('deleteBlankSheetBtn').hidden=false;
   if($('blankSheetCharCount'))$('blankSheetCharCount').textContent=(String(n.texto||'').length)+' caracteres';
 }
 
@@ -8975,9 +9026,9 @@ function renderPaletteGrid(){
   const pro=isPro();
   SEAL_PALETTES.forEach(p=>{
     const b=document.createElement('button');
-    b.type='button';b.className='pal-btn'+(S.sealStyle===p.id?' on':'');
     const locked=p.vip && !pro;
-    b.innerHTML=(locked?'<span class="vip-dot">Pro</span>':'')+
+    b.type='button';b.className='pal-btn'+(S.sealStyle===p.id?' on':'')+(locked?' pro-glow':'');
+    b.innerHTML=
       '<div class="swatch" style="background:'+p.sw+'"></div>'+
       '<span>'+esc(p.name)+'</span>';
     b.onclick=()=>{
@@ -9187,8 +9238,8 @@ function syncProfileForm(){
   const hasMySongInProf=!!(S.soundCapsule && (S.soundCapsule.title||S.soundCapsule.url));
   if($('scToggleBtn')){
     $('scToggleBtn').innerHTML=hasMySongInProf
-      ? '<span>♪ '+esc(S.soundCapsule.title||'Canción vinculada')+'</span><small style="color:var(--gold);font-weight:600">Modificar / Quitar ▾</small>'
-      : '<span>+ Vincular canción en mi perfil (opcional)</span><small style="color:var(--muted)">Spotify, Apple Music, Deezer…</small>';
+      ? '<span>'+esc(S.soundCapsule.title||'Canción vinculada')+'</span><small style="color:var(--gold);font-weight:600">Cambiar / Quitar ▾</small>'
+      : '<span>+ Vincular canción en mi perfil</span><small style="color:var(--muted)">Buscar canción o artista</small>';
   }
   if($('scConfigBox') && !hasMySongInProf && !$('scConfigBox').dataset.userOpened){
     $('scConfigBox').hidden=true;
@@ -9212,28 +9263,68 @@ function syncProfileForm(){
   });
 }
 
-if($('saveSoundCapsuleBtn')){
-  $('saveSoundCapsuleBtn').onclick=async()=>{
-    const q=$('scQuestionSelect').value||SOUND_QUESTIONS[0];
-    const url=$('scUrlInput').value.trim();
-    if(!url){
-      toast('Pega el enlace de tu canción (Spotify, Apple Music, YouTube, Deezer o Amazon)','er');
-      return;
-    }
-    const meta=await resolveStreamingMetadata(url);
-    S.soundCapsule={question:q,title:meta.title||'Melodía compartida',artist:meta.artist||detectMusicPlatformName(url),url,updatedAt:Date.now()};
-    save(true);
-    if($('mySoundCapsulePreview'))$('mySoundCapsulePreview').innerHTML=renderSoundCapsuleHTML(S.soundCapsule,false);
-    if($('scConfigBox')){
-      $('scConfigBox').hidden=true;
-      delete $('scConfigBox').dataset.userOpened;
-    }
-    if($('scToggleBtn')){
-      $('scToggleBtn').innerHTML='<span>♪ '+esc(S.soundCapsule.title)+'</span><small style="color:var(--gold);font-weight:600">Modificar / Quitar ▾</small>';
-    }
-    renderCircleFeed();
-    toast('Canción detectada y activada automáticamente desde el enlace','ok');
+let profSongSearchTimer=null;
+function selectProfileSongItem(s){
+  if(!s)return;
+  const q=$('scQuestionSelect')?($('scQuestionSelect').value||SOUND_QUESTIONS[0]):SOUND_QUESTIONS[0];
+  const trackUrl=s.trackViewUrl||('https://music.apple.com/mx/search?term='+encodeURIComponent((s.trackName||'')+' '+(s.artistName||'')));
+  S.soundCapsule={
+    question:q,
+    title:s.trackName||'Melodía compartida',
+    artist:s.artistName||'Paisaje sonoro',
+    url:trackUrl,
+    previewUrl:s.previewUrl||'',
+    artwork:s.artworkUrl100||'',
+    updatedAt:Date.now()
   };
+  save(true);
+  if($('mySoundCapsulePreview'))$('mySoundCapsulePreview').innerHTML=renderSoundCapsuleHTML(S.soundCapsule,false);
+  if($('profSongSearch'))$('profSongSearch').value='';
+  if($('profSongResults'))$('profSongResults').innerHTML='';
+  if($('scConfigBox')){
+    $('scConfigBox').hidden=true;
+    delete $('scConfigBox').dataset.userOpened;
+  }
+  if($('scToggleBtn')){
+    $('scToggleBtn').innerHTML='<span>'+esc(S.soundCapsule.title)+'</span><small style="color:var(--gold);font-weight:600">Cambiar / Quitar ▾</small>';
+  }
+  renderCircleFeed();
+}
+async function searchProfileSong(q){
+  const box=$('profSongResults');if(!box)return;
+  q=String(q||'').trim();
+  if(q.length<2){box.innerHTML='';return}
+  const instant=searchLocalCatalogFallback(q);
+  box.innerHTML='<small style="font-size:11.5px;color:var(--muted);padding:4px 2px">Buscando canción…</small>';
+  const list=await fetchItunesSongs(q);
+  const finalList=(Array.isArray(list)&&list.length)?list:instant;
+  box.innerHTML='';
+  finalList.forEach(s=>{
+    const b=document.createElement('button');
+    b.type='button';
+    b.style.cssText='display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:var(--paper);border:1px solid var(--rule);border-radius:12px;padding:7px 10px;cursor:pointer';
+    const artHtml=s.artworkUrl100
+      ? '<img src="'+esc(s.artworkUrl100)+'" alt="" style="width:36px;height:36px;border-radius:8px;object-fit:cover;flex-shrink:0">'
+      : '<span style="width:36px;height:36px;border-radius:8px;background:var(--wash);color:var(--ink);display:inline-flex;align-items:center;justify-content:center;flex-shrink:0">'+WAVY_MUSIC_NOTE_SVG+'</span>';
+    b.innerHTML=artHtml+'<span style="flex:1;min-width:0"><strong style="font-family:var(--serif);font-size:14.5px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--ink)">'+esc(s.trackName||'')+'</strong><small style="font-size:11.5px;color:var(--muted);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+esc(s.artistName||'')+'</small></span><span style="font-size:11px;color:var(--ok);font-weight:600;flex-shrink:0">Vincular</span>';
+    b.onclick=()=>selectProfileSongItem(s);
+    box.appendChild(b);
+  });
+}
+if($('profSongSearch')){
+  $('profSongSearch').addEventListener('input',e=>{
+    clearTimeout(profSongSearchTimer);
+    profSongSearchTimer=setTimeout(()=>searchProfileSong(e.target.value),220);
+  });
+}
+if($('scQuestionSelect')){
+  $('scQuestionSelect').addEventListener('change',e=>{
+    if(S.soundCapsule && S.soundCapsule.title){
+      S.soundCapsule.question=e.target.value||SOUND_QUESTIONS[0];
+      save(true);
+      if($('mySoundCapsulePreview'))$('mySoundCapsulePreview').innerHTML=renderSoundCapsuleHTML(S.soundCapsule,false);
+    }
+  });
 }
 if($('clearSoundCapsuleBtn')){
   $('clearSoundCapsuleBtn').onclick=()=>{
@@ -9241,17 +9332,18 @@ if($('clearSoundCapsuleBtn')){
     if($('scTitleInput'))$('scTitleInput').value='';
     if($('scArtistInput'))$('scArtistInput').value='';
     if($('scUrlInput'))$('scUrlInput').value='';
+    if($('profSongSearch'))$('profSongSearch').value='';
+    if($('profSongResults'))$('profSongResults').innerHTML='';
     if($('mySoundCapsulePreview'))$('mySoundCapsulePreview').innerHTML='';
     if($('scConfigBox')){
       $('scConfigBox').hidden=true;
       delete $('scConfigBox').dataset.userOpened;
     }
     if($('scToggleBtn')){
-      $('scToggleBtn').innerHTML='<span>+ Vincular canción en mi perfil (opcional)</span><small style="color:var(--muted)">Spotify, Apple Music, Deezer…</small>';
+      $('scToggleBtn').innerHTML='<span>+ Vincular canción en mi perfil</span><small style="color:var(--muted)">Buscar canción o artista</small>';
     }
     save(true);
     renderCircleFeed();
-    toast('Canción desvinculada de tu perfil');
   };
 }
 
@@ -9454,23 +9546,39 @@ document.addEventListener('pointerdown',e=>{
    ========================================================= */
 if($('openBlankSheetBtn')){
   $('openBlankSheetBtn').onclick=()=>{
-    editingBlankId=null; /* hoja nueva: no se está editando un escrito guardado */
+    editingBlankId=null; /* hoja nueva para escribir y publicar */
     const bs=$('blankSheetModal');if(!bs)return;
     bs.hidden=false;
-    const now=new Date();
     const dateStr=formatDiaryDate(today());
     if($('blankSheetDate'))$('blankSheetDate').textContent=dateStr;
     blankSheetPublic=false;syncBlankSheetVisBtn();
-    if($('blankSheetTitle'))$('blankSheetTitle').value='';
+    if($('blankSheetTitle')){
+      $('blankSheetTitle').readOnly=false;
+      $('blankSheetTitle').value='';
+      $('blankSheetTitle').classList.remove('pulse-alert');
+    }
     if($('blankSheetBody')){
+      $('blankSheetBody').readOnly=false;
       $('blankSheetBody').value=$('ni')?$('ni').value:'';
       $('blankSheetBody').focus();
     }
+    if($('saveBlankSheetBtn'))$('saveBlankSheetBtn').hidden=false;
+    if($('deleteBlankSheetBtn'))$('deleteBlankSheetBtn').hidden=true;
     if($('blankSheetCharCount'))$('blankSheetCharCount').textContent=($('blankSheetBody')?$('blankSheetBody').value.length:0)+' caracteres';
   };
 }
 if($('closeBlankSheetBtn')){
   $('closeBlankSheetBtn').onclick=()=>{
+    if($('blankSheetModal'))$('blankSheetModal').hidden=true;
+  };
+}
+if($('deleteBlankSheetBtn')){
+  $('deleteBlankSheetBtn').onclick=()=>{
+    if(editingBlankId!=null){
+      S.notes=(S.notes||[]).filter(x=>x && x.id!==editingBlankId);
+      editingBlankId=null;
+      save(false);notes();renderDiaryList();renderClinicalReport();
+    }
     if($('blankSheetModal'))$('blankSheetModal').hidden=true;
   };
 }
@@ -9481,44 +9589,48 @@ if($('blankSheetBody')){
 }
 if($('saveBlankSheetBtn')){
   $('saveBlankSheetBtn').onclick=()=>{
+    if(editingBlankId!=null)return; /* Los escritos ya publicados son inmutables (solo lectura o eliminar) */
     const txt=($('blankSheetBody')?$('blankSheetBody').value.trim():'')||'';
     const title=($('blankSheetTitle')?$('blankSheetTitle').value.trim():'')||'';
-    /* El asunto es obligatorio al abrir un texto: sin asunto no se guarda. */
-    if(!title){toast('Ponle un asunto a tu escrito para guardarlo','er');return}
-    if(!txt){toast('Escribe tu reflexión antes de guardar','er');return}
+    /* Si falta el asunto, el campo de asunto palpita 2 veces sutilmente */
+    if(!title){
+      const tEl=$('blankSheetTitle');
+      if(tEl){
+        tEl.classList.remove('pulse-alert');
+        void tEl.offsetWidth;
+        tEl.classList.add('pulse-alert');
+        tEl.focus();
+      }
+      return;
+    }
+    if(!txt){
+      if($('blankSheetBody'))$('blankSheetBody').focus();
+      return;
+    }
     if($('ni'))$('ni').value=txt;
     const n=new Date();
     const timeStr=p2(n.getHours())+':'+p2(n.getMinutes());
     const clueSum=summarizeTodayClueForNote();
-    const finalState=title||(txt?analyze(txt).e:'Registro del día');
+    const finalState=title;
     const finalTheory=txt?analyze(txt).t:'Reconocer cómo está tu cuerpo y tu ánimo ordena tu experiencia del día.';
-    /* Escritura larga de la hoja en blanco: se marca blank:true (así la
-       lista "Tus escritos" del Diario la reconoce) y lleva id para poder
-       editarla después sin duplicarla. Si se abrió un escrito guardado,
-       se ACTUALIZA en su lugar; si es nuevo, se agrega arriba. */
-    const existing=editingBlankId!=null?(S.notes||[]).find(x=>x&&(x.id===editingBlankId)):null;
-    if(existing){
-      existing.estado=finalState;existing.teoria=finalTheory;existing.texto=txt;existing.blank=true;existing.public=blankSheetPublic;
-    }else{
-      S.notes.unshift({
-        id:Date.now(),
-        blank:true,
-        public:blankSheetPublic,
-        d:today(),
-        hora:timeStr,
-        estado:finalState,
-        teoria:finalTheory,
-        texto:txt,
-        moods:[],
-        moodNames:[],
-        ciclo:S.bioMode==='male'?'Fuerza y recuperación':(clueSum||''),
-        fuerza:S.bioMode==='male'?(getPlannedRoutineForDate(today())?.short||'Calistenia'):'',
-        cuerpo:bioState.cuerpo||'',
-        sl:bioState.sl||'',
-        soc:bioState.soc||''
-      });
-      if(S.notes.length>120)S.notes.pop();
-    }
+    S.notes.unshift({
+      id:Date.now(),
+      blank:true,
+      public:blankSheetPublic,
+      d:today(),
+      hora:timeStr,
+      estado:finalState,
+      teoria:finalTheory,
+      texto:txt,
+      moods:[],
+      moodNames:[],
+      ciclo:S.bioMode==='male'?'Fuerza y recuperación':(clueSum||''),
+      fuerza:S.bioMode==='male'?(getPlannedRoutineForDate(today())?.short||'Calistenia'):'',
+      cuerpo:bioState.cuerpo||'',
+      sl:bioState.sl||'',
+      soc:bioState.soc||''
+    });
+    if(S.notes.length>120)S.notes.pop();
     editingBlankId=null;
     markVerifiedPractice('Entrada de diario libre registrada');
     save();notes();renderDiaryList();renderClinicalReport();
@@ -9526,7 +9638,6 @@ if($('saveBlankSheetBtn')){
     if($('blankSheetBody'))$('blankSheetBody').value='';
     if($('blankSheetTitle'))$('blankSheetTitle').value='';
     if($('ni'))$('ni').value='';
-    toast('Entrada guardada en tu Diario','ok');
   };
 }
 

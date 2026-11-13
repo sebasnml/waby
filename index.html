@@ -138,35 +138,33 @@ body{
 
 /* Cabecera Editorial */
 /* Encabezado centrado estilo Instagram: Wavy grande al centro con pitch
-   sutil debajo, y avatar de perfil alineado a la derecha */
+   sutil debajo; tocar Wavy abre tu Perfil (sin foto en la esquina derecha) */
 .masthead{
   border-bottom:none;
   padding:10px 0 8px;
   margin-bottom:10px;
-  display:grid;
-  grid-template-columns:40px 1fr 40px;
+  display:flex;
+  flex-direction:column;
   align-items:center;
-  gap:8px;
+  justify-content:center;
 }
 .masthead-left{
-  grid-column:2;
   text-align:center;
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
   min-width:0;
+  cursor:pointer;
+  user-select:none;
+  -webkit-tap-highlight-color:transparent;
+  transition:transform .2s cubic-bezier(.22,1,.36,1), opacity .2s ease;
 }
+.masthead-left:active{transform:scale(0.97);opacity:0.8}
 .masthead .eyebrow{display:none}
 .masthead h1{font-family:var(--serif);font-weight:500;font-size:clamp(35px,8.8vw,40px);line-height:1;letter-spacing:-.015em;margin:0}
 .masthead .tagline{font-family:var(--serif);font-style:normal;color:var(--muted);font-size:11.5px;letter-spacing:.01em;margin-top:4px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
-.masthead-right{grid-column:3;display:flex;align-items:center;justify-content:flex-end}
-.masthead .me-pill{padding:2px;border-radius:50%;min-height:0;gap:0;box-shadow:none}
-.masthead .me-pill > div:last-child{display:none}
-.masthead .me-pill .mini-av{width:34px;height:34px}
-/* Halo dorado atardecer en el avatar cuando Wavy Pro está activo: un
-   anillo dorado y un resplandor suave alrededor de la circunferencia. */
-.masthead .me-pill.pro-halo .mini-av{border-color:#E9B949;box-shadow:0 0 0 2px #F2C14E,0 0 16px 4px rgba(242,193,78,.6)}
+.masthead-right{display:none!important}
 .eyebrow{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--crimson);font-weight:600}
 h1{font-family:var(--serif);font-weight:500;font-size:clamp(28px,7vw,36px);line-height:1;letter-spacing:.02em;margin:2px 0}
 .tagline{font-family:var(--serif);font-style:normal;color:var(--muted);font-size:14px}
@@ -246,7 +244,7 @@ h1{font-family:var(--serif);font-weight:500;font-size:clamp(28px,7vw,36px);line-
 }
 .help-tip[hidden]{display:none}
 
-/* Sub-navegación rápida de instrumentos en HOY con borde Liquid Glass en movimiento */
+/* Sub-navegación rápida de instrumentos en HOY: minimalismo absoluto, sin línea perimetral ni línea divisoria inferior */
 @keyframes liquidBorderFlow{
   0%{background-position:0% 50%}
   50%{background-position:100% 50%}
@@ -254,24 +252,22 @@ h1{font-family:var(--serif);font-weight:500;font-size:clamp(28px,7vw,36px);line-
 }
 .tabs{
   display:grid;grid-template-columns:repeat(3,1fr);gap:6px;
-  background:transparent;border:none;border-bottom:1px solid var(--rule);
-  border-radius:0;padding:0 0 10px;margin-bottom:16px;box-shadow:none;
+  background:transparent;border:none;border-bottom:none;
+  border-radius:0;padding:0;margin-bottom:14px;box-shadow:none;
 }
 .tab{
-  background:none;border:1.5px solid transparent;min-height:44px;padding:6px 4px;
-  font-family:var(--serif);font-size:15px;color:var(--muted);
-  cursor:pointer;border-radius:9px;transition:all .2s;
+  background:transparent;border:none;min-height:44px;padding:6px 4px;
+  font-family:var(--serif);font-size:15px;color:var(--muted);opacity:.55;
+  cursor:pointer;border-radius:0;transition:opacity .2s ease, color .2s ease;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
+  box-shadow:none;
 }
-.tab b{display:block;font-family:var(--sans);font-size:11px;letter-spacing:.12em;font-weight:600;color:var(--gold);text-transform:uppercase}
+.tab b{display:block;font-family:var(--sans);font-size:11px;letter-spacing:.12em;font-weight:600;color:var(--muted);text-transform:uppercase;margin-bottom:2px;transition:color .2s ease}
 .tab.on{
-  color:var(--ink);font-weight:600;
-  border:1.5px solid transparent;
-  background:linear-gradient(var(--paper),var(--paper)) padding-box,linear-gradient(120deg,color-mix(in srgb,var(--ink) 12%,var(--paper)),color-mix(in srgb,var(--ink) 45%,var(--paper)),rgba(255,255,255,0.96),color-mix(in srgb,var(--ink) 12%,var(--paper))) border-box;
-  background-size:100% 100%,240% 240%;
-  animation:liquidBorderFlow 4.2s ease infinite;
-  box-shadow:0 4px 14px -8px rgba(0,0,0,0.12),inset 0 1px 0 rgba(255,255,255,0.85);
+  color:var(--ink);font-weight:600;opacity:1;
+  border:none;background:transparent;box-shadow:none;animation:none;
 }
+.tab.on b{color:var(--crimson)}
 .panel{display:none;animation:fadeUp .24s ease}.panel.on{display:block}
 
 /* Check-in rápido en Hoy (sin animación giratoria en Pebetero) */
@@ -311,11 +307,13 @@ h1{font-family:var(--serif);font-weight:500;font-size:clamp(28px,7vw,36px);line-
 #sub-habit.habits-hidden #habitGrid,
 #sub-habit.habits-hidden #sm{filter:blur(9px);pointer-events:none;user-select:none}
 
-.read{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:12px}
-.big{font-family:var(--serif);font-size:52px;line-height:.9;font-weight:500;letter-spacing:-.02em}
-.big small{font-size:22px;color:var(--muted)}
-.sub{text-align:right;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-.sub strong{display:block;font-family:var(--serif);font-size:24px;color:var(--ink);letter-spacing:0;text-transform:none}
+/* Renglón de progreso en HOY: 3 columnas simétricas para que el corazón quede en el 50% exacto (alineado con el hito 45),
+   y mismo tamaño de letra para 1.1% y Día 1 / 90 */
+.read{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;margin-bottom:12px}
+.big{font-family:var(--serif);font-size:clamp(24px,6.6vw,28px);line-height:1.1;font-weight:500;letter-spacing:-.01em;color:var(--ink);text-align:left}
+.big small{font-size:clamp(24px,6.6vw,28px);color:var(--ink);font-weight:500}
+.sub{text-align:right;font-size:11px;letter-spacing:0;text-transform:none;color:var(--ink)}
+.sub strong{display:block;font-family:var(--serif);font-size:clamp(24px,6.6vw,28px);line-height:1.1;font-weight:500;color:var(--ink);letter-spacing:-.01em;text-transform:none}
 .bar{height:14px;border:1px solid var(--ink);border-radius:8px;padding:2px;background:var(--paper)}
 .fill{height:100%;width:0;border-radius:5px;background:linear-gradient(90deg,var(--ink),var(--crimson));transition:width .5s cubic-bezier(.2,.8,.2,1)}
 .marks{position:relative;height:82px;margin:6px 14px 14px}
@@ -534,12 +532,12 @@ input[type=range]{width:100%;accent-color:var(--crimson);cursor:pointer;min-heig
 .stats{display:grid;grid-template-columns:repeat(3,1fr);margin-top:12px;padding-top:8px;border-top:none;text-align:center}
 .stats b{display:block;font-family:var(--serif);font-size:28px;font-weight:500}
 .stats span{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-.clock{border:none;border-bottom:1px solid var(--rule);background:transparent;padding:12px 2px;border-radius:0;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);position:relative;overflow:hidden;box-shadow:none}
+.clock{border:none;border-bottom:1px solid var(--rule);background:transparent;padding:6px 2px 14px;border-radius:0;margin-bottom:12px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:2px;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);position:relative;overflow:hidden;box-shadow:none}
 .clock.urgent{border-bottom-color:var(--crimson)}
 .clock.urgent b{color:var(--crimson)}
 @keyframes pulseUrgent{0%,100%{box-shadow:0 0 0 0 rgba(158,27,50,0.25)}50%{box-shadow:0 0 0 6px rgba(158,27,50,0)}}
-.clock b{font-family:var(--serif);font-size:26px;letter-spacing:.03em;color:var(--ink);font-weight:500;font-variant-numeric:tabular-nums}
-.clock i{position:absolute;left:0;bottom:0;height:1.5px;background:var(--crimson);width:0}
+.clock b{font-family:var(--serif);font-size:26px;line-height:1.05;letter-spacing:.03em;color:var(--ink);font-weight:500;font-variant-numeric:tabular-nums}
+.clock i{display:none}
 .line{width:100%;border:1px solid var(--rule);border-radius:14px;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:17px;font-style:normal;padding:9px 13px;outline:none;transition:border-color .2s;min-height:44px}
 .line:focus{border-color:var(--ink)}
 
@@ -885,12 +883,79 @@ textarea::placeholder{font-style:normal;color:var(--muted);opacity:.68}
 .notif-head{display:flex;justify-content:space-between;align-items:center;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;font-weight:600}
 .notif-body{font-family:var(--serif);font-size:16px;margin-bottom:10px;line-height:1.35}
 /* =========================================================
-   EDITORIAL LIQUID GLASS (MEDIUM / PARIS REVIEW / ARE.NA CONSENSUS)
-   Pureza tipográfica en redonda, márgenes proporcionales y colofón fino
+   DIARIO & PERFIL PÚBLICO · ESTÉTICA Y PROPORCIONES MEDIUM
    ========================================================= */
 .wavy-card,
-.diary-entry{cursor:pointer;transition:transform .18s ease, box-shadow .18s ease}
-.diary-entry:active{transform:scale(.985)}
+.diary-entry{cursor:pointer;transition:transform .18s ease}
+.diary-entry:active{transform:scale(.99)}
+.med-card{
+  padding:20px 0;
+  border-bottom:1px solid var(--rule);
+  cursor:pointer;
+}
+.med-author-row{
+  display:flex;align-items:center;gap:7px;margin-bottom:8px;
+  font-family:var(--sans);font-size:13px;line-height:1.2;color:var(--ink);
+}
+.med-av{
+  width:20px;height:20px;border-radius:50%;overflow:hidden;flex-shrink:0;
+  border:1px solid var(--rule);display:grid;place-items:center;
+}
+.med-av svg{width:100%;height:100%;display:block}
+.med-author-name{font-weight:400;color:var(--ink)}
+.med-dot{color:var(--muted)}
+.med-date{color:var(--muted);font-variant-numeric:tabular-nums}
+.med-title{
+  font-family:var(--sans);
+  font-size:18.5px;
+  font-weight:700;
+  line-height:1.24;
+  letter-spacing:-.02em;
+  color:var(--ink);
+  margin:0 0 6px;
+}
+.med-excerpt{
+  font-family:var(--sans);
+  font-size:14.5px;
+  font-weight:400;
+  line-height:1.44;
+  color:var(--muted);
+  margin:0 0 14px;
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+.med-foot{
+  display:flex;justify-content:space-between;align-items:center;gap:10px;
+}
+.med-pill{
+  display:inline-flex;align-items:center;gap:5px;
+  background:var(--wash);color:var(--muted);
+  font-family:var(--sans);font-size:11.5px;font-weight:500;
+  padding:3px 10px;border-radius:4px;min-height:22px;
+}
+.med-pill.draft{color:var(--gold)}
+.med-icon-btn{
+  border:none;background:transparent;color:var(--muted);
+  display:inline-flex;align-items:center;gap:5px;
+  font-family:var(--sans);font-size:12px;padding:4px;cursor:pointer;
+  transition:color .18s ease;
+}
+.med-icon-btn:hover,.med-icon-btn[data-vis="pub"]{color:var(--ink)}
+.med-icon-btn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.pub-tabs{
+  display:flex;align-items:center;gap:24px;
+  border-bottom:1px solid var(--rule);
+  margin:14px 0 6px;
+}
+.pub-tab{
+  font-family:var(--sans);font-size:13.5px;font-weight:400;color:var(--muted);
+  padding:10px 0;border:none;border-bottom:1.5px solid transparent;background:none;cursor:pointer;
+  margin-bottom:-1px;
+}
+.pub-tab.on{color:var(--ink);font-weight:500;border-bottom-color:var(--ink)}
+
 /* La fecha del escrito, alineada a la derecha, en negro y discreta, como en las cartas antiguas. */
 .diary-date{font-size:11.5px;letter-spacing:.04em;text-transform:none;color:var(--ink);font-weight:500;margin-bottom:6px;text-align:right;font-variant-numeric:tabular-nums}
 .diary-vis-btn{border:1px solid var(--rule);background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:11px;font-weight:500;padding:5px 11px;border-radius:999px;cursor:pointer;flex-shrink:0;display:inline-flex;align-items:center;gap:5px}
@@ -904,21 +969,21 @@ textarea::placeholder{font-style:normal;color:var(--muted);opacity:.68}
    Se muestran con la clase body.public-view (el router la pone/quita). */
 body.public-view{display:block}
 body.public-view .masthead, body.public-view .vpage, body.public-view #bnav, body.public-view .book{display:none!important}
-.pub-view{display:none;width:100%;max-width:680px;margin:0 auto;padding:28px 20px 60px;min-height:100vh;min-height:100dvh}
+.pub-view{display:none;width:100%;max-width:680px;margin:0 auto;padding:20px 20px 60px;min-height:100vh;min-height:100dvh}
 body.public-view .pub-view.on{display:block}
-.pub-top{display:flex;justify-content:space-between;align-items:center;padding:6px 0 18px;border-bottom:1px solid var(--rule);margin-bottom:28px}
-.pub-wordmark{font-family:var(--serif);font-weight:600;font-size:26px;color:var(--ink);text-decoration:none}
-.pub-back{font-size:12px;color:var(--muted);text-decoration:none}
+.pub-top{display:flex;justify-content:space-between;align-items:center;padding:4px 0 14px;border-bottom:1px solid var(--rule);margin-bottom:22px}
+.pub-wordmark{font-family:var(--serif);font-weight:700;font-size:30px;letter-spacing:-.02em;color:var(--ink);text-decoration:none}
+.pub-back{font-size:12.5px;color:var(--muted);text-decoration:none}
 .pub-author{display:flex;align-items:center;gap:14px;margin-bottom:8px}
-.pub-author .av{width:56px;height:56px;border-radius:50%;overflow:hidden;flex-shrink:0;border:1px solid var(--glass-border)}
+.pub-author .av{width:48px;height:48px;border-radius:50%;overflow:hidden;flex-shrink:0;border:1px solid var(--rule)}
 .pub-author .av svg{width:100%;height:100%;display:block}
-.pub-author h2{font-family:var(--serif);font-size:26px;font-weight:600;line-height:1.15;margin:0}
+.pub-author h2{font-family:var(--sans);font-size:22px;font-weight:700;letter-spacing:-.02em;line-height:1.15;margin:0}
 .pub-author .un{font-size:13px;color:var(--muted);margin-top:2px}
-.pub-bio{font-family:var(--serif);font-style:italic;font-size:15px;line-height:1.55;color:var(--ink);opacity:.85;margin:10px 0 26px}
-.pub-post{padding:22px 0;border-bottom:1px solid var(--rule);cursor:pointer}
-.pub-post .d{font-size:12px;color:var(--ink);font-weight:600;margin-bottom:6px}
-.pub-post h3{font-family:var(--serif);font-size:22px;font-weight:700;line-height:1.25;margin:0 0 8px}
-.pub-post .ex{font-size:15px;line-height:1.55;color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pub-bio{font-family:var(--sans);font-size:14px;line-height:1.5;color:var(--muted);margin:8px 0 14px}
+.pub-post{padding:20px 0;border-bottom:1px solid var(--rule);cursor:pointer}
+.pub-post .d{font-size:13px;color:var(--muted);font-weight:400}
+.pub-post h3{font-family:var(--sans);font-size:18.5px;font-weight:700;letter-spacing:-.02em;line-height:1.24;margin:0 0 6px;color:var(--ink)}
+.pub-post .ex{font-family:var(--sans);font-size:14.5px;line-height:1.44;color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:14px}
 .pub-foot{margin-top:32px;padding-top:18px;border-top:1px solid var(--rule);font-size:12.5px;color:var(--muted);text-align:center;line-height:1.7}
 .pub-foot a{color:var(--gold);text-decoration:none;font-weight:600}
 .pub-article h1{font-family:var(--serif);font-size:clamp(30px,7vw,42px);font-weight:700;line-height:1.15;margin:0 0 18px}
@@ -1297,7 +1362,7 @@ body.public-view .pub-view.on{display:block}
 .plan-card b{font-family:var(--serif);font-size:24px;color:var(--crimson);font-weight:600}
 .plan-card small{font-size:12px;color:var(--muted);display:block;margin-top:3px}
 
-/* Barra Inferior: píldora traslúcida estilo WhatsApp iOS + encogimiento dinámico estilo Instagram al scrollear */
+/* Barra Inferior: píldora traslúcida estilo WhatsApp iOS + encogimiento GPU 60fps estilo Instagram sin reflujo */
 .bnav{
   position:fixed;left:18px;right:18px;bottom:calc(env(safe-area-inset-bottom,0px) + 10px);z-index:85;
   background:color-mix(in srgb, var(--paper) 54%, transparent);
@@ -1309,12 +1374,15 @@ body.public-view .pub-view.on{display:block}
   padding:4px 6px;
   display:flex;justify-content:center;
   transform-origin:center bottom;
-  transition:transform .32s cubic-bezier(.22,1,.36,1), padding .32s cubic-bezier(.22,1,.36,1), opacity .28s ease;
+  transform:translate3d(0,0,0) scale3d(1,1,1);
+  will-change:transform;
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
+  transition:transform .52s cubic-bezier(.22,1,.36,1), box-shadow .52s cubic-bezier(.22,1,.36,1);
 }
 .bnav.bnav-compact{
-  transform:translateY(4px) scale(0.86);
-  padding:2px 5px;
-  opacity:0.88;
+  transform:translate3d(0,6px,0) scale3d(0.90,0.90,1);
+  box-shadow:0 2px 10px -6px rgba(0,0,0,0.06);
 }
 .bnav-inner{width:100%;max-width:600px;display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
 /* Todas las letras e ilustraciones siempre en negro (o blanco en modo nocturno) para que nunca se pierdan.
@@ -1323,42 +1391,41 @@ body.public-view .pub-view.on{display:block}
   background:none;border:none;min-height:48px;padding:6px 4px;cursor:pointer;color:var(--ink);
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-size:11px;
   letter-spacing:.10em;text-transform:uppercase;font-family:var(--sans);font-weight:500;
-  transition:transform .2s cubic-bezier(.22,1,.36,1), min-height .28s ease, padding .28s ease;border-radius:10px;
-}
-.bnav.bnav-compact .bnav-btn{
-  min-height:38px;padding:3px 2px;gap:2px;font-size:9.5px;
+  transition:transform .22s cubic-bezier(.22,1,.36,1);border-radius:10px;
 }
 .bnav-btn svg{
   width:21px;height:21px;stroke:var(--ink);fill:none;stroke-width:1.65;
   stroke-linecap:round;stroke-linejoin:round;
-  transition:transform .28s cubic-bezier(.22,1,.36,1), stroke .2s ease, width .28s ease, height .28s ease;
+  transition:transform .28s cubic-bezier(.22,1,.36,1), stroke .2s ease;
   transform-origin:center center;
+  overflow:visible;
 }
-.bnav.bnav-compact .bnav-btn svg{width:18px;height:18px}
 .bnav-btn.on{color:var(--ink);font-weight:500}
 .bnav-btn.on svg{stroke:var(--crimson);stroke-width:1.95}
+/* Animaciones orgánicas y expresivas para cada icono activo de la barra inferior */
 @keyframes bnavLeafSway{
-  0%,100%{transform:translateY(-1px) rotate(0deg)}
-  35%{transform:translateY(-2px) rotate(-5deg)}
-  70%{transform:translateY(-1.5px) rotate(4deg)}
+  0%,100%{transform:translateY(1px) scale(0.92) rotate(0deg);transform-origin:50% 90%}
+  35%{transform:translateY(-3px) scale(1.16) rotate(-8deg);transform-origin:50% 90%}
+  70%{transform:translateY(-2px) scale(1.12) rotate(7deg);transform-origin:50% 90%}
 }
 @keyframes bnavWaveFloat{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-2.2px)}
+  0%,100%{transform:translate3d(-3.5px, 0.5px, 0) rotate(-6deg)}
+  50%{transform:translate3d(3.5px, -3px, 0) rotate(6deg)}
 }
 @keyframes bnavPulseWave{
-  0%,100%{transform:scale(1)}
-  50%{transform:scale(1.09)}
+  0%,100%{transform:scale(0.90)}
+  45%{transform:scale(1.22)}
+  75%{transform:scale(1.06)}
 }
 @keyframes bnavCompassTilt{
-  0%,100%{transform:rotate(0deg)}
-  35%{transform:rotate(8deg)}
-  70%{transform:rotate(-6deg)}
+  0%,100%{transform:rotate(0deg) scale(1)}
+  30%{transform:rotate(26deg) scale(1.14)}
+  68%{transform:rotate(-20deg) scale(1.08)}
 }
-.bnav-btn[data-v="v-today"].on svg{animation:bnavLeafSway 3.6s ease-in-out infinite}
-.bnav-btn[data-v="v-breathe"].on svg{animation:bnavWaveFloat 3.2s ease-in-out infinite}
-.bnav-btn[data-v="v-circle"].on svg{animation:bnavPulseWave 3s ease-in-out infinite}
-.bnav-btn[data-v="v-clinic"].on svg{animation:bnavCompassTilt 3.8s ease-in-out infinite}
+.bnav-btn[data-v="v-today"].on svg{animation:bnavLeafSway 2.6s ease-in-out infinite}
+.bnav-btn[data-v="v-breathe"].on svg{animation:bnavWaveFloat 2.4s ease-in-out infinite}
+.bnav-btn[data-v="v-circle"].on svg{animation:bnavPulseWave 2.2s ease-in-out infinite}
+.bnav-btn[data-v="v-clinic"].on svg{animation:bnavCompassTilt 2.7s ease-in-out infinite}
 
 .search-bar{display:flex;align-items:center;gap:8px;background:var(--paper);border:1px solid var(--ink);padding:8px 12px;border-radius:12px;margin-bottom:12px;min-height:46px}
 .search-bar span{font-family:var(--serif);font-style:italic;font-size:18px;color:var(--muted)}
@@ -1734,18 +1801,19 @@ summary::-webkit-details-marker{display:none}
 /* Círculo + Vincular anclado al extremo derecho de la barra de historias */
 .story.add-right{margin-left:auto}
 
-/* Barra de escribir en Círculo SIEMPRE anclada encima de la barra inferior #bnav,
-   deslizándose hacia abajo al scrollear abajo y subiendo al scrollear arriba */
+/* Barra de escribir en Círculo SIEMPRE anclada encima de la barra inferior #bnav
+   respetando el margen homogéneo de 14px de toda la app */
 .circle-sticky-wrap{
   position:fixed;
   left:18px;right:18px;
-  bottom:calc(env(safe-area-inset-bottom,0px) + 70px);
+  bottom:calc(env(safe-area-inset-bottom,0px) + 84px);
   max-width:600px;margin:0 auto;
   z-index:80;
-  transition:transform .34s cubic-bezier(.22,1,.36,1), opacity .26s ease;
+  will-change:transform, opacity;
+  transition:transform .48s cubic-bezier(.22,1,.36,1), opacity .34s cubic-bezier(.22,1,.36,1);
 }
 .circle-sticky-wrap.composer-hidden{
-  transform:translateY(calc(100% + 26px));
+  transform:translate3d(0, calc(100% + 36px), 0);
   opacity:0;
   pointer-events:none;
 }
@@ -1884,11 +1952,11 @@ summary::-webkit-details-marker{display:none}
 
 <main class="book">
   <header class="masthead">
-    <div class="masthead-left">
+    <div class="masthead-left" id="mastheadProfileTrigger" role="button" tabindex="0" aria-label="Abrir mi perfil y ajustes">
       <h1>Wavy</h1>
       <div class="tagline">Donde tu calma se encuentra con los tuyos</div>
     </div>
-    <div class="masthead-right">
+    <div class="masthead-right" hidden>
       <button class="me-pill" id="topProfileBtn" aria-label="Abrir mi perfil">
         <div class="mini-av" id="topMeAv"></div>
         <div>
@@ -1925,11 +1993,11 @@ summary::-webkit-details-marker{display:none}
         <button type="button" class="heart-socket" id="heartSocket" aria-label="Siento un impulso ahora · Acompañarme">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.3a4.3 4.3 0 0 1 7.5-2.8 4.3 4.3 0 0 1 7.5 2.8c0 5.7-7.5 10.3-7.5 10.3Z"/></svg>
         </button>
-        <div class="sub">Progreso<strong>Día <span id="days">0</span> / 90</strong></div>
+        <div class="sub"><strong>Día <span id="days">0</span> / 90</strong></div>
       </div>
       <div class="bar"><div class="fill" id="fill"></div></div>
       <div class="marks" id="marks"></div>
-      <div class="clock" id="dayClockBox"><span>Falta hoy</span><b id="cd">--:--:--</b><i id="cdb"></i></div>
+      <div class="clock" id="dayClockBox"><b id="cd">--:--:--</b><span>Falta hoy</span><i id="cdb"></i></div>
       <div class="sig" id="sigbox">
         <div class="m"><span style="display:flex;align-items:center;gap:8px"><button type="button" class="sig-spirit-btn" id="spiritBtn" aria-label="Elegir línea espiritual o filosófica">✦</button><span id="sm"></span></span><span id="sback" style="color:var(--muted)"></span></div>
         <q id="sq"></q><p id="st"></p><div class="s" id="ss"></div>
@@ -2829,7 +2897,7 @@ summary::-webkit-details-marker{display:none}
       </div>
       <!-- Versión de la app: sube una por ronda (v18, v19, v20…) para saber
            de un vistazo si la versión publicada ya trae los últimos cambios. -->
-      <div class="cover-version">v25</div>
+      <div class="cover-version">v26</div>
     </div>
   </div>
 </div>
@@ -5147,7 +5215,7 @@ function renderCircleFeed(){
   }
 
   const hasMySong=!!(S.soundCapsule && (S.soundCapsule.title||S.soundCapsule.url));
-  S.echoes.slice(0,2).forEach((ec,idx)=>{
+  S.echoes.forEach((ec,idx)=>{
     const myCard=document.createElement('div');
     myCard.className='wavy-card';
     const drawerId='myScDrawer_'+idx;
@@ -5469,13 +5537,12 @@ function dayView(d,mm){
   if(act && $('mk'+act[0]))$('mk'+act[0]).classList.add('cur');
 
   if(mm){
-    $('sm').textContent=hObj.name+' · Hito día '+mm[0]+(cycleDay>=mm[0]?' · alcanzado':' · por explorar');
+    $('sm').textContent='Hito día '+mm[0]+(cycleDay>=mm[0]?' · alcanzado':' · por explorar');
     $('sback').textContent='Toca fuera para volver a hoy';
     $('sq').textContent=mm[1];
     $('st').textContent=mm[2];
   }else{
-    const cycleNum=Math.floor(d/90)+1;
-    $('sm').textContent='Día '+(d+1)+(cycleNum>1?' (Ciclo '+cycleNum+')':'')+' · '+hObj.name;
+    $('sm').textContent='';
     $('sback').textContent='';
     $('sq').textContent=PH[d%PH.length];
     $('st').textContent=act?'Último hito alcanzado (día '+act[0]+'): '+act[2]:('En '+hObj.name.toLowerCase()+', los primeros días requieren observar el impulso con amabilidad sin actuar por reflejo.');
@@ -5555,21 +5622,14 @@ function renderSpiritOpts(){
     box.appendChild(b);
   });
 }
-/* Límite de frases espirituales por día: 1 al día en el plan libre,
-   hasta 5 al día con Wavy Pro. Se cuenta cada frase nueva que se muestra
-   (deslizar a la izquierda); volver a la frase del hábito (deslizar a la
-   derecha) no cuenta. El contador se reinicia cada día. */
+/* Frases espirituales / filosóficas: el usuario siempre puede deslizar libremente
+   de derecha a izquierda para ver una frase de su línea elegida, sin límite diario
+   incluso sin ser Pro. */
 function spiritSeenToday(){
   if(!S.spiritSeen||S.spiritSeen.d!==today())S.spiritSeen={d:today(),n:0};
   return S.spiritSeen.n;
 }
 function showRandomSpiritPhrase(){
-  const limit=isPro()?5:1;
-  const seen=spiritSeenToday();
-  if(seen>=limit){
-    toast(isPro()?'Ya viste tus 5 frases de hoy':'Ya viste tu frase de hoy · Con Wavy Pro puedes ver hasta 5','er');
-    return;
-  }
   const lines=spiritLines();
   const pool=lines.flatMap(id=>SPIRIT_PHRASES[id].map(p=>({...p,line:id})));
   if(!pool.length)return;
@@ -5579,7 +5639,6 @@ function showRandomSpiritPhrase(){
   $('sq').textContent=pick.t;
   $('st').textContent=pick.s;
   $('ss').textContent=(L?L.name:'')+' · Desliza → para volver';
-  S.spiritSeen.n=seen+1;save(false);
   sigShowingSpirit=true;
 }
 function restoreSigQuote(){
@@ -8108,18 +8167,27 @@ function renderDiaryList(){
     b.innerHTML='<p class="empty">Aún no hay escritos. Tu primera reflexión aparecerá aquí.</p>';
     return;
   }
+  const myName=esc((S.me && S.me.name) || ('@'+(S.me && S.me.username || '')));
+  const myAvHtml=getAv(S.me && S.me.av);
   list.slice(0,20).forEach(n=>{
     const isDraft=Boolean(n.draft);
-    const card=document.createElement('div');
-    card.className='journal-card diary-entry';
+    const ex=publicExcerpt(n);
+    const card=document.createElement('article');
+    card.className='med-card diary-entry';
     card.innerHTML=
-      '<div class="diary-date">'+(isDraft?'<span style="color:var(--gold);font-family:var(--sans);font-style:normal;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;margin-right:8px">Borrador</span>':'')+esc(formatDiaryDate(n.d))+'</div>'+
-      '<div class="journal-title">'+esc(n.estado||(isDraft?'Borrador sin título':'Reflexión del día'))+'</div>'+
-      '<div style="display:flex;justify-content:space-between;align-items:center;gap:8px">'+
-        '<div class="diary-read">'+(isDraft?'Continuar escribiendo →':'Leer →')+'</div>'+
-        '<button type="button" class="diary-vis-btn" data-vis="'+(n.public?'pub':'priv')+'">'+(n.public?VIS_PUB_SVG+'<span>Público</span>':VIS_PRIV_SVG+'<span>Privado</span>')+'</button>'+
+      '<div class="med-author-row">'+
+        '<div class="med-av">'+myAvHtml+'</div>'+
+        '<span class="med-author-name">'+myName+'</span>'+
+        '<span class="med-dot">·</span>'+
+        '<span class="med-date">'+esc(formatDiaryDate(n.d))+'</span>'+
+      '</div>'+
+      '<h3 class="med-title">'+esc(n.estado||(isDraft?'Borrador sin título':'Reflexión del día'))+'</h3>'+
+      (ex?'<p class="med-excerpt">'+esc(ex)+'</p>':'')+
+      '<div class="med-foot">'+
+        '<span class="med-pill'+(isDraft?' draft':'')+'">'+(isDraft?'Borrador':'Escrito')+'</span>'+
+        '<button type="button" class="med-icon-btn" data-vis="'+(n.public?'pub':'priv')+'" aria-label="Cambiar visibilidad">'+(n.public?VIS_PUB_SVG+'<span>Público</span>':VIS_PRIV_SVG+'<span>Privado</span>')+'</button>'+
       '</div>';
-    card.querySelector('.diary-vis-btn').onclick=e=>{
+    card.querySelector('.med-icon-btn').onclick=e=>{
       e.stopPropagation();
       n.public=!n.public;
       save(false);renderDiaryList();
@@ -8212,17 +8280,29 @@ function renderPublicProfile(username){
     const posts=publicPostsOf(st);
     const name=esc(me.name||('@'+(me.username||'')));
     const bio=esc(me.bio||'');
-    let html='<div class="pub-author"><div class="av">'+getAv(me.av)+'</div><div><h2>'+name+'</h2><div class="un">@'+esc(me.username||'')+'</div></div></div>';
+    const avHtml=getAv(me.av);
+    let html='<div class="pub-author"><div class="av">'+avHtml+'</div><div><h2>'+name+'</h2><div class="un">@'+esc(me.username||'')+'</div></div></div>';
     if(bio)html+='<p class="pub-bio">“'+bio+'”</p>';
     html+='<div style="display:flex;gap:8px;margin-bottom:6px"><button type="button" class="chip" id="pubShareProfileBtn" style="min-height:34px;padding:6px 14px;font-size:12px">Compartir mi perfil</button></div>';
+    html+='<div class="pub-tabs"><button type="button" class="pub-tab on">Home</button><span class="pub-tab" style="cursor:default">Escritos · '+posts.length+'</span></div>';
     if(!posts.length){
       html+='<p style="color:var(--muted);line-height:1.7;margin-top:24px">Aún no hay escritos públicos. Marca un escrito como <b>Público</b> en tu Diario y aparecerá aquí.</p>';
     }else{
       posts.forEach(n=>{
-        html+='<article class="pub-post" data-pub-post="'+esc(String(n.id))+'">'+
-          '<div class="d">'+esc(formatPublicDate(n.d))+'</div>'+
-          '<h3>'+esc(n.estado||'Reflexión del día')+'</h3>'+
-          (publicExcerpt(n)?'<div class="ex">'+esc(publicExcerpt(n))+'</div>':'')+
+        const ex=publicExcerpt(n);
+        html+='<article class="med-card" data-pub-post="'+esc(String(n.id))+'">'+
+          '<div class="med-author-row">'+
+            '<div class="med-av">'+avHtml+'</div>'+
+            '<span class="med-author-name">'+name+'</span>'+
+            '<span class="med-dot">·</span>'+
+            '<span class="med-date">'+esc(formatPublicDate(n.d))+'</span>'+
+          '</div>'+
+          '<h3 class="med-title">'+esc(n.estado||'Reflexión del día')+'</h3>'+
+          (ex?'<p class="med-excerpt">'+esc(ex)+'</p>':'')+
+          '<div class="med-foot">'+
+            '<span class="med-pill">'+publicReadMins(n)+' min</span>'+
+            '<span class="med-icon-btn" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4.5L6 21V3Z"/></svg></span>'+
+          '</div>'+
         '</article>';
       });
     }
@@ -8805,7 +8885,11 @@ function closeExtModal(){
 }
 $('extClose').onclick=closeExtModal;
 $('extModal').addEventListener('click',e=>{if(e.target===$('extModal'))closeExtModal()});
-$('topProfileBtn').onclick=()=>switchMainView('v-profile');
+if($('topProfileBtn'))$('topProfileBtn').onclick=()=>switchMainView('v-profile');
+if($('mastheadProfileTrigger')){
+  $('mastheadProfileTrigger').onclick=()=>switchMainView('v-profile');
+  $('mastheadProfileTrigger').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();switchMainView('v-profile');}};
+}
 $('previewMyPublicBtn').onclick=()=>openExternalProfile('ME');
 
 document.addEventListener('keydown',e=>{

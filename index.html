@@ -600,9 +600,12 @@ body.co-sync-screen #coFirefliesOverlay{opacity:1}
   border:1px solid var(--rule);
   display:grid;place-items:center;overflow:hidden;
 }
-.sc-meta{min-width:0;flex:1;text-align:left}
+.sc-meta{min-width:0;flex:1;text-align:left;overflow:hidden}
 .sc-q{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:600;display:block;margin-bottom:1px}
-.sc-title{font-family:var(--serif);font-size:16px;font-weight:500;color:var(--ink);display:block;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sc-title-track{display:inline-block;white-space:nowrap;will-change:transform}
+.sc-title-track.marquee{padding-right:32px;animation:scMarquee 11s linear infinite}
+@keyframes scMarquee{0%,15%{transform:translateX(0)}80%,100%{transform:translateX(-50%)}}
+.sc-title{font-family:var(--serif);font-size:16px;font-weight:500;color:var(--ink);display:block;line-height:1.15;white-space:nowrap;overflow:hidden}
 .sc-artist{font-size:12px;color:var(--muted);display:block;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .sc-note-btn{
   width:34px;height:34px;border-radius:50%;border:1px solid var(--rule);background:var(--paper);
@@ -704,19 +707,19 @@ input[type=range]{width:100%;accent-color:var(--crimson);cursor:pointer;min-heig
 }
 .sea-fs-btn:hover{background:rgba(15,23,36,0.58);transform:scale(1.06)}
 .sea-fs-btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
-body.coast-fullscreen{overflow:hidden !important;background:#0f1d2e !important;margin:0 !important;padding:0 !important}
+body.coast-fullscreen{overflow:hidden !important;background:#0f1d2e !important;margin:0 !important;padding:0 !important;width:100vw !important;height:100lvh !important}
 body.coast-fullscreen > *:not(#seab){display:none !important}
 body.coast-fullscreen > #seab{
   display:block !important;
-  position:fixed !important;inset:0 !important;z-index:9999 !important;
-  border-radius:0 !important;margin:0 !important;padding:0 !important;
-  width:100vw !important;height:100dvh !important;max-width:none !important;max-height:none !important;
+  position:fixed !important;top:0 !important;left:0 !important;right:0 !important;bottom:0 !important;
+  z-index:9999 !important;border-radius:0 !important;margin:0 !important;padding:0 !important;
+  width:100vw !important;height:100vh !important;height:100lvh !important;max-width:none !important;max-height:none !important;
   border:none !important;box-shadow:none !important;
 }
 body.coast-fullscreen > #seab #sea,
-body.coast-fullscreen > #seab #breathLayer{width:100vw !important;height:100dvh !important;display:block}
+body.coast-fullscreen > #seab #breathLayer{width:100vw !important;height:100vh !important;height:100lvh !important;display:block}
 body.coast-fullscreen > #seab .sea-fs-btn{top:max(14px, env(safe-area-inset-top, 14px));right:max(14px, env(safe-area-inset-right, 14px))}
-body.coast-fullscreen > #seab .gauge{left:max(16px, env(safe-area-inset-left, 16px));bottom:max(18px, env(safe-area-inset-bottom, 18px))}
+body.coast-fullscreen > #seab .gauge{left:max(16px, env(safe-area-inset-left, 16px));bottom:max(22px, env(safe-area-inset-bottom, 22px))}
 .bmode{
   display:grid;grid-template-columns:repeat(4,1fr);gap:6px;align-items:center;
   margin-bottom:10px;background:transparent;padding:4px 0 10px;border-radius:0;
@@ -900,27 +903,55 @@ body.coast-fullscreen > #seab .gauge{left:max(16px, env(safe-area-inset-left, 16
   color:var(--muted);margin-bottom:8px;font-weight:600;
 }
 .bio-sec-hd span:last-child{font-family:var(--serif);font-style:italic;text-transform:none;letter-spacing:0;font-size:13px}
-.moods{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:10px;padding:10px;border-radius:20px;background:radial-gradient(circle at 20% 25%,rgba(164,198,224,.18),transparent 55%),radial-gradient(circle at 82% 72%,rgba(236,192,162,.18),transparent 55%),var(--wash)}
+@keyframes auraTide{
+  0%,100%{background-position:42% 45%;transform:translateY(0px)}
+  50%{background-position:58% 55%;transform:translateY(-1.5px)}
+}
+.moods{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:10px;padding:4px 0;background:transparent}
 .mo{
   border:none;color:var(--ink);
   min-height:66px;min-width:0;overflow:visible;padding:10px 6px 8px;cursor:pointer;font-family:var(--serif);border-radius:999px;
-  transition:transform .2s cubic-bezier(.22,1,.36,1), box-shadow .2s ease, filter .2s ease;position:relative;
-  background:radial-gradient(circle at 48% 42%, var(--aura-c, rgba(164,198,224,.38)) 0%, var(--aura-c2, rgba(164,198,224,.10)) 68%, transparent 100%);
+  transition:transform .22s cubic-bezier(.22,1,.36,1), box-shadow .22s ease;position:relative;
+  background-size:135% 135%;
+  background-image:radial-gradient(circle at 48% 42%, var(--aura-c, rgba(164,198,224,.38)) 0%, var(--aura-c2, rgba(164,198,224,.10)) 68%, transparent 100%);
+  animation:auraTide 7.5s ease-in-out infinite;
 }
+.mo:nth-child(2n){animation-delay:-2.4s}
+.mo:nth-child(3n){animation-delay:-4.9s}
 .mo:hover{transform:translateY(-2px) scale(1.03)}
 .mo i{display:block;font-style:normal;font-size:21px;line-height:1.1;color:var(--ink)}
 .mo span{font-size:12px;font-weight:500;display:block;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 2px;letter-spacing:.01em}
 .mo.on{
   transform:scale(1.05);
-  box-shadow:0 0 0 1.5px color-mix(in srgb, var(--ink) 55%, transparent), 0 10px 22px -10px rgba(0,0,0,0.20);
-  background:radial-gradient(circle at 48% 42%, var(--aura-on, rgba(164,198,224,.64)) 0%, var(--aura-c, rgba(164,198,224,.28)) 74%, transparent 100%);
+  box-shadow:0 0 0 1.5px color-mix(in srgb, var(--ink) 58%, transparent), 0 10px 22px -10px rgba(0,0,0,0.20);
+  background-image:radial-gradient(circle at 48% 42%, var(--aura-on, rgba(164,198,224,.66)) 0%, var(--aura-c, rgba(164,198,224,.30)) 74%, transparent 100%);
   color:var(--ink);font-weight:700;
 }
 .mo.on i{color:var(--ink)}
-.mo.plus-btn{border:1px dashed color-mix(in srgb, var(--ink) 24%, transparent);color:var(--ink);background:transparent;border-radius:16px}
+.mo.plus-btn{border:1px dashed color-mix(in srgb, var(--ink) 24%, transparent);color:var(--ink);background:transparent;border-radius:999px;animation:none}
 .mo.plus-btn i{color:var(--ink);font-weight:400}
+.mo.extra-mood[hidden]{display:none !important}
 .mo .vip-dot{display:none!important}
-#moodsVip{grid-template-columns:repeat(3,minmax(0,1fr))}
+.mood-flip-wrap{perspective:1100px;position:relative}
+.mood-flip-inner{position:relative;transform-style:preserve-3d;transition:transform .72s cubic-bezier(.22,1,.36,1)}
+.mood-flip-inner.flipped{transform:rotateY(180deg)}
+.mood-flip-front,.mood-flip-back{backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.mood-flip-front{position:relative;z-index:2}
+.mood-flip-back{
+  position:absolute;inset:0;transform:rotateY(180deg);border-radius:22px;padding:20px 18px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  overflow:hidden;border:1px solid var(--line);background:var(--paper);
+}
+.mood-map-canvas{
+  position:absolute;inset:-18%;border-radius:50%;filter:blur(28px);opacity:.78;pointer-events:none;
+  animation:auraSpin 16s linear infinite;
+}
+@keyframes auraSpin{0%{transform:rotate(0deg) scale(1)}50%{transform:rotate(180deg) scale(1.06)}100%{transform:rotate(360deg) scale(1)}}
+.mood-flip-hint{
+  display:inline-flex;align-items:center;gap:6px;margin-top:8px;padding:7px 14px;border-radius:999px;
+  border:1px solid var(--line-strong);background:var(--card);color:var(--ink);font-size:12px;font-weight:600;
+  cursor:pointer;animation:fadeUp .35s ease;
+}
 .circle-aura-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:14px;padding:6px 0}
 .circle-aura-btn{
   border:none;background:transparent;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;
@@ -933,7 +964,18 @@ body.coast-fullscreen > #seab .gauge{left:max(16px, env(safe-area-inset-left, 16
 /* Las razones de cuidado van en retícula geométrica: dos columnas iguales,
    cuatro filas, todas las píldoras del mismo ancho y alineadas. */
 #loss{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
-#loss .chip{width:100%}
+#loss .chip{
+  width:100%;border:none;color:var(--ink);
+  background-size:160% 160%;
+  background-image:radial-gradient(circle at 30% 35%, var(--care-c, rgba(164,198,224,.34)), var(--care-c2, rgba(164,198,224,.12)) 75%);
+  animation:auraTide 8.5s ease-in-out infinite;
+}
+#loss .chip:nth-child(2n){animation-delay:-3s}
+#loss .chip.on{
+  box-shadow:0 0 0 1.5px var(--ink), 0 8px 18px -10px rgba(0,0,0,0.18);
+  background-image:radial-gradient(circle at 30% 35%, var(--care-on, rgba(164,198,224,.62)), var(--care-c, rgba(164,198,224,.32)) 80%);
+  color:var(--ink);font-weight:700;
+}
 .chip{
   border:1px solid var(--rule);background:var(--paper);color:var(--muted);
   font-family:var(--serif);font-size:15px;min-height:44px;padding:6px 14px;border-radius:22px;
@@ -1204,6 +1246,12 @@ body.public-view .pub-view.on{display:block}
 .journal-date{text-transform:uppercase;font-weight:600;letter-spacing:.08em}
 
 /* El Escrito: Garamond Redonda para lectura serena; no todo en cursiva forzada */
+.wavy-card .wavy-echo,
+.wavy-card .bereal-lock-hint,
+.wavy-card .wavy-stats,
+.wavy-card .react-bar{
+  margin-left:46px;
+}
 .wavy-echo,
 .journal-quote{
   font-family:var(--serif);
@@ -2221,13 +2269,24 @@ summary::-webkit-details-marker{display:none}
 
       <div class="bio-sec">
         <div class="bio-sec-hd"><span>Emociones de hoy</span><span id="moodCounterLbl">Elige hasta 3 (0/3)</span></div>
-        <div class="moods" id="moodsCore"></div>
-        <div class="extra-box" id="moodsExtraBox" hidden>
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-            <span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:700">Matices emocionales · Wavy Pro</span>
-            <span id="vipMoodHint" style="font-size:11px;color:var(--muted)">Desbloqueable</span>
+        <div class="mood-flip-wrap" id="moodFlipWrap">
+          <div class="mood-flip-inner" id="moodFlipInner">
+            <div class="mood-flip-front">
+              <div class="moods" id="moodsCore"></div>
+              <div style="text-align:center">
+                <button type="button" class="mood-flip-hint" id="moodFlipToBackBtn" hidden>Ver tu mapa de colores →</button>
+              </div>
+            </div>
+            <div class="mood-flip-back" id="moodFlipBack">
+              <div class="mood-map-canvas" id="moodMapCanvas"></div>
+              <div style="position:relative;z-index:2">
+                <div style="font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:6px">Tu mapa emocional de hoy</div>
+                <div id="moodMapName" style="font-family:var(--serif);font-size:30px;font-weight:500;color:var(--ink);line-height:1.1;margin-bottom:8px"></div>
+                <div id="moodMapTags" style="font-size:12.5px;font-family:var(--serif);font-style:italic;color:var(--ink);opacity:.85;margin-bottom:14px"></div>
+                <button type="button" class="mood-flip-hint" id="moodFlipToFrontBtn">← Cambiar emociones</button>
+              </div>
+            </div>
           </div>
-          <div class="moods" id="moodsVip" style="margin-bottom:0"></div>
         </div>
       </div>
 
@@ -2513,6 +2572,7 @@ summary::-webkit-details-marker{display:none}
               <svg class="w-ico gold" viewBox="0 0 24 24"><path d="M12 20s-6.5-4-6.5-9A3.8 3.8 0 0 1 12 8.5 3.8 3.8 0 0 1 18.5 11c0 5-6.5 9-6.5 9Z"/></svg>
             </div>
           </div>
+          <div id="coBreathGroupAuras" style="display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:10px 0 4px"></div>
           <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-top:8px">
             <label style="display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-family:var(--serif);font-style:italic;cursor:pointer;color:var(--ink)">
               <input type="checkbox" id="simPartnerFingerChk" style="width:16px;height:16px;accent-color:var(--gold)">
@@ -3047,66 +3107,55 @@ summary::-webkit-details-marker{display:none}
 </div>
 
 <!-- TUTORIAL MODAL (SIEMPRE DISPONIBLE EN ?) -->
-<div class="modal" id="tutorialModal" style="display:none">
-  <div class="modal-card" style="max-width:460px">
-    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:6px">
-      <div class="kicker" style="margin:0">Guía rápida · 10 segundos</div>
-      <button type="button" class="btn-icon" id="tutorialXBtn" aria-label="Cerrar tutorial" style="width:30px;height:30px;border-radius:50%;border:1px solid var(--line);background:var(--card);cursor:pointer;font-size:14px;color:var(--muted)">✕</button>
-    </div>
-    <h3 style="margin-bottom:6px">Cómo usar Wavy</h3>
-    <p class="sub-copy" style="margin-bottom:14px">Cuatro espacios pensados para entenderse al instante, sin ruido.</p>
-    <div style="display:flex;flex-direction:column;gap:10px">
-      <div style="padding:11px 13px;border-radius:14px;background:var(--bg);border:1px solid var(--line)">
-        <div style="font-size:13px;font-weight:700;color:var(--ink)">1. Hoy — Tu punto de partida</div>
-        <div style="font-size:12.5px;color:var(--muted);line-height:1.45;margin-top:2px">Elige qué hábito quieres construir o dejar, oculta su nombre con el ojo si alguien mira tu pantalla, registra cómo te sientes y mantén viva tu llama diaria.</div>
+<div class="modal-backdrop" id="tutorialModal" hidden>
+  <div class="ext-card" style="padding:20px 18px 18px">
+    <button type="button" class="ext-close" id="tutorialXBtn" aria-label="Cerrar tutorial">×</button>
+    <div style="font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Guía rápida · 10 segundos</div>
+    <h2 style="font-family:var(--serif);font-size:24px;font-weight:500;margin-bottom:10px">Cómo usar Wavy</h2>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <div style="padding:9px 11px;border-radius:12px;background:var(--wash)">
+        <div style="font-size:12.5px;font-weight:700;color:var(--ink)">1. Hoy — Tu punto de partida</div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.35">Elige tu hábito (ocúltalo con el ojo), registra emociones y cuida tu llama.</div>
       </div>
-      <div style="padding:11px 13px;border-radius:14px;background:var(--bg);border:1px solid var(--line)">
-        <div style="font-size:13px;font-weight:700;color:var(--ink)">2. Costa — Respirar ahora</div>
-        <div style="font-size:12.5px;color:var(--muted);line-height:1.45;margin-top:2px">Cuando llegue un impulso o estrés, abre la costa y respira con el mar. Puedes ponerlo en pantalla completa para aislarte 1 a 3 minutos.</div>
+      <div style="padding:9px 11px;border-radius:12px;background:var(--wash)">
+        <div style="font-size:12.5px;font-weight:700;color:var(--ink)">2. Costa — Respirar ahora</div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.35">Respira con el mar y su oleaje; también puedes hacerlo en grupo.</div>
       </div>
-      <div style="padding:11px 13px;border-radius:14px;background:var(--bg);border:1px solid var(--line)">
-        <div style="font-size:13px;font-weight:700;color:var(--ink)">3. Círculo — Tus aliados y escritos</div>
-        <div style="font-size:12.5px;color:var(--muted);line-height:1.45;margin-top:2px">Publica pensamientos breves, escribe ensayos largos en Tus escritos o entra a Tu círculo para ver a tus personas de confianza.</div>
-      </div>
-      <div style="padding:11px 13px;border-radius:14px;background:var(--bg);border:1px solid var(--line)">
-        <div style="font-size:13px;font-weight:700;color:var(--ink)">4. Pulso y Perfil</div>
-        <div style="font-size:12.5px;color:var(--muted);line-height:1.45;margin-top:2px">Pulso muestra tu avance real de 90 días. El ícono de persona arriba a la derecha abre o cierra tu perfil y ajustes en un toque.</div>
+      <div style="padding:9px 11px;border-radius:12px;background:var(--wash)">
+        <div style="font-size:12.5px;font-weight:700;color:var(--ink)">3. Círculo y 4. Pulso</div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.35">Comparte notas, escritos largos, ve a tus aliados y revisa tu avance de 90 días.</div>
       </div>
     </div>
-    <div style="margin-top:14px;display:flex;justify-content:flex-end">
-      <button type="button" class="btn primary" id="tutorialCloseBtn" style="width:100%">Entendido, empezar</button>
-    </div>
+    <button type="button" class="btn" id="tutorialCloseBtn" style="width:100%;margin-top:12px">Entendido, empezar</button>
   </div>
 </div>
 
 <!-- MODAL REGISTRO RÁPIDO (+ CENTRAL): ¿QUÉ NECESITAS AHORA? -->
-<div class="modal" id="quickActionModal" style="display:none">
-  <div class="modal-card" style="max-width:440px">
-    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:4px">
-      <div class="kicker" style="margin:0">Registro rápido</div>
-      <button type="button" class="btn-icon" id="qaCloseBtn" aria-label="Cerrar registro rápido" style="width:30px;height:30px;border-radius:50%;border:1px solid var(--line);background:var(--card);cursor:pointer;font-size:14px;color:var(--muted)">✕</button>
-    </div>
-    <h3 style="margin-bottom:14px;font-size:24px">¿Qué necesitas ahora?</h3>
-    <div style="display:flex;flex-direction:column;gap:10px">
-      <button type="button" id="qaUrgeBtn" style="text-align:left;padding:15px 16px;border-radius:18px;border:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;background:radial-gradient(circle at 12% 20%,rgba(232,164,116,.38),rgba(232,164,116,.18));color:var(--ink);font-family:var(--sans)">
+<div class="modal-backdrop" id="quickActionModal" hidden>
+  <div class="ext-card" style="padding:20px 18px 18px">
+    <button type="button" class="ext-close" id="qaCloseBtn" aria-label="Cerrar registro rápido">×</button>
+    <div style="font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Registro rápido</div>
+    <h2 style="font-family:var(--serif);font-size:25px;font-weight:500;margin-bottom:12px">¿Qué necesitas ahora?</h2>
+    <div style="display:flex;flex-direction:column;gap:9px">
+      <button type="button" id="qaUrgeBtn" style="text-align:left;padding:13px 14px;border-radius:16px;border:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:10px;background:radial-gradient(circle at 12% 20%,rgba(232,164,116,.38),rgba(232,164,116,.18));color:var(--ink);font-family:var(--sans)">
         <div>
-          <div style="font-size:14.5px;font-weight:700">Tengo un impulso · Pausa de 10 min</div>
-          <div style="font-size:12.5px;color:var(--muted);margin-top:2px">Baja la ola antes de reaccionar en automático</div>
+          <div style="font-size:14px;font-weight:700">Tengo un impulso · Pausa de 10 min</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:2px">Baja la ola antes de reaccionar en automático</div>
         </div>
-        <span style="width:32px;height:32px;border-radius:50%;background:var(--ink);color:var(--paper);display:grid;place-items:center;flex-shrink:0;font-size:14px">→</span>
+        <span style="width:30px;height:30px;border-radius:50%;background:var(--ink);color:var(--paper);display:grid;place-items:center;flex-shrink:0;font-size:14px">→</span>
       </button>
-      <button type="button" id="qaBreatheBtn" style="text-align:left;padding:15px 16px;border-radius:18px;border:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;background:radial-gradient(circle at 85% 20%,rgba(120,174,210,.36),rgba(120,174,210,.16));color:var(--ink);font-family:var(--sans)">
+      <button type="button" id="qaBreatheBtn" style="text-align:left;padding:13px 14px;border-radius:16px;border:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:10px;background:radial-gradient(circle at 85% 20%,rgba(120,174,210,.36),rgba(120,174,210,.16));color:var(--ink);font-family:var(--sans)">
         <div>
-          <div style="font-size:14.5px;font-weight:700">Respirar con el mar · 1 min</div>
-          <div style="font-size:12.5px;color:var(--muted);margin-top:2px">Vuelve al cuerpo con oleaje en vivo</div>
+          <div style="font-size:14px;font-weight:700">Respirar con el mar · 1 min</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:2px">Vuelve al cuerpo con oleaje en vivo</div>
         </div>
-        <span style="width:32px;height:32px;border-radius:50%;background:var(--ink);color:var(--paper);display:grid;place-items:center;flex-shrink:0;font-size:14px">→</span>
+        <span style="width:30px;height:30px;border-radius:50%;background:var(--ink);color:var(--paper);display:grid;place-items:center;flex-shrink:0;font-size:14px">→</span>
       </button>
-      <div style="padding:14px 16px;border-radius:18px;background:var(--bg);border:1px solid var(--line)">
-        <div style="font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Anotar algo rápido</div>
+      <div style="padding:12px 13px;border-radius:16px;background:var(--wash)">
+        <div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:6px">Anotar algo rápido</div>
         <div style="display:flex;gap:8px;align-items:center">
-          <input id="qaNoteInput" type="text" maxlength="220" placeholder="Hoy me siento..." style="flex:1;min-width:0;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-family:var(--serif);font-size:16px">
-          <button type="button" class="btn primary" id="qaNoteSaveBtn" style="flex-shrink:0;padding:10px 14px">Guardar</button>
+          <input id="qaNoteInput" type="text" maxlength="220" placeholder="Hoy me siento..." style="flex:1;min-width:0;padding:9px 11px;border-radius:12px;border:1px solid var(--rule);background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:15.5px">
+          <button type="button" class="btn" id="qaNoteSaveBtn" style="flex-shrink:0;padding:9px 13px">Guardar</button>
         </div>
       </div>
     </div>
@@ -4664,12 +4713,13 @@ function renderSoundCapsuleHTML(sc,compact=false){
   const titleTxt=sc.title||'Melodía compartida';
   const artistTxt=sc.artist||'Paisaje sonoro';
   const urlTxt=String(sc.url||'').trim();
-  const artUrl=String(sc.artwork||'').trim();
   const services=buildStreamingServiceLinks(titleTxt,artistTxt,urlTxt);
 
-  const vinylHtml=artUrl
-    ? '<img src="'+esc(artUrl)+'" alt="" style="width:36px;height:36px;border-radius:8px;object-fit:cover;flex-shrink:0">'
-    : '<div class="sc-vinyl" aria-hidden="true">'+WAVY_MUSIC_NOTE_SVG+'</div>';
+  const vinylHtml='<div class="sc-vinyl" aria-hidden="true">'+WAVY_MUSIC_NOTE_SVG+'</div>';
+  const isLongTitle=titleTxt.length>22;
+  const titleHtml=isLongTitle
+    ? '<span class="sc-title-track marquee">'+esc(titleTxt)+' &nbsp;·&nbsp; '+esc(titleTxt)+' &nbsp;·&nbsp; </span>'
+    : '<span class="sc-title-track">'+esc(titleTxt)+'</span>';
 
   const pickerLinks=services.map(s=>
     '<a href="'+esc(s.url)+'" target="_blank" rel="noopener" class="sc-plat-link" onclick="event.stopPropagation()">'+esc(s.name)+'</a>'
@@ -4679,7 +4729,7 @@ function renderSoundCapsuleHTML(sc,compact=false){
     '<div class="sc-head" style="cursor:pointer">'+
       vinylHtml+
       '<div class="sc-meta">'+
-        '<strong class="sc-title">'+esc(titleTxt)+'</strong>'+
+        '<strong class="sc-title">'+titleHtml+'</strong>'+
         '<span class="sc-artist">'+esc(artistTxt)+'</span>'+
       '</div>'+
       '<button type="button" class="sc-note-btn" aria-label="Elegir servicio de música" title="Elegir servicio de música">'+WAVY_MUSIC_NOTE_SVG+'</button>'+
@@ -6448,14 +6498,25 @@ function stats(){
 }
 
 const CARE_OPTS=['Claridad mental','Tranquilidad','Energía','Autoestima','Concentración','Tiempo','Descanso','Cuerpo en paz'];
+const CARE_COLORS={
+  'Claridad mental':['rgba(126,184,228,.38)','rgba(126,184,228,.12)','rgba(126,184,228,.64)'],
+  'Tranquilidad':['rgba(176,166,222,.38)','rgba(176,166,222,.12)','rgba(176,166,222,.64)'],
+  'Energía':['rgba(244,192,102,.42)','rgba(244,192,102,.14)','rgba(244,192,102,.68)'],
+  'Autoestima':['rgba(232,148,140,.40)','rgba(232,148,140,.13)','rgba(232,148,140,.66)'],
+  'Concentración':['rgba(124,186,144,.38)','rgba(124,186,144,.12)','rgba(124,186,144,.64)'],
+  'Tiempo':['rgba(222,190,148,.38)','rgba(222,190,148,.12)','rgba(222,190,148,.64)'],
+  'Descanso':['rgba(120,140,188,.38)','rgba(120,140,188,.12)','rgba(120,140,188,.64)'],
+  'Cuerpo en paz':['rgba(144,204,194,.38)','rgba(144,204,194,.12)','rgba(144,204,194,.64)']
+};
 function lossView(){
   const el=$('loss');if(!el)return;el.innerHTML='';if(!Array.isArray(S.loss))S.loss=[];
-  /* Migración: las opciones perdieron el "Mi" (ahora "Claridad mental",
-     no "Mi claridad mental"). Los valores guardados viejos se normalizan
-     quitando el "Mi " inicial, para que el chip siga marcado. */
   S.loss=S.loss.map(x=>String(x).replace(/^Mi\s+/i,''));
   CARE_OPTS.forEach(o=>{
     const b=document.createElement('button');b.className='chip'+(S.loss.includes(o)?' on':'');b.textContent=o;
+    const pal=CARE_COLORS[o]||['rgba(164,198,224,.34)','rgba(164,198,224,.12)','rgba(164,198,224,.62)'];
+    b.style.setProperty('--care-c',pal[0]);
+    b.style.setProperty('--care-c2',pal[1]);
+    b.style.setProperty('--care-on',pal[2]);
     b.onclick=()=>{S.loss=S.loss.includes(o)?S.loss.filter(x=>x!==o):[...S.loss,o];save();lossView()};
     el.appendChild(b);
   });
@@ -6938,6 +6999,16 @@ function syncCoBreathVisualState(){
   if($('myFingerStatus'))$('myFingerStatus').textContent=coBreath.myInhaling?'Inhalando ahora':'Suelta / Exhala';
   if($('peerFingerLabel'))$('peerFingerLabel').textContent='@'+(coBreath.partnerUser||S.allyUser||'natalia');
   if($('peerFingerStatus'))$('peerFingerStatus').textContent=partnerInhaling?'Inhalando contigo':'En espera / Exhalando';
+  const grp=$('coBreathGroupAuras');
+  if(grp){
+    const pals=['rgba(236,162,102,.52)','rgba(128,184,224,.52)','rgba(234,158,176,.52)','rgba(148,196,158,.52)'];
+    const ppl=[
+      {name:(S.me&&S.me.name)?S.me.name:'Tú',active:!!coBreath.myInhaling,col:pals[0]},
+      {name:'@'+(coBreath.partnerUser||S.allyUser||'natalia'),active:!!partnerInhaling,col:pals[1]},
+      ...(S.following||[]).slice(1,3).map((h,i)=>({name:'@'+h,active:bothSync,col:pals[i+2]}))
+    ].slice(0,4);
+    grp.innerHTML=ppl.map(p=>'<div style="display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 10px;border-radius:999px;background:radial-gradient(circle,'+p.col+' 0%,transparent 75%);transform:scale('+(p.active?'1.12':'0.96')+');transition:transform .35s ease"><b style="font-size:11px;color:var(--ink)">'+esc(p.name)+'</b><small style="font-size:10px;color:var(--muted)">'+(p.active?'inhalando':'presente')+'</small></div>').join('');
+  }
 }
 
 /* =========================================================
@@ -7174,6 +7245,36 @@ function renderOceanCanvas(ctx,w,h,a,ts,dt,isMainCanvas){
       ctx.beginPath();ctx.arc(mx,my,m.r,0,Math.PI*2);
       ctx.fillStyle='rgba(246,248,252,'+al.toFixed(3)+')';ctx.fill();
     });
+  }
+  /* Transición suave al respirar: disuelve el océano nítido en sus propios
+     colores con movimiento circular hipnótico para dar protagonismo al centro */
+  if(isMainCanvas){
+    if(typeof window._wavyBreathDissolve!=='number')window._wavyBreathDissolve=0;
+    const wantD=(typeof br!=='undefined' && br.on)?1:0;
+    window._wavyBreathDissolve+=(wantD-window._wavyBreathDissolve)*Math.min(1,dt*1.8);
+    const bd=window._wavyBreathDissolve;
+    if(bd>0.015){
+      const cA=mix(seaTopCalm,seaTopStorm,a),cB=mix(crestLightCalm,crestLightStorm,a),cC=mix(seaBotCalm,seaBotStorm,a);
+      ctx.save();
+      ctx.globalAlpha=Math.min(0.94,bd*0.94);
+      const baseG=ctx.createLinearGradient(0,0,0,h);
+      baseG.addColorStop(0,rgb(cA));baseG.addColorStop(1,rgb(cC));
+      ctx.fillStyle=baseG;
+      ctx.fillRect(0,0,w,h);
+      const cxD=w*0.5,cyD=h*0.5,radD=Math.max(w,h)*0.72;
+      for(let k=0;k<4;k++){
+        const ang=t*(0.28+k*0.09)+k*1.57;
+        const ox=cxD+Math.cos(ang)*(w*0.18),oy=cyD+Math.sin(ang)*(h*0.16);
+        const col=k%2===0?cB:cA;
+        const rg=ctx.createRadialGradient(ox,oy,10,ox,oy,radD*0.65);
+        rg.addColorStop(0,'rgba('+col.join(',')+',0.68)');
+        rg.addColorStop(0.55,'rgba('+col.join(',')+',0.22)');
+        rg.addColorStop(1,'rgba('+col.join(',')+',0)');
+        ctx.fillStyle=rg;
+        ctx.beginPath();ctx.arc(ox,oy,radD*0.65,0,Math.PI*2);ctx.fill();
+      }
+      ctx.restore();
+    }
   }
   /* Textura táctil tipo papel algodón / risografía sobre el mar (sin costo de CPU) */
   if(isMainCanvas){
@@ -8486,17 +8587,36 @@ function analyze(txt){
 
 const MO_CORE=[
   ['✧','Plenitud'],['❋','Gratitud'],['☾','Quietud'],['❖','Enfoque'],['⚘','Ternura'],
-  ['◐','Ambivalencia'],['❈','Inquietud'],['✺','Impulso'],['◌','Vacío']
+  ['◐','Ambivalencia'],['❈','Inquietud'],['✺','Impulso']
 ];
 const MO_VIP=[
-  ['✶','Ira'],['✧','Alivio'],['❀','Compasión'],['◈','Claridad'],['❂','Asombro'],
+  ['◌','Vacío'],['✶','Ira'],['✧','Alivio'],['❀','Compasión'],['◈','Claridad'],['❂','Asombro'],
   ['◒','Nostalgia'],['❁','Vulnerabilidad'],['◓','Sensibilidad'],['◊','Agotamiento'],['○','Desconexión']
 ];
 
+function updateMoodFlipMap(){
+  const sel=[...document.querySelectorAll('.mo.on:not(.plus-btn)')];
+  const hintBtn=$('moodFlipToBackBtn');
+  if(hintBtn)hintBtn.hidden=(sel.length!==3);
+  if(sel.length!==3 && $('moodFlipInner'))$('moodFlipInner').classList.remove('flipped');
+  if(sel.length===3){
+    const c1=(MOOD_AURAS[sel[0].dataset.n]||[])[2]||'rgba(246,204,110,.72)';
+    const c2=(MOOD_AURAS[sel[1].dataset.n]||[])[2]||'rgba(136,184,222,.72)';
+    const c3=(MOOD_AURAS[sel[2].dataset.n]||[])[2]||'rgba(238,166,188,.72)';
+    if($('moodMapCanvas')){
+      $('moodMapCanvas').style.background='radial-gradient(circle at 25% 28%, '+c1+' 0%, transparent 56%), radial-gradient(circle at 76% 32%, '+c2+' 0%, transparent 56%), radial-gradient(circle at 50% 78%, '+c3+' 0%, transparent 58%)';
+    }
+    if($('moodMapName'))$('moodMapName').textContent=(S.me&&S.me.name)?S.me.name:'Tu calma';
+    if($('moodMapTags'))$('moodMapTags').textContent=sel.map(x=>x.dataset.n).join(' · ');
+  }
+}
 function updateMoodCounter(){
   const count=document.querySelectorAll('.mo.on:not(.plus-btn)').length;
   if($('moodCounterLbl'))$('moodCounterLbl').textContent='Elige hasta 3 ('+count+'/3)';
+  updateMoodFlipMap();
 }
+if($('moodFlipToBackBtn'))$('moodFlipToBackBtn').onclick=()=>{if($('moodFlipInner'))$('moodFlipInner').classList.add('flipped');};
+if($('moodFlipToFrontBtn'))$('moodFlipToFrontBtn').onclick=()=>{if($('moodFlipInner'))$('moodFlipInner').classList.remove('flipped');};
 
 const MOOD_SVGS={
   'Plenitud':'<svg class="w-ico lg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.5"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M18.7 5.3l-2.1 2.1M7.4 16.6l-2.1 2.1"/></svg>',
@@ -8529,12 +8649,23 @@ const MOOD_AURAS={
   'Ambivalencia':['rgba(190,174,224,.46)','rgba(190,174,224,.14)','rgba(190,174,224,.70)'],
   'Inquietud':['rgba(232,168,128,.48)','rgba(232,168,128,.14)','rgba(232,168,128,.72)'],
   'Impulso':['rgba(228,124,118,.48)','rgba(228,124,118,.14)','rgba(228,124,118,.72)'],
-  'Vacío':['rgba(176,188,198,.44)','rgba(176,188,198,.12)','rgba(176,188,198,.68)']
+  'Vacío':['rgba(176,188,198,.44)','rgba(176,188,198,.12)','rgba(176,188,198,.68)'],
+  'Ira':['rgba(216,96,92,.52)','rgba(216,96,92,.14)','rgba(216,96,92,.76)'],
+  'Alivio':['rgba(134,206,184,.50)','rgba(134,206,184,.14)','rgba(134,206,184,.74)'],
+  'Compasión':['rgba(242,174,196,.50)','rgba(242,174,196,.14)','rgba(242,174,196,.74)'],
+  'Claridad':['rgba(116,194,234,.52)','rgba(116,194,234,.14)','rgba(116,194,234,.76)'],
+  'Asombro':['rgba(248,214,126,.52)','rgba(248,214,126,.14)','rgba(248,214,126,.76)'],
+  'Nostalgia':['rgba(166,158,208,.48)','rgba(166,158,208,.14)','rgba(166,158,208,.72)'],
+  'Vulnerabilidad':['rgba(234,178,166,.48)','rgba(234,178,166,.14)','rgba(234,178,166,.72)'],
+  'Sensibilidad':['rgba(208,184,228,.48)','rgba(208,184,228,.14)','rgba(208,184,228,.72)'],
+  'Agotamiento':['rgba(154,148,176,.46)','rgba(154,148,176,.14)','rgba(154,148,176,.70)'],
+  'Desconexión':['rgba(148,170,188,.44)','rgba(148,170,188,.12)','rgba(148,170,188,.68)']
 };
 function createMoodBtn(o,isVipItem){
   const b=document.createElement('button');
   const locked=isVipItem && !isPro();
-  b.type='button';b.className='mo'+(locked?' pro-glow':'');
+  b.type='button';b.className='mo'+(isVipItem?' extra-mood':'')+(locked?' pro-glow':'');
+  if(isVipItem)b.hidden=true;
   b.dataset.g=o[0]+'\uFE0E';b.dataset.n=o[1];
   const aura=MOOD_AURAS[o[1]]||['rgba(174,194,218,.44)','rgba(174,194,218,.12)','rgba(174,194,218,.68)'];
   b.style.setProperty('--aura-c',aura[0]);
@@ -8556,20 +8687,26 @@ function createMoodBtn(o,isVipItem){
   return b;
 }
 
+let moodExtrasOpen=false;
 function renderMoodsGrid(){
-  const core=$('moodsCore'),vip=$('moodsVip');if(!core||!vip)return;
-  core.innerHTML='';vip.innerHTML='';
+  const core=$('moodsCore');if(!core)return;
+  core.innerHTML='';
   MO_CORE.forEach(o=>core.appendChild(createMoodBtn(o,false)));
   const plus=document.createElement('button');
-  plus.type='button';plus.className='mo plus-btn';
-  plus.innerHTML='<i>+</i><span>Matices</span>';
+  plus.type='button';plus.className='mo plus-btn'+(moodExtrasOpen?' on':'');
+  plus.innerHTML='<i>'+(moodExtrasOpen?'−':'+')+'</i><span>Matices</span>';
   plus.onclick=()=>{
-    const box=$('moodsExtraBox');
-    box.hidden=!box.hidden;
-    plus.classList.toggle('on',!box.hidden);
+    moodExtrasOpen=!moodExtrasOpen;
+    plus.classList.toggle('on',moodExtrasOpen);
+    plus.querySelector('i').textContent=moodExtrasOpen?'−':'+';
+    core.querySelectorAll('.extra-mood').forEach(x=>{x.hidden=!moodExtrasOpen;});
   };
   core.appendChild(plus);
-  MO_VIP.forEach(o=>vip.appendChild(createMoodBtn(o,true)));
+  MO_VIP.forEach(o=>{
+    const el=createMoodBtn(o,true);
+    el.hidden=!moodExtrasOpen;
+    core.appendChild(el);
+  });
   updateMoodCounter();
   syncProWifiSwitchUI();
 }
@@ -9497,23 +9634,23 @@ if($('mastheadProfileTrigger')){
 }
 if($('mastheadMenuBtn'))$('mastheadMenuBtn').onclick=()=>toggleProfileView();
 if($('mastheadHelpBtn'))$('mastheadHelpBtn').onclick=()=>{
-  const m=$('tutorialModal');if(m)m.style.display='grid';
+  const m=$('tutorialModal');if(m)m.hidden=false;
 };
-if($('tutorialCloseBtn'))$('tutorialCloseBtn').onclick=()=>{if($('tutorialModal'))$('tutorialModal').style.display='none';};
-if($('tutorialXBtn'))$('tutorialXBtn').onclick=()=>{if($('tutorialModal'))$('tutorialModal').style.display='none';};
-if($('tutorialModal'))$('tutorialModal').addEventListener('click',e=>{if(e.target===$('tutorialModal'))$('tutorialModal').style.display='none';});
-if($('bnavQuickBtn'))$('bnavQuickBtn').onclick=()=>{if($('quickActionModal'))$('quickActionModal').style.display='grid';};
-if($('qaCloseBtn'))$('qaCloseBtn').onclick=()=>{if($('quickActionModal'))$('quickActionModal').style.display='none';};
-if($('quickActionModal'))$('quickActionModal').addEventListener('click',e=>{if(e.target===$('quickActionModal'))$('quickActionModal').style.display='none';});
+if($('tutorialCloseBtn'))$('tutorialCloseBtn').onclick=()=>{if($('tutorialModal'))$('tutorialModal').hidden=true;};
+if($('tutorialXBtn'))$('tutorialXBtn').onclick=()=>{if($('tutorialModal'))$('tutorialModal').hidden=true;};
+if($('tutorialModal'))$('tutorialModal').addEventListener('click',e=>{if(e.target===$('tutorialModal'))$('tutorialModal').hidden=true;});
+if($('bnavQuickBtn'))$('bnavQuickBtn').onclick=()=>{if($('quickActionModal'))$('quickActionModal').hidden=false;};
+if($('qaCloseBtn'))$('qaCloseBtn').onclick=()=>{if($('quickActionModal'))$('quickActionModal').hidden=true;};
+if($('quickActionModal'))$('quickActionModal').addEventListener('click',e=>{if(e.target===$('quickActionModal'))$('quickActionModal').hidden=true;});
 if($('qaUrgeBtn'))$('qaUrgeBtn').onclick=()=>{
-  if($('quickActionModal'))$('quickActionModal').style.display='none';
+  if($('quickActionModal'))$('quickActionModal').hidden=true;
   switchMainView('v-today');
   const hTab=document.querySelector('#todaySubTabs .tab[data-sub="sub-habit"]');
   if(hTab)hTab.click();
   setTimeout(()=>{if($('sosb'))$('sosb').click();},60);
 };
 if($('qaBreatheBtn'))$('qaBreatheBtn').onclick=()=>{
-  if($('quickActionModal'))$('quickActionModal').style.display='none';
+  if($('quickActionModal'))$('quickActionModal').hidden=true;
   switchMainView('v-breathe');
   const opt2=document.querySelector('.bb-dur-opt[data-min="2"]');
   if(opt2)opt2.click();
@@ -9529,7 +9666,7 @@ if($('qaNoteSaveBtn'))$('qaNoteSaveBtn').onclick=()=>{
   S.notes.unshift(entry);
   save();
   if(inp)inp.value='';
-  if($('quickActionModal'))$('quickActionModal').style.display='none';
+  if($('quickActionModal'))$('quickActionModal').hidden=true;
   toast('Nota guardada','ok');
 };
 (function initFirstDayGuide(){

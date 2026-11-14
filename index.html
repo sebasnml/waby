@@ -383,20 +383,22 @@ h1{font-family:var(--serif);font-weight:500;font-size:clamp(28px,7vw,36px);line-
 /* Cuadrícula 3x3 Hábitos */
 .habit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
 .habit-item{
-  background:var(--paper);border:1.5px solid var(--rule);border-radius:12px;
+  background-color:var(--paper);
+  background-image:radial-gradient(circle at 28% 28%, var(--hab-c, rgba(136,184,222,.36)) 0%, var(--hab-c2, rgba(136,184,222,.14)) 72%);
+  background-size:150% 150%;
+  border:none;border-radius:16px;
   min-height:64px;padding:10px 6px 8px;text-align:center;cursor:pointer;position:relative;
-  transition:all .16s ease;color:var(--muted);font-family:var(--serif);
-  box-shadow:var(--glass-spec);
+  transition:transform .2s ease, box-shadow .2s ease;color:var(--ink);font-family:var(--serif);
+  animation:auraTide 8s ease-in-out infinite;
 }
+.habit-item:nth-child(2n){animation-delay:-3s}
 .habit-item i{display:block;font-style:normal;font-size:21px;color:var(--ink);margin-bottom:3px;line-height:1}
-.habit-item span{font-size:12.5px;display:block;line-height:1.15}
+.habit-item span{font-size:12.5px;display:block;line-height:1.15;font-weight:500}
 .habit-item.on{
-  color:var(--ink);font-weight:600;
-  border:1.5px solid transparent;
-  background:linear-gradient(var(--paper),var(--paper)) padding-box,linear-gradient(120deg,color-mix(in srgb,var(--ink) 14%,var(--paper)),color-mix(in srgb,var(--ink) 50%,var(--paper)),rgba(255,255,255,0.96),color-mix(in srgb,var(--ink) 14%,var(--paper))) border-box;
-  background-size:100% 100%,240% 240%;
-  animation:liquidBorderFlow 4.2s ease infinite;
-  box-shadow:0 6px 18px -10px rgba(0,0,0,0.14),inset 0 1px 0 rgba(255,255,255,0.88);
+  color:var(--ink);font-weight:700;
+  background-image:radial-gradient(circle at 30% 30%, var(--hab-on, rgba(136,184,222,.64)) 0%, var(--hab-c, rgba(136,184,222,.34)) 80%);
+  box-shadow:0 0 0 1.5px var(--ink), 0 10px 20px -10px rgba(0,0,0,0.22);
+  transform:scale(1.03);
 }
 .habit-item.on i{color:var(--ink)}
 .habit-item.pro-glow,.mo.pro-glow,.pal-btn.pro-glow{
@@ -429,9 +431,23 @@ h1{font-family:var(--serif);font-weight:500;font-size:clamp(28px,7vw,36px);line-
    filas para que sus circunferencias jamás se toquen */
 .mk:nth-child(even){top:34px}
 .mk i{width:1px;height:8px;background:var(--rule)}
-.mk span{width:clamp(22px,6.4vw,26px);height:clamp(22px,6.4vw,26px);font-size:12px;border-radius:50%;border:1px solid var(--muted);display:grid;place-items:center;background:var(--card-solid);transition:transform .2s,background .2s}
-.mk.got span{background:var(--ink);color:var(--paper);border-color:var(--ink)}
-.mk.cur span{background:var(--crimson);border-color:var(--crimson);color:#fff;transform:scale(1.14)}
+.mk span{width:clamp(22px,6.4vw,26px);height:clamp(22px,6.4vw,26px);font-size:12px;border-radius:50%;border:1px solid var(--muted);display:grid;place-items:center;background:var(--card-solid);transition:transform .2s,background .2s;position:relative}
+.mk.got span{background:var(--ink);color:var(--paper);border:1.5px solid #2e8b57;box-shadow:0 0 0 2px rgba(46,139,87,.18)}
+.mk.cur span{background:var(--crimson);border:1.5px solid #2e8b57;color:#fff;transform:scale(1.14)}
+.mk.next-up span{border:1.5px solid transparent;color:var(--ink);font-weight:700}
+.mk.next-up span::before{
+  content:"";position:absolute;inset:-4px;border-radius:50%;
+  background:conic-gradient(from 0deg, #2e8b57 0deg 220deg, #e7c268 250deg, #2e8b57 280deg 360deg);
+  -webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 2px),#000 calc(100% - 1.5px));
+  mask:radial-gradient(farthest-side,transparent calc(100% - 2px),#000 calc(100% - 1.5px));
+  animation:nextMilestoneSpin 3.6s linear infinite;pointer-events:none;
+}
+.mk.next-up span::after{
+  content:"✦";position:absolute;top:-7px;right:-4px;font-size:8px;color:#d4a63a;
+  animation:nextSparkPulse 2.2s ease-in-out infinite;pointer-events:none;
+}
+@keyframes nextMilestoneSpin{to{transform:rotate(360deg)}}
+@keyframes nextSparkPulse{0%,100%{opacity:.35;transform:scale(.85)}50%{opacity:1;transform:scale(1.18)}}
 .sig-spirit-btn{width:28px;height:28px;border-radius:50%;border:1px solid var(--glass-border);background:var(--card);color:var(--gold);font-size:14px;cursor:pointer;display:grid;place-items:center;flex-shrink:0;line-height:1}
 .spirit-opt{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:var(--paper);border:1px solid var(--rule);border-radius:16px;padding:12px 14px;cursor:pointer;font-family:var(--serif);font-size:16px;color:var(--ink)}
 .spirit-opt .ck{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--rule);display:grid;place-items:center;font-size:13px;color:var(--paper);flex-shrink:0;background:transparent}
@@ -2277,20 +2293,28 @@ summary::-webkit-details-marker{display:none}
                 <button type="button" class="mood-flip-hint" id="moodFlipToBackBtn" hidden>Ver tu mapa de colores →</button>
               </div>
             </div>
-            <div class="mood-flip-back" id="moodFlipBack">
+            <div class="mood-flip-back" id="moodFlipBack" style="min-height:260px">
               <div class="mood-map-canvas" id="moodMapCanvas"></div>
-              <div style="position:relative;z-index:2">
-                <div style="font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:6px">Tu mapa emocional de hoy</div>
-                <div id="moodMapName" style="font-family:var(--serif);font-size:30px;font-weight:500;color:var(--ink);line-height:1.1;margin-bottom:8px"></div>
-                <div id="moodMapTags" style="font-size:12.5px;font-family:var(--serif);font-style:italic;color:var(--ink);opacity:.85;margin-bottom:14px"></div>
-                <button type="button" class="mood-flip-hint" id="moodFlipToFrontBtn">← Cambiar emociones</button>
+              <div id="moodStickerLayer" style="position:absolute;inset:0;z-index:3;pointer-events:none"></div>
+              <div style="position:relative;z-index:2;pointer-events:none">
+                <div style="font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);opacity:.72;margin-bottom:6px;font-weight:700">Tu mapa emocional de hoy</div>
+                <div id="moodMapName" style="font-family:var(--serif);font-size:32px;font-weight:500;color:var(--ink);line-height:1.1;margin-bottom:8px;text-shadow:0 2px 14px rgba(255,255,255,.75)"></div>
+                <div id="moodMapTags" style="font-size:13px;font-family:var(--serif);font-style:italic;color:var(--ink);opacity:.9;margin-bottom:16px"></div>
+              </div>
+              <div style="position:relative;z-index:4;display:flex;gap:8px;flex-wrap:wrap;justify-content:center">
+                <button type="button" class="mood-flip-hint" id="moodAddGemBtn">+ Gemas</button>
+                <button type="button" class="mood-flip-hint" id="shareMoodMapBtn" style="background:var(--ink);color:var(--paper);border-color:var(--ink)">Compartir Stories</button>
+                <button type="button" class="mood-flip-hint" id="moodFlipToFrontBtn">← Cambiar</button>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <textarea id="ni" class="echo-input" placeholder="Nota breve de tu check-in (opcional)"></textarea>
+      <div style="display:flex;gap:8px;align-items:flex-end;margin-bottom:10px">
+        <textarea id="ni" class="echo-input" placeholder="Nota breve de tu check-in (opcional)" style="margin-bottom:0;flex:1"></textarea>
+        <button type="button" class="echo-music-btn" id="diaryGemBtn" aria-label="Agregar gema cristal" title="Pegatinas de gemas" style="flex-shrink:0">✦</button>
+      </div>
       <button class="btn" style="width:100%" id="na">Guardar check-in del día</button>
       <p class="ins" id="ins"></p>
       <div id="nb"></div>
@@ -2637,6 +2661,7 @@ summary::-webkit-details-marker{display:none}
         <div class="daily-prompt-line" id="dailyPromptLine"></div>
         <div class="circle-composer-row">
           <textarea class="echo-input" id="echoInput" maxlength="200" rows="1" placeholder="Escribe una nota"></textarea>
+          <button type="button" class="echo-music-btn" id="circleGemBtn" aria-label="Agregar gema cristal" title="Pegatinas de gemas">✦</button>
           <button type="button" class="echo-music-btn" id="toggleInlineSongBtn" aria-label="Buscar canción" title="Adjuntar canción">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 17.5V6.2c0-.7.5-1.3 1.2-1.4l7.4-1.3c.8-.1 1.4.5 1.4 1.3v10.7"/><circle cx="6.5" cy="17.5" r="2.5"/><circle cx="16.5" cy="15.5" r="2.5"/><path d="M9 9.5l10-1.7"/></svg>
           </button>
@@ -3108,25 +3133,29 @@ summary::-webkit-details-marker{display:none}
 
 <!-- TUTORIAL MODAL (SIEMPRE DISPONIBLE EN ?) -->
 <div class="modal-backdrop" id="tutorialModal" hidden>
-  <div class="ext-card" style="padding:20px 18px 18px">
+  <div class="ext-card" style="padding:18px 16px 16px">
     <button type="button" class="ext-close" id="tutorialXBtn" aria-label="Cerrar tutorial">×</button>
-    <div style="font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Guía rápida · 10 segundos</div>
-    <h2 style="font-family:var(--serif);font-size:24px;font-weight:500;margin-bottom:10px">Cómo usar Wavy</h2>
-    <div style="display:flex;flex-direction:column;gap:8px">
-      <div style="padding:9px 11px;border-radius:12px;background:var(--wash)">
-        <div style="font-size:12.5px;font-weight:700;color:var(--ink)">1. Hoy — Tu punto de partida</div>
-        <div style="font-size:12px;color:var(--muted);line-height:1.35">Elige tu hábito (ocúltalo con el ojo), registra emociones y cuida tu llama.</div>
+    <div style="font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Guía rápida</div>
+    <h2 style="font-family:var(--serif);font-size:23px;font-weight:500;margin-bottom:10px">Cómo usar Wavy</h2>
+    <div style="display:flex;flex-direction:column;gap:7px">
+      <div style="padding:8px 10px;border-radius:12px;background:var(--wash);display:flex;align-items:center;gap:10px">
+        <svg viewBox="0 0 24 24" style="width:20px;height:20px;stroke:var(--ink);fill:none;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0"><path d="M12 20V9"/><path d="M12 14c-4.5 0-7.5-3-7.5-7.5 4.5 0 7.5 3 7.5 7.5Z"/><path d="M12 11c4-0.5 6.8-3.2 6.8-7.2-4 0.5-6.8 3.2-6.8 7.2Z"/><path d="M8.5 20h7"/></svg>
+        <div><div style="font-size:12.5px;font-weight:700;color:var(--ink)">Hoy</div><div style="font-size:11.5px;color:var(--muted);line-height:1.3">Elige tu hábito (ocúltalo con el ojo), registra emociones y aviva tu llama.</div></div>
       </div>
-      <div style="padding:9px 11px;border-radius:12px;background:var(--wash)">
-        <div style="font-size:12.5px;font-weight:700;color:var(--ink)">2. Costa — Respirar ahora</div>
-        <div style="font-size:12px;color:var(--muted);line-height:1.35">Respira con el mar y su oleaje; también puedes hacerlo en grupo.</div>
+      <div style="padding:8px 10px;border-radius:12px;background:var(--wash);display:flex;align-items:center;gap:10px">
+        <svg viewBox="0 0 24 24" style="width:20px;height:20px;stroke:var(--ink);fill:none;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0"><path d="M6.5 13.5a5.5 5.5 0 0 1 11 0"/><path d="M2.5 14h19"/><path d="M4 18c2.5-1.8 5.2-1.8 8 0s5.5 1.8 8 0"/></svg>
+        <div><div style="font-size:12.5px;font-weight:700;color:var(--ink)">Costa</div><div style="font-size:11.5px;color:var(--muted);line-height:1.3">Respira con el mar en vivo, solo o en sintonía con tu círculo.</div></div>
       </div>
-      <div style="padding:9px 11px;border-radius:12px;background:var(--wash)">
-        <div style="font-size:12.5px;font-weight:700;color:var(--ink)">3. Círculo y 4. Pulso</div>
-        <div style="font-size:12px;color:var(--muted);line-height:1.35">Comparte notas, escritos largos, ve a tus aliados y revisa tu avance de 90 días.</div>
+      <div style="padding:8px 10px;border-radius:12px;background:var(--wash);display:flex;align-items:center;gap:10px">
+        <svg viewBox="0 0 24 24" style="width:20px;height:20px;stroke:var(--ink);fill:none;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0"><circle cx="12" cy="12" r="2.6"/><path d="M7.2 15a5.8 5.8 0 1 1 9.6 0"/><path d="M4.2 17.6a9.4 9.4 0 1 1 15.6 0"/></svg>
+        <div><div style="font-size:12.5px;font-weight:700;color:var(--ink)">Círculo</div><div style="font-size:11.5px;color:var(--muted);line-height:1.3">Publica notas, escribe ensayos largos y mira la presencia de tus aliados.</div></div>
+      </div>
+      <div style="padding:8px 10px;border-radius:12px;background:var(--wash);display:flex;align-items:center;gap:10px">
+        <svg viewBox="0 0 24 24" style="width:20px;height:20px;stroke:var(--ink);fill:none;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0"><circle cx="12" cy="12" r="8.5"/><polygon points="15.4 8.6 13.3 13.3 8.6 15.4 10.7 10.7 15.4 8.6"/><circle cx="12" cy="12" r="1"/></svg>
+        <div><div style="font-size:12.5px;font-weight:700;color:var(--ink)">Pulso</div><div style="font-size:11.5px;color:var(--muted);line-height:1.3">Consulta tu avance real de 90 días, gráficas y reporte PDF.</div></div>
       </div>
     </div>
-    <button type="button" class="btn" id="tutorialCloseBtn" style="width:100%;margin-top:12px">Entendido, empezar</button>
+    <button type="button" class="btn" id="tutorialCloseBtn" style="width:100%;margin-top:11px">Entendido, empezar</button>
   </div>
 </div>
 
@@ -3159,6 +3188,17 @@ summary::-webkit-details-marker{display:none}
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- BANDEJA DE PEGATINAS DE GEMAS CRISTAL (ESTILO TECLADO) -->
+<div class="modal-backdrop" id="gemTrayModal" hidden>
+  <div class="ext-card" style="padding:18px 16px 16px">
+    <button type="button" class="ext-close" id="gemTrayCloseBtn" aria-label="Cerrar gemas">×</button>
+    <div style="font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Pegatinas cristal</div>
+    <h2 style="font-family:var(--serif);font-size:22px;font-weight:500;margin-bottom:10px">Elige una gema</h2>
+    <div id="gemTrayGrid" style="display:grid;grid-template-columns:repeat(6,1fr);gap:8px;max-height:52vh;overflow-y:auto;padding:4px 2px"></div>
+    <p style="font-size:11.5px;color:var(--muted);margin-top:10px;text-align:center">En el mapa puedes arrastrarlas con el dedo; tócala doble para quitar.</p>
   </div>
 </div>
 
@@ -4039,7 +4079,7 @@ function createDefaultStateForUser(uAlias){
     last:'',hist:[],notes:[],spikes:[],trigLogs:[],
     echoes:[],
     pulses:[],
-    following:[],
+    following:['sofia','camila','valeria','renata','lucia','mariana'],
     customUsers:[],
     arousal:0.10,
     fuel:{v:50,t:Date.now()},
@@ -4148,8 +4188,20 @@ function readStoredAccountSnapshot(uname){
   return null;
 }
 
+const CIRCLE_DEMO_WOMEN=[
+  {username:'sofia',name:'Sofía',av:'swan',bio:'Matcha helado, reformer pilates y mañanas sin celular.',echo:'Salí de pilates temblando pero con la cabeza en paz. A veces soltar el control pesa más que la barra.',sea:16,flame:88,days:21,pact:21,aura:['rgba(118,196,142,.64)','rgba(118,196,142,.18)']},
+  {username:'camila',name:'Camila',av:'coast',bio:'Yoga vinyasa, té verde y escribir antes de dormir.',echo:'Hoy me costó muchísimo no responder desde el ego, pero respiré antes de abrir el chat y todo cambió.',sea:38,flame:74,days:14,pact:14,aura:['rgba(236,154,176,.64)','rgba(236,154,176,.18)']},
+  {username:'valeria',name:'Valeria',av:'sun',bio:'Running suave, matcha ceremonial y límites sanos.',echo:'Matcha en mano viendo el cielo limpio. Me tardé años en entender que descansar no es perder el tiempo.',sea:12,flame:94,days:30,pact:30,aura:['rgba(244,192,102,.66)','rgba(244,192,102,.18)']},
+  {username:'renata',name:'Renata',av:'moon',bio:'Pilates mat, lectura nocturna y silencio digital.',echo:'Tuve un día pesadísimo en el trabajo y casi caigo en el scroll infinito. 3 minutos de costa me salvaron la noche.',sea:62,flame:69,days:9,pact:9,aura:['rgba(136,184,234,.64)','rgba(136,184,234,.18)']},
+  {username:'lucia',name:'Lucía',av:'leaf',bio:'Jugo verde, respiración profunda y journaling.',echo:'Qué fuerte darte cuenta de quién te drena energía y aun así elegir quedarte tranquila contigo.',sea:24,flame:81,days:18,pact:18,aura:['rgba(182,156,232,.64)','rgba(182,156,232,.18)']},
+  {username:'mariana',name:'Mariana',av:'flame',bio:'Yoga restaurativo, café de olla y calma.',echo:'Después de yoga siento el cuerpo ligero como hace meses no pasaba. Paso a dejarles luz a todas.',sea:14,flame:90,days:25,pact:25,aura:['rgba(242,160,122,.64)','rgba(242,160,122,.18)']}
+];
+
 function allUsers(){
   const map=new Map();
+  CIRCLE_DEMO_WOMEN.forEach(w=>{
+    if(w.username!==S.me.username)map.set(w.username,w);
+  });
   /* Escanear todas las cuentas reales guardadas bajo wavy_v18_* en localStorage */
   try{
     for(let i=0;i<localStorage.length;i++){
@@ -4894,11 +4946,11 @@ function renderCircleFriends(){
   ];
   const liveStates=['en calma','en costa','llama activa','presente'];
   list.forEach((handle,idx)=>{
-    const u=(typeof getAllyProfile==='function')?getAllyProfile(handle):null;
+    const u=(typeof findUser==='function'?findUser(handle):null)||((typeof getAllyProfile==='function')?getAllyProfile(handle):null);
     const name=(u&&u.name)?u.name:('@'+handle);
     const avKey=(u&&u.av)?u.av:'coast';
     const svg=(typeof AVATARS!=='undefined'&&AVATARS[avKey])?AVATARS[avKey]:'<svg class="w-ico" viewBox="0 0 24 24"><circle cx="12" cy="9" r="3.5"/><path d="M5 19.5c1.5-3.2 4-4.8 7-4.8s5.5 1.6 7 4.8"/></svg>';
-    const pal=auras[idx%auras.length];
+    const pal=(u&&u.aura)?u.aura:auras[idx%auras.length];
     const stText=liveStates[idx%liveStates.length];
     const card=document.createElement('button');
     card.type='button';
@@ -5881,13 +5933,29 @@ function renderCustomIconPicker(){
   });
 }
 
+const HABIT_COLORS={
+  scrolling:['rgba(116,182,232,.44)','rgba(116,182,232,.16)','rgba(116,182,232,.72)'],
+  porn:['rgba(176,154,226,.44)','rgba(176,154,226,.16)','rgba(176,154,226,.72)'],
+  nicotine:['rgba(132,196,176,.44)','rgba(132,196,176,.16)','rgba(132,196,176,.72)'],
+  sugar:['rgba(244,188,118,.46)','rgba(244,188,118,.16)','rgba(244,188,118,.74)'],
+  alcohol:['rgba(148,166,214,.44)','rgba(148,166,214,.16)','rgba(148,166,214,.72)'],
+  caffeine:['rgba(218,168,128,.44)','rgba(218,168,128,.16)','rgba(218,168,128,.72)'],
+  procrastination:['rgba(142,202,152,.44)','rgba(142,202,152,.16)','rgba(142,202,152,.72)'],
+  sleep:['rgba(122,146,204,.44)','rgba(122,146,204,.16)','rgba(122,146,204,.72)'],
+  gaming:['rgba(234,154,174,.44)','rgba(234,154,174,.16)','rgba(234,154,174,.72)'],
+  shopping:['rgba(238,166,134,.44)','rgba(238,166,134,.16)','rgba(238,166,134,.72)']
+};
 function renderHabitGrid(){
   const g=$('habitGrid');if(!g)return;g.innerHTML='';
-  allHabitsList().forEach(h=>{
+  allHabitsList().forEach((h,idx)=>{
     const b=document.createElement('button');
     b.type='button';
     const locked=!isHabitUnlocked(h);
     b.className='habit-item'+(S.habit===h.id?' on':'')+(locked?' pro-glow':'');
+    const hCol=HABIT_COLORS[h.id]||['rgba(146,198,214,.44)','rgba(146,198,214,.16)','rgba(146,198,214,.72)'];
+    b.style.setProperty('--hab-c',hCol[0]);
+    b.style.setProperty('--hab-c2',hCol[1]);
+    b.style.setProperty('--hab-on',hCol[2]);
     const hSvg=h.isCustom?(CUSTOM_HABIT_ICONS[h.icon]||CUSTOM_HABIT_ICONS.book):(HABIT_SVGS[h.id]||HABIT_SVGS.scrolling);
     b.innerHTML='<i>'+hSvg+'</i><span>'+esc(h.name)+'</span>';
     b.onclick=()=>{
@@ -5984,12 +6052,15 @@ function dayView(d,mm){
   const cycleDay=((d%90)|| (d>0?90:0));
   const hObj=currentHabitObj();
   let act=null;
+  let nextM=null;
   hObj.ms.forEach(m=>{
     const e=$('mk'+m[0]);if(!e)return;
-    e.classList.remove('got','cur');
+    e.classList.remove('got','cur','next-up');
     if(cycleDay>=m[0]){e.classList.add('got');act=m}
+    else if(!nextM){nextM=m;}
   });
   if(act && $('mk'+act[0]))$('mk'+act[0]).classList.add('cur');
+  if(nextM && $('mk'+nextM[0]))$('mk'+nextM[0]).classList.add('next-up');
 
   if(mm){
     $('sm').textContent='Hito día '+mm[0]+(cycleDay>=mm[0]?' · alcanzado':' · por explorar');
@@ -8600,16 +8671,162 @@ function updateMoodFlipMap(){
   if(hintBtn)hintBtn.hidden=(sel.length!==3);
   if(sel.length!==3 && $('moodFlipInner'))$('moodFlipInner').classList.remove('flipped');
   if(sel.length===3){
-    const c1=(MOOD_AURAS[sel[0].dataset.n]||[])[2]||'rgba(246,204,110,.72)';
-    const c2=(MOOD_AURAS[sel[1].dataset.n]||[])[2]||'rgba(136,184,222,.72)';
-    const c3=(MOOD_AURAS[sel[2].dataset.n]||[])[2]||'rgba(238,166,188,.72)';
+    const c1=(MOOD_AURAS[sel[0].dataset.n]||[])[2]||'rgba(246,192,66,.92)';
+    const c2=(MOOD_AURAS[sel[1].dataset.n]||[])[2]||'rgba(82,164,228,.92)';
+    const c3=(MOOD_AURAS[sel[2].dataset.n]||[])[2]||'rgba(232,118,158,.92)';
     if($('moodMapCanvas')){
-      $('moodMapCanvas').style.background='radial-gradient(circle at 25% 28%, '+c1+' 0%, transparent 56%), radial-gradient(circle at 76% 32%, '+c2+' 0%, transparent 56%), radial-gradient(circle at 50% 78%, '+c3+' 0%, transparent 58%)';
+      $('moodMapCanvas').style.opacity='0.96';
+      $('moodMapCanvas').style.filter='blur(20px) saturate(1.35)';
+      $('moodMapCanvas').style.background=
+        'radial-gradient(circle at 22% 24%, '+c1+' 0%, transparent 46%), '+
+        'radial-gradient(circle at 80% 26%, '+c2+' 0%, transparent 46%), '+
+        'radial-gradient(circle at 50% 82%, '+c3+' 0%, transparent 48%)';
     }
     if($('moodMapName'))$('moodMapName').textContent=(S.me&&S.me.name)?S.me.name:'Tu calma';
     if($('moodMapTags'))$('moodMapTags').textContent=sel.map(x=>x.dataset.n).join(' · ');
   }
 }
+
+/* =========================================================
+   PEGATINAS VIRALES DE GEMAS CRISTAL (UNISEX, ARRASTRABLES + STORIES)
+   ========================================================= */
+const GEM_STICKERS=[
+  {id:'ruby_heart',label:'Corazón Rubí',glyph:'♦',c1:'#ff7aa8',c2:'#b80f3a',shape:'heart'},
+  {id:'rose_heart',label:'Cuarzo Rosa',glyph:'♡',c1:'#ffd1e3',c2:'#e85d92',shape:'heart'},
+  {id:'sapphire_heart',label:'Corazón Zafiro',glyph:'💙',c1:'#7dd3fc',c2:'#1d4ed8',shape:'heart'},
+  {id:'amethyst_heart',label:'Corazón Amatista',glyph:'💜',c1:'#e9d5ff',c2:'#7e22ce',shape:'heart'},
+  {id:'amber_heart',label:'Corazón Ámbar',glyph:'💛',c1:'#fef08a',c2:'#d97706',shape:'heart'},
+  {id:'emerald_heart',label:'Corazón Esmeralda',glyph:'💚',c1:'#bbf7d0',c2:'#15803d',shape:'heart'},
+  {id:'diamond_round',label:'Diamante Plata',glyph:'◈',c1:'#ffffff',c2:'#94a3b8',shape:'round'},
+  {id:'cobalt_round',label:'Zafiro Redondo',glyph:'◉',c1:'#93c5fd',c2:'#1e40af',shape:'round'},
+  {id:'ruby_round',label:'Rubí Redondo',glyph:'●',c1:'#fda4af',c2:'#be123c',shape:'round'},
+  {id:'peridot_round',label:'Peridoto Lima',glyph:'◎',c1:'#d9f99d',c2:'#4d7c0f',shape:'round'},
+  {id:'obsidian_hex',label:'Ónix Negro',glyph:'⬡',c1:'#94a3b8',c2:'#0f172a',shape:'hex'},
+  {id:'gold_hex',label:'Oro Hexagonal',glyph:'⬢',c1:'#fef3c7',c2:'#b45309',shape:'hex'},
+  {id:'aqua_drop',label:'Gota Aguamarina',glyph:'💧',c1:'#a5f3fc',c2:'#0e7490',shape:'drop'},
+  {id:'violet_drop',label:'Gota Amatista',glyph:'✦',c1:'#ddd6fe',c2:'#6d28d9',shape:'drop'},
+  {id:'rose_drop',label:'Gota Rosa',glyph:'✧',c1:'#fbcfe8',c2:'#be185d',shape:'drop'},
+  {id:'star_silver',label:'Estrella Cristal',glyph:'✦',c1:'#f8fafc',c2:'#64748b',shape:'star'},
+  {id:'star_gold',label:'Estrella Solar',glyph:'★',c1:'#fef08a',c2:'#ca8a04',shape:'star'},
+  {id:'flower_pink',label:'Flor Cuarzo',glyph:'✿',c1:'#fbcfe8',c2:'#db2777',shape:'flower'},
+  {id:'flower_blue',label:'Flor Celeste',glyph:'❀',c1:'#bae6fd',c2:'#0284c7',shape:'flower'},
+  {id:'flower_lime',label:'Flor Matcha',glyph:'❁',c1:'#d9f99d',c2:'#16a34a',shape:'flower'},
+  {id:'emerald_cut',label:'Esmeralda Talla',glyph:'◇',c1:'#a7f3d0',c2:'#047857',shape:'rect'},
+  {id:'sapphire_cut',label:'Zafiro Talla',glyph:'◆',c1:'#bfdbfe',c2:'#1d4ed8',shape:'rect'},
+  {id:'onyx_cut',label:'Obsidiana Talla',glyph:'■',c1:'#cbd5e1',c2:'#1e293b',shape:'rect'},
+  {id:'pearl_moon',label:'Perla Lunar',glyph:'☾',c1:'#fffbeb',c2:'#cbd5e1',shape:'round'}
+];
+function buildGemSVG(g,size=36){
+  const gid='g_'+g.id+'_'+Math.random().toString(36).slice(2,6);
+  let body='<circle cx="18" cy="18" r="14" fill="url(#'+gid+')" stroke="rgba(255,255,255,.85)" stroke-width="1.2"/>';
+  if(g.shape==='heart')body='<path d="M18 31s-11-6.8-13.2-13C3.1 12.8 6.4 7.5 11.4 7.5c2.9 0 5 1.5 6.6 3.5 1.6-2 3.7-3.5 6.6-3.5 5 0 8.3 5.3 6.6 10.5C29 24.2 18 31 18 31Z" fill="url(#'+gid+')" stroke="rgba(255,255,255,.9)" stroke-width="1.2"/>';
+  else if(g.shape==='drop')body='<path d="M18 4C12 12 8 17.5 8 22.5a10 10 0 0 0 20 0C28 17.5 24 12 18 4Z" fill="url(#'+gid+')" stroke="rgba(255,255,255,.9)" stroke-width="1.2"/>';
+  else if(g.shape==='hex')body='<polygon points="18,4 30,11 30,25 18,32 6,25 6,11" fill="url(#'+gid+')" stroke="rgba(255,255,255,.88)" stroke-width="1.2"/>';
+  else if(g.shape==='rect')body='<rect x="7" y="5" width="22" height="26" rx="4" fill="url(#'+gid+')" stroke="rgba(255,255,255,.9)" stroke-width="1.2"/>';
+  else if(g.shape==='star')body='<polygon points="18,3 22,13 33,13.5 24.5,20.5 27.5,31 18,25 8.5,31 11.5,20.5 3,13.5 14,13" fill="url(#'+gid+')" stroke="rgba(255,255,255,.9)" stroke-width="1.1"/>';
+  else if(g.shape==='flower')body='<g fill="url(#'+gid+')" stroke="rgba(255,255,255,.85)" stroke-width="1"><circle cx="18" cy="9" r="5.5"/><circle cx="26.5" cy="15" r="5.5"/><circle cx="23" cy="25" r="5.5"/><circle cx="13" cy="25" r="5.5"/><circle cx="9.5" cy="15" r="5.5"/></g><circle cx="18" cy="18" r="4" fill="#fff" opacity=".85"/>';
+  return '<svg width="'+size+'" height="'+size+'" viewBox="0 0 36 36" style="filter:drop-shadow(0 3px 6px rgba(0,0,0,.22))"><defs><radialGradient id="'+gid+'" cx="32%" cy="28%" r="72%"><stop offset="0%" stop-color="#ffffff"/><stop offset="28%" stop-color="'+g.c1+'"/><stop offset="100%" stop-color="'+g.c2+'"/></radialGradient></defs>'+body+'<ellipse cx="14" cy="12" rx="4.2" ry="2" transform="rotate(-25 14 12)" fill="#fff" opacity=".68"/></svg>';
+}
+
+let gemTrayTarget='map'; // 'map' | 'diary' | 'circle'
+let mapPlacedGems=[]; // [{id,xPct,yPct}]
+function openGemTray(target){
+  gemTrayTarget=target||'map';
+  const grid=$('gemTrayGrid');
+  if(grid && !grid.children.length){
+    GEM_STICKERS.forEach(g=>{
+      const b=document.createElement('button');
+      b.type='button';
+      b.title=g.label;
+      b.style.cssText='border:none;background:var(--wash);border-radius:12px;padding:6px;cursor:pointer;display:grid;place-items:center;transition:transform .14s ease';
+      b.innerHTML=buildGemSVG(g,32);
+      b.onclick=()=>onPickGemSticker(g);
+      grid.appendChild(b);
+    });
+  }
+  if($('gemTrayModal'))$('gemTrayModal').hidden=false;
+}
+function onPickGemSticker(g){
+  if($('gemTrayModal'))$('gemTrayModal').hidden=true;
+  if(gemTrayTarget==='map'){
+    const xPct=24+Math.random()*52,yPct=22+Math.random()*50;
+    mapPlacedGems.push({id:g.id,xPct,yPct});
+    renderMapStickers();
+  }else if(gemTrayTarget==='diary' && $('ni')){
+    $('ni').value=($('ni').value?($('ni').value+' '):'')+g.glyph;
+    $('ni').focus();
+  }else if(gemTrayTarget==='circle' && $('echoInput')){
+    $('echoInput').value=($('echoInput').value?($('echoInput').value+' '):'')+g.glyph;
+    $('echoInput').focus();
+  }
+}
+function renderMapStickers(){
+  const layer=$('moodStickerLayer');if(!layer)return;
+  layer.innerHTML='';
+  mapPlacedGems.forEach((item,idx)=>{
+    const g=GEM_STICKERS.find(x=>x.id===item.id)||GEM_STICKERS[0];
+    const el=document.createElement('div');
+    el.style.cssText='position:absolute;left:'+item.xPct+'%;top:'+item.yPct+'%;transform:translate(-50%,-50%);cursor:grab;pointer-events:auto;touch-action:none;user-select:none';
+    el.innerHTML=buildGemSVG(g,38);
+    el.ondblclick=()=>{mapPlacedGems.splice(idx,1);renderMapStickers();};
+    el.onpointerdown=ev=>{
+      ev.preventDefault();
+      el.setPointerCapture(ev.pointerId);
+      const rect=layer.getBoundingClientRect();
+      const onMove=mv=>{
+        item.xPct=Math.max(8,Math.min(92,((mv.clientX-rect.left)/rect.width)*100));
+        item.yPct=Math.max(10,Math.min(86,((mv.clientY-rect.top)/rect.height)*100));
+        el.style.left=item.xPct+'%';
+        el.style.top=item.yPct+'%';
+      };
+      const onUp=()=>{
+        el.removeEventListener('pointermove',onMove);
+        el.removeEventListener('pointerup',onUp);
+      };
+      el.addEventListener('pointermove',onMove);
+      el.addEventListener('pointerup',onUp);
+    };
+    layer.appendChild(el);
+  });
+}
+if($('moodAddGemBtn'))$('moodAddGemBtn').onclick=()=>openGemTray('map');
+if($('diaryGemBtn'))$('diaryGemBtn').onclick=()=>openGemTray('diary');
+if($('circleGemBtn'))$('circleGemBtn').onclick=()=>openGemTray('circle');
+if($('gemTrayCloseBtn'))$('gemTrayCloseBtn').onclick=()=>{if($('gemTrayModal'))$('gemTrayModal').hidden=true;};
+if($('gemTrayModal'))$('gemTrayModal').addEventListener('click',e=>{if(e.target===$('gemTrayModal'))$('gemTrayModal').hidden=true;});
+if($('shareMoodMapBtn'))$('shareMoodMapBtn').onclick=()=>{
+  const sel=[...document.querySelectorAll('.mo.on:not(.plus-btn)')];
+  if(sel.length<1){toast('Elige tus emociones primero','er');return;}
+  const c=document.createElement('canvas');c.width=1080;c.height=1920;
+  const ctx=c.getContext('2d');
+  ctx.fillStyle='#f7f3ec';ctx.fillRect(0,0,1080,1920);
+  const cols=sel.map(x=>(MOOD_AURAS[x.dataset.n]||[])[2]||'rgba(120,174,210,.9)');
+  [[280,560,cols[0]],[800,640,cols[1]||cols[0]],[540,1260,cols[2]||cols[0]]].forEach(([ox,oy,col])=>{
+    const rg=ctx.createRadialGradient(ox,oy,40,ox,oy,480);
+    rg.addColorStop(0,col);rg.addColorStop(1,'rgba(247,243,236,0)');
+    ctx.fillStyle=rg;ctx.beginPath();ctx.arc(ox,oy,480,0,Math.PI*2);ctx.fill();
+  });
+  ctx.fillStyle='#181411';ctx.textAlign='center';
+  ctx.font='600 28px sans-serif';ctx.fillText('WAVY · MAPA EMOCIONAL',540,260);
+  ctx.font='500 104px Georgia, serif';ctx.fillText((S.me&&S.me.name)?S.me.name:'Tu calma',540,940);
+  ctx.font='italic 44px Georgia, serif';ctx.fillText(sel.map(x=>x.dataset.n).join('  ·  '),540,1035);
+  mapPlacedGems.forEach(item=>{
+    const g=GEM_STICKERS.find(x=>x.id===item.id)||GEM_STICKERS[0];
+    const gx=(item.xPct/100)*1080,gy=420+(item.yPct/100)*1080;
+    const gr=ctx.createRadialGradient(gx-12,gy-12,4,gx,gy,46);
+    gr.addColorStop(0,'#ffffff');gr.addColorStop(0.35,g.c1);gr.addColorStop(1,g.c2);
+    ctx.fillStyle=gr;ctx.beginPath();ctx.arc(gx,gy,44,0,Math.PI*2);ctx.fill();
+  });
+  c.toBlob(async blob=>{
+    if(!blob)return;
+    const file=new File([blob],'wavy-mapa-emocional.png',{type:'image/png'});
+    if(navigator.canShare && navigator.canShare({files:[file]})){
+      try{await navigator.share({files:[file],title:'Mi mapa en Wavy'});return;}catch(e){}
+    }
+    const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='wavy-mapa-emocional.png';a.click();
+    toast('Imagen lista para subir a Instagram Stories','ok');
+  },'image/png');
+};
 function updateMoodCounter(){
   const count=document.querySelectorAll('.mo.on:not(.plus-btn)').length;
   if($('moodCounterLbl'))$('moodCounterLbl').textContent='Elige hasta 3 ('+count+'/3)';

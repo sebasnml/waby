@@ -900,29 +900,34 @@ body.coast-fullscreen > #seab .gauge{left:max(16px, env(safe-area-inset-left, 16
   color:var(--muted);margin-bottom:8px;font-weight:600;
 }
 .bio-sec-hd span:last-child{font-family:var(--serif);font-style:italic;text-transform:none;letter-spacing:0;font-size:13px}
-.moods{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:8px}
+.moods{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:10px;padding:10px;border-radius:20px;background:radial-gradient(circle at 20% 25%,rgba(164,198,224,.18),transparent 55%),radial-gradient(circle at 82% 72%,rgba(236,192,162,.18),transparent 55%),var(--wash)}
 .mo{
-  background:var(--paper);border:1px solid var(--rule);color:var(--muted);
-  min-height:60px;min-width:0;overflow:hidden;padding:12px 2px 7px;cursor:pointer;font-family:var(--serif);border-radius:10px;
-  transition:all .16s ease;position:relative;
+  border:none;color:var(--ink);
+  min-height:66px;min-width:0;overflow:visible;padding:10px 6px 8px;cursor:pointer;font-family:var(--serif);border-radius:999px;
+  transition:transform .2s cubic-bezier(.22,1,.36,1), box-shadow .2s ease, filter .2s ease;position:relative;
+  background:radial-gradient(circle at 48% 42%, var(--aura-c, rgba(164,198,224,.38)) 0%, var(--aura-c2, rgba(164,198,224,.10)) 68%, transparent 100%);
 }
-.mo i{display:block;font-style:normal;font-size:24px;line-height:1.1;color:var(--ink)}
-.mo span{font-size:11px;display:block;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 2px}
+.mo:hover{transform:translateY(-2px) scale(1.03)}
+.mo i{display:block;font-style:normal;font-size:21px;line-height:1.1;color:var(--ink)}
+.mo span{font-size:12px;font-weight:500;display:block;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 2px;letter-spacing:.01em}
 .mo.on{
-  border:1.5px solid transparent;
-  background:
-    linear-gradient(var(--card-solid), var(--card-solid)) padding-box,
-    linear-gradient(120deg, color-mix(in srgb, var(--ink) 26%, var(--paper)) 0%, var(--gold) 50%, color-mix(in srgb, var(--ink) 26%, var(--paper)) 100%) border-box;
-  background-size:100% 100%, 220% 220%;
-  animation:liquidBorderFlow 4.2s ease infinite;
-  box-shadow:0 6px 16px -8px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.65);
-  color:var(--ink);font-weight:600;
+  transform:scale(1.05);
+  box-shadow:0 0 0 1.5px color-mix(in srgb, var(--ink) 55%, transparent), 0 10px 22px -10px rgba(0,0,0,0.20);
+  background:radial-gradient(circle at 48% 42%, var(--aura-on, rgba(164,198,224,.64)) 0%, var(--aura-c, rgba(164,198,224,.28)) 74%, transparent 100%);
+  color:var(--ink);font-weight:700;
 }
 .mo.on i{color:var(--ink)}
-.mo.plus-btn{border-style:dashed;color:var(--ink);background:var(--wash)}
+.mo.plus-btn{border:1px dashed color-mix(in srgb, var(--ink) 24%, transparent);color:var(--ink);background:transparent;border-radius:16px}
 .mo.plus-btn i{color:var(--ink);font-weight:400}
 .mo .vip-dot{display:none!important}
-#moodsVip{grid-template-columns:repeat(5,minmax(0,1fr))}
+#moodsVip{grid-template-columns:repeat(3,minmax(0,1fr))}
+.circle-aura-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:14px;padding:6px 0}
+.circle-aura-btn{
+  border:none;background:transparent;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:5px;padding:18px 10px;border-radius:999px;position:relative;font-family:var(--sans);transition:transform .22s ease;
+  background-image:radial-gradient(circle at 50% 46%, var(--ally-aura, rgba(232,164,116,.44)) 0%, var(--ally-aura-2, rgba(232,164,116,.12)) 62%, transparent 76%);
+}
+.circle-aura-btn:hover{transform:scale(1.04)}
 
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 /* Las razones de cuidado van en retícula geométrica: dos columnas iguales,
@@ -1517,7 +1522,16 @@ body.public-view .pub-view.on{display:block}
   border:1px solid var(--rule);
   box-shadow:0 4px 18px -8px rgba(0,0,0,0.08);
 }
-.bnav-inner{width:100%;max-width:600px;display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
+.bnav-inner{width:100%;max-width:600px;display:grid;grid-template-columns:1fr 1fr auto 1fr 1fr;gap:4px;align-items:center}
+.bnav-plus{
+  width:46px;height:46px;border-radius:50%;border:none;cursor:pointer;
+  background:var(--ink);color:var(--paper);font-size:24px;line-height:1;font-weight:400;
+  display:grid;place-items:center;margin:0 4px;transform:translateY(-4px);
+  box-shadow:0 8px 20px -6px rgba(0,0,0,0.28);
+  transition:transform .2s cubic-bezier(.22,1,.36,1), box-shadow .2s ease;
+}
+.bnav-plus:hover{transform:translateY(-6px) scale(1.05)}
+.bnav-plus:active{transform:translateY(-3px) scale(0.96)}
 /* Todas las letras e ilustraciones siempre en negro (o blanco en modo nocturno) para que nunca se pierdan.
    Lo único que indica en qué pestaña estás es el color en la ilustración activa. */
 .bnav-btn{
@@ -3065,6 +3079,40 @@ summary::-webkit-details-marker{display:none}
   </div>
 </div>
 
+<!-- MODAL REGISTRO RÁPIDO (+ CENTRAL): ¿QUÉ NECESITAS AHORA? -->
+<div class="modal" id="quickActionModal" style="display:none">
+  <div class="modal-card" style="max-width:440px">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:4px">
+      <div class="kicker" style="margin:0">Registro rápido</div>
+      <button type="button" class="btn-icon" id="qaCloseBtn" aria-label="Cerrar registro rápido" style="width:30px;height:30px;border-radius:50%;border:1px solid var(--line);background:var(--card);cursor:pointer;font-size:14px;color:var(--muted)">✕</button>
+    </div>
+    <h3 style="margin-bottom:14px;font-size:24px">¿Qué necesitas ahora?</h3>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <button type="button" id="qaUrgeBtn" style="text-align:left;padding:15px 16px;border-radius:18px;border:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;background:radial-gradient(circle at 12% 20%,rgba(232,164,116,.38),rgba(232,164,116,.18));color:var(--ink);font-family:var(--sans)">
+        <div>
+          <div style="font-size:14.5px;font-weight:700">Tengo un impulso · Pausa de 10 min</div>
+          <div style="font-size:12.5px;color:var(--muted);margin-top:2px">Baja la ola antes de reaccionar en automático</div>
+        </div>
+        <span style="width:32px;height:32px;border-radius:50%;background:var(--ink);color:var(--paper);display:grid;place-items:center;flex-shrink:0;font-size:14px">→</span>
+      </button>
+      <button type="button" id="qaBreatheBtn" style="text-align:left;padding:15px 16px;border-radius:18px;border:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;background:radial-gradient(circle at 85% 20%,rgba(120,174,210,.36),rgba(120,174,210,.16));color:var(--ink);font-family:var(--sans)">
+        <div>
+          <div style="font-size:14.5px;font-weight:700">Respirar con el mar · 1 min</div>
+          <div style="font-size:12.5px;color:var(--muted);margin-top:2px">Vuelve al cuerpo con oleaje en vivo</div>
+        </div>
+        <span style="width:32px;height:32px;border-radius:50%;background:var(--ink);color:var(--paper);display:grid;place-items:center;flex-shrink:0;font-size:14px">→</span>
+      </button>
+      <div style="padding:14px 16px;border-radius:18px;background:var(--bg);border:1px solid var(--line)">
+        <div style="font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Anotar algo rápido</div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <input id="qaNoteInput" type="text" maxlength="220" placeholder="Hoy me siento..." style="flex:1;min-width:0;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-family:var(--serif);font-size:16px">
+          <button type="button" class="btn primary" id="qaNoteSaveBtn" style="flex-shrink:0;padding:10px 14px">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- =========================================================
      MODAL 2: PAYWALL COMERCIAL WAVY PRO (EN PESOS MEXICANOS + TRIAL 7 DÍAS)
      ========================================================= -->
@@ -3328,6 +3376,7 @@ summary::-webkit-details-marker{display:none}
       <svg viewBox="0 0 24 24"><path d="M6.5 13.5a5.5 5.5 0 0 1 11 0"/><path d="M2.5 14h19"/><path d="M4 18c2.5-1.8 5.2-1.8 8 0s5.5 1.8 8 0"/></svg>
       <span>Costa</span>
     </button>
+    <button type="button" class="bnav-plus" id="bnavQuickBtn" aria-label="¿Qué necesitas ahora?" title="Registro rápido">+</button>
     <button class="bnav-btn" data-v="v-circle" role="tab" aria-selected="false">
       <!-- Símbolo de Autor 3: Onda de Sintonía Compartida (Centro y Resonancia en Calma) -->
       <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="2.6"/><path d="M7.2 15a5.8 5.8 0 1 1 9.6 0"/><path d="M4.2 17.6a9.4 9.4 0 1 1 15.6 0"/></svg>
@@ -4780,24 +4829,35 @@ function toggleProfileView(){
 /* Pestañas de Círculo: En vivo, Tus escritos y Tu círculo. */
 function renderCircleFriends(){
   const grid=$('circleFriendsGrid');if(!grid)return;
+  grid.className='circle-aura-grid';
   const list=(S.following||[]);
   if(!list.length){
     grid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:18px 8px;color:var(--muted);font-size:13px">Aún no tienes aliados en tu círculo. Invita a alguien de confianza abajo.</div>';
     return;
   }
   grid.innerHTML='';
-  list.forEach(handle=>{
+  const auras=[
+    ['rgba(236,162,102,.48)','rgba(236,162,102,.12)'],
+    ['rgba(128,184,224,.48)','rgba(128,184,224,.12)'],
+    ['rgba(234,158,176,.48)','rgba(234,158,176,.12)'],
+    ['rgba(148,196,158,.48)','rgba(148,196,158,.12)']
+  ];
+  const liveStates=['en calma','en costa','llama activa','presente'];
+  list.forEach((handle,idx)=>{
     const u=(typeof getAllyProfile==='function')?getAllyProfile(handle):null;
     const name=(u&&u.name)?u.name:('@'+handle);
     const avKey=(u&&u.av)?u.av:'coast';
     const svg=(typeof AVATARS!=='undefined'&&AVATARS[avKey])?AVATARS[avKey]:'<svg class="w-ico" viewBox="0 0 24 24"><circle cx="12" cy="9" r="3.5"/><path d="M5 19.5c1.5-3.2 4-4.8 7-4.8s5.5 1.6 7 4.8"/></svg>';
+    const pal=auras[idx%auras.length];
+    const stText=liveStates[idx%liveStates.length];
     const card=document.createElement('button');
     card.type='button';
-    card.className='circle-friend-item';
-    card.style.cssText='display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 6px;border-radius:16px;border:1px solid var(--line);background:var(--bg);cursor:pointer;font-family:var(--sans);transition:transform .16s ease,border-color .16s ease';
-    card.innerHTML='<div style="width:52px;height:52px;border-radius:50%;border:1.5px solid var(--line-strong);background:var(--card);display:grid;place-items:center;color:var(--ink)">'+svg+'</div>'
-      +'<div style="font-size:12px;font-weight:700;color:var(--ink);max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+esc(name)+'</div>'
-      +'<div style="font-size:10.5px;color:var(--muted);max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">@'+esc(handle)+'</div>';
+    card.className='circle-aura-btn';
+    card.style.setProperty('--ally-aura',pal[0]);
+    card.style.setProperty('--ally-aura-2',pal[1]);
+    card.innerHTML='<div style="width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.55);backdrop-filter:blur(4px);display:grid;place-items:center;color:var(--ink)">'+svg+'</div>'
+      +'<div style="font-size:12.5px;font-weight:700;letter-spacing:.03em;color:var(--ink);max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+esc(name)+'</div>'
+      +'<div style="font-size:11px;font-family:var(--serif);font-style:italic;color:var(--muted)">'+esc(stText)+'</div>';
     card.onclick=()=>{if(typeof openExternalProfile==='function')openExternalProfile(handle);};
     grid.appendChild(card);
   });
@@ -7045,6 +7105,25 @@ function renderOceanCanvas(ctx,w,h,a,ts,dt,isMainCanvas){
     ctx.fillStyle=waveGrad;
     ctx.fill();
 
+    /* Trazo gouache / pincelada orgánica sobre cada cresta (textura pictórica) */
+    ctx.save();
+    ctx.beginPath();
+    for(let x=-12;x<=w+step+12;x+=step){
+      const w1=Math.sin(x*freq+t*speed+i*0.85)*swell;
+      const w2=Math.cos(x*freq*1.75-t*speed*0.92+i*1.4)*swell*(0.24+mist*0.24);
+      const wWild=storm>0.01?(Math.sin(x*freq*2.9-t*speed*1.85+i*1.9)*0.22 + Math.cos(x*freq*4.2+t*speed*2.3+i*2.7)*0.12)*swell*storm:0;
+      const brushOffset=Math.sin(x*0.025+i*1.9)*1.4;
+      const y=yBase+w1+w2+wWild+brushOffset;
+      if(x===-12)ctx.moveTo(x,y);else ctx.lineTo(x,y);
+    }
+    const brushAlpha=(0.14+depth*0.24)*(isNight?0.75:0.95);
+    ctx.strokeStyle='rgba('+crestLight.join(',')+','+brushAlpha.toFixed(3)+')';
+    ctx.lineWidth=3.2+depth*5.4;
+    ctx.lineCap='round';
+    ctx.lineJoin='round';
+    ctx.stroke();
+    ctx.restore();
+
     const shimmerW=w*(0.24+depth*0.44);
     const specGrad=ctx.createLinearGradient(sunX-shimmerW,0,sunX+shimmerW,0);
     const ribbonCol=mix(ribbonCalm,ribbonStorm,a);
@@ -7095,6 +7174,28 @@ function renderOceanCanvas(ctx,w,h,a,ts,dt,isMainCanvas){
       ctx.beginPath();ctx.arc(mx,my,m.r,0,Math.PI*2);
       ctx.fillStyle='rgba(246,248,252,'+al.toFixed(3)+')';ctx.fill();
     });
+  }
+  /* Textura táctil tipo papel algodón / risografía sobre el mar (sin costo de CPU) */
+  if(isMainCanvas){
+    if(!window._wavyGrainPat){
+      const gc=document.createElement('canvas');gc.width=96;gc.height=96;
+      const gctx=gc.getContext('2d');
+      const id=gctx.createImageData(96,96);
+      for(let k=0;k<id.data.length;k+=4){
+        const v=Math.random()>0.5?255:20;
+        id.data[k]=v;id.data[k+1]=v;id.data[k+2]=v;
+        id.data[k+3]=Math.random()>0.68?14:0;
+      }
+      gctx.putImageData(id,0,0);
+      window._wavyGrainPat=ctx.createPattern(gc,'repeat');
+    }
+    if(window._wavyGrainPat){
+      ctx.save();
+      ctx.globalAlpha=isNight?0.34:0.24;
+      ctx.fillStyle=window._wavyGrainPat;
+      ctx.fillRect(0,0,w,h);
+      ctx.restore();
+    }
   }
   ctx.restore();
 }
@@ -8419,11 +8520,26 @@ const MOOD_SVGS={
   'Desconexión':'<svg class="w-ico lg" viewBox="0 0 24 24"><circle cx="9" cy="12" r="4.5"/><circle cx="15" cy="12" r="4.5" stroke-dasharray="2.5 2.5"/></svg>'
 };
 
+const MOOD_AURAS={
+  'Plenitud':['rgba(246,204,110,.52)','rgba(246,204,110,.14)','rgba(246,204,110,.76)'],
+  'Gratitud':['rgba(244,186,132,.50)','rgba(244,186,132,.14)','rgba(244,186,132,.74)'],
+  'Quietud':['rgba(136,184,222,.50)','rgba(136,184,222,.14)','rgba(136,184,222,.74)'],
+  'Enfoque':['rgba(148,196,158,.48)','rgba(148,196,158,.14)','rgba(148,196,158,.72)'],
+  'Ternura':['rgba(238,166,188,.50)','rgba(238,166,188,.14)','rgba(238,166,188,.74)'],
+  'Ambivalencia':['rgba(190,174,224,.46)','rgba(190,174,224,.14)','rgba(190,174,224,.70)'],
+  'Inquietud':['rgba(232,168,128,.48)','rgba(232,168,128,.14)','rgba(232,168,128,.72)'],
+  'Impulso':['rgba(228,124,118,.48)','rgba(228,124,118,.14)','rgba(228,124,118,.72)'],
+  'Vacío':['rgba(176,188,198,.44)','rgba(176,188,198,.12)','rgba(176,188,198,.68)']
+};
 function createMoodBtn(o,isVipItem){
   const b=document.createElement('button');
   const locked=isVipItem && !isPro();
   b.type='button';b.className='mo'+(locked?' pro-glow':'');
   b.dataset.g=o[0]+'\uFE0E';b.dataset.n=o[1];
+  const aura=MOOD_AURAS[o[1]]||['rgba(174,194,218,.44)','rgba(174,194,218,.12)','rgba(174,194,218,.68)'];
+  b.style.setProperty('--aura-c',aura[0]);
+  b.style.setProperty('--aura-c2',aura[1]);
+  b.style.setProperty('--aura-on',aura[2]);
   const mSvg=MOOD_SVGS[o[1]]||MOOD_SVGS['Plenitud'];
   b.innerHTML='<i>'+mSvg+'</i><span>'+esc(o[1])+'</span>';
   b.onclick=()=>{
@@ -8937,26 +9053,32 @@ const PEB_LEGACY_MAP={fuente:'cuarzo',musa:'lavanda',nido:'ororosa',piedra:'amba
 const PEB_VESSELS={
   cuarzo:{
     title:'Cuarzo',mode:'female',short:'Cuarzo',pro:false,relic:'#C87A88',
+    motion:{freq:1.45,amp:9,wScale:1.12,hScale:0.94,tongues:2,sparkMode:'spiral',breathAmp:0.05},
     pal:{glow:'rgba(244,172,188,',outerTop:'#FFF3F6',outerBot:'#D86B82',midTop:'#FFFFFF',midBot:'#FFD6E0',core:'#FFFFFF',spark:'#FFE2EA',ember:'#E88FA0'}
   },
   lavanda:{
     title:'Lavanda',mode:'female',short:'Lavanda',pro:true,relic:'#9F82D6',
+    motion:{freq:2.15,amp:15,wScale:0.95,hScale:1.06,tongues:3,sparkMode:'zigzag',breathAmp:0.045},
     pal:{glow:'rgba(186,154,244,',outerTop:'#FFF6FF',outerBot:'#916AD8',midTop:'#FFFFFF',midBot:'#E4D4FF',core:'#FFFFFF',spark:'#F2D8FF',ember:'#B596EA'}
   },
   ororosa:{
     title:'Oro rosa',mode:'female',short:'Oro rosa',pro:true,relic:'#D49474',
+    motion:{freq:2.65,amp:12,wScale:1.05,hScale:1.02,tongues:3,sparkMode:'halo',breathAmp:0.06},
     pal:{glow:'rgba(246,188,154,',outerTop:'#FFF8EE',outerBot:'#D67E5C',midTop:'#FFFFFF',midBot:'#FFE0CC',core:'#FFFFFF',spark:'#FFF0DC',ember:'#E4A07E'}
   },
   ambar:{
     title:'Ámbar',mode:'male',short:'Ámbar',pro:false,relic:'#D68232',
+    motion:{freq:2.25,amp:11,wScale:1.15,hScale:0.98,tongues:2,sparkMode:'rise',breathAmp:0.035},
     pal:{glow:'rgba(244,158,64,',outerTop:'#FFF7DC',outerBot:'#D86018',midTop:'#FFFFFF',midBot:'#FFD584',core:'#FFFFFF',spark:'#FFEAB4',ember:'#EA9038'}
   },
   cobalto:{
     title:'Cobalto',mode:'male',short:'Cobalto',pro:true,relic:'#4D7FD6',
+    motion:{freq:3.2,amp:6.5,wScale:0.82,hScale:1.14,tongues:2,sparkMode:'fast',breathAmp:0.025},
     pal:{glow:'rgba(104,162,248,',outerTop:'#F0FAFF',outerBot:'#2F66D0',midTop:'#FFFFFF',midBot:'#B8DCFF',core:'#FFFFFF',spark:'#DCF0FF',ember:'#689AE8'}
   },
   aurora:{
     title:'Aurora',mode:'male',short:'Aurora',pro:true,relic:'#C43A4E',
+    motion:{freq:3.55,amp:17,wScale:1.08,hScale:1.05,tongues:3,sparkMode:'burst',breathAmp:0.055},
     pal:{glow:'rgba(232,86,104,',outerTop:'#FFF2EC',outerBot:'#B8283E',midTop:'#FFFFFF',midBot:'#FFC2AE',core:'#FFFFFF',spark:'#FFE0C8',ember:'#DE5A6A'}
   }
 };
@@ -8978,7 +9100,7 @@ function renderPebVesselBar(){
   });
 }
 
-let activeFlamePal=PEB_VESSELS.ambar.pal,flameSparks=[],flameRaf=0,flamePctSmooth=65;
+let activeFlamePal=PEB_VESSELS.ambar.pal,activeFlameMotion=PEB_VESSELS.ambar.motion,flameSparks=[],flameRaf=0,flamePctSmooth=65;
 function resolveFlameVesselKey(){
   let vKey=PEB_LEGACY_MAP[S.pebVessel]||S.pebVessel;
   if(!PEB_VESSELS[vKey] || PEB_VESSELS[vKey].mode!==S.bioMode)vKey=pebDefaultVessel();
@@ -8989,6 +9111,7 @@ function renderPebVesselArt(){
   S.pebVessel=vKey;
   const cfg=PEB_VESSELS[vKey];
   activeFlamePal=cfg.pal;
+  activeFlameMotion=cfg.motion||PEB_VESSELS.ambar.motion;
   renderPebVesselBar();
   if($('pd'))$('pd').style.setProperty('--relic',cfg.relic||'#D68232');
   if($('pebVesselTitle'))$('pebVesselTitle').textContent=cfg.title;
@@ -9009,21 +9132,22 @@ function drawLivingFlame(ts){
   const p=Math.max(0.08,Math.min(1,flamePctSmooth/100));
   const t=(ts||0)*0.001;
   const pal=activeFlamePal;
+  const mot=activeFlameMotion||PEB_VESSELS.ambar.motion;
 
   ctx.clearRect(0,0,w,h);
 
-  // 1. Halo atmosférico cálido amplio
-  const haloR=115+175*p+Math.sin(t*2.4)*7;
+  // 1. Halo atmosférico con textura risográfica
+  const haloR=115+175*p+Math.sin(t*mot.freq)*7;
   const haloY=baseY-72-70*p;
   const hg=ctx.createRadialGradient(cx,haloY,12,cx,haloY,haloR);
-  hg.addColorStop(0,pal.glow+(0.42+0.34*p).toFixed(2)+')');
-  hg.addColorStop(0.48,pal.glow+(0.16+0.16*p).toFixed(2)+')');
+  hg.addColorStop(0,pal.glow+(0.44+0.34*p).toFixed(2)+')');
+  hg.addColorStop(0.5,pal.glow+(0.18+0.16*p).toFixed(2)+')');
   hg.addColorStop(1,pal.glow+'0)');
   ctx.fillStyle=hg;
   ctx.beginPath();ctx.arc(cx,haloY,haloR,0,Math.PI*2);ctx.fill();
 
   // 2. Brasa base viva (nunca desaparece)
-  const embW=52+36*p;
+  const embW=(52+36*p)*mot.wScale;
   const eg=ctx.createRadialGradient(cx,baseY+6,4,cx,baseY+6,embW);
   eg.addColorStop(0,'#FFFFFF');
   eg.addColorStop(0.45,pal.ember);
@@ -9031,12 +9155,12 @@ function drawLivingFlame(ts){
   ctx.save();ctx.globalAlpha=0.65+0.3*p;ctx.fillStyle=eg;
   ctx.beginPath();ctx.ellipse(cx,baseY+6,embW,15+6*p,0,0,Math.PI*2);ctx.fill();ctx.restore();
 
-  // 3. Lenguas orgánicas estilo Miyazaki / Calcifer (escala amplia 560x500)
-  const flameH=110+235*p;
-  const flameW=44+70*p;
-  const sway1=Math.sin(t*2.3)*12*p + Math.sin(t*5.0)*4.5*p;
-  const sway2=Math.cos(t*3.0)*9*p + Math.sin(t*6.1)*3.2*p;
-  const breath=1+Math.sin(t*3.2)*0.04;
+  // 3. Lenguas orgánicas con identidad propia por llama + pincelada gouache
+  const flameH=(110+235*p)*mot.hScale;
+  const flameW=(44+70*p)*mot.wScale;
+  const sway1=Math.sin(t*mot.freq)*mot.amp*p + Math.sin(t*mot.freq*2.15)*(mot.amp*0.36)*p;
+  const sway2=Math.cos(t*mot.freq*1.32)*(mot.amp*0.75)*p + Math.sin(t*mot.freq*2.6)*(mot.amp*0.26)*p;
+  const breath=1+Math.sin(t*(mot.freq*1.25))*mot.breathAmp;
 
   function drawTongue(scaleW,scaleH,sway,topCol,botCol,alpha,offsetX){
     const ox=cx+(offsetX||0);
@@ -9053,42 +9177,60 @@ function drawLivingFlame(ts){
     ctx.bezierCurveTo(ox+fw*0.74+sway*0.45,baseY-fh*0.65, ox+fw*1.12,baseY-fh*0.16, ox,baseY+4);
     ctx.closePath();
     ctx.fill();
+    /* Trazo gouache sutil en el contorno izquierdo/derecho */
+    ctx.strokeStyle=botCol;
+    ctx.lineWidth=1.8;
+    ctx.globalAlpha=alpha*0.28;
+    ctx.stroke();
     ctx.restore();
   }
 
-  // Lenguas laterales danzantes
-  if(p>0.18){
-    const sideA=Math.min(0.82,(p-0.18)*1.15);
-    const ls=Math.sin(t*4.1)*13*p;
-    drawTongue(0.62,0.68, -18*p+ls, pal.outerTop, pal.outerBot, sideA*0.65, -24*p);
-    drawTongue(0.62,0.64, 18*p-ls*0.8, pal.outerTop, pal.outerBot, sideA*0.65, 24*p);
+  // Lenguas laterales según personalidad de cada llama
+  if(p>0.16){
+    const sideA=Math.min(0.84,(p-0.16)*1.15);
+    const ls=Math.sin(t*(mot.freq*1.65))*(mot.amp*1.1)*p;
+    drawTongue(0.62,0.68, -18*p+ls, pal.outerTop, pal.outerBot, sideA*0.68, -24*p*mot.wScale);
+    drawTongue(0.62,0.64, 18*p-ls*0.8, pal.outerTop, pal.outerBot, sideA*0.68, 24*p*mot.wScale);
+    if(mot.tongues>=3){
+      const ls3=Math.cos(t*(mot.freq*1.9))*(mot.amp*0.8)*p;
+      drawTongue(0.46,0.82, ls3, pal.midTop, pal.outerBot, sideA*0.52, Math.sin(t*1.2)*10*p);
+    }
   }
   drawTongue(1.06,1.0,sway1,pal.outerTop,pal.outerBot,0.92,0);
   drawTongue(0.72,0.80,sway2*0.78,pal.midTop,pal.midBot,0.96,0);
   drawTongue(0.42,0.52,sway1*0.35,pal.core,pal.midBot,0.98,0);
 
-  // 4. Chispas ascendentes con brillo
+  // 4. Chispas según sparkMode (spiral, zigzag, halo, rise, fast, burst)
   const maxSparks=Math.round(5+28*p);
+  const spdMult=mot.sparkMode==='fast'||mot.sparkMode==='burst'?1.45:0.95;
   while(flameSparks.length<maxSparks){
     flameSparks.push({
       x:cx+(Math.random()-0.5)*flameW*0.95,
       y:baseY-Math.random()*flameH*0.55,
-      vy:0.9+Math.random()*(1.5+1.9*p),
-      vx:(Math.random()-0.5)*0.65,
+      vy:(0.9+Math.random()*(1.5+1.9*p))*spdMult,
+      vx:(Math.random()-0.5)*(mot.sparkMode==='burst'?1.35:0.65),
       r:1.8+Math.random()*3.2,
       life:Math.random()
     });
   }
   if(flameSparks.length>maxSparks)flameSparks.length=maxSparks;
-  flameSparks.forEach(sp=>{
+  flameSparks.forEach((sp,idx)=>{
     sp.y-=sp.vy;
-    sp.x+=sp.vx+Math.sin(t*4+sp.y*0.03)*0.55;
+    if(mot.sparkMode==='spiral'){
+      sp.x+=Math.cos(t*3.2+idx)*1.15;
+    }else if(mot.sparkMode==='zigzag'){
+      sp.x+=Math.sin(t*5.5+sp.y*0.05)*1.3;
+    }else if(mot.sparkMode==='halo'){
+      sp.x+=sp.vx+Math.sin(t*2.4+idx)*0.85;
+    }else{
+      sp.x+=sp.vx+Math.sin(t*mot.freq*1.6+sp.y*0.03)*0.55;
+    }
     sp.life-=0.007+0.005*(1-p);
     if(sp.life<=0 || sp.y<baseY-flameH-76){
       sp.x=cx+(Math.random()-0.5)*flameW*0.8;
       sp.y=baseY-flameH*(0.18+Math.random()*0.55);
-      sp.vy=0.9+Math.random()*(1.5+1.9*p);
-      sp.vx=(Math.random()-0.5)*0.65;
+      sp.vy=(0.9+Math.random()*(1.5+1.9*p))*spdMult;
+      sp.vx=(Math.random()-0.5)*(mot.sparkMode==='burst'?1.35:0.65);
       sp.life=0.85+Math.random()*0.15;
     }
     ctx.save();
@@ -9097,6 +9239,15 @@ function drawLivingFlame(ts){
     ctx.beginPath();ctx.arc(sp.x,sp.y,sp.r,0,Math.PI*2);ctx.fill();
     ctx.restore();
   });
+
+  // 5. Grano sutil tipo papel / risografía sobre la llama
+  if(window._wavyGrainPat){
+    ctx.save();
+    ctx.globalAlpha=0.14;
+    ctx.fillStyle=window._wavyGrainPat;
+    ctx.fillRect(0,0,w,h);
+    ctx.restore();
+  }
 
   flameRaf=requestAnimationFrame(drawLivingFlame);
 }
@@ -9351,6 +9502,36 @@ if($('mastheadHelpBtn'))$('mastheadHelpBtn').onclick=()=>{
 if($('tutorialCloseBtn'))$('tutorialCloseBtn').onclick=()=>{if($('tutorialModal'))$('tutorialModal').style.display='none';};
 if($('tutorialXBtn'))$('tutorialXBtn').onclick=()=>{if($('tutorialModal'))$('tutorialModal').style.display='none';};
 if($('tutorialModal'))$('tutorialModal').addEventListener('click',e=>{if(e.target===$('tutorialModal'))$('tutorialModal').style.display='none';});
+if($('bnavQuickBtn'))$('bnavQuickBtn').onclick=()=>{if($('quickActionModal'))$('quickActionModal').style.display='grid';};
+if($('qaCloseBtn'))$('qaCloseBtn').onclick=()=>{if($('quickActionModal'))$('quickActionModal').style.display='none';};
+if($('quickActionModal'))$('quickActionModal').addEventListener('click',e=>{if(e.target===$('quickActionModal'))$('quickActionModal').style.display='none';});
+if($('qaUrgeBtn'))$('qaUrgeBtn').onclick=()=>{
+  if($('quickActionModal'))$('quickActionModal').style.display='none';
+  switchMainView('v-today');
+  const hTab=document.querySelector('#todaySubTabs .tab[data-sub="sub-habit"]');
+  if(hTab)hTab.click();
+  setTimeout(()=>{if($('sosb'))$('sosb').click();},60);
+};
+if($('qaBreatheBtn'))$('qaBreatheBtn').onclick=()=>{
+  if($('quickActionModal'))$('quickActionModal').style.display='none';
+  switchMainView('v-breathe');
+  const opt2=document.querySelector('.bb-dur-opt[data-min="2"]');
+  if(opt2)opt2.click();
+  setTimeout(()=>{if($('bb') && typeof br!=='undefined' && !br.on)$('bb').click();},120);
+};
+if($('qaNoteSaveBtn'))$('qaNoteSaveBtn').onclick=()=>{
+  const inp=$('qaNoteInput');
+  const txt=(inp?inp.value:'').trim();
+  if(!txt){toast('Escribe una línea primero','er');return;}
+  const res=analyze(txt);
+  const entry={d:today(),t:Date.now(),txt,e:res.e,moods:[]};
+  if(!Array.isArray(S.notes))S.notes=[];
+  S.notes.unshift(entry);
+  save();
+  if(inp)inp.value='';
+  if($('quickActionModal'))$('quickActionModal').style.display='none';
+  toast('Nota guardada','ok');
+};
 (function initFirstDayGuide(){
   const g=$('firstDayGuide');if(!g)return;
   if(localStorage.getItem('wavy_guide_done')==='1'){g.hidden=true;return;}
